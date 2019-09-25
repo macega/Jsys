@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="caixaTotalGeralSub" pageWidth="210" pageHeight="802" columnWidth="210" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7b96b2fa-633c-4a95-a778-ca3f79b25108">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT descricao
+	,SUM(total) AS total
+	,SUM(confereTotalVenda) AS confereTotalVenda
+FROM jsysCaixaResumo
+WHERE DATA BETWEEN $P{dataInicial}
+		AND $P{dataFinal}
+	AND idContabil NOT IN (
+		SELECT TOP 1 idGeralAberturaCaixa
+		FROM jsysParametros
+		)
+GROUP BY descricao]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="confereTotalVenda" class="java.math.BigDecimal"/>
+	<variable name="sunTotalVendas" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{confereTotalVenda}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="24" width="80" height="13" uuid="866152fb-98eb-47c8-9a6c-b9c5ea52d111"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="84" y="24" width="85" height="13" uuid="25ae4393-51c8-472b-9a39-959e303c7e10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="80" height="15" uuid="4c02a680-5559-4173-9195-2310bf3e0ab2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[TOTAL GERAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="18" width="210" height="1" uuid="e187a8a3-e115-448c-a9fc-45f3d2fed207"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="210" height="13" backcolor="#66FF66" uuid="c5279538-eb6a-4b06-bc0d-a408c67a26df"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="0" y="0" width="80" height="13" uuid="06e765cc-003e-4f84-94d3-4ee76b7f580d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="0" width="126" height="13" uuid="f8a75212-7110-4f22-b6ab-1322c9ff612e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="210" height="15" backcolor="#FFCC99" uuid="5cb2edd7-2147-493c-8df2-02b9d6b67b5f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="84" y="2" width="126" height="13" uuid="4c02a680-5559-4173-9195-2310bf3e0ab2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE VENDAS]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="0" y="2" width="80" height="13" uuid="06e765cc-003e-4f84-94d3-4ee76b7f580d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sunTotalVendas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

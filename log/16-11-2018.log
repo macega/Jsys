@@ -1,0 +1,8 @@
+11:23 - Usuario: SUPERVISOR;
+11:28 - Usuario: Balcao;
+11:28 - Classe: Retorna; Método: findOneResult; Exceção: Can not refresh not managed object: br.sql.bean.JsysParametros[ cnpj=04.509.537/0001-32 ].;java.lang.IllegalArgumentException: Can not refresh not managed object: br.sql.bean.JsysParametros[ cnpj=04.509.537/0001-32 ].;
+11:28 - Usuario: SUPERVISOR;
+11:30 - Usuario: Balcao;
+11:33 - Usuario: SUPERVISOR;
+11:38 - Usuario: SUPERVISOR;
+11:39 - Usuario: SUPERVISOR;

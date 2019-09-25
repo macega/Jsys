@@ -1,0 +1,16 @@
+10:37 - Usuario: SUPERVISOR;
+10:47 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;java.util.concurrent.ExecutionException: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;
+10:52 - Usuario: SUPERVISOR;
+10:53 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.RuntimeException: Uncompilable source code - incompatible types: br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TEvento cannot be converted to br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TProcEvento;java.util.concurrent.ExecutionException: java.lang.RuntimeException: Uncompilable source code - incompatible types: br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TEvento cannot be converted to br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TProcEvento;
+10:58 - Usuario: SUPERVISOR;
+11:00 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;java.util.concurrent.ExecutionException: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;
+11:12 - Usuario: SUPERVISOR;
+11:14 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.RuntimeException: Uncompilable source code - Erroneous tree type: <any>;java.util.concurrent.ExecutionException: java.lang.RuntimeException: Uncompilable source code - Erroneous tree type: <any>;
+11:20 - Usuario: SUPERVISOR;
+11:21 - Usuario: SUPERVISOR;
+11:22 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.RuntimeException: Uncompilable source code - cannot find symbol
+  symbol:   class JAXBContext
+  location: class br.sql.nfe.xml.GerandoNFeEventoJAXB;java.util.concurrent.ExecutionException: java.lang.RuntimeException: Uncompilable source code - cannot find symbol
+  symbol:   class JAXBContext
+  location: class br.sql.nfe.xml.GerandoNFeEventoJAXB;
+12:24 - Usuario: SUPERVISOR;

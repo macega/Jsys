@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="002131a0-3ea3-4d46-97b7-ffa0b5382a4b">
+	<property name="ireport.zoom" value="2.593742460100009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="detail" forecolor="#000000" fontName="Tahoma" fontSize="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Courier"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT mod
+	,natOp
+	,serie
+	,nNF
+	,chaveAcesso
+	,data
+	,vProd
+	,vDesc
+	,vNF
+	,vTotTrib
+	,emitida
+	,cancelada
+          ,jsysparametros.fantasia
+FROM jsysNfeEmitidas
+cross join jsysparametros
+WHERE data between $P{dataInicial} and $P{dataFinal} 
+ORDER BY mod, serie, nNF]]>
+	</queryString>
+	<field name="mod" class="java.lang.Integer"/>
+	<field name="natOp" class="java.lang.String"/>
+	<field name="serie" class="java.lang.Integer"/>
+	<field name="nNF" class="java.lang.Integer"/>
+	<field name="chaveAcesso" class="java.lang.String"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="vProd" class="java.math.BigDecimal"/>
+	<field name="vDesc" class="java.math.BigDecimal"/>
+	<field name="vNF" class="java.math.BigDecimal"/>
+	<field name="vTotTrib" class="java.math.BigDecimal"/>
+	<field name="emitida" class="java.lang.Boolean"/>
+	<field name="cancelada" class="java.lang.Boolean"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="vProd_2" class="java.math.BigDecimal" resetType="Group" resetGroup="mod" calculation="Sum">
+		<variableExpression><![CDATA[$F{vProd}]]></variableExpression>
+	</variable>
+	<variable name="vDesc_1" class="java.math.BigDecimal" resetType="Group" resetGroup="mod" calculation="Sum">
+		<variableExpression><![CDATA[$F{vDesc}]]></variableExpression>
+	</variable>
+	<variable name="vNF_1" class="java.math.BigDecimal" resetType="Group" resetGroup="mod" calculation="Sum">
+		<variableExpression><![CDATA[$F{vNF}]]></variableExpression>
+	</variable>
+	<variable name="vProd_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vProd}]]></variableExpression>
+	</variable>
+	<variable name="vDesc_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vDesc}]]></variableExpression>
+	</variable>
+	<variable name="vNF_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vNF}]]></variableExpression>
+	</variable>
+	<variable name="vNF_3" class="java.math.BigDecimal" resetType="Group" resetGroup="serie" calculation="Sum">
+		<variableExpression><![CDATA[$F{vNF}]]></variableExpression>
+	</variable>
+	<variable name="vDesc_3" class="java.math.BigDecimal" resetType="Group" resetGroup="serie" calculation="Sum">
+		<variableExpression><![CDATA[$F{vDesc}]]></variableExpression>
+	</variable>
+	<variable name="vProd_3" class="java.math.BigDecimal" resetType="Group" resetGroup="serie" calculation="Sum">
+		<variableExpression><![CDATA[$F{vProd}]]></variableExpression>
+	</variable>
+	<group name="mod" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{mod}]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField>
+					<reportElement x="0" y="0" width="555" height="11" uuid="e51beece-b064-40dd-b710-ce2360e373cc"/>
+					<textElement>
+						<font fontName="Tahoma" size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[( $F{mod} == 55 ? "55 - NF-e Nota Fiscal Eletrônica" : "65 - NFC-e Nota Fiscal de Consumidor Eletrônica " )]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="12" width="555" height="1" uuid="c8ded9a1-9ec9-4136-99fc-6c0996e6ba5e"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField pattern="#,##0.00;#,##0.00-">
+					<reportElement x="254" y="3" width="71" height="13" uuid="82197094-af5c-40e1-92f4-b79341f482a6"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vProd_2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;#,##0.00-">
+					<reportElement x="325" y="3" width="60" height="13" uuid="5c3a8581-c841-4d2a-b018-08032110eaeb"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vDesc_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;#,##0.00-">
+					<reportElement x="476" y="3" width="79" height="13" uuid="eaf1ec54-f6c1-4cc4-a6e3-5cc5cdfcaeaa"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{vNF_1}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="251" y="1" width="304" height="1" uuid="80c508f1-7ea9-48fa-a9f8-49306cedbcb3"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement x="182" y="3" width="69" height="13" uuid="1ba86872-7637-478a-bd12-01083f530669"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total: ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="serie" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{serie}]]></groupExpression>
+		<groupHeader>
+			<band height="13">
+				<staticText>
+					<reportElement x="28" y="0" width="25" height="11" uuid="a89890b8-2683-49c7-944c-d3ce2b5bdf71"/>
+					<textElement textAlignment="Center">
+						<font fontName="Tahoma" size="9"/>
+					</textElement>
+					<text><![CDATA[Série:]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="0" y="0" width="23" height="11" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="329e5a81-5d5b-4cda-bfc3-2d0033fb28a1"/>
+					<graphicElement>
+						<pen lineColor="#CCCCCC"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="53" y="0" width="52" height="11" uuid="957915a3-156a-4e63-b2e5-5e9bd1797287"/>
+					<textElement>
+						<font fontName="Tahoma" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="23" y="11" width="532" height="1" uuid="764b171b-744f-4781-b18a-dec8e4512541"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement style="detail" x="476" y="2" width="79" height="13" uuid="e7834583-2f76-4e4c-ae10-e646d2c2411a"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{vNF_3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement style="detail" x="325" y="2" width="57" height="13" uuid="a47661cd-a282-4dbb-b6d0-f44aa805551d"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{vDesc_3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement style="detail" x="254" y="2" width="65" height="13" uuid="0baa5f93-7da0-4136-a3e5-351cb84a6d69"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{vProd_3}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="223" y="0" width="332" height="1" uuid="acb9a2ce-4512-4bd1-ab0a-16efed628f44"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<staticText>
+					<reportElement style="detail" x="182" y="2" width="69" height="13" uuid="50ca5d7d-e0a5-4668-b9f7-f382128a7b98"/>
+					<textElement textAlignment="Right">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total Serie: ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="5ce5e802-a0a5-4bb2-b1a1-c388d41bc8c3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="555" height="13" uuid="a9b6b7b2-b5ae-4830-8302-62b5112df6b9"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relação de NF-e e NFC-e " 
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="34" width="555" height="1" uuid="b3a3b5e8-a354-44c1-b383-d7cbf6bd4ddd"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="133" height="11" uuid="aa5bc9f6-bb3e-406a-aa43-09fdba35bfed"/>
+				<textElement>
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Operaçao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="196" y="0" width="55" height="11" uuid="47718af1-aaa4-436c-b4e4-2d8f23cb1fe4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="0" width="55" height="11" uuid="286590bc-b38b-496d-85de-5ab16479eddb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="0" width="65" height="11" uuid="0eed1781-70fe-4156-bc22-852ef3c4adde"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Total Produtos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="325" y="0" width="57" height="11" uuid="ac95e942-abbe-4817-8cee-f10028631d80"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Desconto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="79" height="11" uuid="ebc92ed2-1590-428f-8214-17ee87d9e4c0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Valor Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="88" height="11" uuid="c5fe71b3-15eb-4540-b753-78ea46013eb1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[Tributos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="12" width="555" height="1" uuid="a38bd79d-fbef-49df-86e7-17fae74ab567"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="0" width="100" height="11" forecolor="#FF0000" backcolor="#FFFFFF" uuid="09a5b196-ef0b-4cb6-9bb7-f3841b386f48"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{cancelada} ? "Cancelada" : null )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="133" height="11" uuid="93b1603b-34bb-4d88-b603-debacf11bf72"/>
+				<textElement>
+					<font fontName="Tahoma" size="9" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{natOp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="0" width="55" height="11" uuid="45f67660-1c2f-4114-8284-600d73e928fd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nNF}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="136" y="0" width="55" height="11" uuid="086126cb-3266-4276-bc24-7689c3dcc355"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="254" y="0" width="65" height="11" uuid="42b035d8-b4d8-4b82-8571-d2f4cbbeb035"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vProd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="325" y="0" width="57" height="11" uuid="60be3c9c-8a3c-4d2e-b9f4-3de85e0c9dfc"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vDesc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="476" y="0" width="79" height="11" uuid="61bb750f-c8e2-4ae2-9492-3caa4a6d66ea"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vNF}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="385" y="0" width="88" height="11" uuid="113da0ef-c585-4c0e-9eab-9d4dafe8db76"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vTotTrib}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="6" width="555" height="1" uuid="e6aae33e-a05b-422e-9d36-5bf199eb7510">
+					<printWhenExpression><![CDATA[$F{cancelada}]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="fffd3e08-dad8-49fa-b9c6-f297d92d760d"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="1" width="490" height="13" uuid="58ac84c4-fd9f-4b66-aff4-f6cdd7c673e5"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " +$V{PAGE_NUMBER}+ " "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="490" y="1" width="65" height="13" uuid="70326058-1d74-47ea-9068-860b120c89f5"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["de "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="16" splitType="Stretch">
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="254" y="2" width="71" height="13" uuid="600d1070-90ed-433b-9ba9-662803deddc8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vProd_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="325" y="2" width="60" height="13" uuid="8f07aa50-67c1-43ba-bdbf-90a950edc2c2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vDesc_2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="476" y="2" width="79" height="13" uuid="977ae864-1f76-4064-9e11-2b47d4bea381"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vNF_2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="254" y="0" width="301" height="1" uuid="f0a8f771-3d51-4e8f-aaa3-ec66787a4ec8"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="182" y="2" width="69" height="13" uuid="20d85dfb-aaee-405e-bfc3-dc6b164c951d"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral: ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

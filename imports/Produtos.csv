@@ -1,0 +1,53 @@
+[C:\MLINE\csv\GERAL.xml];[jsysProdutosT]
+CODIGO;idProduto;CAST(@value as int)
+COD_ORIG;referencia;COALESCE(CAST(@value as VARCHAR(20)), '')
+COD_NCM;NCM;REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(COALESCE(CAST(@value as VARCHAR(9)), ''), ':', ''), ',', ''), '.', ''), '/', ''), '-', '')
+DISCRIM;nomeProduto;(replace(LEFT(@value, 255), '-', '') COLLATE SQL_Latin1_General_CP1251_CS_AS) 
+UND;unidadeCompra;COALESCE(CAST(@value as VARCHAR(3)), 'UN')
+UND_VND;unidadeVenda;COALESCE(CAST(@value as VARCHAR(3)), 'UN')
+ESTOQ_ATU;estoqueGeral;isnull(@value, 0)
+DT_ALT;dataAlteracao;CONVERT(DATETIME, @value, 100)
+QUEM_ALT;usuarioAlteracao;CAST(@value as VARCHAR(25))
+;usuarioInclusao;'IMPORTADO'
+DT_CAD;dataInclusao;CONVERT(DATETIME, @value, 100)
+;principioAtivo;(replace(LEFT(DISCRIM, 255), '-', '') COLLATE SQL_Latin1_General_CP1251_CS_AS)
+COD_BLOCO;idGrupo;CAST(@value as int)
+COD_MARCA;idFabricante;CAST(@value as int)
+COD_LINHA;idFamilia;CAST(@value as int)
+APLICACAO;marca;COALESCE(CAST(@value as VARCHAR(50)), '')
+ORIGEM_PRO;origemFiscal;COALESCE(CAST(@value as VARCHAR(1)), '0')
+ICMS_PROD;tipoIcms;COALESCE(LEFT('0000000000' + @value, 2), '00')
+;icmsEstadual;17.5
+;icmsInterestadual;12
+CST_PIS;CstPis;
+CST_PIS_E;CstPisEstadual;
+CST_COFINS;CstCofins;
+CST_COF_E;CstCofEstadual;
+CST_IPI;CstIpi;
+CST_IPI_E;CstIpiEstadual;
+CST_ISS;CstIss;
+CSOSN;CSOSN;
+CSOSN_F;CSOSNEstadual;
+;cfopEstadual;'5.102'
+;cfopInterestadual;'6.102'
+;precoCompra;0
+;precoFrete;0
+;precoEncargos;0
+;precoCusto;0
+;precoIpi;0
+;precoCreditoIcms;0
+;precoDebitoIcms;0
+;precoOutrosImpostos;0
+;precoComissao;0
+;precoDespesasOperacional;0
+;precoAgregado;0
+M_LUCRO_V;margemLucro;isnull(@value, 0)
+GIRO_MIN;estMinimo;isnull(@value, 0)
+;estMaximo;0
+;aliquotaCupom;01
+;aliquotaFora;02
+;inativo;0
+;peso;0
+;prodLocaliza;''
+;comissaoVista;0
+;comissaoPrazo;0

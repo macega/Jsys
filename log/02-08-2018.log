@@ -1,0 +1,25 @@
+08:45 - Usuario: SUPERVISOR;
+09:11 - Usuario: SUPERVISOR;
+10:27 - Usuario: SUPERVISOR;
+12:19 - Usuario: SUPERVISOR;
+12:19 - Usuario: SUPERVISOR;
+12:20 - Classe: br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task; Método: Task.doInBackground; Exceção: 1 counts of IllegalAnnotationExceptions;com.sun.xml.bind.v2.runtime.IllegalAnnotationsException: 1 counts of IllegalAnnotationExceptions
+br.inf.portalfiscal.nfe.schema_4.util.XsdUtil$retEnviNfe é uma interface e JAXB não pode tratar interfaces.
+	this problem is related to the following location:
+		at br.inf.portalfiscal.nfe.schema_4.util.XsdUtil$retEnviNfe
+;
+12:34 - Usuario: SUPERVISOR;
+12:34 - Classe: br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task; Método: Task.doInBackground; Exceção: Objeto não mapeado no XmlUtil:TRetConsReciNFe;br.com.samuelweb.nfe.exception.NfeException: Objeto não mapeado no XmlUtil:TRetConsReciNFe;
+12:35 - Usuario: SUPERVISOR;
+13:21 - Usuario: SUPERVISOR;
+13:31 - Usuario: SUPERVISOR;
+13:31 - Classe: br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task; Método: Task.done; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+13:33 - Usuario: SUPERVISOR;
+13:36 - Usuario: SUPERVISOR;
+13:37 - Usuario: SUPERVISOR;
+14:03 - Usuario: SUPERVISOR;
+14:07 - Classe: ImprimirDanfe; Método: nfePdf; Exceção: Uncompilable source code - gerarString(java.lang.String,java.lang.String) has private access in br.sql.nfe.xml.GerandoNFeProc;java.lang.RuntimeException: Uncompilable source code - gerarString(java.lang.String,java.lang.String) has private access in br.sql.nfe.xml.GerandoNFeProc;
+14:08 - Classe: ImprimirDanfe; Método: nfePdf; Exceção: Uncompilable source code - gerarString(java.lang.String,java.lang.String) has private access in br.sql.nfe.xml.GerandoNFeProc;java.lang.RuntimeException: Uncompilable source code - gerarString(java.lang.String,java.lang.String) has private access in br.sql.nfe.xml.GerandoNFeProc;
+14:46 - Usuario: SUPERVISOR;
+14:56 - Usuario: SUPERVISOR;
+15:15 - Usuario: SUPERVISOR;

@@ -1,0 +1,62 @@
+[C:\MLINE\csv\CADCLI.XML];[jsysClientes]
+CLIENTE;nomeCorentista;CAST(@value as VARCHAR(60))
+FANTASIA;fantasia;CAST(@value as VARCHAR(60))
+PESSOA;tipo;CASE WHEN @value = 'J' THEN 1 ELSE 0 END
+SEXO;sexo;CASE WHEN @value = 'F' THEN 'Feminino' ELSE 'Masculino' END
+DT_NASC;dataNacimento;CONVERT(DATETIME, @value, 100)
+END_RES;endereco;LEFT(COALESCE(@value, END_COM, ''), 60)
+NRO_RES;numero;CAST(COALESCE(@value, NRO_COM) AS VARCHAR(9))
+COMP_RES;complemento;LEFT(COALESCE(@value, COMP_COM, ''), 30)
+BAIRRO;bairro;COALESCE(CAST(@value as VARCHAR(60)), '')
+CEP;cep;COALESCE(CAST(@value as VARCHAR(9)), '')
+FONE_RES;celular;CAST(@value as VARCHAR(25))
+CGC;cnpjCpf;COALESCE(@value, CPF, '')
+IE;ieRg;COALESCE(@value, RG, '')
+DT_EMIS_RG;ieRgData;CONVERT(DATETIME, @value, 100)
+IM;IM;CAST(@value as VARCHAR(15))
+CIDADE;cidade;CAST(@value as VARCHAR(40))
+ESTADO;estado;CAST(@value as VARCHAR(2))
+;codPais;'1058'
+PAI;pai;CAST(@value as VARCHAR(60))
+MAE;mae;CAST(@value as VARCHAR(60))
+;cliente;1
+;pais;'BRASIL'
+;fornecedor;0
+;colaborador;0
+;filial;0
+;vip;0
+FONE_COM;fone;CAST(@value as VARCHAR(25))
+FAX;fax;CAST(@value as VARCHAR(25))
+COD_CLI;obs;LTRIM(RTRIM(CONCAT(@value, '; ', LOJA1, '; ', FONE_LJ1, '; ', CONT_LJ1, '; ', LOJA2, '; ',FONE_LJ2, '; ',CONT_LJ2, '; ',BANCO1, '; ',FONE_BC1, '; ',CONT_BC1, '; ',BANCO2, '; ', CONT_BC2, '; ',CONTATO, '; ',END_COB, '; ',BAIR_COB, '; ',CEP_COB, '; ',CID_COB, '; ',EST_COB, '; ',FONE_SMS)))
+;inativo;0
+END_COM;;
+NRO_COM;;
+CPF;;
+RG;;
+COMP_COM;;
+LOJA1;;
+FONE_LJ1;;
+CONT_LJ1;;
+LOJA2;;
+;codMunicipio;'1100205'
+;filhos;0
+DATA_CAD;dataInclusao;CASE WHEN CONVERT(DATETIME, @value, 100) IS NULL THEN GETDATE() ELSE CONVERT(DATETIME, @value, 100) END
+QUEM_CAD;usuarioInclusao;COALESCE(CAST(@value as VARCHAR(50)), '')
+;malaDireta;0
+FONE_LJ2;;
+CONT_LJ2;;
+BANCO1;;
+BANCO2;;
+CONT_BC1;;
+FONE_BC1;;
+CONT_BC2;;
+LIM_CRED;limiteCredito;CAST(@value + '0000' as DECIMAL(16,4))
+CONTATO;;
+END_COB;;
+BAIR_COB;;
+CEP_COB;;
+CID_COB;;
+EST_COB;;
+EMAIL;email;CAST(CONCAT(@value, '; ', EMAILCC) as VARCHAR(60))
+FONE_SMS;;
+EMAILCC;;

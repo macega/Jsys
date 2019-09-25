@@ -1,0 +1,1154 @@
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+51975 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+233667 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+291286 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+21341 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+32582 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10793 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8184 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14601 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4995 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9092 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+35124 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+146212 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [Thread-6] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Print error.
+net.sf.jasperreports.engine.JRException: Error printing report.
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:210)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:229)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:116)
+	at net.sf.jasperreports.swing.JRViewerToolbar$16.run(JRViewerToolbar.java:430)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.awt.print.PrinterException: O servidor RPC não está disponível.
+
+	at sun.awt.windows.WPrinterJob._startDoc(Native Method)
+	at sun.awt.windows.WPrinterJob.startDoc(WPrinterJob.java:1316)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1401)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1277)
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:196)
+	... 4 more
+23239 [Thread-9] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Print error.
+net.sf.jasperreports.engine.JRException: Error printing report.
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:210)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:229)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:116)
+	at net.sf.jasperreports.swing.JRViewerToolbar$16.run(JRViewerToolbar.java:430)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.awt.print.PrinterException: A impressora especificada foi excluída.
+
+	at sun.awt.windows.WPrinterJob._startDoc(Native Method)
+	at sun.awt.windows.WPrinterJob.startDoc(WPrinterJob.java:1316)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1401)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1277)
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:196)
+	... 4 more
+29249 [Thread-11] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Print error.
+net.sf.jasperreports.engine.JRException: Error printing report.
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:210)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:229)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:116)
+	at net.sf.jasperreports.swing.JRViewerToolbar$16.run(JRViewerToolbar.java:430)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.awt.print.PrinterException: O servidor RPC não está disponível.
+
+	at sun.awt.windows.WPrinterJob._startDoc(Native Method)
+	at sun.awt.windows.WPrinterJob.startDoc(WPrinterJob.java:1316)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1401)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1277)
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:196)
+	... 4 more
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Save error.
+net.sf.jasperreports.engine.JRException: Error trying to export to file : C:\Users\Juliano Alves Medina\Desktop\vendasLojas 01-02 28-02.pdf
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:425)
+	at net.sf.jasperreports.view.save.JRPdfSaveContributor.save(JRPdfSaveContributor.java:119)
+	at net.sf.jasperreports.swing.JRViewerToolbar.btnSaveActionPerformed(JRViewerToolbar.java:404)
+	at net.sf.jasperreports.swing.JRViewerToolbar$1.actionPerformed(JRViewerToolbar.java:134)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2018)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2341)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
+	at java.awt.Component.processMouseEvent(Component.java:6505)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3321)
+	at java.awt.Component.processEvent(Component.java:6270)
+	at java.awt.Container.processEvent(Container.java:2229)
+	at java.awt.Component.dispatchEventImpl(Component.java:4861)
+	at java.awt.Container.dispatchEventImpl(Container.java:2287)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4832)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4492)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4422)
+	at java.awt.Container.dispatchEventImpl(Container.java:2273)
+	at java.awt.Window.dispatchEventImpl(Window.java:2719)
+	at java.awt.Component.dispatchEvent(Component.java:4687)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:735)
+	at java.awt.EventQueue.access$200(EventQueue.java:103)
+	at java.awt.EventQueue$3.run(EventQueue.java:694)
+	at java.awt.EventQueue$3.run(EventQueue.java:692)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:87)
+	at java.awt.EventQueue$4.run(EventQueue.java:708)
+	at java.awt.EventQueue$4.run(EventQueue.java:706)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:76)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:705)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:242)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:161)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:150)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:146)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:138)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:91)
+Caused by: java.io.FileNotFoundException: C:\Users\Juliano Alves Medina\Desktop\vendasLojas 01-02 28-02.pdf (A operação solicitada não pode ser executada em um arquivo com uma seção mapeada pelo usuário aberta)
+	at java.io.FileOutputStream.open(Native Method)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:212)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:165)
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:419)
+	... 40 more
+0    [SwingWorker-pool-2-thread-1] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport  - Fill 1: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : caixaTotalGeralSub
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:240)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:1112)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:689)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1281)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:900)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:651)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.AbstractThreadSubreportRunner.run(AbstractThreadSubreportRunner.java:203)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Invalid object name 'dbo.Clientes'.
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDatabaseError(SQLServerException.java:216)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.getNextResult(SQLServerStatement.java:1515)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.doExecutePreparedStatement(SQLServerPreparedStatement.java:404)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement$PrepStmtExecCmd.doExecute(SQLServerPreparedStatement.java:350)
+	at com.microsoft.sqlserver.jdbc.TDSCommand.execute(IOBuffer.java:5696)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.executeCommand(SQLServerConnection.java:1715)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeCommand(SQLServerStatement.java:180)
+	at com.microsoft.sqlserver.jdbc.SQLServerStatement.executeStatement(SQLServerStatement.java:155)
+	at com.microsoft.sqlserver.jdbc.SQLServerPreparedStatement.executeQuery(SQLServerPreparedStatement.java:285)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:233)
+	... 11 more
+0    [Thread-6] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Print error.
+net.sf.jasperreports.engine.JRException: Error printing report.
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:210)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:229)
+	at net.sf.jasperreports.engine.JasperPrintManager.print(JasperPrintManager.java:116)
+	at net.sf.jasperreports.swing.JRViewerToolbar$16.run(JRViewerToolbar.java:430)
+	at java.lang.Thread.run(Thread.java:744)
+Caused by: java.awt.print.PrinterException: Não foi emitida uma chamada a StartDocPrinter.
+
+	at sun.awt.windows.WPrinterJob._startDoc(Native Method)
+	at sun.awt.windows.WPrinterJob.startDoc(WPrinterJob.java:1316)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1401)
+	at sun.print.RasterPrinterJob.print(RasterPrinterJob.java:1277)
+	at net.sf.jasperreports.engine.print.JRPrinterAWT.printPages(JRPrinterAWT.java:196)
+	... 4 more
+0    [SwingWorker-pool-2-thread-2] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport  - Fill 1: exception
+net.sf.jasperreports.engine.JRException: Error retrieving field value from bean : Det
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getBeanProperty(JRAbstractBeanDataSource.java:123)
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getFieldValue(JRAbstractBeanDataSource.java:96)
+	at net.sf.jasperreports.engine.data.JRBeanCollectionDataSource.getFieldValue(JRBeanCollectionDataSource.java:100)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setOldValues(JRFillDataset.java:1356)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.next(JRFillDataset.java:1257)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.next(JRFillDataset.java:1233)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.next(JRBaseFiller.java:1577)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:149)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:659)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.AbstractThreadSubreportRunner.run(AbstractThreadSubreportRunner.java:203)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NoSuchMethodException: Unknown property 'Det' on class 'class br.inf.portalfiscal.nfe.schema.procnfe.TNFe$InfNFe$Det'
+	at org.apache.commons.beanutils.PropertyUtilsBean.getSimpleProperty(PropertyUtilsBean.java:1322)
+	at org.apache.commons.beanutils.PropertyUtilsBean.getNestedProperty(PropertyUtilsBean.java:770)
+	at org.apache.commons.beanutils.PropertyUtilsBean.getProperty(PropertyUtilsBean.java:846)
+	at org.apache.commons.beanutils.PropertyUtils.getProperty(PropertyUtils.java:426)
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getBeanProperty(JRAbstractBeanDataSource.java:111)
+	... 14 more
+0    [SwingWorker-pool-2-thread-2] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport  - Fill 1: exception
+net.sf.jasperreports.engine.JRException: Error retrieving field value from bean : Det
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getBeanProperty(JRAbstractBeanDataSource.java:123)
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getFieldValue(JRAbstractBeanDataSource.java:96)
+	at net.sf.jasperreports.engine.data.JRBeanCollectionDataSource.getFieldValue(JRBeanCollectionDataSource.java:100)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.setOldValues(JRFillDataset.java:1356)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.next(JRFillDataset.java:1257)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.next(JRFillDataset.java:1233)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.next(JRBaseFiller.java:1577)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:149)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:659)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.AbstractThreadSubreportRunner.run(AbstractThreadSubreportRunner.java:203)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NoSuchMethodException: Unknown property 'Det' on class 'class br.inf.portalfiscal.nfe.schema.procnfe.TNFe$InfNFe$Det'
+	at org.apache.commons.beanutils.PropertyUtilsBean.getSimpleProperty(PropertyUtilsBean.java:1322)
+	at org.apache.commons.beanutils.PropertyUtilsBean.getNestedProperty(PropertyUtilsBean.java:770)
+	at org.apache.commons.beanutils.PropertyUtilsBean.getProperty(PropertyUtilsBean.java:846)
+	at org.apache.commons.beanutils.PropertyUtils.getProperty(PropertyUtils.java:426)
+	at net.sf.jasperreports.engine.data.JRAbstractBeanDataSource.getBeanProperty(JRAbstractBeanDataSource.java:111)
+	... 14 more
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+809  [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+59254 [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+59566 [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+92556 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+92757 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+891  [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+346598 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+346973 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+189061 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+48694 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+82961 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+750  [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+953  [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+834  [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+953  [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+859  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+922  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+734  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+781  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+906  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+863  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+873  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+921  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+938  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1299 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+945  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1072063 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1072266 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2189 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2089 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3309 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3326 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+942  [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+416426 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+416778 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+485898 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+471  [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+606  [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+320688 [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+320891 [AWT-EventQueue-0] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13976 [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+25558 [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+961  [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1272 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+507850 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+535933 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2253 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2863 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1565 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2113 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Save error.
+net.sf.jasperreports.engine.JRException: Error trying to export to file : C:\Users\Juliano Alves Medina\Desktop\relatorio de atendimentos.pdf
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:425)
+	at net.sf.jasperreports.view.save.JRPdfSaveContributor.save(JRPdfSaveContributor.java:119)
+	at net.sf.jasperreports.swing.JRViewerToolbar.btnSaveActionPerformed(JRViewerToolbar.java:404)
+	at net.sf.jasperreports.swing.JRViewerToolbar$1.actionPerformed(JRViewerToolbar.java:134)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2346)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
+	at java.awt.Component.processMouseEvent(Component.java:6525)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6290)
+	at java.awt.Container.processEvent(Container.java:2234)
+	at java.awt.Component.dispatchEventImpl(Component.java:4881)
+	at java.awt.Container.dispatchEventImpl(Container.java:2292)
+	at java.awt.Component.dispatchEvent(Component.java:4703)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4898)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4533)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4462)
+	at java.awt.Container.dispatchEventImpl(Container.java:2278)
+	at java.awt.Window.dispatchEventImpl(Window.java:2750)
+	at java.awt.Component.dispatchEvent(Component.java:4703)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: java.io.FileNotFoundException: C:\Users\Juliano Alves Medina\Desktop\relatorio de atendimentos.pdf (O arquivo já está sendo usado por outro processo)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:419)
+	... 40 more
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1489 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1846 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1748 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2075 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2341 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1257 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1645 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1957 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2221 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [AWT-EventQueue-0] ERROR net.sf.jasperreports.swing.JRViewerToolbar  - Save error.
+net.sf.jasperreports.engine.JRException: Error trying to export to file : C:\Users\Juliano Alves Medina\Desktop\rel finaceiro Geral 12\2015.pdf
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:425)
+	at net.sf.jasperreports.view.save.JRPdfSaveContributor.save(JRPdfSaveContributor.java:119)
+	at net.sf.jasperreports.swing.JRViewerToolbar.btnSaveActionPerformed(JRViewerToolbar.java:404)
+	at net.sf.jasperreports.swing.JRViewerToolbar$1.actionPerformed(JRViewerToolbar.java:134)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2346)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
+	at java.awt.Component.processMouseEvent(Component.java:6525)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6290)
+	at java.awt.Container.processEvent(Container.java:2234)
+	at java.awt.Component.dispatchEventImpl(Component.java:4881)
+	at java.awt.Container.dispatchEventImpl(Container.java:2292)
+	at java.awt.Component.dispatchEvent(Component.java:4703)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4898)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4533)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4462)
+	at java.awt.Container.dispatchEventImpl(Container.java:2278)
+	at java.awt.Window.dispatchEventImpl(Window.java:2750)
+	at java.awt.Component.dispatchEvent(Component.java:4703)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.awt.EventQueue$4.run(EventQueue.java:729)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: java.io.FileNotFoundException: C:\Users\Juliano Alves Medina\Desktop\rel finaceiro Geral 12\2015.pdf (O sistema não pode encontrar o caminho especificado)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:162)
+	at net.sf.jasperreports.engine.export.JRPdfExporter.exportReport(JRPdfExporter.java:419)
+	... 40 more
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1268 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1549 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1883 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2107 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2343 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2502 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2667 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+2867 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3031 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3202 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3358 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3491 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3614 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3750 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+3940 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4111 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4307 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4482 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4602 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4738 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+4884 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5025 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5149 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5280 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5388 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5493 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5660 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5755 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+5889 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6005 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6121 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6228 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6348 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6444 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6468 [SwingWorker-pool-2-thread-6] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 22; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:441)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:368)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1437)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3067)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:348)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.fiscal.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:249)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:275)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:214)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+6629 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6777 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+6945 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7183 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7356 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7527 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7622 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7804 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+7957 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8052 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8143 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8242 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8379 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8488 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8617 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8706 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8808 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+8908 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9006 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9181 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9267 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9455 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9606 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9755 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+9895 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10086 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10223 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10343 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10458 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10578 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10701 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10791 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+10899 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11018 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11097 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11206 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11286 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11377 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11458 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11558 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11633 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11709 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11804 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11887 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+11972 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12053 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12181 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12277 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12370 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12474 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12590 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12665 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12738 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12816 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12882 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+12951 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13033 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13106 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13184 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13276 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13355 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13451 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13547 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13657 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13783 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13878 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+13982 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14111 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14215 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14329 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14410 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14492 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14580 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14650 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14735 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+14858 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+444  [SwingWorker-pool-2-thread-7] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 21; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:441)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:368)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1437)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3067)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:348)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.fiscal.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:249)
+	at br.sql.fiscal.Janelas.NfeEmissao$TaskEmail.doInBackground(NfeEmissao.java:1864)
+	at br.sql.fiscal.Janelas.NfeEmissao$TaskEmail.doInBackground(NfeEmissao.java:1831)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+0    [SwingWorker-pool-2-thread-10] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-9] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+27771 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-10] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-9] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1159368 [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+41172 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-8] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport  - Fill 1: exception
+net.sf.jasperreports.engine.JRRuntimeException: Subreport overflowed on a band that does not support overflow.
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.addPage(JRVerticalFiller.java:1858)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageBreak(JRVerticalFiller.java:1952)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBreak(JRVerticalFiller.java:1981)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:754)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportContent(JRVerticalFiller.java:308)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:155)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:651)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.AbstractThreadSubreportRunner.run(AbstractThreadSubreportRunner.java:203)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+1    [SwingWorker-pool-2-thread-7] ERROR net.sf.jasperreports.engine.fill.JRFillSubreport  - Fill 1: exception
+net.sf.jasperreports.engine.JRRuntimeException: Subreport overflowed on a band that does not support overflow.
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.addPage(JRVerticalFiller.java:1858)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageBreak(JRVerticalFiller.java:1952)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillColumnBreak(JRVerticalFiller.java:1981)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillDetail(JRVerticalFiller.java:754)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportContent(JRVerticalFiller.java:308)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:155)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:845)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:651)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.AbstractThreadSubreportRunner.run(AbstractThreadSubreportRunner.java:203)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+0    [SwingWorker-pool-2-thread-10] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+163  [SwingWorker-pool-2-thread-7] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 21; The entity name must immediately follow the '&' in the entity reference.
+	at org.apache.xerces.util.ErrorHandlerWrapper.createSAXParseException(Unknown Source)
+	at org.apache.xerces.util.ErrorHandlerWrapper.fatalError(Unknown Source)
+	at org.apache.xerces.impl.XMLErrorReporter.reportError(Unknown Source)
+	at org.apache.xerces.impl.XMLErrorReporter.reportError(Unknown Source)
+	at org.apache.xerces.impl.XMLErrorReporter.reportError(Unknown Source)
+	at org.apache.xerces.impl.XMLScanner.reportFatalError(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl$FragmentContentDispatcher.dispatch(Unknown Source)
+	at org.apache.xerces.impl.XMLDocumentFragmentScannerImpl.scanDocument(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XML11Configuration.parse(Unknown Source)
+	at org.apache.xerces.parsers.XMLParser.parse(Unknown Source)
+	at org.apache.xerces.parsers.DOMParser.parse(Unknown Source)
+	at org.apache.xerces.jaxp.DocumentBuilderImpl.parse(Unknown Source)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.util.ReportUtils.getJPrint(ReportUtils.java:273)
+	at br.sql.util.ReportUtils.access$200(ReportUtils.java:37)
+	at br.sql.util.ReportUtils$TaskReport.doInBackground(ReportUtils.java:435)
+	at br.sql.util.ReportUtils$TaskReport.doInBackground(ReportUtils.java:391)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+0    [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+255862 [SwingWorker-pool-2-thread-9] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-4] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.3.jar!/
+0    [SwingWorker-pool-2-thread-4] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.3.jar!/
+0    [SwingWorker-pool-2-thread-4] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.3.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [SwingWorker-pool-2-thread-10] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/lib_java/nfe/java-nfe-4.00.6.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+1    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-7] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+83626 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-10] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+11983 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+8652 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+14153 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+14315 [SwingWorker-pool-2-thread-7] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+28888 [SwingWorker-pool-2-thread-8] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-9] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-2] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-9] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+37585 [SwingWorker-pool-2-thread-2] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-8] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+11988 [SwingWorker-pool-2-thread-9] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-2] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+17105 [SwingWorker-pool-2-thread-3] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+23802 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+1    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-10] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-2] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+1390493 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1393561 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1395274 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1397075 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1399170 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1400710 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1402178 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1403704 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1405241 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1406749 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1408231 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1409804 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1411224 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1412623 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1414641 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1416304 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1417740 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1419479 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1421133 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1422512 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1424125 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1425599 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1427068 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1428446 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1429762 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1431350 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1432834 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1434262 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1435701 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1437101 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1438476 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1439839 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1441452 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1442757 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1444319 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1444340 [SwingWorker-pool-2-thread-4] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 22; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1472)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3061)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:842)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:771)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.nfe.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:250)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:275)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:214)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+1445855 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1447188 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1448483 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1449960 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1451581 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1452901 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1454197 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1455805 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1457344 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1458826 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1460185 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1461678 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1463118 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1464485 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1465897 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1467178 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1468580 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1469898 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1471387 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1473543 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1474962 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1476365 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1477986 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1479555 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1481106 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1482406 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1483798 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1485151 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1486440 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1487789 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1489127 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1490360 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1491653 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1492938 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1494284 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1495545 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1496887 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1498194 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1499466 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1500717 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1501984 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1503264 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1504565 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1505787 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1507108 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1508416 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1509660 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1510937 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1512204 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1513440 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1515004 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1516337 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1517565 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1519114 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1520380 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1521627 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1522956 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1524390 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1525614 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1526924 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1528363 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1529600 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1530935 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1532305 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1533575 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1534933 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1536261 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1537504 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1539084 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1540438 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1541664 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1543088 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1544344 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1545629 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1546980 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1548257 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1549558 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1550875 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1552188 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1553527 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1554794 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1556215 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1557471 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1558725 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1560069 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1561322 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1561333 [SwingWorker-pool-2-thread-4] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 13; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1472)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3061)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:842)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:771)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.nfe.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:250)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:275)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:214)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+1562802 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1562813 [SwingWorker-pool-2-thread-4] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 13; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1472)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3061)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:842)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:771)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.nfe.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:250)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:275)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:214)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+1564105 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1565386 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1566626 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1567938 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1569202 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1570477 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1571756 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1572995 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1574269 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1575593 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1575602 [SwingWorker-pool-2-thread-4] FATAL net.sf.jasperreports.engine.util.JRStyledTextParser  - Error parsing styled text.
+org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 36; O nome da entidade deve seguir imediatamente o '&' na referência da entidade.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1472)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEntityReference(XMLDocumentFragmentScannerImpl.java:1846)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:3061)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:842)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:771)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.parse(JRStyledTextParser.java:225)
+	at net.sf.jasperreports.engine.util.JRStyledTextParser.getStyledText(JRStyledTextParser.java:258)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getStyledText(JRFillTextElement.java:570)
+	at net.sf.jasperreports.engine.fill.JRFillTextElement.getText(JRFillTextElement.java:588)
+	at net.sf.jasperreports.engine.fill.JRFillTextField.prepare(JRFillTextField.java:669)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillFrame.prepare(JRFillFrame.java:217)
+	at net.sf.jasperreports.engine.fill.JRFillElementContainer.prepareElements(JRFillElementContainer.java:331)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:384)
+	at net.sf.jasperreports.engine.fill.JRFillBand.fill(JRFillBand.java:358)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillBandNoOverflow(JRVerticalFiller.java:458)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillPageHeader(JRVerticalFiller.java:421)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReportStart(JRVerticalFiller.java:282)
+	at net.sf.jasperreports.engine.fill.JRVerticalFiller.fillReport(JRVerticalFiller.java:151)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:932)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:864)
+	at net.sf.jasperreports.engine.fill.JRFiller.fill(JRFiller.java:114)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:653)
+	at net.sf.jasperreports.engine.JasperFillManager.fill(JasperFillManager.java:634)
+	at net.sf.jasperreports.engine.JasperFillManager.fillReport(JasperFillManager.java:956)
+	at br.sql.nfe.danfe.ImprimirDanfe.nfePdf(ImprimirDanfe.java:250)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:275)
+	at br.sql.janelas.utilitarios.TransmitirDadosFiscais$Task.doInBackground(TransmitirDadosFiscais.java:214)
+	at javax.swing.SwingWorker$1.call(SwingWorker.java:295)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at javax.swing.SwingWorker.run(SwingWorker.java:334)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+1576966 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1578212 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1579549 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1580816 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1582079 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1583365 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1584608 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1585854 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1587201 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1588410 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+1589705 [SwingWorker-pool-2-thread-4] WARN  net.sf.jasperreports.engine.component.ComponentsEnvironment  - Found two components for namespace http://jasperreports.sourceforge.net/htmlcomponent
+0    [SwingWorker-pool-2-thread-7] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+1    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+1    [SwingWorker-pool-2-thread-9] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-9] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-2] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-6] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/F:/Fontes/Fontes%20de%20Terceiros/GitHub/Java_NFe-master/target/java-nfe-4.00.6-jar-with-dependencies.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  net.sf.jasperreports.extensions.DefaultExtensionsRegistry  - Extension resource jar:file:/F:/Fontes/repo_local/a_old/jaspersoft/modules/ext/jasperreports-htmlcomponent-4.7.1.jar!/jasperreports_extension.properties was found to be a duplicate of jar:file:/F:/Fontes/repo_local/a_old/jaspersoft/modules/ext/jasperreports-htmlcomponent-5.0.1.jar!/jasperreports_extension.properties in classloader sun.misc.Launcher$AppClassLoader@5910e440

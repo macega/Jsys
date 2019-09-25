@@ -1,0 +1,11 @@
+15:03 - Classe: SQLDatabaseConnection; Método: conn; Exceção: java.sql.SQLException: No suitable driver found for jdbc:sqlserver://MACEGA:1433;databaseName=dados;user=jsys;password=jsys8203;
+15:03 - Classe: java.lang.Thread; Método: uncaughtException; Exceção: null;java.lang.NullPointerException;
+15:15 - Classe: SQLDatabaseConnection; Método: conn; Exceção: java.sql.SQLException: No suitable driver found for jdbc:sqlserver://MACEGA:1433;databaseName=dados;user=jsys;password=jsys8203;
+15:15 - Classe: java.lang.Thread; Método: uncaughtException; Exceção: null;java.lang.NullPointerException;
+15:16 - Usuario: SUPERVISOR;
+16:58 - Usuario: SUPERVISOR;
+19:00 - Usuario: SUPERVISOR;
+19:01 - Classe: java.awt.EventDispatchThread; Método: uncaughtException; Exceção: autocomplete/AutoCompleteDecorator;java.lang.NoClassDefFoundError: autocomplete/AutoCompleteDecorator;
+19:07 - Usuario: SUPERVISOR;
+20:53 - Usuario: SUPERVISOR;
+21:17 - Usuario: SUPERVISOR;

@@ -1,0 +1,7 @@
+[C:\MLINE\csv\GERAL.XML];[AjusteEstoqueItens]
+CODIGO;idProduto;CAST(@value as int)
+ESTOQ_ATU;quantidade;ISNULL(@value, 0)
+;quantidadeAnterior;0
+;totalCompra;0
+;totalVenda;0
+;idAjusteEstoque;1

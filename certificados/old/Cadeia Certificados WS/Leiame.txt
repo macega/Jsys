@@ -1,0 +1,18 @@
+-------------------------------------------
+            I M P O R T A N T E
+-------------------------------------------
+
+Os certificados existentes nesta pasta sao
+chaves publicas dos certificados das AC -
+Autoridade Certificadora que emitem os
+Certificados Digitais utilizados pelos WS
+das Secretarias de Fazenda.
+
+Os certificados devem ser instalados pois
+sao pre-requisito para estabelecer a conexao
+SSL com autenticacao mutua.
+
+Para instalar o certificado digital, basta
+selecionar o arquivo com o Explorer e clicar
+como o botao direito e escolher instalar,
+confirmando todas as opcoes.

@@ -1,0 +1,9 @@
+[C:\Fontes\AdaptaJsys\imports\ajusteEstoque.XML];[AjusteEstoque]
+data;data;CONVERT(DATETIME, @value, 100)
+idUsuario;idUsuario;
+usuario;usuario;
+totalCompra;totalCompra;
+totalVenda;totalVenda;
+obs;obs;
+fechado;fechado;
+cancelada;cancelada;

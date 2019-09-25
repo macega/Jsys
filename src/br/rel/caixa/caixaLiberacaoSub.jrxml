@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="caixaLiberacaoSub" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a0087901-6ec8-41ed-844a-fca1c1f58b88">
+	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT obs, 
+       vendedor, 
+       cliente, 
+       id, 
+       tabelaOrigem, 
+       idOrigem, 
+       motivo, 
+       usuario, 
+       hora, 
+       tipo
+FROM listaLiberacao
+WHERE data BETWEEN $P{dataInicial} and $P{dataFinal}]]>
+	</queryString>
+	<field name="obs" class="java.lang.String"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="tabelaOrigem" class="java.lang.String"/>
+	<field name="idOrigem" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="hora" class="java.sql.Timestamp"/>
+	<field name="tipo" class="java.lang.String"/>
+	<detail>
+		<band height="95" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="95" uuid="a4f4ef0e-7fe5-4cdb-adfc-913219a6e8ad"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="138" y="78" width="409" height="13" uuid="a8d561b4-8bdb-4426-9187-d1c775e88cf6"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="6" width="61" height="13" uuid="e73acedf-b83d-4636-8b62-39a1899eb26b"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Liberação de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="6" width="189" height="13" forecolor="#FF3366" uuid="ed4a9fa5-ea78-47b2-bb28-4ef297fcf95c"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="261" y="6" width="50" height="13" uuid="7ffbebb9-1a92-4bde-8b7d-c1958087e77c"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="24" width="40" height="13" uuid="5ef1fa41-0baf-4290-89fa-b23f4241d8e8"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="46" y="24" width="265" height="13" forecolor="#6666FF" uuid="a1f6627c-d746-435d-a9e4-7b017e53e46d"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="42" width="100" height="13" uuid="1d2a8071-ce20-4339-a8f8-dd304468abfd"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tabelaOrigem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="106" y="42" width="205" height="13" uuid="a8767e1d-2a64-4ea7-97ad-aedb3c26c42f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idOrigem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="60" width="61" height="13" uuid="f9898761-f30f-4d1b-a44c-96ca2f53afb6"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Vendedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="60" width="244" height="13" uuid="a67afde8-ac5d-419f-add9-1b64a7ab3955"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="78" width="40" height="13" uuid="8c915344-8113-4bb8-9bd2-fb26a111d05f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="46" y="78" width="88" height="13" uuid="f97a8382-7f60-4084-84da-a670ebea4eeb"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="6" width="230" height="67" uuid="ef03ddf3-a19e-4130-bc2f-ead4690c2292"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

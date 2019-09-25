@@ -1,0 +1,4 @@
+[C:\MLINE\csv\GERAL.xml];[jsysProdutosTPrecos]
+CODIGO;idProduto;CAST(@value as int)
+VLR_URV;precoVenda;CAST(@value as DECIMAL(16,4))
+;idloja;(SELECT TOP 1 idloja FROM jsysLojas WHERE ativo = 1)

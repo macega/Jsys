@@ -1,0 +1,437 @@
+﻿update 130.518
+inicio do sistema 
+
+Update 140.430
+- implantada opcao de multLojas
+- Criado Relatório de Vendas Por Família - Agrupada por Vendedor
+
+Update 140.527
+- Alterado Relatório de Vendas Por Família - Adicionada Soma Geral 
+- Criado Lista de Colaboradores
+- Criado Lista de Clientes
+- Criado Lista de Fornecedores
+
+Update 140.530
+- Criado Relação de Faltas
+- Criado Relação de Faltas Geral
+- Criado Controle de versões
+- Alterado Tela de Splash
+- Alterado Tela de Vendas 
+
+Update 140.531
+- Consertado relatório de Faturamento de vendas (Não abria no ultimo dia do mês)
+
+Update 140.604
+- Consertador Ajuste de Estoque, O sistema agora vai recontar todo o estoque quando entra na Janela. 
+
+Update 140.610
+- Alterado sistema de ponto, o ponto vai registra os feriados que estiverem cadastrados no sistema. 
+
+Update 140.621
+- pagamentos caixa foram incluídos o campo de Loja para salvar no banco de dados de qual loja foi à credora do pagamento.
+- consertado a opção sem cadastro da janela de pagamentos que as vesses se comportava estranho.
+
+Update 140.627
+- Consertado Nf-e erro de não carregar o valor de "ISENTO" no momento que gerar a NF-e
+- Alterado o desconto na Venda agora ele vai permitir somente até 10.50% de desconto 
+
+Update 140.701
+- adaptar a tabela pagamentos
+- Modificado a forma de conexão para ter como alterar entre as empresas sem precisar sair do Aplicativo
+- Alterado na agenda telefônica, não vai poder alterar os dados direto na lista de busca.
+- criado baixa de títulos para o Financeiro
+
+Update 140.703
+- adaptar a tabela pagamentos
+- criado relatório de contas Pagas
+- criado consulta de pagamentos
+- criado cadastro de pagamentos
+
+Update 140.704
+* adaptar a tabela pagamentos
+- Alterado no cadastro de código de barras quando código cadastrado for de outro produto vai mostra erro em vermelho
+- Alterado o cadastro de produtos quando for cadastra código de barra não a necessidade de salvar o registro antes de iniciar os cadastros
+- consertado o cadastro de produtos que não estava permitindo alterar os registros
+
+Update 140.708 
+* adaptar a tabela pagamentos
+* adaptar a tabela de Liberação
+- criada opção de consultar documentos cancelados na Consulta de Pagamentos
+- Alterado as outras buscas irão ignorar os títulos cancelados
+- Alterado o relatório de caixa vai mostras na lista de liberação os títulos de pagamentos cancelados
+- Alterado o titulo cancelado vai retornar o valor para o caixa 
+
+Update 140.709
+- criado opção de apagar código de barras na janela de cadastro de produtos
+- consertado problema para confirmar retiradas
+
+Update 140.710
+- consertado envio de caixa (mensagem estava sendo enviada em branco)
+
+Update 140.714
+- criado Help Desk no Menu CRM
+- criado relatório de Resumo de Contas Pagas
+- consertado Relatório de contas Pagas (Financeiro)
+- consertado problema na Geração de NF-e 
+
+Update 140.715
+- criado relatório de Help Desk
+
+Update 140.716
+- criado fechamento de atendimentos pelo Help Desk
+
+Update 140.730
+* Update  na tabela jsysOrcamento
+* Update  na tabela Receber
+- janela de vendas criado um campo para ficha do cliente
+- janela de vendas foi removida o botão de impressão de vendas
+- janela de recebimento de caixa agora vai mostra a ficha do cliente atendido
+- janela de recebimento de caixa assim que efetuado o pagamento do titulo ele vai imprimir o espelho da venda
+
+Update 140.731
+* Update  na tabela CadECF
+- janela vendas e obrigatório preencher o campo de ficha
+
+Update 140.805
+- criado recebimento agrupado
+- alterado a venda para aceitar ficha de clientes
+- orçamento agora imprime a venda assim que e fechada
+
+Update 140.807
+- janela de caixa vai mostras títulos que foram marcados com a cor azul
+
+Update 140.808
+- erro de não sair o cupom fiscal foi resolvido
+- erro na nota fiscal de não trazer o código do orçamento foi resolvido 
+- janela de ajuste de ponto agora tem como fazer o ajuste de vários dias do funcionário que esta de FERIAS, AVISO-PREVIO E LICENÇA-MATERNIDADE.
+- impressão de orçamento agora vai sair no final do orçamento o código do mesmo
+- impressão de ficha na nota de troca 
+- na lista de notas recebidas do caixa agora vai mostra a ficha do cliente
+
+Update 140.818
+* adaptar tabelas jsysClientes, jsysClientesIds, funcionariosPonto.
+* criar tabela Replicacao
+- cadastro de correntistas, Na aba de colaborador foi criado opção de Loja.
+- criado Relatório Lista de Vendas (Por Vendedor)
+- janela de consulta de clientes o focus esta indo direto para a consulta, ao pressionar Enter em cima do registro vai Editar o mesmo.
+- erro no ajuste de ponto foi consertado, não estava sendo salvados os registros alterados.
+
+Update 140.826
+- valor inicial da loja ativada na janela de pagamentos
+- ajustado problema com senha que não abria quando se errava a mesma
+- consulta receber vai mostra os cadastros bloqueados para efetuar baixa dos clientes cadastrados
+- na venda não permite mais digitar o código para vender
+- o ponto agora não permite mais digitar para passar o ponto
+- para abri o relatório não aceita mais digitar o código
+
+Update 140.909
+* adaptar tabela JsysOrcamentos
+* criar defaltFalse
+* criar tabela jsysParametros
+- criado janela do pacote para confirmar entrega de mercadoria
+- agora no bando de dados vai gravar as vendas que forem entregues 
+- ajustado problema no cadastro de cartão dos Colaboradores
+- Relatório Mov Financeira vai mostra se a vendo foi entregue no pacote
+- janela do pacote foi adicionada um grid com as ultimas vendas que foram entregues para ser visualiza 
+- no grid do caixa e do pacote foram posicionados os campos com valores para melhor visualização dos mesmos
+- na entrega do pacote agora vai ficar liberada vendas com saldo Negativo, vai constar como quitado o titulo.
+- criado janela de parâmetros
+
+Update 141.009
+- na janela do pacote agora tem como imprimir o orçamento que acabou de ser confirmado
+- janela do caixa agora vai ficar destacada o valor que esta sendo cobrado na venda
+- todos os Relatórios foram ajustados os títulos aparecerem em todas as paginas 
+
+Update 141.106
+* adaptar tabela Parâmetros
+- parâmetros adicionada versão do Emissor de NF-e
+- consertado problema de mostras os zeros a mais nos campos formatados com moeda
+- Realizados Ajustes na Janela de Help Desk
+- Criado um Relatório com os Atendimentos Finalizados do Help Desk 
+- Melhorado Log do Sistema para salvar o nome dos métodos e das Classes
+
+Update 141.112
+- erro nos renders antigos causados pela atualização de log da ultima versão
+	formulário de vendas 
+	formulário de envio de caixa
+	formulário marcação de ponto 
+- adicionado no ponto opção de "LACTANTE" para colaboradoras que voltarem da LICENÇA-MATERNIDADE
+- Relatório mov Financeira Foi adicionado o campo de Hora 
+- melhorado janela de Fechamento do Help Desk
+
+Update 141.125
+- os cupons fiscais vai sair descrito o tipo de pagamento, se tiver sido um pagamento no dinheiro ou debito.  Conforme o recebimento no caixa
+- criado no parâmetro um campo para adicionar uma mensagem no cupom Fiscal 
+
+Update 141.128
+- recebimento de caixa foi alterado a ordem das ações no momento da baixa do titulo
+  para que seja baixado o titulo no bando de dados apos o processo no bando de dados 
+  ai será enviado para impressora fiscal 
+- na janela do pacote agora vai emitir sons para os eventos que estiver acontecendo 
+- no cadastro de produtos vai emitir sons dependendo do evento que acontecer no cadastro de códigos de barra
+
+Update 141.203
+- no gerenciador de ECF vai ter avisos perto do relógio para mostras erros como falta de papel entre outros 
+- no gerenciador de ECF vai ter mais avisos para ter certeza que o usuário esta ciente de emitir a redução Z
+- abertura de caixa não vai ser mais duplicada como erra antes, se não tiver abertura vai ser lançada uma nova.
+	se o sistema identificar que o caixa já foi aberto ele só vai altera a abertura corrente e vai registra
+	a liberação do sistema.
+	
+Update 141.208
+* criar tabela jsysContas.
+- alterado relatório de contas pagas para ficar com um layout mais compacto.
+- relatório de contas pagas agora vai sair Geral, todas as lojas do sistema. 
+- relatório resumo de contas pagas agora vai ser Geral, todas as lojas do sistema.
+
+Update 141.210
+- melhorado a consulta de débitos para melhorar o desempenho.
+
+Update 141.222
+- alterado fechamento de venda para cliente vip não registrar a ficha e anotar como mercadoria entregue.
+- foram atualizados os dados das devoluções de estoque para remover as fichas e marcar como entregue.
+- alteração no método que verifica se a ficha esta sendo usada, agora vai executar um script para retornar o valor. 
+
+Update 141.229
+- alterado os itens da venda para mostra zero casas decimais na quantidade e somente dois casas decimais para o valor dos produtos.
+
+Update 150.102
+- a aplicação vai verificar se tem outra instancia aberta ante de iniciar.
+
+Update 150.115
+* atualizar tabela de JsysMetas.
+- alterado para não aceitar metas duplicadas no sistema. 
+- consertado quando um vendedor e inativado vai mostras na venda que não foi encontrado o vendedor antes não mostrava nada de aviso para o usuário.
+
+Update 150.123
+- ajuste de estoque.
+	Foi melhorado o layout.
+	Arrumado o grid que embaralhava os intens. durante o lançamento.
+	Agora quando lançar um item repetido ele vai fazer a soma do que já está lançado, ante ele só substituía o valor anterior.
+- relatório do kardex agora está ordenado pela data e hora do lançamento.
+
+Update 150.127
+- janela de metas da loja foi melhorada agora ele vai alterar direto o mês selecionado e não vai apenas dizer que já esta cadastrada.
+
+Update 150.129
+- alterado o relatório de inventario para contar a quantidade de itens.
+
+Update 150.216
+- consertado erro na venda que permitia fechar a venda com valor acima de 10% de desconto.
+
+Update 150.219
+- reimpressão de cupom fiscal agora vai pedir senha do gerente para emissão de outra via do cupom fiscal. 
+
+Update 150.225
+- criada a janela de cadastro de Compensação.
+- criada impressão de Compensação.
+- alterado ajustes de ponto para aceitar atualizar Lactantes para liberar uma hora de folga para funcionarias que Tiveram licença Maternidade.
+- alterado impressão de ponto cartão. 
+- alterado impressão de relação de faltas. 
+- alterado impressão de relação de faltas Geral.
+- melhorada a janela de ponto para não vai realizar a consulta de todo o mês.
+- consertado o ponto que mostra erro nos domingos e outros dias. 
+
+Update 150.311
+* atualizar tabela jsysLojas.
+* atualizar tabela jsysparametros.
+- cadastras no cadastro de Lojas o Deposito e marcar como deposito
+- alterado janela de vendas no botão de fechar venda para melhora o desempenho.
+- desativado o controle de intervalo do sistema.
+- alterado devolução para deposito.
+- alterado Replicador (melhorador o desempenho do mesmo).
+
+Update 150.327
+* adaptar tabela jsysContas.
+* adaptar tabela jsysSubConta.
+* adaptar tabela jsysParametros 5.
+* rodar script Update  contas que esta na pasta MANUTENÇAO.
+- alterada consulta pagamentos para filtra a data de pagamento em vês de vencimento.
+- criados novos parâmetros do sistema.
+- liberado controle de intervalo.
+
+Update 150.409
+* adaptar tabela jsysClientes.
+* adaptar tabela Pagamentos.
+- cadastro de Correntistas vai validar se foi selecionada uma cidade
+- adicionada opção de imprimir Ficha de cadastro de Colaborador.
+- atualizado o sistema para exportar Script para Emissor gratuito de Nota Fiscal versão 3.10.
+- cadastro de Pagamentos o campo de outros Números foi aumento para 40 dígitos.
+- melhorada a nomenclatura dos métodos na classe validar.
+- cadastro de Correntistas não vai aceitar datas invalidas.
+
+Update 150.504
+- criado Relatório de Cheques.
+- criado Relatório de Contas á Pagar.
+- alterado relatório de Contas Pagas para incluir as vendas das Lojas.
+- criado Parcelamento de Contas a Pagar.
+- parcelamento calcula automaticamente os valores das parcelas.
+- alterado relatório de Contas a pagar para ordenar por vencimento.
+
+Update 150.526
+- consulta contas a pagar, removido botão de relatório, não erra muito intuitivo.
+- Relatório, contas a pagar criada opção para filtra Fornecedores.
+- consulta de Cheques modificados, a ordenação da listagem.
+- consulta de cheques não carrega mais todos os dados, vai listar somente os cheques que não estão quitados do mês atual.
+- Relatório de Cheques adicionado filtro para fornecedor.
+- formulário de pedidos foi implementado um filtro para facilitar o lançamento. 
+- formulário de cadastro do help desk vai selecionar diretamente a loja ativa no sistema.
+- formulário de transferência. Lista de pedidos não mostra as transferências canceladas.
+- formulário de pagamento de contas, incluindo um botão para consulta de sub contas.
+- formulário de cadastro de parcelamento, incluindo um botão para consulta de sub contas.
+- formulário de cadastro de pagamentos, incluído um botão para consulta de sub contas.
+
+Update 150.530
+- cadastro de cheques foi recriado para facilitar o uso do sistema e resolver o erro de baixa. 
+- baixa de cheques adicionada numero de compensação no ato da baixa.
+- formulário de vendas agora pode efetuar o cadastro do cliente.
+- no formulário de abertura de venda criado botão de consulta de clientes e cadastro de clientes.
+
+Update 150.804
+- Alterado ordenação do formulário de retiradas para ficar melhor para achar os registros.
+- implementando NFC-e no sistema.
+- emissão de NFC-e.
+- emissão de inutilização da NFC-e.
+- emissão de inutilização da NF-e.
+- Alterado Regras de validação da NFC-e.
+- parâmetro para verificar se vai utilizar NFC-e ou ECF.
+
+Update 150.908
+- janela de emissão de NFC-e vai mostra a validade o Certificado da Empresa.
+- cadastro de Colaboradores vai selecionar a empresa ativa no cadastro do sistema.
+- cancelamento NFC-e por evento.
+- Implementando NF-e.
+- alterado o envio de e-mail para envidar arquivos.
+- criado importador de XML do emissor de nota fiscal eletrônica Gratuito.
+- criado auto Login para Vendas, adicionar a palavra "vendas" no atalho da aplicação para os terminais de vendas.
+- criado auto Login para pacote, adicionar a palavra "pacote" no atalho da aplicação para os terminais do pacote.
+- envio de arquivos Fiscais para Contador. 
+- alterado parâmetros do sistema. 
+- alterado parâmetros locais do sistema.
+- erro connectin reset parou de apresentar problemas apos ativar os protocolos "SSLv3", "TLSv1".
+- o sistema agora permite abrir o sistema de vendas e o sistema completo com usuário e senha.
+- finalizado o sistema para envio de dados fiscais para o contador (envio dos arquivos XML mod 55, 65, eventos de cancelamento e os pdf com as NF-e Emitidas no período).
+- parâmetro local agora permite cadastras mais de um e-mail para envio de dados fiscais e caixa cadastras os e-mails separados por vírgula “,” vai enviar uma mensagem para dos os cadastras no parâmetro.
+- consertado relatório de produtos Negativos não estava abrindo erro na consulta SQL.
+- função de alterar cliente da venda na janela do caixa foi melhorada agora mostra os registros selecionados e pode consultar o cadastro de clientes para selecionar o mesmo.
+- registro de log do sistema vai gravar o nome do relatório que esta gerando e Exception.
+
+Update 151.106
+- alterado a forma de envio de e-mail da NF-e agora vai enviar assim que for transmitido para Sefaz, e nao juntamente com a Impressão.
+- adicionada cancelamento de NF-e no menu Fiscal > cancelamento.
+- cancelamento de NF-e está ativo.
+- criado relatório de devoluções para o deposito e Lojas.
+- removido os acentos do XML no momento que for retornar o valor do bando de dados na classe jsysNfe.
+- o sistema vai avisar se a necessidade de cadastrar a meta dos vendedores antes de abri o relatório.
+- devolução para o deposito está funcionado novamente. 
+- ponto não vai mais registros caso o funcionário que estiver de compensação.
+- relatório de Faturamento de vendas agora pode abri em qualquer período EX. 15/10/2015 a 15/10/2015.
+- lista de transferência, mostra o valor de venda da loja, que está recebendo a mercadoria conforme no cadastro de produtos.
+- melhorado o lançamento de faltas, pois o anterior demorava muito para carregar, agora quando o funcionário for registra o ponto ele vai também registra a faltas do mesmo.
+- Novo Sistema de controle de intervalo implementado.
+- consulta de chave de acesso para consertar cupons com proplemas.
+
+Update 151.120
+- focus do intervalo consertador, não atrapalha mais a venda. 
+- intervalo quando finalizar um intervalo vai mostra quem ainda esta no intervalo.
+- alterado tabela do sistema antigo para facilitar as consultas a tabela jsysTranferenciaEntreContas.
+- ajustado formulário de retiradas do caixa. 
+- managerDate melhorado imports.
+- mensagem e-mail contador foi melhorado o email agora vai conter razão social e CNPJ para melhora a identificação da empresa. 
+- Alterado o sistema de retiradas no banco de dados melhorado o desempenho da tabela.
+- Retirada de caixa não vai ser mais realizada caso o caixa ainda não seja aberto.
+- Não aceita registra o ponto no primeiro dia de trabalho resolvido.
+- erro na mensagem de retorno da NFC-e não mostrava o erro detalhado na tela do caixa, agora esta mostrando o erro normalmente.
+- adicionada no cadastro de correntistas na aba de colaborador as datas de inicio e fim do aviso prévio do mesmo.
+- O sistema vai registra automático o aviso prévio do funcionário se estiver correto no cadastro de correntista.
+- caso não tenha sido cadastrado a compensação do funcionário o sistema vai considerar como dia normal para quem for registra o ponto 
+- caixa agora não vai permitir realizar o fechamento de caixa caso tenha fichas em aberto no caixa do mesmo
+- Implementado no sistema mensagem de erros genéricos para mostra ao usuário sobre os erros
+- a impressao no pacote foi melhorada, vai permitir imprimir varias notas ou somente uma, 
+    tem que selecionar as notas que deseja imprimir e clicar no botao imprimir.
+- alterado relatorio de atencimentos help desk.
+- alterado registro de helpe desk para registra a hora do chamado.
+
+update 151.229
+- Alterado o gerador de NF-e para retirar os espaços no fim do endereço e do nome do corentista. 
+- Criado recebi para pagamentos no caixa. 
+- Alterado a consultado da NF-e para pegar o cadastro do cliente pelo CNPJ ou CPF.
+- Adicionada na consulta da NF-e o filtro por data para deixar a consulta mais rapida. 
+- Ajuste de ponto, removido opçao de Aviso-Previo.
+- NF-e vai selecionar automaticamente se a mesma é para 
+		1 - Operação Interna
+		2 - Operação Interestadual
+		3 - Operação com Exterior
+- Implementado as solicitaçoes feitas pela receita na NT2015.002 que tem o prazo para 01-01-2016.
+- Alterado classe setfomato CPF/CNPJ para formatar autmaticamente o formato conforme digitado um cpj ou cnpj.
+- Adicionado soma Geral das lojas no final do relatorio "Vendas Lojas"
+- Criado uma Tabela de Produtos para impressao dos produtos ativos no sistema.
+- Alterado fechamento da venda para resolver proplema de Dízima periódica no desconto, e gerava erro na NF-e e NFC-e.
+- Agrupamento no relatorio de contas pagas estava mostrando os nomes das contas e nao das subContas foi consertado.
+
+update 160.212
+- Criado replicador entre as lojas para os cadastros de correntistas.
+- O sistema nao vai mais aceitar cnpj ou cpf duplicado nos cadastros.
+- o sistema vai premitir que o cadastro do correntista seja cadastrado sem o cnpj ou cpf.
+- Ajustado sistema de ponto para registras meia-Falta.
+- Cadastro de correntista criado campo para Filial.
+- Melhorado a transferncias entre empresas, agora tem como cadastras somente as filias para ser efetuada as transferencias.
+- Consertado proplema para reativar o cadastro de antigos funcionarios.
+
+update 160.229
+- REPLICADOR INTEGRADO AO SISTEMA jsys.
+- Melhorado o replicaçao de clientes, nao vai mais duplicar registros sem cnpjCpf.
+- Consulta status sefaz sistema NF-e e NFC-e agora fica automatico em loop caso configurado no parametros locais.
+- Cadastro de lojas agora tem opçao de nome do banco de dados. 
+- Entrada de notas fiscais agora tem local para colocar a chave de acesso na NF-e.
+- Ponto do sistema agora registra no banco de dados a meia falta.
+- Adicionado opçao de contingencia namual no sistema pelo parametro do sistema.
+- Cadastro de transportadoras no sistema para Emissao de NF-e.
+- A emissao de nf-e e nfc-e vai validar se os codigos de barra sao validos conforme manual de orientaçao contribuinte
+- Arumado proplema na abertura do sistema de NF-e erro no Copilador
+
+update 160.810
+- Melhorado registro de Liberaçoes do Sistema (nao mostrava reaberturas de Caixa).
+- Foi subistituida a tabela Receber por jsysReceber e suas dependentes.
+- Criado opçao no menu do caixa "Gerencial" a liberaçao vai depender do nivel de acesso do Usuario
+		cancelar Recebimento
+		cancelar retirada
+		cancelar pagamento
+		reabir venda
+		cancelar Venda
+- cadastro de usuarios de caixa e outras funçoes agora pode ser realizada pelo gerente e administraçao da empresa.
+- proplema de adicionar funcionarios no 15 resolvido.
+- fechar janela de cancelamento de recebimento, agora somente fecha sem pedir senha de supervisor.
+- alterado orderm dos registros no formulario de retiradas.
+- reparado proplema no recebimento agrupado do caixa.
+- formatado o campo de valor Recebido para "0,00" no formulario do caixa.
+- no momento de emissao de NF-e o focus estava voltado ao formulario do caixa, o proplema foi resolvido.
+- adicionada no parametro limite de desconto.
+- melhorada consulta de produtos no formulario de Vendas/Orcaçamentos.
+- adicionada opçao no parametro para permitir efetuar vendas sem o cartao.
+- alterado constantes da classe ManagerData
+- proplema no cadastro de clientes basico, consertado nao mostrava os clientes referentes ao vendedor
+- criado opção de instalacao no adaptar
+
+update 161.213
+- proplema de ficar com os :: na mascara do campo de hora resolvido.
+- proplema no lançamento de retiradas resolvido.
+- criado opçao de cheque devolvido.
+- relatorio de cheques melhorado.
+- ao reabri o cheque ele abre o formulario do titulo reaberto. 
+- o erro ao baixar o titulo a prazo, foi adicionado um truncamento para nao sobra Dízima periódica
+	e o titulo ainda ficar em aberto. com o valor zero.
+
+update 170.112
+- adicinada opção, cancelamento de retirada com senha de gerente.
+- agora pode selecionar varios titulos de pagamento para efetuar a baixa ou cancelamento.
+- criada um formulario para cadastro de tribubutos
+- pode cadastra diretamente no parametro ou selecionar um tipo de tributo diretamente para o produto
+
+update 61.1.2.4
+- alterado o sistema de verçoes.
+- agora tem um sitema de atulizaço pela rede.
+- consertado proplema de nao mostra os produtos.
+- consertado proplema do parcelamento que nao abria.
+
+update 61.2.2.4
+- adicionado link para download do sistema

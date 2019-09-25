@@ -1,0 +1,22 @@
+09:31 - Usuario: SUPERVISOR;
+09:33 - Usuario: SUPERVISOR;
+09:38 - Usuario: SUPERVISOR;
+09:41 - Usuario: SUPERVISOR;
+09:42 - Classe: NfeEmissao; Método: caregaVendaActionPerformed; Exceção: Erro Na Validação do Xml: 
+- Foi detectado um conteúdo inválido começando com o elemento 'infAdic'. Era esperado um dos 'cobr, pag'.;br.com.samuelweb.nfe.exception.NfeValidacaoException: Erro Na Validação do Xml: 
+- Foi detectado um conteúdo inválido começando com o elemento 'infAdic'. Era esperado um dos 'cobr, pag'.;
+10:00 - Usuario: SUPERVISOR;
+10:00 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+10:01 - Usuario: SUPERVISOR;
+10:02 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+10:03 - Usuario: SUPERVISOR;
+10:05 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+10:17 - Usuario: SUPERVISOR;
+10:27 - Usuario: SUPERVISOR;
+15:55 - Usuario: SUPERVISOR;
+16:09 - Usuario: SUPERVISOR;
+18:55 - Usuario: SUPERVISOR;
+18:58 - Usuario: SUPERVISOR;
+19:23 - Usuario: SUPERVISOR;
+19:30 - Usuario: SUPERVISOR;
+19:42 - Usuario: SUPERVISOR;

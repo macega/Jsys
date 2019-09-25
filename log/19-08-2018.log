@@ -1,0 +1,7 @@
+09:40 - Usuario: SUPERVISOR;
+21:27 - Usuario: SUPERVISOR;
+21:31 - Classe: br.sql.nfe.Janelas.NfceCancelamento; Método: Task.doInBackground; Exceção: Status:999 - Motivo:Rejeicao: Erro nao catalogado ;br.com.samuelweb.nfe.exception.NfeException: Status:999 - Motivo:Rejeicao: Erro nao catalogado ;
+21:35 - Usuario: SUPERVISOR;
+21:36 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;java.util.concurrent.ExecutionException: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;
+21:41 - Usuario: SUPERVISOR;
+22:03 - Classe: br.sql.nfe.Janelas.NfceCancelamento$Task; Método: Task; Exceção: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;java.util.concurrent.ExecutionException: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0;

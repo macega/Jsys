@@ -1,0 +1,12 @@
+08:44 - Usuario: SUPERVISOR;
+16:02 - Classe: java.awt.EventDispatchThread; Método: uncaughtException; Exceção: null;java.lang.ExceptionInInitializerError;
+16:04 - Classe: java.awt.EventDispatchThread; Método: uncaughtException; Exceção: null;java.lang.ExceptionInInitializerError;
+16:05 - Classe: java.awt.EventDispatchThread; Método: uncaughtException; Exceção: null;java.lang.ExceptionInInitializerError;
+16:06 - Classe: java.awt.EventDispatchThread; Método: uncaughtException; Exceção: null;java.lang.ExceptionInInitializerError;
+16:11 - Usuario: SUPERVISOR;
+16:11 - Classe: ManagerData; Método: horaToLong; Exceção: For input string: "he";java.lang.NumberFormatException: For input string: "he";
+16:53 - Usuario: SUPERVISOR;
+16:59 - Usuario: SUPERVISOR;
+17:03 - Usuario: SUPERVISOR;
+17:33 - Usuario: SUPERVISOR;
+17:34 - Usuario: SUPERVISOR;

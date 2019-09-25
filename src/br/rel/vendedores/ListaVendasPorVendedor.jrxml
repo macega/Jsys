@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListaVendasPorVendedor" language="groovy" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="72f4f49d-49a4-4d82-b05a-885781f89a82">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select jsysOrcamento.idOrcamento, jsysOrcamento.data, jsysOrcamento.valorBruto, jsysOrcamento.valorLiquido, jsysOrcamento.idFuncionario, jsysClientes.nomeCorentista, jsysParametros.fantasia
+from jsysOrcamento 
+inner join jsysClientes on jsysOrcamento.idFuncionario = jsysClientes.idCliente
+cross join jsysParametros
+where (jsysOrcamento.vendido = 1) 
+	and (jsysOrcamento.cancelado = 0)
+	and (jsysOrcamento.data between $P{dataInicial} and $P{dataFinal})
+	and (jsysOrcamento.valorLiquido >= 0)
+order by jsysOrcamento.idFuncionario, jsysOrcamento.data]]>
+	</queryString>
+	<field name="idOrcamento" class="java.lang.Integer"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="valorBruto" class="java.math.BigDecimal"/>
+	<field name="valorLiquido" class="java.math.BigDecimal"/>
+	<field name="idFuncionario" class="java.lang.Integer"/>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="valorLiquido_1" class="java.math.BigDecimal" resetType="Group" resetGroup="idFuncionario" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorLiquido}]]></variableExpression>
+	</variable>
+	<group name="idFuncionario">
+		<groupExpression><![CDATA[$F{idFuncionario}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField>
+					<reportElement uuid="acc2adda-e698-49d9-9c28-223be9d95464" style="SubTitle" x="39" y="1" width="51" height="15" forecolor="#333333"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idFuncionario}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement uuid="d6f26966-5c03-4b41-9769-6fadf1183ec4" mode="Opaque" x="0" y="1" width="36" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC"/>
+				</rectangle>
+				<textField>
+					<reportElement uuid="df1c22ed-951b-43b7-8afb-31cc56e64856" style="Detail" x="95" y="1" width="179" height="15"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nomeCorentista}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="18">
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement uuid="d9ef5f32-4d61-4e33-9c90-cadb283b1cf7" x="198" y="2" width="76" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{valorLiquido_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="9d8efd3a-d725-4ea0-97ba-0fdd85c1eba6" x="113" y="2" width="82" height="15"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Total Vendas:]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="5d44e2a9-1aec-4712-b432-4bb3ce815da5" x="113" y="0" width="161" height="1"/>
+					<graphicElement>
+						<pen lineWidth="0.75" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7c573f35-a051-4d08-ad13-82da7e8c64a0" style="Detail" x="0" y="1" width="274" height="23"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="3d183d40-8616-4d60-b95e-8d4ac74373d6" style="SubTitle" x="148" y="25" width="120" height="13"/>
+				<textElement verticalAlignment="Middle" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataInicial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c5dd7f14-0711-4cbd-b3c6-9f1023c2264a" style="SubTitle" x="64" y="25" width="82" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Lista Vendas]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a843e61d-e5c1-4667-ac0a-2ffbf34abfba" style="SubTitle" x="148" y="25" width="120" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="b0f57875-0f45-4df9-b48c-ef3c0536c260" style="SubTitle" x="148" y="25" width="120" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[á]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement uuid="c492b3ab-97d7-4bd4-83fb-2e24f7bd2a06" positionType="FixRelativeToBottom" x="0" y="17" width="274" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="08cf4095-24fa-4b7d-86b7-914947eb7221" style="Column header" x="52" y="3" width="57" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="87568b32-89ca-4475-9e77-420e2d135bf4" style="Column header" x="113" y="3" width="82" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Valor Bruto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb7eedcd-676d-4081-aedf-5ade35ebb900" style="Column header" x="198" y="3" width="76" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Valor Liquido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7e123c0-9137-41cc-a558-cbc71816b1ba" style="Column header" x="2" y="3" width="50" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="1718f772-02a7-4992-adcb-4450c8c7fe0f" style="Detail" x="52" y="0" width="57" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement uuid="231919cd-d66a-44b9-a238-596ad0e8c9ce" style="Detail" x="113" y="0" width="82" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorBruto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement uuid="f72b5ef9-916d-41a3-833e-f5a24906c8df" style="Detail" x="198" y="0" width="76" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorLiquido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1718f772-02a7-4992-adcb-4450c8c7fe0f" style="Detail" x="2" y="0" width="50" height="12"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idOrcamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b62124bd-fa49-4635-bb9d-5709f7ec00dc" style="Column header" x="433" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="421fc6ee-bb06-445c-b363-f9c2b80d1836" style="Column header" x="513" y="0" width="42" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="f608fe79-cf81-408e-8b23-ca0bf882cb64" style="Column header" x="0" y="0" width="197" height="20"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

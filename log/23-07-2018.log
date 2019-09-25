@@ -1,0 +1,79 @@
+11:32 - Usuario: SUPERVISOR;
+11:33 - Classe: GerenteEntidade; Método: insert(class br.sql.bean.JsysFeriados); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'dataFeriado', table 'DADOS.dbo.jsysFeriados'; column does not allow nulls. INSERT fails.
+Error Code: 515
+Call: INSERT INTO jsysFeriados (dataFeriado, obs) VALUES (?, ?)
+	bind => [2 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysFeriados[ idFeriado=null ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Cannot insert the value NULL into column 'dataFeriado', table 'DADOS.dbo.jsysFeriados'; column does not allow nulls. INSERT fails.
+Error Code: 515
+Call: INSERT INTO jsysFeriados (dataFeriado, obs) VALUES (?, ?)
+	bind => [2 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysFeriados[ idFeriado=null ]);
+12:03 - Usuario: SUPERVISOR;
+12:06 - Usuario: SUPERVISOR;
+12:09 - Usuario: SUPERVISOR;
+12:17 - Usuario: SUPERVISOR;
+12:19 - Usuario: SUPERVISOR;
+12:21 - Usuario: SUPERVISOR;
+12:24 - Usuario: SUPERVISOR;
+12:30 - Usuario: SUPERVISOR;
+13:39 - Usuario: SUPERVISOR;
+13:40 - Classe: GerenteEntidade; Método: update(class br.sql.bean.JsysLojas); Exceção: 
+Exception Description: Transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: Transaction is currently active;
+14:42 - Usuario: SUPERVISOR;
+15:11 - Usuario: SUPERVISOR;
+15:12 - Classe: GerenteEntidade; Método: insertOrUpdate(class br.sql.bean.JsysMetas); Exceção: Exception [EclipseLink-7251] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.ValidationException
+Exception Description: The attribute [mes] of class [br.sql.bean.JsysMetas] is mapped to a primary key column in the database. Updates are not allowed.;javax.persistence.RollbackException: Exception [EclipseLink-7251] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.ValidationException
+Exception Description: The attribute [mes] of class [br.sql.bean.JsysMetas] is mapped to a primary key column in the database. Updates are not allowed.;
+15:14 - Usuario: SUPERVISOR;
+15:26 - Usuario: SUPERVISOR;
+16:52 - Usuario: SUPERVISOR;
+17:03 - Usuario: SUPERVISOR;
+17:05 - Usuario: SUPERVISOR;
+17:07 - Usuario: SUPERVISOR;
+17:08 - Classe: GerenteEntidade; Método: insertOrUpdate(class br.sql.bean.JsysMetas); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas[ mes=Sun Jul 01 00:00:00 GMT-04:00 2018 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas[ mes=Sun Jul 01 00:00:00 GMT-04:00 2018 ]);
+17:09 - Usuario: SUPERVISOR;
+17:09 - Classe: GerenteEntidade; Método: insertOrUpdate(class br.sql.bean.JsysMetas); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas[ mes=Sun Jul 01 00:00:00 GMT-04:00 2018 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas[ mes=Sun Jul 01 00:00:00 GMT-04:00 2018 ]);
+17:13 - Usuario: SUPERVISOR;
+17:13 - Usuario: SUPERVISOR;
+17:18 - Usuario: SUPERVISOR;
+17:19 - Classe: GerenteEntidade; Método: insertOrUpdate(class br.sql.bean.JsysMetas); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas@5175ee54);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Violation of PRIMARY KEY constraint 'PK_jsysMetas'. Cannot insert duplicate key in object 'dbo.jsysMetas'. The duplicate key value is (Jul  1 2018 12:00AM).
+Error Code: 2627
+Call: INSERT INTO jsysMetas (mes, loja, vendedor) VALUES (?, ?, ?)
+	bind => [3 parameters bound]
+Query: InsertObjectQuery(br.sql.bean.JsysMetas@5175ee54);
+17:45 - Usuario: SUPERVISOR;
+17:45 - Classe: GerenteEntidade; Método: insertOrUpdate(class br.sql.bean.JsysMetas); Exceção: Exception [EclipseLink-7251] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.ValidationException
+Exception Description: The attribute [mes] of class [br.sql.bean.JsysMetas] is mapped to a primary key column in the database. Updates are not allowed.;javax.persistence.RollbackException: Exception [EclipseLink-7251] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.ValidationException
+Exception Description: The attribute [mes] of class [br.sql.bean.JsysMetas] is mapped to a primary key column in the database. Updates are not allowed.;
+19:00 - Usuario: SUPERVISOR;
+19:00 - Usuario: SUPERVISOR;
+19:07 - Usuario: SUPERVISOR;

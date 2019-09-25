@@ -1,0 +1,31 @@
+[C:\MLINE\csv\CADFORN.XML];[jsysClientes]
+BAIRRO;bairro;
+BLOQFICHA;usuarioalteracao;
+CEP;cep;
+CGC;cnpjCpf;
+CGF;ieRg;
+CIDADE;cidade;
+COD_PAIS;codPais;
+DATA_ALT;dataalteracao;convert(datetime, @value, 100)
+DATA_CAD;dataInclusao;convert(datetime, @value, 100)
+EMAIL;email;
+END;endereco;
+ESTADO;estado;
+FANTASIA;fantasia;
+FAX;fax;
+FONEA;fone;
+FORNEC;nomeCorentista;
+NRO;numero;
+PESSOA;tipo;case when @value = 'J' then 1 else 0 end
+FONEB;celular;
+;codMunicipio;'1100205'
+;pais;'BRASIL'
+;inativo;0
+;cliente;0
+;fornecedor;1
+;colaborador;0
+;filial;0
+;vip;0
+;filhos;''
+;usuarioInclusao;'IMPORTADO'
+;malaDireta;0

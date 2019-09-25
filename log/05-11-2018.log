@@ -1,0 +1,2 @@
+14:12 - Classe: SQLDatabaseConnection; Método: conn; Exceção: com.microsoft.sqlserver.jdbc.SQLServerException: Falha na conexão TCP/IP com o host MACEGA, porta 1433. Erro: "connect timed out. Verifique as propriedades da conexão. Verifique se uma instância do SQL Server está sendo executada no host e se está aceitando conexões TCP/IP na porta. Verifique se as conexões TCP na porta não foram bloqueadas por um firewall.".;
+14:12 - Classe: java.lang.Thread; Método: uncaughtException; Exceção: null;java.lang.NullPointerException;

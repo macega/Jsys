@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listaCompras" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fbb4f7dc-0135-49f9-9789-cfb9014aae89">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[DECLARE @Srv AS SYSNAME
+	,@nomeBancoDados AS SYSNAME
+	,@Comando AS NVARCHAR(MAX)
+	,@dataInicial AS DATETIME = $P{dataInicial}
+	,@dataFinal AS DATETIME = $P{dataFinal}
+
+DECLARE cServer CURSOR
+FOR
+SELECT NAME
+FROM SYS.SERVERS
+WHERE is_linked = 1
+ORDER BY NAME
+
+SET @Comando = N''
+
+OPEN cServer
+
+FETCH NEXT
+FROM cServer
+INTO @Srv
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	BEGIN TRY
+		EXEC sp_testlinkedserver @Srv
+
+		SELECT @nomeBancoDados = nomeBancoDados
+		FROM jsysLojas
+		WHERE idLoja = @Srv
+
+		SET @Comando += CONCAT (
+				'UNION ALL '
+				,'SELECT * FROM OPENQUERY(['
+				,@Srv
+				,'], ''SELECT jsysCompras.idCompra, jsysCompras.data '
+				,',jsysCompras.idCorentista '
+				,',jsysCompras.nNFe '
+				,',jsysCompras.valorNF '
+				,',jsysCompras.cancelado '
+				,',jsysCompras.confirmado '
+				,',jsysCompras.idloja '
+				,',jsysClientes.nomeCorentista '
+				,',jsysLojas.nomeLoja '
+				,',jsysparametros.fantasia '
+				,'FROM ['
+				,@nomeBancoDados
+				,'].dbo.jsysCompras INNER JOIN ['
+				,@nomeBancoDados
+				,'].dbo.jsysClientes ON jsysCompras.idCorentista = jsysClientes.idCliente INNER JOIN ['
+				,@nomeBancoDados
+				,'].dbo.jsysLojas ON jsysCompras.idloja = jsysLojas.idloja CROSS JOIN ['
+				,@nomeBancoDados
+				,'].dbo.jsysparametros '
+				,'WHERE (dbo.setTimeNull(jsysCompras.data) BETWEEN '''''
+				,@dataInicial
+				,''''' AND '''''
+				,@dataFinal
+				,''''') '' )'
+				)
+	END TRY
+
+	BEGIN CATCH
+		SET @Comando += CONCAT (
+				'UNION ALL '
+				,'SELECT 0 as idCompra, null as data, 0 as idCorentista '
+				,',0 as nNFe '
+				,',0 as valorNF '
+				,',0 as cancelado '
+				,',0 as confirmado '
+				,',idloja '
+				,',concat(nomeLoja, '' off-line'') as nomeCorentista '
+				,',concat(nomeLoja, '' off-line'') as nomeLoja '
+				,',concat(nomeLoja, '' off-line'') as fantasia '
+				,'FROM jsysLojas '
+				,'where idLoja = '
+				,@Srv
+				)
+	END CATCH
+
+	FETCH NEXT
+	FROM cServer
+	INTO @Srv
+END
+
+CLOSE cServer
+
+DEALLOCATE cServer
+
+SET @Comando += CONCAT (
+		'UNION ALL '
+		,'SELECT jsysCompras.idCompra '
+		,',jsysCompras.data '
+		,',jsysCompras.idCorentista '
+		,',jsysCompras.nNFe '
+		,',jsysCompras.valorNF '
+		,',jsysCompras.cancelado '
+		,',jsysCompras.confirmado '
+		,',jsysCompras.idloja '
+		,',jsysClientes.nomeCorentista '
+		,',jsysLojas.nomeLoja '
+		,',jsysparametros.fantasia '
+		,'FROM dbo.jsysCompras '
+		,'INNER JOIN dbo.jsysClientes ON jsysCompras.idCorentista = jsysClientes.idCliente '
+		,'INNER JOIN dbo.jsysLojas ON jsysCompras.idloja = jsysLojas.idloja '
+		,'CROSS JOIN dbo.jsysparametros '
+		,'WHERE (dbo.setTimeNull(jsysCompras.data) BETWEEN '''
+		,@dataInicial
+		,''' AND '''
+		,@dataFinal
+		,''') ORDER BY idloja, data'
+		)
+SET @Comando = substring(@Comando, 10, len(@Comando))
+
+EXEC SP_EXECUTESQL @Comando
+]]>
+	</queryString>
+	<field name="idCompra" class="java.lang.Integer"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="idCorentista" class="java.lang.Integer"/>
+	<field name="nNFe" class="java.lang.Integer"/>
+	<field name="valorNF" class="java.math.BigDecimal"/>
+	<field name="cancelado" class="java.lang.Boolean"/>
+	<field name="confirmado" class="java.lang.Boolean"/>
+	<field name="idloja" class="java.lang.String"/>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="nomeLoja" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="valorNF_1" class="java.math.BigDecimal" resetType="Group" resetGroup="loja" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorNF}]]></variableExpression>
+	</variable>
+	<variable name="valorNF_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorNF}]]></variableExpression>
+	</variable>
+	<group name="loja">
+		<groupExpression><![CDATA[$F{idloja}]]></groupExpression>
+		<groupHeader>
+			<band height="16">
+				<textField>
+					<reportElement x="46" y="0" width="509" height="13" uuid="2b4929a6-a948-4bfd-89e3-e8749848d9cb"/>
+					<textElement>
+						<font fontName="Tahoma"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nomeLoja}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="5" y="0" width="37" height="13" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="0662e473-dc48-41b6-a367-efbb63e671f9"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="16">
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="453" y="2" width="102" height="13" uuid="549e1819-2b47-47b7-be1c-335c2c502d30"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{valorNF_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="394" y="2" width="59" height="13" uuid="8b1709f6-316c-477b-9997-9f03adea3b79"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma"/>
+					</textElement>
+					<text><![CDATA[Total Loja: ]]></text>
+				</staticText>
+				<line>
+					<reportElement x="394" y="0" width="161" height="1" uuid="1f676002-94ff-4b10-abb5-bcae6a7bf4c1"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<pageHeader>
+		<band height="36">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="d7633695-613e-462d-add4-9eb7209f6e62"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="13" uuid="dde151be-3685-4859-9307-58f158257412"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Lista de Compras]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="34" width="555" height="1" uuid="f08c3070-30c7-49eb-ab8e-75b7f10aea27"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="15">
+			<line>
+				<reportElement x="0" y="13" width="555" height="1" forecolor="#666666" uuid="e23501d5-f199-41fe-899e-79d0d5e57a17"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="51" y="0" width="60" height="13" uuid="90b23472-efe6-425d-8e7d-7c46a4644c29"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="0" width="45" height="13" uuid="09cba218-326a-4ff8-9e4c-0fd066e21859"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="51" height="13" uuid="437e3a41-3fe8-4329-a804-bd9fb29d9945"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Nº NF-e]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="453" y="0" width="102" height="13" uuid="c27e0fe7-075b-4718-9b83-b4f394f929f2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Valor NF-e]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="0" width="274" height="13" uuid="dd2e804c-877b-409a-9781-3599fcd69582"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Fornecedor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="51" y="0" width="60" height="13" uuid="97d74515-7a53-4716-8c26-a97066ac8c75"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="45" height="13" uuid="39f65d99-26a1-4400-8305-597c04ac01a8"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="51" height="13" uuid="f9fb83dc-a700-42e2-aa4c-7a96dbe7915a"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nNFe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="453" y="0" width="102" height="13" uuid="fe0512e1-35d5-4755-9d3a-ff6391fe66b0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorNF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="173" y="0" width="274" height="13" uuid="72dcdf49-6cd6-4c8a-8596-04f3e2bc790f"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeCorentista}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="1" width="515" height="13" backcolor="#E6E6E6" uuid="d46d69c8-8297-47db-aa90-d6276f4111b0"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="1" width="40" height="13" backcolor="#E6E6E6" uuid="656ba67e-5125-44ad-badd-37d450305b0a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="1" width="100" height="13" uuid="ab04dc37-c31f-479f-8e06-a4e6df985580"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="16">
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="453" y="2" width="102" height="13" uuid="026d0a17-0529-4e96-b423-5fd9b6697a93"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{valorNF_2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="2" width="59" height="13" uuid="8b1709f6-316c-477b-9997-9f03adea3b79"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Total Geral: ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="394" y="0" width="161" height="1" uuid="ab26835a-7e80-4491-b82c-cb7dbc9b5884"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

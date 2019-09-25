@@ -1,0 +1,90 @@
+14:47 - Classe: GerenteEntidade; Método: update; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+14:47 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+14:48 - Usuario: SUPERVISOR;
+14:48 - Classe: GerenteEntidade; Método: update; Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411174 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411174 ]);
+14:48 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+14:51 - Usuario: SUPERVISOR;
+14:51 - Classe: GerenteEntidade; Método: update; Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411175 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411175 ]);
+14:51 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+14:51 - Usuario: SUPERVISOR;
+15:00 - Usuario: SUPERVISOR;
+15:01 - Classe: GerenteEntidade; Método: update; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+15:01 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+15:02 - Usuario: SUPERVISOR;
+15:03 - Classe: GerandoNFeProc; Método: gerar; Exceção: O conteúdo não é permitido no prólogo.;org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1; O conteúdo não é permitido no prólogo.;
+15:03 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+15:18 - Usuario: SUPERVISOR;
+15:19 - Classe: GerenteEntidade; Método: update; Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411178 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411178 ]);
+15:19 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+15:29 - Usuario: SUPERVISOR;
+15:29 - Classe: GerenteEntidade; Método: update; Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411179 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: XML parsing: line 1, character 38, unable to switch the encoding
+Error Code: 9402
+Call: UPDATE jsysNFe SET enviNFe = ? WHERE (nfe_id = ?)
+	bind => [2 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysNFe[ nfeId=411179 ]);
+15:29 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;java.util.concurrent.ExecutionException: java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+15:31 - Usuario: SUPERVISOR;
+15:33 - Usuario: SUPERVISOR;
+15:35 - Usuario: SUPERVISOR;
+17:07 - Usuario: SUPERVISOR;
+17:10 - Usuario: SUPERVISOR;
+17:24 - Usuario: SUPERVISOR;
+17:25 - Classe: br.sql.nfe.Janelas.NfceEmissao$Task; Método: Task; Exceção: java.lang.NullPointerException;java.util.concurrent.ExecutionException: java.lang.NullPointerException;
+17:27 - Usuario: SUPERVISOR;
+17:30 - Classe: consultaNFeTransmitir; Método: transmitir.2; Exceção: Unable to handle request. The action 'http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4/nfeConsultaNF' was not recognized.;org.apache.axis2.AxisFault: Unable to handle request. The action 'http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4/nfeConsultaNF' was not recognized.;
+19:24 - Usuario: SUPERVISOR;
+19:24 - Usuario: SUPERVISOR;
+19:27 - Usuario: SUPERVISOR;
+19:40 - Usuario: SUPERVISOR;

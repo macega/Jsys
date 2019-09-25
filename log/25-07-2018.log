@@ -1,0 +1,67 @@
+10:06 - Usuario: SUPERVISOR;
+10:15 - Usuario: SUPERVISOR;
+11:13 - Usuario: SUPERVISOR;
+11:23 - Usuario: SUPERVISOR;
+14:45 - Usuario: SUPERVISOR;
+15:11 - Usuario: SUPERVISOR;
+15:54 - Usuario: SUPERVISOR;
+18:29 - Usuario: SUPERVISOR;
+19:09 - Usuario: SUPERVISOR;
+19:11 - Classe: GerenteEntidade; Método: update(class br.sql.bean.JsysProdutosTTributacao); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Arithmetic overflow error converting numeric to data type numeric.
+Error Code: 8115
+Call: UPDATE jsysProdutosTTributacao SET cson = ?, modBCST = ?, pICMSST = ?, pMVAST = ?, pRedBCST = ? WHERE (idTributacao = ?)
+	bind => [6 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysProdutosTTributacao[ idTributacao=2 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Arithmetic overflow error converting numeric to data type numeric.
+Error Code: 8115
+Call: UPDATE jsysProdutosTTributacao SET cson = ?, modBCST = ?, pICMSST = ?, pMVAST = ?, pRedBCST = ? WHERE (idTributacao = ?)
+	bind => [6 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysProdutosTTributacao[ idTributacao=2 ]);
+19:11 - Classe: GerenteEntidade; Método: update(class br.sql.bean.JsysProdutosTTributacao); Exceção: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Arithmetic overflow error converting numeric to data type numeric.
+Error Code: 8115
+Call: UPDATE jsysProdutosTTributacao SET cson = ?, modBCST = ?, nome = ?, pICMSST = ?, pMVAST = ?, pRedBCST = ? WHERE (idTributacao = ?)
+	bind => [7 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysProdutosTTributacao[ idTributacao=2 ]);javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: com.microsoft.sqlserver.jdbc.SQLServerException: Arithmetic overflow error converting numeric to data type numeric.
+Error Code: 8115
+Call: UPDATE jsysProdutosTTributacao SET cson = ?, modBCST = ?, nome = ?, pICMSST = ?, pMVAST = ?, pRedBCST = ? WHERE (idTributacao = ?)
+	bind => [7 parameters bound]
+Query: UpdateObjectQuery(br.sql.bean.JsysProdutosTTributacao[ idTributacao=2 ]);
+19:20 - Usuario: SUPERVISOR;
+19:26 - Usuario: SUPERVISOR;
+19:27 - Usuario: SUPERVISOR;
+19:29 - Usuario: SUPERVISOR;
+19:30 - Usuario: SUPERVISOR;
+19:31 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadFamilias; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+19:31 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadGrupos; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+19:31 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadFabricantes; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+19:42 - Usuario: SUPERVISOR;
+19:45 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadGrupos; Exceção: 
+Exception Description: Transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: Transaction is currently active;
+19:47 - Usuario: SUPERVISOR;
+19:48 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadGrupos; Exceção: 
+Exception Description: Transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: Transaction is currently active;
+19:56 - Usuario: SUPERVISOR;
+19:57 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadFamilias; Exceção: 
+Exception Description: No transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: No transaction is currently active;
+20:01 - Usuario: SUPERVISOR;
+20:01 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadGrupos; Exceção: 
+Exception Description: Transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: Transaction is currently active;
+20:01 - Classe: br.sql.cadastros.produtos.ProdutosEdit; Método: loadFabricantes; Exceção: 
+Exception Description: Transaction is currently active;java.lang.IllegalStateException: 
+Exception Description: Transaction is currently active;
+20:01 - Usuario: SUPERVISOR;
+20:10 - Usuario: SUPERVISOR;
+20:36 - Usuario: SUPERVISOR;

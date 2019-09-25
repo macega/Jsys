@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FaltasPonto" language="groovy" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3d01e2e-5c26-4f9e-8c36-d1d91702d20d">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[EXEC atulizarFaltas
+
+SELECT jsysClientes.nomeCorentista
+	,entrada
+	,CASE WHEN funcionariosPonto.meiaFalta = 1
+			OR DATEPART(DW, funcionariosPonto.data) = 7
+			OR funcionariosPonto.compensacao = 1
+			THEN ' Meia-Falta'
+		ELSE ' Falta'
+		END AS obs
+	,CASE WHEN funcionariosPonto.meiaFalta = 1
+			OR DATEPART(DW, funcionariosPonto.data) = 7
+			OR funcionariosPonto.compensacao = 1
+			THEN 0.5
+		ELSE 1
+		END AS totalFaltas
+	,jsysParametros.fantasia
+FROM funcionariosPonto
+INNER JOIN jsysClientes ON jsysClientes.idCliente = funcionariosPonto.idFuncionario
+CROSS JOIN jsysParametros
+WHERE funcionariosPonto.falta = 1
+	AND DATEPART(DW, funcionariosPonto.data) <> 1
+	AND (
+		funcionariosPonto.entrada BETWEEN $P{dataInicial}
+			AND $P{dataFinal}
+		)
+ORDER BY jsysClientes.nomeCorentista
+	,entrada]]>
+	</queryString>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="entrada" class="java.sql.Timestamp"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="totalFaltas" class="java.math.BigDecimal"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="totalFaltas_1" class="java.math.BigDecimal" resetType="Group" resetGroup="nomeCorentista" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalFaltas}]]></variableExpression>
+	</variable>
+	<group name="nomeCorentista">
+		<groupExpression><![CDATA[$F{nomeCorentista}]]></groupExpression>
+		<groupHeader>
+			<band height="19">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="3" width="216" height="15" forecolor="#333333" uuid="cb25a3cb-5717-4fbb-a7de-755467c8f0f2"/>
+					<textElement>
+						<font fontName="Tahoma" size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nomeCorentista}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="3" width="36" height="14" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="957143ae-4216-4a68-9b92-742edd200032"/>
+				</rectangle>
+				<line>
+					<reportElement x="0" y="0" width="269" height="1" uuid="5421f61c-7056-4052-aba4-a5b61e05b25e"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="19">
+				<textField>
+					<reportElement x="219" y="3" width="41" height="15" uuid="c67ae05d-fe05-491e-a7f6-7640b2a8fa57"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalFaltas_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="133" y="3" width="82" height="15" uuid="10c94293-3261-42b1-9373-9fb32fea4cd7"/>
+					<textElement textAlignment="Right">
+						<font fontName="Tahoma" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Faltas:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="133" y="1" width="127" height="1" uuid="a2ad0ced-219d-4b4d-b4d3-1dcb2d10b045"/>
+					<graphicElement>
+						<pen lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement style="SubTitle" x="0" y="0" width="555" height="21" forecolor="#000000" uuid="e5895532-8841-431e-9e9a-25afc08aff4b"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Tahoma" size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="21" width="555" height="15" uuid="eaa8af93-c40a-4c18-a19c-a1c2a63f851e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relação de Faltas " 
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="38" width="555" height="1" uuid="eece9398-4e1a-4b0c-a5a4-404474f0a304"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="269" height="1" uuid="d203b1ca-0caa-4e5c-a93a-45545e850622"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="115" y="3" width="69" height="15" uuid="6dbbda96-80e8-4bff-8456-99cf7fe9c403"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="184" y="3" width="76" height="15" uuid="48ec2c3a-2233-42ee-a6e4-492e45202ded"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Tipo ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="115" y="0" width="69" height="13" uuid="baf10a04-5843-46a5-b0bc-de0e075cdf44"/>
+				<textElement>
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="184" y="0" width="76" height="13" uuid="c55d7427-a9de-46a4-b8a2-cb650f4936bd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="12" uuid="28f4f20d-42ce-4201-8bde-2787ec1ff48c"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="12" uuid="83b681a2-df87-4558-a832-baedfbc6818b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="12" uuid="f0bc78cc-d487-4f08-9065-8e08eea686cf"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
