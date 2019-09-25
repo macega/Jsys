@@ -40,18 +40,15 @@ public class Retorna {
             return data.isEmpty() ? null : data.get(0);
         } catch (Exception e) {
             Log.registraErro("Retorna", "findOneResult", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
 
-    private static void finalizar() throws HeadlessException {
-        erro("Erro indeterminado o sistema será finalizado.");
+    
+    private static void finalizar(String erro) throws HeadlessException {
+        JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
-    }
-
-    private static void erro(String mensagen) throws HeadlessException {
-        JOptionPane.showMessageDialog(null, mensagen, "ERRO", JOptionPane.ERROR_MESSAGE);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,7 +62,7 @@ public class Retorna {
             return data.isEmpty() ? null : data.get(0);
         } catch (Exception e) {
             Log.registraErro("Retorna", "findOneResult", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
@@ -90,7 +87,7 @@ public class Retorna {
             return data;
         } catch (Exception e) {
             Log.registraErro("Retorna", "findList", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
@@ -111,7 +108,7 @@ public class Retorna {
             return data;
         } catch (Exception e) {
             Log.registraErro("Retorna", "findList", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
@@ -132,7 +129,7 @@ public class Retorna {
             return data;
         } catch (Exception e) {
             Log.registraErro("Retorna", "findCollection", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
@@ -157,7 +154,7 @@ public class Retorna {
             return data;
         } catch (Exception e) {
             Log.registraErro("Retorna", "findCollection", e);
-            finalizar();
+            finalizar(e.getMessage());
         }
         return null;
     }
