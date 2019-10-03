@@ -17,9 +17,8 @@ import javax.swing.JOptionPane;
  * @author Juliano Alves Medina
  */
 public class Retorna {
-    
+
     //private static final javax.persistence.EntityManager ENTITY_MANAGER = javax.persistence.Persistence.createEntityManagerFactory(br.sql.acesso.BaseDados.NOME_PERSISTENCE, br.sql.acesso.BaseDados.getConf()).createEntityManager();
-    
     /**
      *
      * @param namedQuery
@@ -45,9 +44,15 @@ public class Retorna {
         return null;
     }
 
-    
     private static void finalizar(String erro) throws HeadlessException {
-        JOptionPane.showMessageDialog(null, erro, "ERRO", JOptionPane.ERROR_MESSAGE);
+        String mensagen = "teste 123";
+        for (int i = 0; i < erro.length(); i++) {
+            if (i <= 50) {
+                mensagen += erro.substring(i, erro.length());
+            }
+        }
+
+        JOptionPane.showMessageDialog(null, mensagen, "ERRO", JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
 

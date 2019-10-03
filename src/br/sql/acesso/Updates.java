@@ -1,6 +1,5 @@
 package br.sql.acesso;
 
-
 import br.sql.log.Log;
 import br.sql.util.EXEFileInfo;
 import br.sql.util.FileEx;
@@ -17,7 +16,6 @@ public class Updates extends javax.swing.JDialog {
 
     public static String localInstalador;
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
-    
 
     /**
      * Creates new form Updates
@@ -133,21 +131,21 @@ public class Updates extends javax.swing.JDialog {
         }
     }
 
-    public static void verificaVersao() {
-        try {
-            ResultSet rs = DADOS.executesqlScriptRS("select localinstalador from jsysparametros"); // Constantes.getBaseDefault());
-            while (rs.next()) {
-                localInstalador = rs.getString(1);
-                if (EXEFileInfo.getMajorVersionOfProgram(localInstalador) != br.JavaApplicationJsys.MAJOR
-                        | EXEFileInfo.getMinorVersionOfProgram(localInstalador) != br.JavaApplicationJsys.MINOR
-                        | EXEFileInfo.getBuildOfProgram(localInstalador) != br.JavaApplicationJsys.BUILD
-                        | EXEFileInfo.getRevisionOfProgram(localInstalador) != br.JavaApplicationJsys.REVISION) {
-                    instalar();
-                }
+    public static void verificaVersao() throws SQLException {
+        //try {
+        ResultSet rs = DADOS.executesqlScriptRS("select localinstalador from jsysparametros"); // Constantes.getBaseDefault());
+        while (rs.next()) {
+            localInstalador = rs.getString(1);
+            if (EXEFileInfo.getMajorVersionOfProgram(localInstalador) != br.JavaApplicationJsys.MAJOR
+                    | EXEFileInfo.getMinorVersionOfProgram(localInstalador) != br.JavaApplicationJsys.MINOR
+                    | EXEFileInfo.getBuildOfProgram(localInstalador) != br.JavaApplicationJsys.BUILD
+                    | EXEFileInfo.getRevisionOfProgram(localInstalador) != br.JavaApplicationJsys.REVISION) {
+                instalar();
             }
-        } catch (SQLException e) {
-            Log.registraErro("Updates", "verificaVersao", e);
-        } 
+        }
+//        } catch (SQLException e) {
+//            Log.registraErro("Updates", "verificaVersao", e);
+//        } 
     }
 
     public static void instalar() {

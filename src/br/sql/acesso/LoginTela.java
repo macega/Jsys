@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.PersistenceException;
@@ -49,7 +50,11 @@ public final class LoginTela extends javax.swing.JFrame {
         if (caregaBases()) {
             initComponents();
             setTela();
-            Updates.verificaVersao();
+//            try {
+//                Updates.verificaVersao();
+//            } catch (SQLException e) {
+//                Log.registraErro("LoginTela", "LoginTela", e);
+//            }
         }
     }
 
