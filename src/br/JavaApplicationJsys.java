@@ -19,8 +19,9 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class JavaApplicationJsys {
 
+    //62.4.4006.15 local 
     public static final int MAJOR = 62; // versao do db
-    public static final int MINOR = 3; // versao do app
+    public static final int MINOR = 4; // versao do app
     public static final int BUILD = 4006; // NotaFiscal java-nfe-4.00.6.jar
     public static final int REVISION = 15; // revisoes bugs
     public static int[] VERSAO = new int[]{MAJOR, MINOR, BUILD, REVISION};
