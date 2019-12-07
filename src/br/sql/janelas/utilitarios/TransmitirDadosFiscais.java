@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.sql.janelas.utilitarios;
 
-import br.com.samuelweb.nfe.exception.NfeException;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
@@ -338,7 +332,7 @@ public class TransmitirDadosFiscais extends javax.swing.JDialog implements Prope
                 setProgress(100);
                 publish("E-mail Enviado.");
                 return true;
-            } catch (NfeException | JAXBException | UnsupportedEncodingException | MessagingException ex) {
+            } catch (JAXBException | UnsupportedEncodingException | MessagingException ex) {
                 setProgress(100);
                 publish("Erro não foi possível enviar o E-mail.");
                 publish(ex.getMessage());

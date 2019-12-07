@@ -1,12 +1,13 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.certificado.exception.CertificadoException;
-import br.com.samuelweb.nfe.Nfe;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.com.samuelweb.nfe.util.ConstantesUtil;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe;
-import br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.TRetConsSitNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TRetEnviNFe;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.Nfe;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe;
+import br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TRetConsSitNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
 import br.sql.bean.JsysNFe;
 import br.sql.log.Log;
 import br.sql.nfe.util.XmlUtil;
@@ -15,6 +16,7 @@ import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.SwingWorker;
@@ -339,15 +341,19 @@ public class NfeConsulta extends javax.swing.JDialog implements PropertyChangeLi
         @Override
         protected Boolean doInBackground() {
             try {
-                br.JavaApplicationJsys.iniciaConfigurações(Retorna.JsysParametros());
+                //br.JavaApplicationJsys.iniciaConfigurações();
+                ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(Retorna.JsysParametros());
                 publish("Iniciando consulta no Banco de dados da Sefaz");
                 setProgress(10);
                 String chaveAcesso = jTextFieldChaveAcesso.getText();
-                TRetConsSitNFe tRetConsSitNFe = Nfe.consultaXml(chaveAcesso,
-                        "55".equals(chaveAcesso.substring(20, 22)) ? ConstantesUtil.NFE : ConstantesUtil.NFCE);
                 
+                System.out.println( DocumentoEnum.getByModelo(chaveAcesso.substring(20, 22)) );
                 
-                
+                TRetConsSitNFe tRetConsSitNFe = Nfe.consultaXml(
+                        config,
+                        chaveAcesso,
+                        DocumentoEnum.getByModelo(chaveAcesso.substring(20, 22)));
+
                 publish("Analisando dados da Sefaz");
                 setProgress(25);
                 publish(tRetConsSitNFe.getXMotivo());
@@ -362,7 +368,7 @@ public class NfeConsulta extends javax.swing.JDialog implements PropertyChangeLi
                     tRetEnviNFe.setXMotivo("Lote processado");
                     tRetEnviNFe.setCUF(tRetConsSitNFe.getCUF());
                     tRetEnviNFe.setDhRecbto(tRetConsSitNFe.getProtNFe().getInfProt().getDhRecbto().toXMLFormat());
-                    br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe tProtNFe = new br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe();
+                    br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe tProtNFe = new br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe();
                     tProtNFe.setVersao(tRetConsSitNFe.getProtNFe().getVersao());
                     TProtNFe.InfProt infProt = new TProtNFe.InfProt();
                     infProt.setTpAmb(tRetConsSitNFe.getProtNFe().getInfProt().getTpAmb());
@@ -420,7 +426,7 @@ public class NfeConsulta extends javax.swing.JDialog implements PropertyChangeLi
                 publish("Erro encontrado processo finalizado.");
                 setProgress(100);
                 return false;
-            } catch (CertificadoException | NfeException e) {
+            } catch (CertificadoException | NfeException | FileNotFoundException e) {
                 Log.registraErro(this.getClass().getName(), "doInBackground1", e);
                 return false;
             }

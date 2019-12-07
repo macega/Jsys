@@ -1,15 +1,17 @@
 package br;
 
 import br.adp.geral.Geral;
-import br.com.samuelweb.certificado.Certificado;
-import br.com.samuelweb.certificado.CertificadoService;
-import br.com.samuelweb.certificado.exception.CertificadoException;
-import br.com.samuelweb.nfe.dom.ConfiguracoesIniciaisNfe;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.com.samuelweb.nfe.util.Estados;
+import br.com.swconsultoria.certificado.Certificado;
+import br.com.swconsultoria.certificado.CertificadoService;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.Proxy;
+import br.com.swconsultoria.nfe.dom.enuns.AmbienteEnum;
+import br.com.swconsultoria.nfe.dom.enuns.EstadosEnum;
 import br.sql.acesso.LoginTela;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.ConstantesFiscal;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -59,6 +61,7 @@ public class JavaApplicationJsys {
     public static final String LINK_INSTALADOR = "https://drive.google.com/open?id=0B1_nXJkF5YiBTnVQVUR5UmNKRWs";
     public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static final Boolean LOG = true;
+    public static final String PASTAS_SCHEMAS = "Schemas 4.00";
     public static Base base = new Base();
 
     public static String getBaseDefault() {
@@ -82,25 +85,23 @@ public class JavaApplicationJsys {
      *
      * @param jsysParametros
      * @return
-     * @throws NfeException
      * @throws CertificadoException
+     * @throws java.io.FileNotFoundException
      */
-    public static ConfiguracoesIniciaisNfe iniciaConfigurações(JsysParametros jsysParametros) throws NfeException, CertificadoException {
-        // Certificado Arquivo, Parametros: -Caminho Certificado, - Senha
-        
+    public static ConfiguracoesNfe iniciaConfigurações(JsysParametros jsysParametros) throws FileNotFoundException, CertificadoException {
         Certificado certificado = CertificadoService.certificadoPfx(
                 jsysParametros.getCaminhoDoCertificadoDoCliente(),
                 jsysParametros.getSenhaDoCertificadoDoCliente());
-        ConfiguracoesIniciaisNfe config = ConfiguracoesIniciaisNfe.iniciaConfiguracoes(
-                Estados.RO,
-                ConstantesFiscal.AMBIENTE.TP_AMB,
+        ConfiguracoesNfe config = ConfiguracoesNfe.criarConfiguracoes(
+                EstadosEnum.getByCodigoIbge("11"),  // criar parametro para codigo de ibege de estado
+                AmbienteEnum.getByCodigo(ConstantesFiscal.AMBIENTE.TP_AMB),
                 certificado,
-                "Schemas 4.00", LOG);
+                PASTAS_SCHEMAS);
         String ip = "192.168.0.1";
         int porta = 3128;
         String usuario = "";
         String senha = "";
-        config.setProxy(ip, porta, usuario, senha);
+        config.setProxy(new Proxy(ip, porta, usuario, senha));
         return config;
     }
 

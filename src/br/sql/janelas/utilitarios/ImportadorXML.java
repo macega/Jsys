@@ -1,6 +1,7 @@
 package br.sql.janelas.utilitarios;
 
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+//import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;

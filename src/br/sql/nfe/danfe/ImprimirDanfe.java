@@ -1,9 +1,9 @@
 package br.sql.nfe.danfe;
 
 import static br.JavaApplicationJsys.OPTIONS;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNFe;
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+// verificar essas importacoes
+import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe;
+import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNfeProc;
 import br.sql.bean.DanfeNFCe;
 import br.sql.bean.DanfeNFCeIten;
 import br.sql.bean.DanfeNFCePagamentos;
@@ -181,7 +181,7 @@ public class ImprimirDanfe {
                             }
                         }
                     }
-                } catch (JAXBException | NfeException ex) {
+                } catch (JAXBException ex) {
                     Log.registraErro(ImprimirDanfe.class, "nfce", ex);
                 }
             }
@@ -210,7 +210,7 @@ public class ImprimirDanfe {
                     param.put("Logo", PAR.getLogo());
                     ReportUtils.openReport("Imprimindo NF-e", "/br/rel/fiscal/danfeR.jasper", param, xmlDataSource);
                     //ReportUtils.pirntReport("Imprimindo NF-e", inputStream, parametros, new JRBeanCollectionDataSource(dados), true);
-                } catch (JAXBException | NfeException | JRException e) {
+                } catch (JAXBException | JRException e) {
                     Log.registraErro("ImprimirFiscal", "nfe", e);
                 }
             }
@@ -253,7 +253,7 @@ public class ImprimirDanfe {
                  * Exportando em pdf
                  */
                 pdf = JasperExportManager.exportReportToPdf(print);
-            } catch (NfeException | JAXBException | JRException e) {
+            } catch (JAXBException | JRException e) {
                 Log.registraErro("ImprimirDanfe", "nfePdf", e);
                 pdf = null;
             }

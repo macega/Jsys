@@ -132,7 +132,6 @@ public class Updates extends javax.swing.JDialog {
     }
 
     public static void verificaVersao() throws SQLException {
-        //try {
         ResultSet rs = DADOS.executesqlScriptRS("select localinstalador from jsysparametros"); // Constantes.getBaseDefault());
         while (rs.next()) {
             localInstalador = rs.getString(1);
@@ -143,9 +142,6 @@ public class Updates extends javax.swing.JDialog {
                 instalar();
             }
         }
-//        } catch (SQLException e) {
-//            Log.registraErro("Updates", "verificaVersao", e);
-//        } 
     }
 
     public static void instalar() {

@@ -33,7 +33,6 @@ public final class LoginTela extends javax.swing.JFrame {
 
     private String bases[];
     private Integer err = 0;
-    //private final String args[] = new String[10];
     private final RuntimeMXBean rt = ManagementFactory.getRuntimeMXBean();
     private final int runtimePid = Integer.parseInt(rt.getName().substring(0, rt.getName().indexOf("@")));
     private final MatrizDinamica<String> matrizDinamica = new MatrizDinamica<>();
@@ -50,11 +49,11 @@ public final class LoginTela extends javax.swing.JFrame {
         if (caregaBases()) {
             initComponents();
             setTela();
-//            try {
-//                Updates.verificaVersao();
-//            } catch (SQLException e) {
-//                Log.registraErro("LoginTela", "LoginTela", e);
-//            }
+            try {
+                Updates.verificaVersao();
+            } catch (SQLException e) {
+                Log.registraErro("LoginTela", "LoginTela", e);
+            }
         }
     }
 
@@ -414,12 +413,12 @@ public final class LoginTela extends javax.swing.JFrame {
             br.JavaApplicationJsys.base.setNome(bases[bancoDadosJC.getSelectedIndex()]);
             if (tipo == 2) {
                 usuarioTF.setText("SUPERVISOR");
-                senhaPF.setText("JSYS");
+                senhaPF.setText("AE3ILM");
                 tipo = 0;
             }
             if (tipo == 3) {
                 usuarioTF.setText("SUPERVISOR");
-                senhaPF.setText("JSYS");
+                senhaPF.setText("AE3ILM");
                 tipo = 1;
             }
             Security s = new Security();
