@@ -1156,3 +1156,4 @@ org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 36; O nome da entida
 0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/D:/GitHub/Java_NFe/java-nfe-4.00.12.jar!/
 0    [AWT-EventQueue-0] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/D:/GitHub/Java_NFe/java-nfe-4.00.12.jar!/
 0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/D:/GitHub/Java_NFe/java-nfe-4.00.12.jar!/
+0    [SwingWorker-pool-2-thread-5] WARN  org.apache.axiom.util.stax.dialect.StAXDialectDetector  - Unable to determine dialect of the StAX implementation at jar:file:/D:/GitHub/Java_NFe/java-nfe-4.00.12.jar!/

@@ -1,6 +1,6 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.exception.NfeException;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.ConstantesFiscal;
@@ -84,9 +84,6 @@ public class NfceCancelamento extends javax.swing.JDialog implements
         jLabel1.setText("Cancelar NF-e & NFC-e");
         jLabel1.setToolTipText("");
 
-        jLabelStatus.setText("0");
-        jLabelStatus.setToolTipText("");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -94,10 +91,10 @@ public class NfceCancelamento extends javax.swing.JDialog implements
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelStatus, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+                    .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -284,7 +281,6 @@ public class NfceCancelamento extends javax.swing.JDialog implements
             //Initialize progress property.
             setProgress(0);
             GerandoNFeEventoJAXB evento = new GerandoNFeEventoJAXB(nfe.getChaveAcesso(), jTextFieldMotivo.getText().trim());
-
             if (evento.gerarEnviEvento()) {
                 try {
                     setProgress(33);
@@ -306,7 +302,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
 //                } else {
 //                    publish("Erro ao Assinar o Evento Cancelamento");
 //                }
-                } catch (NfeException | JAXBException ex) {
+                } catch (JAXBException ex) {
                     Log.registraErro(NfceCancelamento.class, "Task.doInBackground", ex);
                 }
             } else {
