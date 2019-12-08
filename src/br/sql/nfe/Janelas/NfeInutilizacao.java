@@ -288,6 +288,7 @@ public class NfeInutilizacao extends javax.swing.JDialog {
             sql.append("SELECT inicio, fim, mod, serie FROM intervaloNFeIDs ")
                     .append("WHERE (serie = '").append(serie).append("') and (")
                     .append("mod = '").append(mod).append("')");
+            System.out.println(sql.toString());
             ResultSet x = DADOS.execSQL(sql.toString());
             String[] tableColumnsName = {"Inicio", "Fim", "mod", "Serie"};
             DefaultTableModel aModel = new DefaultTableModel() {

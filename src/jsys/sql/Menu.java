@@ -73,6 +73,7 @@ import br.sql.janelas.utilitarios.ParametrosLocaisJanelas;
 import br.sql.janelas.utilitarios.TransmitirDadosFiscais;
 import br.sql.log.Log;
 import br.sql.nfe.Janelas.NfceTransmitirContingencia;
+import br.sql.nfe.Janelas.NfeInutilizacao;
 import br.sql.nfe.Janelas.NfeStatus;
 import br.sql.util.Calculadora;
 import br.sql.util.ManagerData;
@@ -2431,8 +2432,9 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
     private void jMenuItem67ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem67ActionPerformed
-        NfeInutilizacaoJanela inutilizacaoJanela = new NfeInutilizacaoJanela();
-
+        //NfeInutilizacaoJanela inutilizacaoJanela = new NfeInutilizacaoJanela();
+        NfeInutilizacao inutilizacao = new NfeInutilizacao(this, false);
+        inutilizacao.setVisible(true);
     }//GEN-LAST:event_jMenuItem67ActionPerformed
 
     private void jMenuItem69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem69ActionPerformed
