@@ -135,7 +135,7 @@ public final class Menu extends javax.swing.JFrame {
         }
         setTela("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         UsuarioJLabel.requestFocus();
-        
+
         boolean replicador = "true".equals(ManagerString.noNull(br.JavaApplicationJsys.INI.getString("REPLICADOR", "ATIVO").toLowerCase(), "false"));
         TaskTimer taskTimer = new TaskTimer();
         taskTimer.execute();
@@ -2431,7 +2431,8 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
     private void jMenuItem67ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem67ActionPerformed
-        NfeInutilizacaoJanela.main(null);
+        NfeInutilizacaoJanela inutilizacaoJanela = new NfeInutilizacaoJanela();
+
     }//GEN-LAST:event_jMenuItem67ActionPerformed
 
     private void jMenuItem69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem69ActionPerformed
