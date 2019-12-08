@@ -12,20 +12,20 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.inf.portalfiscal.nfe.schema.consCad.TConsCad;
-import br.inf.portalfiscal.nfe.schema.distdfeint.DistDFeInt;
-import br.inf.portalfiscal.nfe.schema_4.consReciNFe.TConsReciNFe;
-import br.inf.portalfiscal.nfe.schema_4.consSitNFe.TConsSitNFe;
-import br.inf.portalfiscal.nfe.schema_4.consStatServ.TConsStatServ;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNfeProc;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TRetEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.inutNFe.TInutNFe;
-import br.inf.portalfiscal.nfe.schema_4.inutNFe.TProcInutNFe;
-import br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.TRetConsSitNFe;
-import br.inf.portalfiscal.nfe.schema_4.util.XsdUtil;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema.consCad.TConsCad;
+import br.com.swconsultoria.nfe.schema.distdfeint.DistDFeInt;
+import br.com.swconsultoria.nfe.schema_4.consReciNFe.TConsReciNFe;
+import br.com.swconsultoria.nfe.schema_4.consSitNFe.TConsSitNFe;
+import br.com.swconsultoria.nfe.schema_4.consStatServ.TConsStatServ;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNfeProc;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.inutNFe.TInutNFe;
+import br.com.swconsultoria.nfe.schema_4.inutNFe.TProcInutNFe;
+import br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TRetConsSitNFe;
+import br.com.swconsultoria.nfe.util.XsdUtil;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeConstants;
 import javax.xml.datatype.DatatypeFactory;
@@ -59,19 +59,21 @@ public class XmlUtil {
     private static final String SITUACAO_NFE_RET = "TRetConsSitNFe";
     private static final String T_RET_CONS_STAT_SERV = "TRetConsStatServ";
 
-    private static final String TPROCCANCELAR = "br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TProcEvento";
-    private static final String TPROCCCE = "br.inf.portalfiscal.nfe.schema.envcce.TProcEvento";
-    private static final String TPROCEPEC = "br.inf.portalfiscal.nfe.schema.envEpec.TProcEvento";
+    private static final String TPROCCANCELAR = "br.com.swconsultoria.nfe.schema.envEventoCancNFe.TProcEvento";
+    private static final String TPROCCCE = "br.com.swconsultoria.nfe.schema.envcce.TProcEvento";
+    private static final String TPROCEPEC = "br.com.swconsultoria.nfe.schema.envEpec.TProcEvento";
 
     private static final String TProtNFe = "TProtNFe";
-    private static final String TProtEnvi = "br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe";
-    private static final String TProtCons = "br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.TProtNFe";
-    private static final String TProtReci = "br.inf.portalfiscal.nfe.schema_4.retConsReciNFe.TProtNFe";
+    private static final String TProtEnvi = "br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe";
+    private static final String TProtCons = "br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TProtNFe";
+    private static final String TProtReci = "br.com.swconsultoria.nfe.schema_4.retConsReciNFe.TProtNFe";
 
-    private static final String CANCELAR = "br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TEnvEvento";
-    private static final String CCE = "br.inf.portalfiscal.nfe.schema.envcce.TEnvEvento";
-    private static final String EPEC = "br.inf.portalfiscal.nfe.schema.envEpec.TEnvEvento";
-    private static final String MANIFESTAR = "br.inf.portalfiscal.nfe.schema.envConfRecebto.TEnvEvento";
+    private static final String CANCELAR = "br.com.swconsultoria.nfe.schema.envEventoCancNFe.TEnvEvento";
+    private static final String CCE = "bbr.com.swconsultoria.nfe.schema.envcce.TEnvEvento";
+    private static final String EPEC = "br.com.swconsultoria.nfe.schema.envEpec.TEnvEvento";
+    private static final String MANIFESTAR = "br.com.swconsultoria.nfe.schema.envConfRecebto.TEnvEvento";
+    
+    
 
     /**
      * Transforma o String do XML em Objeto
@@ -106,12 +108,12 @@ public class XmlUtil {
 
             case STATUS:
                 context = JAXBContext.newInstance(TConsStatServ.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.consStatServ.ObjectFactory().createConsStatServ((TConsStatServ) obj);
+                element = new br.com.swconsultoria.nfe.schema_4.consStatServ.ObjectFactory().createConsStatServ((TConsStatServ) obj);
                 break;
 
             case ENVIO_NFE:
-                context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.enviNFe.ObjectFactory().createEnviNFe((br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe) obj);
+                context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe.class);
+                element = new br.com.swconsultoria.nfe.schema_4.enviNFe.ObjectFactory().createEnviNFe((br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe) obj);
                 break;
 
             case RETORNO_ENVIO:
@@ -121,47 +123,47 @@ public class XmlUtil {
 
             case SITUACAO_NFE:
                 context = JAXBContext.newInstance(TConsSitNFe.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.consSitNFe.ObjectFactory().createConsSitNFe((TConsSitNFe) obj);
+                element = new br.com.swconsultoria.nfe.schema_4.consSitNFe.ObjectFactory().createConsSitNFe((TConsSitNFe) obj);
                 break;
 
             case DIST_DFE:
                 context = JAXBContext.newInstance(DistDFeInt.class);
-                element = new br.inf.portalfiscal.nfe.schema.distdfeint.ObjectFactory().createDistDFeInt((DistDFeInt) obj);
+                element = new br.com.swconsultoria.nfe.schema.distdfeint.ObjectFactory().createDistDFeInt((DistDFeInt) obj);
                 break;
 
             case TCONSRECINFE:
                 context = JAXBContext.newInstance(TConsReciNFe.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.consReciNFe.ObjectFactory().createConsReciNFe((TConsReciNFe) obj);
+                element = new br.com.swconsultoria.nfe.schema_4.consReciNFe.ObjectFactory().createConsReciNFe((TConsReciNFe) obj);
                 break;
 
             case TConsCad:
                 context = JAXBContext.newInstance(TConsCad.class);
-                element = new br.inf.portalfiscal.nfe.schema.consCad.ObjectFactory().createConsCad((TConsCad) obj);
+                element = new br.com.swconsultoria.nfe.schema.consCad.ObjectFactory().createConsCad((TConsCad) obj);
                 break;
 
             case INUTILIZACAO:
                 context = JAXBContext.newInstance(TInutNFe.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.inutNFe.ObjectFactory().createInutNFe((TInutNFe) obj);
+                element = new br.com.swconsultoria.nfe.schema_4.inutNFe.ObjectFactory().createInutNFe((TInutNFe) obj);
                 break;
 
             case SITUACAO_NFE_RET:
                 context = JAXBContext.newInstance(TRetConsSitNFe.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.ObjectFactory().createRetConsSitNFe((TRetConsSitNFe) obj);
+                element = new br.com.swconsultoria.nfe.schema_4.retConsSitNFe.ObjectFactory().createRetConsSitNFe((TRetConsSitNFe) obj);
                 break;
 
             case TPROCEVENTO:
                 switch (obj.getClass().getName()) {
                     case TPROCCANCELAR:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TProcEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envEventoCancNFe.ObjectFactory().createTProcEvento((br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TProcEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envEventoCancNFe.TProcEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envEventoCancNFe.ObjectFactory().createTProcEvento((br.com.swconsultoria.nfe.schema.envEventoCancNFe.TProcEvento) obj);
                         break;
                     case TPROCCCE:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envcce.TProcEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envcce.ObjectFactory().createTProcEvento((br.inf.portalfiscal.nfe.schema.envcce.TProcEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envcce.TProcEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envcce.ObjectFactory().createTProcEvento((br.com.swconsultoria.nfe.schema.envcce.TProcEvento) obj);
                         break;
                     case TPROCEPEC:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envEpec.TProcEvento.class);
-                        element = XsdUtil.epec.createTProcEvento((br.inf.portalfiscal.nfe.schema.envEpec.TProcEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envEpec.TProcEvento.class);
+                        element = XsdUtil.epec.createTProcEvento((br.com.swconsultoria.nfe.schema.envEpec.TProcEvento) obj);
                         break;
                 }
                 break;
@@ -179,20 +181,20 @@ public class XmlUtil {
             case EVENTO:
                 switch (obj.getClass().getName()) {
                     case CANCELAR:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TEnvEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envEventoCancNFe.ObjectFactory().createEnvEvento((br.inf.portalfiscal.nfe.schema.envEventoCancNFe.TEnvEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envEventoCancNFe.TEnvEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envEventoCancNFe.ObjectFactory().createEnvEvento((br.com.swconsultoria.nfe.schema.envEventoCancNFe.TEnvEvento) obj);
                         break;
                     case CCE:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envcce.TEnvEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envcce.ObjectFactory().createEnvEvento((br.inf.portalfiscal.nfe.schema.envcce.TEnvEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envcce.TEnvEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envcce.ObjectFactory().createEnvEvento((br.com.swconsultoria.nfe.schema.envcce.TEnvEvento) obj);
                         break;
                     case EPEC:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envEpec.TEnvEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envEpec.ObjectFactory().createEnvEvento((br.inf.portalfiscal.nfe.schema.envEpec.TEnvEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envEpec.TEnvEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envEpec.ObjectFactory().createEnvEvento((br.com.swconsultoria.nfe.schema.envEpec.TEnvEvento) obj);
                         break;
                     case MANIFESTAR:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema.envConfRecebto.TEnvEvento.class);
-                        element = new br.inf.portalfiscal.nfe.schema.envConfRecebto.ObjectFactory().createEnvEvento((br.inf.portalfiscal.nfe.schema.envConfRecebto.TEnvEvento) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema.envConfRecebto.TEnvEvento.class);
+                        element = new br.com.swconsultoria.nfe.schema.envConfRecebto.ObjectFactory().createEnvEvento((br.com.swconsultoria.nfe.schema.envConfRecebto.TEnvEvento) obj);
                         break;
                 }
                 break;
@@ -201,23 +203,23 @@ public class XmlUtil {
                 switch (obj.getClass().getName()) {
                     case TProtEnvi:
                         context = JAXBContext.newInstance(TProtNFe.class);
-                        element = XsdUtil.enviNfe.createTProtNFe((br.inf.portalfiscal.nfe.schema_4.enviNFe.TProtNFe) obj);
+                        element = XsdUtil.enviNfe.createTProtNFe((br.com.swconsultoria.nfe.schema_4.enviNFe.TProtNFe) obj);
                         break;
                     case TProtCons:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.TProtNFe.class);
-                        element = XsdUtil.retConsSitNfe.createTProtNFe((br.inf.portalfiscal.nfe.schema_4.retConsSitNFe.TProtNFe) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TProtNFe.class);
+                        element = XsdUtil.retConsSitNfe.createTProtNFe((br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TProtNFe) obj);
                         break;
                     case TProtReci:
-                        context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema_4.retConsReciNFe.TProtNFe.class);
-                        element = XsdUtil.retConsReciNfe.createTProtNFe((br.inf.portalfiscal.nfe.schema_4.retConsReciNFe.TProtNFe) obj);
+                        context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema_4.retConsReciNFe.TProtNFe.class);
+                        element = XsdUtil.retConsReciNfe.createTProtNFe((br.com.swconsultoria.nfe.schema_4.retConsReciNFe.TProtNFe) obj);
                         break;
                 }
                 break;
 
             case T_RET_CONS_STAT_SERV:
-                context = JAXBContext.newInstance(br.inf.portalfiscal.nfe.schema_4.retConsStatServ.TRetConsStatServ.class);
-                element = new br.inf.portalfiscal.nfe.schema_4.retConsStatServ.ObjectFactory().createRetConsStatServ(
-                        (br.inf.portalfiscal.nfe.schema_4.retConsStatServ.TRetConsStatServ) obj);
+                context = JAXBContext.newInstance(br.com.swconsultoria.nfe.schema_4.retConsStatServ.TRetConsStatServ.class);
+                element = new br.com.swconsultoria.nfe.schema_4.retConsStatServ.ObjectFactory().createRetConsStatServ(
+                        (br.com.swconsultoria.nfe.schema_4.retConsStatServ.TRetConsStatServ) obj);
                 break;
 
             default:

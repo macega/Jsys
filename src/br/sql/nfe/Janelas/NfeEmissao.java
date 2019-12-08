@@ -1,6 +1,6 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.nfe.util.ConstantesUtil;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeReferencias;
@@ -58,7 +58,7 @@ import javax.swing.table.DefaultTableModel;
 public class NfeEmissao extends javax.swing.JDialog implements
         PropertyChangeListener {
 
-    private static final JsysParametros par = Retorna.JsysParametros();
+    private static final JsysParametros PAR = Retorna.JsysParametros();
     private GerandoNFeJAXB xmlNfe;
     private JsysOrcamento venda;
     private java.util.Collection<JsysOrcamentoItens> itens;
@@ -1921,14 +1921,14 @@ public class NfeEmissao extends javax.swing.JDialog implements
         jTextFieldValorIcms.setText("");
         jTextFieldValorIcmsSt.setText("");
         jTextFieldModelo.setText("55");
-        jTextFieldSerie.setText(par.getnNFeserie());
+        jTextFieldSerie.setText(PAR.getnNFeserie());
         jTextFieldnumeroNFe.setText("0");
         jTextFieldData.setText(ManagerData.convertDate(ManagerData.getDate(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
         jTextFieldCodigoNumerico.setText("");
         jTextFieldDV.setText("");
         jTextFieldNaturazaOperacao.setText("Venda");
         uJComboBoxModFrete.setSelectedIndex(3);
-        jTextFieldinfCpl.setText(par.getInfCpl());
+        jTextFieldinfCpl.setText(PAR.getInfCpl());
     }
 
     private JsysNFe getJsysNFe() {
@@ -1960,7 +1960,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
         if (registroAtual != null
                 //&& registroAtual.getNfeId() == null
                 && venda != null) {
-            if (par.getUf().equals(venda.getIdCliente().getEstado())) {
+            if (PAR.getUf().equals(venda.getIdCliente().getEstado())) {
                 uJComboBoxIdDest.setSelectedIndex(0);
             } else if (venda.getIdCliente().getEstado().equals("EX")) {
                 uJComboBoxIdDest.setSelectedIndex(2);
@@ -1978,12 +1978,12 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     uJComboBoxModFrete.getSelectedObject())) {
                 registroAtual.setVenda(venda.getIdOrcamento());
                 registroAtual.setMod(ConstantesFiscal.NF_E);
-                registroAtual.setSerie(par.getnNFeserie());
+                registroAtual.setSerie(PAR.getnNFeserie());
                 registroAtual.setTpNF(jRadioButton2.isSelected());
                 //registroAtual.setCDV("0");
                 //registroAtual.setCNF(jTextFieldCodigoNumerico.getText());
-                registroAtual.setCMunFG(String.valueOf(par.getCodMunicipio()));
-                registroAtual.setCUF(String.valueOf(par.getCodMunicipio()).substring(0, 2));
+                registroAtual.setCMunFG(String.valueOf(PAR.getCodMunicipio()));
+                registroAtual.setCUF(String.valueOf(PAR.getCodMunicipio()).substring(0, 2));
                 //registroAtual.setDhEmi(null);
                 //registroAtual.setDhSaiEnt(null);
                 registroAtual.setEmitida(false);
@@ -2254,9 +2254,9 @@ public class NfeEmissao extends javax.swing.JDialog implements
             itens = Retorna.findCollection("JsysOrcamentoItens.findByIdOrcamento", filtro);
             for (JsysOrcamentoItens iten : itens) {
                 if (Validar.isNullOrWhite(iten.getCfop())) {
-                    iten.setCfop(iten.getJsysOrcamento().getIdCliente().getEstado().equals(par.getUf())
-                            ? par.getCfop()
-                            : par.getCfopInterestadual());
+                    iten.setCfop(iten.getJsysOrcamento().getIdCliente().getEstado().equals(PAR.getUf())
+                            ? PAR.getCfop()
+                            : PAR.getCfopInterestadual());
                     br.sql.acesso.ConnectionFactory.update(iten);
                 }
                 listItens.add(iten);
@@ -2287,17 +2287,17 @@ public class NfeEmissao extends javax.swing.JDialog implements
             if (Validar.isNotNullOrWhite(venda.getIdCliente().getEmail())) {
                 try {
                     StringBuilder html = new StringBuilder();
-                    html.append("<html><head><title>NF-e ").append(par.getFantasia()).append("</title></head><body>");
+                    html.append("<html><head><title>NF-e ").append(PAR.getFantasia()).append("</title></head><body>");
                     html.append("<div>Segue em anexo o arquivo XML e PDF da NF-e.</div>");
                     html.append("<br><br><br><div>___________________________________________</div>");
                     html.append("<div><H2><b><u>")
-                            .append(par.getFantasia())
+                            .append(PAR.getFantasia())
                             .append("</u></b></H2></div>");
                     html.append("<div>Endereço: ")
-                            .append(par.getEndereco())
+                            .append(PAR.getEndereco())
                             .append("</div>");
                     html.append("<div>Fone: ")
-                            .append(par.getFone())
+                            .append(PAR.getFone())
                             .append("</div></body></html>");
                     setProgress(25);
                     publish("Montanto E-mail");
@@ -2323,7 +2323,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
                         publish("Enviando E-mail");
                         Mail correio = new Mail();
                         correio.setDestinatario(venda.getIdCliente().getNomeCorentista().toUpperCase(), venda.getIdCliente().getEmail().toLowerCase());
-                        correio.senderMail("NF-e - " + par.getFantasia(), html.toString(), localFiles);
+                        correio.senderMail("NF-e - " + PAR.getFantasia(), html.toString(), localFiles);
                         setProgress(100);
                         publish("E-mail Enviado");
                     } else {
@@ -2385,7 +2385,8 @@ public class NfeEmissao extends javax.swing.JDialog implements
             publish(xmlNfe.getMensagem());
             setProgress(50);
             //String tpAmb = Constantes.INI.getString("FISCAL", "TP_AMB").substring(0, 1);
-            if (xmlNfe.enviarNfe(ConstantesUtil.NFE)) {
+
+            if (xmlNfe.enviarNfe(DocumentoEnum.NFE)) {
                 setProgress(60);
                 transmitir.setEnabled(false);
                 imprimir.setEnabled(true);

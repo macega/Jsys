@@ -7,7 +7,6 @@ import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.nfe.xml.GerandoProcEventoNFe;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.FileEx;
 import br.sql.util.ManagerData;
 import java.awt.Cursor;

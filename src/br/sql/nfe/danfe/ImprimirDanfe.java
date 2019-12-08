@@ -1,8 +1,7 @@
 package br.sql.nfe.danfe;
 
 import static br.JavaApplicationJsys.OPTIONS;
-// verificar essas importacoes
-import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe;
+import br.com.swconsultoria.nfe.exception.NfeException;
 import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNfeProc;
 import br.sql.bean.DanfeNFCe;
 import br.sql.bean.DanfeNFCeIten;
@@ -97,7 +96,7 @@ public class ImprimirDanfe {
                             danf.setDivInfoFixas1("DANFE NFC-e - Documento Auxiliar da Nota Fiscal de Consumidor Eletrõnica");
                             danf.setDivInfoFixas2("Não permite aproveitamento de crédito de ICMS");
                             List<DanfeNFCeIten> listProd = new ArrayList<>();
-                            for (TNFe.InfNFe.Det det : NFeProc.getNFe().getInfNFe().getDet()) {
+                            for (br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe.InfNFe.Det det : NFeProc.getNFe().getInfNFe().getDet()) {
                                 DanfeNFCeIten prod = new DanfeNFCeIten();
                                 prod.setIdProduto(Integer.valueOf(det.getProd().getCProd()));
                                 prod.setDescricao(det.getProd().getXProd());
@@ -112,7 +111,7 @@ public class ImprimirDanfe {
                             danf.setQtdeItens(new BigDecimal(NFeProc.getNFe().getInfNFe().getDet().size()));
                             danf.setvTotalNfce(new BigDecimal(NFeProc.getNFe().getInfNFe().getTotal().getICMSTot().getVNF()));
                             List<DanfeNFCePagamentos> pags = new ArrayList<>();
-                            for (TNFe.InfNFe.Pag.DetPag p : NFeProc.getNFe().getInfNFe().getPag().getDetPag()) {
+                            for (br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe.InfNFe.Pag.DetPag p : NFeProc.getNFe().getInfNFe().getPag().getDetPag()) {
                                 DanfeNFCePagamentos pag = new DanfeNFCePagamentos();
                                 pag.setFormaPagamento(p.getTPag());
                                 pag.setvTotalPago(p.getVPag());
@@ -181,7 +180,7 @@ public class ImprimirDanfe {
                             }
                         }
                     }
-                } catch (JAXBException ex) {
+                } catch (JAXBException | NfeException ex) {
                     Log.registraErro(ImprimirDanfe.class, "nfce", ex);
                 }
             }
@@ -210,7 +209,7 @@ public class ImprimirDanfe {
                     param.put("Logo", PAR.getLogo());
                     ReportUtils.openReport("Imprimindo NF-e", "/br/rel/fiscal/danfeR.jasper", param, xmlDataSource);
                     //ReportUtils.pirntReport("Imprimindo NF-e", inputStream, parametros, new JRBeanCollectionDataSource(dados), true);
-                } catch (JAXBException | JRException e) {
+                } catch (JAXBException | JRException | NfeException e) {
                     Log.registraErro("ImprimirFiscal", "nfe", e);
                 }
             }
@@ -233,7 +232,6 @@ public class ImprimirDanfe {
         if (nfe != null) {
             try {
                 //xml.
-
                 String xml = XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                 Document doc = loadXMLFromString(xml);
                 //estrutura do xml.
@@ -253,7 +251,7 @@ public class ImprimirDanfe {
                  * Exportando em pdf
                  */
                 pdf = JasperExportManager.exportReportToPdf(print);
-            } catch (JAXBException | JRException e) {
+            } catch (JAXBException | JRException | NfeException e) {
                 Log.registraErro("ImprimirDanfe", "nfePdf", e);
                 pdf = null;
             }

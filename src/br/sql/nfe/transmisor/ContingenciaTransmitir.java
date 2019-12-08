@@ -7,7 +7,6 @@ import br.com.samuelweb.nfe.util.ConstantesUtil;
 import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
 import br.inf.portalfiscal.nfe.schema_4.enviNFe.TRetEnviNFe;
 import br.sql.bean.JsysNFe;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Retorna;
 import java.util.Collection;

@@ -1,38 +1,38 @@
 package br.sql.nfe.xml;
 
 import br.JavaApplicationJsys;
-import br.com.samuelweb.nfe.Nfe;
-import br.com.samuelweb.nfe.dom.ConfiguracoesNfe;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.com.samuelweb.nfe.util.ConstantesUtil;
-import br.com.samuelweb.nfe.util.NFCeUtil;
-import br.com.samuelweb.nfe.util.WebServiceUtil;
-import br.sql.nfe.util.XmlUtil;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.ObjectFactory;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnderEmi;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEndereco;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TIpi;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Dest;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.COFINS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.ICMS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.PIS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Prod;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Emit;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Ide;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.InfAdic;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Total;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Total.ICMSTot;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Transporta;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Vol;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TRetEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TUf;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TUfEmi;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.Nfe;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.dom.enuns.ServicosEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.util.NFCeUtil;
+import br.com.swconsultoria.nfe.util.WebServiceUtil;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.ObjectFactory;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnderEmi;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEndereco;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Dest;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.COFINS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.ICMS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.PIS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Prod;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Emit;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Ide;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.InfAdic;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Total;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Total.ICMSTot;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Transporta;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Vol;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TUf;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TUfEmi;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeLote;
@@ -48,12 +48,14 @@ import br.sql.cadastros.TitulosJanela;
 import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.janelas.utilitarios.ParametrosJanelas;
 import br.sql.log.Log;
+import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerData;
 import br.sql.util.ManagerDecimal;
 import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
 import br.sql.util.Validar;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
@@ -64,7 +66,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBException;
 import org.brazilutils.br.cpfcnpj.CpfCnpj;
-import java.util.Base64;
 import javax.swing.JFrame;
 
 /**
@@ -1245,7 +1246,7 @@ public class GerandoNFeJAXB {
             enviNFe.setIndSinc("1");
             enviNFe.getNFe().add(nFe);
             // Monta e Assina o XML
-            enviNFe = Nfe.montaNfe(enviNFe, true);
+            enviNFe = Nfe.montaNfe(config, enviNFe, true);
             if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
                 //QRCODE
                 String cDest = null;
@@ -1273,12 +1274,18 @@ public class GerandoNFeJAXB {
 //                        par.getCSC(),
 //                        WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
 //                
+                String chave = infNFe.getId().substring(3);
+                String ambiente = config.getAmbiente().getCodigo();
+                String idToken = par.getcIdToken();
+                String CSC = par.getCSC();
+                String urlConsulta = WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE);
+
                 String qrCode = NFCeUtil.getCodeQRCode(
-                        infNFe.getId().substring(3),
-                        config.getAmbiente(),
-                        par.getcIdToken(),
-                        par.getCSC(),
-                        WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
+                        chave,
+                        ambiente,
+                        idToken,
+                        CSC,
+                        urlConsulta);
 
                 //QRCODE OFFLine
                 //String qrCode = NFCeUtil.getCodeQRCodeContingencia(
@@ -1294,7 +1301,13 @@ public class GerandoNFeJAXB {
 
                 TNFe.InfNFeSupl infNFeSupl = new TNFe.InfNFeSupl();
                 infNFeSupl.setQrCode(qrCode);
-                infNFeSupl.setUrlChave(WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_CONSULTANFCE));
+                infNFeSupl.setUrlChave(
+                        WebServiceUtil.getUrl(
+                                config,
+                                DocumentoEnum.NFCE,
+                                ServicosEnum.URL_CONSULTANFCE
+                        )
+                );
                 enviNFe.getNFe().get(0).setInfNFeSupl(infNFeSupl);
             }
             String xml = XmlUtil.objectToXml(enviNFe);
@@ -1311,12 +1324,13 @@ public class GerandoNFeJAXB {
     /**
      * Envia a Nfe para a Sefaz
      *
-     * @param tipo ConstantesUtil.NFCE
+     * @param tipoDocumento se e uma NF-e ou NFC-e
      * @return
      */
-    public boolean enviarNfe(String tipo) {
+    public boolean enviarNfe(DocumentoEnum tipoDocumento) {
         try {
-            TRetEnviNFe retorno = Nfe.enviarNfe(enviNFe, tipo);
+            ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(par);
+            TRetEnviNFe retorno = Nfe.enviarNfe(config, enviNFe, tipoDocumento);
             String xml = XmlUtil.objectToXml(retorno);
             GravaNoArquivo gravador = new GravaNoArquivo();
             gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, chaveAcesso, "xml");
@@ -1339,7 +1353,7 @@ public class GerandoNFeJAXB {
                 jsysNFe.setEmitida(false);
             }
             return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
-        } catch (JAXBException | NfeException ex) {
+        } catch (JAXBException | FileNotFoundException | CertificadoException | NfeException ex) {
             Log.registraErro(GerandoNFeJAXB.class.getName(), "enviarNfe", ex);
         }
         return false;
@@ -1350,7 +1364,7 @@ public class GerandoNFeJAXB {
         return valor.multiply(fator).setScale(JavaApplicationJsys.CASA_DECIMAL_VALOR_DEFALT, RoundingMode.DOWN);
     }
 
-    private TIpi getIPI(JsysOrcamentoItens iten) {
+//    private TIpi getIPI(JsysOrcamentoItens iten) {
 //        IPI ipi = new IPI();
 //        String cst = vp.getComVendaProdutoIpiCst().equals("") ? vp.getProdProduto().getProdIpi().getProdIpiCstSaida() : vp.getComVendaProdutoIpiCst();
 //
@@ -1385,8 +1399,8 @@ public class GerandoNFeJAXB {
 //        ipi.setIPITrib(trib);
 //        ipi.setCEnq(vp.getProdProduto().getProdIpi().getProdIpiEnq());
 //        return ipi;
-        return null;
-    }
+//        return null;
+//    }
 
     private String getValorNfe(double valor) {
         return ManagerDecimal.formataNumero(valor, 1, 2, false).replace(",", ".");

@@ -5,7 +5,6 @@ import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.xml.GerandoProcEventoNFe;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Mail;
 import br.sql.util.ManagerData;

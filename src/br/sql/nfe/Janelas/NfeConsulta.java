@@ -10,7 +10,6 @@ import br.com.swconsultoria.nfe.schema_4.retConsSitNFe.TRetConsSitNFe;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
 import br.sql.bean.JsysNFe;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.Retorna;
 import java.awt.Cursor;
 import java.awt.Toolkit;

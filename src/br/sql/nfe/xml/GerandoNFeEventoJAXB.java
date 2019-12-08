@@ -19,7 +19,6 @@ import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerData;
 import br.sql.util.ManagerString;
