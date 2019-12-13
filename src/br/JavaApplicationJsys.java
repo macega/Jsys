@@ -4,6 +4,8 @@ import br.adp.geral.Geral;
 import br.com.swconsultoria.certificado.Certificado;
 import br.com.swconsultoria.certificado.CertificadoService;
 import br.com.swconsultoria.certificado.exception.CertificadoException;
+
+
 import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
 import br.com.swconsultoria.nfe.dom.Proxy;
 import br.com.swconsultoria.nfe.dom.enuns.AmbienteEnum;
@@ -42,6 +44,7 @@ public class JavaApplicationJsys {
     public static final String PASTA_XML_RET_CONS_RECI_NFE = PASTA_XML + "retConsReciNFe" + System.getProperty("file.separator");
     public static final String PASTA_XML_INUT_NFE = PASTA_XML + "inutNFe" + System.getProperty("file.separator");
     public static final String PASTA_XML_RET_INUT_NFE = PASTA_XML + "retInutNFe" + System.getProperty("file.separator");
+    public static final String PASTA_XML_PROC_INUT_NFE = PASTA_XML + "procInutNFe" + System.getProperty("file.separator");
     public static final String PASTA_XML_EVENTO = PASTA_XML + "envEvento" + System.getProperty("file.separator");
     public static final String PASTA_XML_CONS_NFE_DEST = PASTA_XML + "consNFeDest" + System.getProperty("file.separator");
     public static final String PASTA_XML_RET_EVENTO = PASTA_XML + "retEnvEvento" + System.getProperty("file.separator");

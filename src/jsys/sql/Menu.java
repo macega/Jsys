@@ -30,7 +30,6 @@ import br.sql.dialogo.RecontarEstoque;
 import br.sql.nfe.Janelas.NfceCancelamento;
 import br.sql.nfe.Janelas.NfeConsulta;
 import br.sql.nfe.Janelas.NfeEmissao;
-import br.sql.nfe.Janelas.NfeInutilizacaoJanela;
 import br.sql.janelas.caixa.AberturaCaixaJanela;
 import br.sql.janelas.caixa.ConsultaReceber;
 import br.sql.janelas.caixa.FechamentoCaixa;
@@ -99,7 +98,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-//import org.apache.log4j.PropertyConfigurator;
 
 /**
  *

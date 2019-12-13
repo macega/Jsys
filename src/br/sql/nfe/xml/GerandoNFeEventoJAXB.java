@@ -1,6 +1,5 @@
 package br.sql.nfe.xml;
 
-import br.com.swconsultoria.certificado.exception.CertificadoException;
 import br.com.swconsultoria.nfe.Nfe;
 import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
 import br.com.swconsultoria.nfe.dom.enuns.AmbienteEnum;
@@ -56,12 +55,12 @@ public class GerandoNFeEventoJAXB {
     }
 
     public GerandoNFeEventoJAXB(String chaveAcesso, String xJust) {
-        jsysNFeEvento = new JsysNFeEvento();
-        PAR = Retorna.JsysParametros();
-        enviEvento = new TEnvEvento();
-        mensagem = new String();
-        dados = new SQLDatabaseConnection();
         try {
+            jsysNFeEvento = new JsysNFeEvento();
+            PAR = Retorna.JsysParametros();
+            enviEvento = new TEnvEvento();
+            mensagem = new String();
+            dados = new SQLDatabaseConnection();
             configuracoesNfe = br.JavaApplicationJsys.iniciaConfigurações(PAR);
             if (!"".equals(chaveAcesso)) {
                 Map<Object, Object> filtro = new HashMap<>();
@@ -87,7 +86,7 @@ public class GerandoNFeEventoJAXB {
                     jsysNFeEvento.setIdEvento(id.toString());
                 }
             }
-        } catch (CertificadoException | NfeException | JAXBException | FileNotFoundException ex) {
+        } catch (FileNotFoundException | JAXBException | NfeException ex) {
             jsysNFeEvento = null;
             Log.registraErro(GerandoNFeEventoJAXB.class, "GerandoNFeEventoJAXB", ex);
         }

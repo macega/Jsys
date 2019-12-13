@@ -989,24 +989,6 @@ public class Geral extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tabelasCB;
     // End of variables declaration//GEN-END:variables
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//     public static void main(String args[]) {
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-//            ex.printStackTrace();
-//        }
-//        java.awt.EventQueue.invokeLater(() -> {
-//            new Geral().setVisible(true);
-//        });
-//    }
     private void create() throws HeadlessException {
         for (File pai : scriptsCreate) {
             String StingPai = pai.toString().substring(8);

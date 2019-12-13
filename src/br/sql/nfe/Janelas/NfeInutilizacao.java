@@ -1,21 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.sql.nfe.Janelas;
 
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.Nfe;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema_4.inutNFe.TInutNFe;
+import br.com.swconsultoria.nfe.schema_4.inutNFe.TRetInutNFe;
+import br.com.swconsultoria.nfe.util.InutilizacaoUtil;
+import br.com.swconsultoria.nfe.util.RetornoUtil;
 import br.sql.acesso.SQLDatabaseConnection;
+import br.sql.bean.JsysNFeInut;
+import br.sql.bean.JsysParametros;
 import br.sql.log.Log;
 import br.sql.nfe.links.ConstantesFiscal;
-import br.sql.nfe.transmisor.InutilizacaoNFeTransmitir;
-import br.sql.nfe.xml.AssinarXMLsCertfificadoA1;
-import br.sql.nfe.xml.GerandoNFeInutilizacaoJAXB;
-import br.sql.nfe.xml.ValidacaoNFeXML;
+import br.sql.util.GravaNoArquivo;
+import br.sql.util.ManagerString;
+import br.sql.util.Retorna;
+import java.io.FileNotFoundException;
+import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -25,6 +37,8 @@ public class NfeInutilizacao extends javax.swing.JDialog {
 
     private final String serie;
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
+    private final JsysParametros par = Retorna.JsysParametros();
+    private final JsysNFeInut jsysNFeInut = new JsysNFeInut();
 
     /**
      * Creates new form NfeInutilizacao
@@ -196,76 +210,74 @@ public class NfeInutilizacao extends javax.swing.JDialog {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (validar()) {
             for (int i : inutilizacaojTable.getSelectedRows()) {
-                String NNFIni = String.valueOf(inutilizacaojTable.getValueAt(i, 0));
-                String NNFFin = String.valueOf(inutilizacaojTable.getValueAt(i, 1));
-                String mod = String.valueOf(inutilizacaojTable.getValueAt(i, 2));
-                String ser = String.valueOf(inutilizacaojTable.getValueAt(i, 3));
-                String xJust = xJustificativajTextArea.getText().trim();
-                GerandoNFeInutilizacaoJAXB inut
-                        = new GerandoNFeInutilizacaoJAXB(mod, ser, NNFIni, NNFFin, xJust);
-                if (inut.gerar()) {
-                    AssinarXMLsCertfificadoA1 assinador = new AssinarXMLsCertfificadoA1();
-                    if (assinador.assinar(inut.getIdInut(), "Inutilizacao")) {
-                        ValidacaoNFeXML validador = new ValidacaoNFeXML();
-                        if (validador.Validar(inut.getIdInut(), "Inutilizacao")) {
-                            InutilizacaoNFeTransmitir transmisor = new InutilizacaoNFeTransmitir();
-                            if (transmisor.transmitir(inut.getIdInut(), ConstantesFiscal.AMBIENTE.TP_AMB, Integer.parseInt(mod))) {
-                                xJustificativajTextArea.setText("");
-                                JOptionPane.showMessageDialog(this, "Operaçao realizada com Sucesso!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                            } else {
-                                JOptionPane.showMessageDialog(this, "Erro na execução da Operação!", "Erro", JOptionPane.ERROR_MESSAGE);
-                            }
-                        } else {
-                            Log.registraErro(this.getClass().getName(), "jButton2ActionPerformed", new Exception(validador.getMensagenErro()));
-                        }
-                    }
+                try {
+                    // Inicia As Configurações
+                    ConfiguracoesNfe configuracoesNfe = br.JavaApplicationJsys.iniciaConfigurações(par);
+                    String cnpj = ManagerString.RemoveFormatoCpfCnpj(par.getCnpj());
+                    int seriee = Integer.parseInt(inutilizacaojTable.getValueAt(i, 3).toString());
+                    int numeroInicial = Integer.parseInt(inutilizacaojTable.getValueAt(i, 0).toString());
+                    int numeroFinal = Integer.parseInt(inutilizacaojTable.getValueAt(i, 1).toString());
+                    String justificativa = xJustificativajTextArea.getText().trim();
+                    LocalDateTime dataCancelamento = LocalDateTime.now();
+                    DocumentoEnum documentoEnum = DocumentoEnum.getByModelo(String.valueOf(inutilizacaojTable.getValueAt(i, 2)));
+                    //Monta Inutilização
+                    TInutNFe inutNFe = InutilizacaoUtil.montaInutilizacao(documentoEnum,
+                            cnpj,
+                            seriee,
+                            numeroInicial,
+                            numeroFinal,
+                            justificativa,
+                            dataCancelamento,
+                            configuracoesNfe);
+                    jsysNFeInut.setTpAmb(inutNFe.getInfInut().getTpAmb());
+                    jsysNFeInut.setXServ(inutNFe.getInfInut().getXServ());
+                    jsysNFeInut.setCUF(inutNFe.getInfInut().getCUF());
+                    jsysNFeInut.setAno(inutNFe.getInfInut().getAno());
+                    jsysNFeInut.setCnpj(inutNFe.getInfInut().getCNPJ());
+                    jsysNFeInut.setMod(inutNFe.getInfInut().getMod());
+                    jsysNFeInut.setSerie(inutNFe.getInfInut().getSerie());
+                    jsysNFeInut.setNNFIni(inutNFe.getInfInut().getNNFIni());
+                    jsysNFeInut.setNNFFin(inutNFe.getInfInut().getNNFFin());
+                    jsysNFeInut.setXJust(inutNFe.getInfInut().getXServ());
+                    StringBuilder id = new StringBuilder();
+                    id.append("ID")
+                            .append(jsysNFeInut.getCUF())
+                            .append(jsysNFeInut.getAno())
+                            .append(jsysNFeInut.getCnpj())
+                            .append(jsysNFeInut.getMod())
+                            .append(ManagerString.zeros(jsysNFeInut.getSerie(), 3))
+                            .append(ManagerString.zeros(jsysNFeInut.getNNFIni(), 9))
+                            .append(ManagerString.zeros(jsysNFeInut.getNNFFin(), 9));
+                    jsysNFeInut.setIdInut(id.toString());
+                    jsysNFeInut.setXmlInutNFe(strValueOf(inutNFe));
+                    GravaNoArquivo gravador = new GravaNoArquivo();
+                    gravador.salvarArquivo(jsysNFeInut.getXmlInutNFe(), br.JavaApplicationJsys.PASTA_XML_INUT_NFE, jsysNFeInut.getIdInut(), "xml");
+                    br.sql.acesso.ConnectionFactory.insert(jsysNFeInut);
+//                  Envia Inutilização
+                    TRetInutNFe retorno = Nfe.inutilizacao(configuracoesNfe, inutNFe, documentoEnum, true);
+                    gravador.salvarArquivo(InutilizacaoUtil.criaProcInutilizacao(configuracoesNfe, inutNFe, retorno),
+                            br.JavaApplicationJsys.PASTA_XML_PROC_INUT_NFE,
+                            jsysNFeInut.getIdInut(),
+                            "xml");
+//                    //Resultado
+//                    System.out.println();
+//                    System.out.println("# Status: " + retorno.getInfInut().getCStat() + " - " + retorno.getInfInut().getXMotivo());
+//                    System.out.println("# Protocolo: " + retorno.getInfInut().getNProt());
+//                    //Cria ProcEvento da Inutilização
+//                    String proc = InutilizacaoUtil.criaProcInutilizacao(configuracoesNfe, inutNFe, retorno);
+//                    System.out.println();
+//                    System.out.println("# ProcInutilizacao : " + proc);
+                    RetornoUtil.validaInutilizacao(retorno);
+                } catch (FileNotFoundException | CertificadoException | JAXBException ex) {
+                    Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
+                } catch (NfeException ex) {
+                    Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                    xJustificativajTextArea.requestFocus();
                 }
-                listaIntervaloNfe(0);
             }
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(NfeInutilizacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(NfeInutilizacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(NfeInutilizacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(NfeInutilizacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                NfeInutilizacao dialog = new NfeInutilizacao(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable inutilizacaojTable;
@@ -323,4 +335,27 @@ public class NfeInutilizacao extends javax.swing.JDialog {
         return true;
     }
 
+    /**
+     * Método que Converte o Objeto em String.
+     *
+     * @param tInutNFe
+     * @return
+     * @throws JAXBException
+     */
+    private static String strValueOf(TInutNFe tInutNFe) throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(TInutNFe.class);
+        Marshaller marshaller = context.createMarshaller();
+        JAXBElement<TInutNFe> element = new br.com.swconsultoria.nfe.schema_4.inutNFe.ObjectFactory().createInutNFe(tInutNFe);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+
+        StringWriter sw = new StringWriter();
+        marshaller.marshal(element, sw);
+
+        String xml = sw.toString();
+        xml = xml.replaceAll("xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "");
+        xml = xml.replaceAll("<NFe>", "<NFe xmlns=\"http://www.portalfiscal.inf.br/nfe\">");
+
+        return xml;
+    }
 }
