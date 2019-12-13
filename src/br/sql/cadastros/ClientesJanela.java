@@ -1,22 +1,16 @@
 package br.sql.cadastros;
 
-import br.sql.acesso.ConnectionFactory;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysClientes;
-import br.sql.bean.JsysClientesIds;
 import br.sql.log.Log;
 import br.sql.defaultTableCellRenderer.Zebrado;
 import br.sql.util.ManagerSQL;
 import br.sql.util.ReportUtils;
-import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import br.sql.util.ManagerData;
@@ -239,8 +233,7 @@ public class ClientesJanela extends JPanel {
         ClientesJanelaEdit cje = new ClientesJanelaEdit(new javax.swing.JFrame(), true, C, false);
         cje.setVisible(true);
         if (cje.isConfirmaClientes()) {
-            cadastroCartao(cje.getCodigoCartao(), cje.RegistroJsysClientes.getIdCliente());
-            consultaTF.setText(cje.RegistroJsysClientes.getIdCliente().toString());
+            consultaTF.setText(cje.RegistroJsysClientes.getNomeCorentista());
             actionConsulta();
             cje.dispose();
         } else {
@@ -275,9 +268,9 @@ public class ClientesJanela extends JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         if (evt.getClickCount() > 1) {
-             editar();
-         }
+        if (evt.getClickCount() > 1) {
+            editar();
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -306,7 +299,6 @@ public class ClientesJanela extends JPanel {
 //            frame.setVisible(true);
 //        });
 //    }
-
     private void actionConsulta() {
         try {
             ManagerSQL sql = new ManagerSQL();
@@ -413,37 +405,12 @@ public class ClientesJanela extends JPanel {
         ClientesJanelaEdit cje = new ClientesJanelaEdit(null, true, C, false);
         cje.setVisible(true);
         if (cje.isConfirmaClientes()) {
-            cadastroCartao(cje.getCodigoCartao(), cje.RegistroJsysClientes.getIdCliente());
-            consultaTF.setText(cje.RegistroJsysClientes.getIdCliente().toString());
+            consultaTF.setText(cje.RegistroJsysClientes.getNomeCorentista());
             actionConsulta();
             cje.dispose();
         } else {
             actionConsulta();
             cje.dispose();
-        }
-    }
-
-    private void cadastroCartao(String id, Integer idCliente) {
-        if (!id.equals("")) {
-            Map<Object, Object> filtro = new HashMap<>();
-            filtro.put("id", id);
-            deleteCartao("JsysClientesIds.findById", filtro);
-            filtro.clear();
-            filtro.put("idCliente", idCliente);
-            deleteCartao("JsysClientesIds.findByIdCliente", filtro);
-            br.sql.bean.JsysClientesIds codigoCartaonovo = new br.sql.bean.JsysClientesIds(id, idCliente);
-            if (ConnectionFactory.insert(codigoCartaonovo) instanceof JsysClientesIds) {
-            } else {
-                JOptionPane.showMessageDialog(null, "Erro Ao Salvar o Codigo do Cartão", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    private void deleteCartao(String namedQuery, Map<Object, Object> filtro) {
-        List<Object> listObjects = br.sql.util.Retorna.findList(namedQuery, filtro);
-        for (Object O : listObjects) {
-            JsysClientesIds jci = (JsysClientesIds) O;
-            ConnectionFactory.delete(jci);
         }
     }
 }

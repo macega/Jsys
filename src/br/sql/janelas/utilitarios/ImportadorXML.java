@@ -9,6 +9,7 @@ import br.sql.nfe.xml.GerandoProcEventoNFe;
 import br.sql.log.Log;
 import br.sql.util.FileEx;
 import br.sql.util.ManagerData;
+import br.sql.util.ManagerString;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -190,7 +191,7 @@ public class ImportadorXML extends javax.swing.JDialog {
                             new StringBuilder().append(diretorio).append("/").append(file).toString());
                     if (FileEx.getExtension(fileXml).equals(FileEx.xml)) {
                         String xml = fileXml.stringRead();
-                        xml = xml.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+                        xml = ManagerString.prepareXmlToSqlServer(xml);
                         if (xml.length() > 0) {
                             switch (getTipoXML(xml)) {
                                 case "nfeProc":

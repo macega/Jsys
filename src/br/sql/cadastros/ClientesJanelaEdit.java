@@ -1,5 +1,6 @@
 package br.sql.cadastros;
 
+import br.sql.acesso.ConnectionFactory;
 import br.sql.bean.Cidades;
 import br.sql.bean.JsysClientes;
 import br.sql.bean.JsysClientesIds;
@@ -1524,6 +1525,9 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
                 RegistroJsysClientes.setDataInclusao(ManagerData.getDate());
                 br.sql.acesso.ConnectionFactory.insert(RegistroJsysClientes);
             }
+            cadastroCartao(this.getCodigoCartao(), this.RegistroJsysClientes.getIdCliente()); 
+//            cadastroCartao(cje.getCodigoCartao(), cje.RegistroJsysClientes.getIdCliente());
+//            consultaTF.setText(cje.RegistroJsysClientes.getIdCliente().toString());
             setVisible(false);
         }
     }//GEN-LAST:event_SalvaCorentista
@@ -1746,34 +1750,34 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private String codigoCartao;
-    
+
     public String getCodigoCartao() {
         return codigoCartao;
     }
-    
+
     public void setCodigoCartao() {
         this.codigoCartao = String.valueOf(jPasswordFieldCartao.getPassword()).trim();
     }
 
     // inicio da propriedade
     public JsysClientes RegistroJsysClientes;
-    
+
     public JsysClientes getRegistroJsysClientes() {
         return RegistroJsysClientes;
     }
-    
+
     public void setRegistroJsysClientes(JsysClientes RegistroJsysClientes) {
         JsysClientes oldrecord = this.RegistroJsysClientes;
         this.RegistroJsysClientes = RegistroJsysClientes;
         propertyChangeSupport.firePropertyChange("registroJsysClientes", oldrecord, RegistroJsysClientes);
     }
     private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
-    
+
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
-    
+
     @Override
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);
@@ -1782,7 +1786,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
 
     // inicio da propriedade
     protected boolean ConfirmaClientes;
-    
+
     public boolean isConfirmaClientes() {
         return ConfirmaClientes;
     }
@@ -1796,7 +1800,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
         horasExtras.setSelected(RegistroJsysClientes.getHorasExtras() == null ? false : RegistroJsysClientes.getHorasExtras());
         descontosOutros.setSelected(RegistroJsysClientes.getDescontosOutros() == null ? false : RegistroJsysClientes.getDescontosOutros());
         malaDiretaCB.setSelected(RegistroJsysClientes.getMalaDireta());
-        inativoCB.setSelected(RegistroJsysClientes.getInativo());        
+        inativoCB.setSelected(RegistroJsysClientes.getInativo());
         clienteCB.setSelected(RegistroJsysClientes.getCliente());
         fornecedorCB.setSelected(RegistroJsysClientes.getFornecedor());
         colaboradorCB.setSelected(RegistroJsysClientes.getColaborador());
@@ -1892,7 +1896,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
             Log.registraErro(this.getClass().getName(), "setCidade", e);
         }
     }
-    
+
     private void setLoja() {
         try {
             List<JsysLojas> lojaList = Retorna.jsysLojas();
@@ -1935,7 +1939,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
             return null;
         }
     }
-    
+
     private void setRegistroJsysClientes() {
         RegistroJsysClientes.setFilhos(temFilhosJC.isSelected());
         RegistroJsysClientes.setRecebimentoValeTrasnporte(recebimentoValeTrasnporte.isSelected());
@@ -2004,11 +2008,11 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
         RegistroJsysClientes.setFilial(filialCB.isSelected());
         setCodigoCartao();
     }
-    
+
     private void erro(String mensagem) {
         JOptionPane.showMessageDialog(this, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private boolean validaDados() {
         if (Validar.data(admissaoDC.getDate()) == 0) {
             erro("Data de admissão invalida ");
@@ -2152,7 +2156,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
         }
         return true;
     }
-    
+
     private void setForm() {
         if (jRadioButtonJuridica.isSelected()) {
             dataNascimentoJD.setEnabled(false);
@@ -2173,5 +2177,29 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
         }
         jTabbedPaneCadastro.setEnabledAt(2, colaboradorCB.isSelected());
         jTabbedPaneCadastro.setSelectedComponent(this.jPanelGeral);
+    }
+
+    private void cadastroCartao(String id, Integer idCliente) {
+        if (!id.equals("")) {
+            Map<Object, Object> filtro = new HashMap<>();
+            filtro.put("id", id);
+            deleteCartao("JsysClientesIds.findById", filtro);
+            filtro.clear();
+            filtro.put("idCliente", idCliente);
+            deleteCartao("JsysClientesIds.findByIdCliente", filtro);
+            br.sql.bean.JsysClientesIds codigoCartaonovo = new br.sql.bean.JsysClientesIds(id, idCliente);
+            if (ConnectionFactory.insert(codigoCartaonovo) instanceof JsysClientesIds) {
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro Ao Salvar o Codigo do Cartão", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void deleteCartao(String namedQuery, Map<Object, Object> filtro) {
+        List<Object> listObjects = br.sql.util.Retorna.findList(namedQuery, filtro);
+        for (Object O : listObjects) {
+            JsysClientesIds jci = (JsysClientesIds) O;
+            ConnectionFactory.delete(jci);
+        }
     }
 }
