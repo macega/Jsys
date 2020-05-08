@@ -2,10 +2,13 @@ CREATE PROCEDURE sincronizatransferenciasProdutos
 AS
 BEGIN
 	DECLARE @Srv SYSNAME
-		,@nomeBancoDados SYSNAME
+		,@nomeBancoDadosLocal SYSNAME
+		,@nomeBancoDadosRemoto SYSNAME
 		,@Comando1 NVARCHAR(max)
 		,@Comando2 NVARCHAR(max)
 		,@OK AS INT
+
+	SELECT @nomebancoDadosLocal = db_name()
 
 	DECLARE cServer CURSOR
 	FOR
@@ -23,7 +26,7 @@ BEGIN
 	FETCH NEXT
 	FROM cServer
 	INTO @Srv
-		,@nomeBancoDados
+		,@nomeBancoDadosRemoto
 
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
@@ -37,8 +40,8 @@ BEGIN
 						,cast(DEP.idTransf as varchar)
 						,''INSERT/UPDATE''
 						,''' + @Srv + '''
-				FROM DADOS.DBO.transferenciasProdutos DEP WITH (NOLOCK)
-					LEFT JOIN [' + @Srv + '].' + @nomeBancoDados + '.DBO.transferenciasProdutos LOJA WITH (NOLOCK) ON LOJA.idTransf = DEP.idTransf
+				FROM [' + @nomebancoDadosLocal + '].DBO.transferenciasProdutos DEP WITH (NOLOCK)
+					LEFT JOIN [' + @Srv + '].[' + @nomeBancoDadosRemoto + '].DBO.transferenciasProdutos LOJA WITH (NOLOCK) ON LOJA.idTransf = DEP.idTransf
 				WHERE LOJA.idTransf is null and DEP.idLoja = ''' + @Srv + ''' '
 			SET @Comando2 = N'' + 'INSERT INTO Replicacao (tabela, id, idAntigo, operacao, servidorDestino, ExecSP)
 				SELECT ''transferenciasProdutosItens''
@@ -47,9 +50,9 @@ BEGIN
 						,''INSERT/UPDATE''
 						,''' + @Srv + '''
 						,''BaixaTranferencia '' + cast(DEP.idTransf as varchar)
-				FROM DADOS.DBO.transferenciasProdutosItens AS DEP WITH (NOLOCK)
-					INNER JOIN DADOS.DBO.transferenciasProdutos WITH (NOLOCK) ON transferenciasProdutos.idTransf = DEP.idTransf
-					LEFT JOIN [' + @Srv + '].' + @nomeBancoDados + '.DBO.transferenciasProdutosItens AS LOJA WITH (NOLOCK) ON LOJA.idTransf = DEP.idTransf
+				FROM [' + @nomebancoDadosLocal + '].DBO.transferenciasProdutosItens AS DEP WITH (NOLOCK)
+					INNER JOIN [' + @nomebancoDadosLocal + '].DBO.transferenciasProdutos WITH (NOLOCK) ON transferenciasProdutos.idTransf = DEP.idTransf
+					LEFT JOIN [' + @Srv + '].[' + @nomeBancoDadosRemoto + '].DBO.transferenciasProdutosItens AS LOJA WITH (NOLOCK) ON LOJA.idTransf = DEP.idTransf
 																				AND LOJA.idProduto = DEP.idProduto
 				WHERE (LOJA.idproduto is null OR LOJA.quantidade <> DEP.quantidade) and (transferenciasProdutos.idLoja = ''' + @Srv + ''') '
 		END TRY
@@ -70,7 +73,7 @@ BEGIN
 		FETCH NEXT
 		FROM cServer
 		INTO @Srv
-			,@nomeBancoDados
+			,@nomeBancoDadosRemoto
 	END
 
 	CLOSE cServer

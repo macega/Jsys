@@ -3,6 +3,9 @@ package br.sql.nfe.Janelas;
 import br.com.swconsultoria.certificado.exception.CertificadoException;
 import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
 import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysClientes;
 import br.sql.bean.JsysNFe;
@@ -18,7 +21,6 @@ import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.nfe.xml.GerandoNFeJAXB;
 import br.sql.log.Log;
 import br.sql.defaultTableCellRenderer.ZebradoLocation;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Mail;
 import br.sql.util.ManagerData;
@@ -2333,7 +2335,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     filtro.put("chaveAcesso", registroAtual.getChaveAcesso());
                     JsysNFe nfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
                     if (nfe != null) {
-                        files.add(gravador.salvarArquivo(XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe()),
+                        files.add(gravador.salvarArquivo(nfe.getProcNFe(),
                                 br.JavaApplicationJsys.PASTA_XML_PROC_NFE,
                                 nfe.getChaveAcesso(),
                                 "xml"));
@@ -2361,6 +2363,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     setProgress(100);
                     publish("Erro ao Enviar E-mail");
                     Log.registraErro(this.getClass().getName(), "envioEmail", e);
+                    //e.printStackTrace();
                 }
             }
             return null;

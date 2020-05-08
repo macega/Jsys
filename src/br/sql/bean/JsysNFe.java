@@ -718,7 +718,7 @@ public class JsysNFe implements Serializable {
     }
 
     public void setProcNFe(String procNFe) {
-        this.procNFe = procNFe;
+        this.procNFe = ManagerString.prepareXmlToSqlServer(procNFe);
     }
 
     public Integer getIdTrasportadora() {

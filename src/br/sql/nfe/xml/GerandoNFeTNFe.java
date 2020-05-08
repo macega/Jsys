@@ -1,7 +1,9 @@
 package br.sql.nfe.xml;
 
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.ObjectFactory;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
+//import br.inf.portalfiscal.nfe.schema_4.enviNFe.ObjectFactory;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.ObjectFactory;
+//import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
 import br.sql.log.Log;
 import java.io.StringReader;
 import java.io.StringWriter;

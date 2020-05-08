@@ -31,8 +31,11 @@ import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Transporta;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Vol;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+//import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TUf;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TUfEmi;
+//import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeLote;
@@ -48,7 +51,6 @@ import br.sql.cadastros.TitulosJanela;
 import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.janelas.utilitarios.ParametrosJanelas;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerData;
 import br.sql.util.ManagerDecimal;
@@ -470,7 +472,9 @@ public class GerandoNFeJAXB {
              */
             if (venda.getIdCliente().getIeRg().equals("ISENTO")) {
                 // gabiarra para emitir nota para o estado no amazonas sem inscricao estadual
-                if (venda.getIdCliente().getEstado().equals("AM")) {
+                // Os Estados que não permitem que os destinatário tenham indicação 
+                // como Contribuinte Isento são: AM, BA, CE, GO, MG, MS, MT, PA, PE, RN, SE, SP.
+                if (Validar.estadosNaoContribuintes(venda.getIdCliente().getEstado())) {
                     dest.setIndIEDest("9");
                 } else {
                     dest.setIndIEDest("2");
@@ -720,7 +724,7 @@ public class GerandoNFeJAXB {
                     icmssn102.setOrig(origem);
                     icmssn102.setCSOSN(cson);
                     icms.setICMSSN102(icmssn102);
-                    
+
 //        } else if (cson.equals("201")) {
 //            ICMS.ICMSSN201 icmssn201 = new ICMS.ICMSSN201();
 //            icmssn201.setOrig(origem);
@@ -1302,8 +1306,7 @@ public class GerandoNFeJAXB {
             //idToken,
             //csc,
             //WebServiceUtil.getUrl(config,ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-            System.out.println(qrCode);
-
+            //System.out.println(qrCode);
             TNFe.InfNFeSupl infNFeSupl = new TNFe.InfNFeSupl();
             infNFeSupl.setQrCode(qrCode);
             infNFeSupl.setUrlChave(
@@ -1315,7 +1318,7 @@ public class GerandoNFeJAXB {
             );
             enviNFe.getNFe().get(0).setInfNFeSupl(infNFeSupl);
         }
-        String xml = XmlUtil.objectToXml(enviNFe);
+        String xml = XmlNfeUtil.objectToXml(enviNFe);
         GravaNoArquivo gravador = new GravaNoArquivo();
         gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_ENVI_NFE, chaveAcesso, "xml");
         jsysNFe.setEnviNFe(xml);
@@ -1336,26 +1339,23 @@ public class GerandoNFeJAXB {
     public boolean enviarNfe(DocumentoEnum tipoDocumento) {
         try {
             ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(par);
-            TRetEnviNFe retorno = Nfe.enviarNfe(config, enviNFe, tipoDocumento);
-            String xml = XmlUtil.objectToXml(retorno);
+            TRetEnviNFe tRetEnviNFe = Nfe.enviarNfe(config, enviNFe, tipoDocumento);
+            String xmlTRetEnviNFe = XmlNfeUtil.objectToXml(tRetEnviNFe);
             GravaNoArquivo gravador = new GravaNoArquivo();
-            gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, chaveAcesso, "xml");
-            jsysNFe.setRetConsReciNFe(xml);
-            if (jsysNFe != null) {
-                if (XmlUtil.verificaCsStat(retorno.getCStat())) {
-                    this.CStat = retorno.getProtNFe().getInfProt().getCStat();
-                    if (XmlUtil.verificaCsStat(this.CStat)) {
-                        setMensagem(retorno.getProtNFe().getInfProt().getXMotivo());
-                        jsysNFe.setEmitida(true);
-                    } else {
-                        setMensagem(this.CStat + " - " + retorno.getProtNFe().getInfProt().getXMotivo());
-                        jsysNFe.setEmitida(false);
-                    }
+            gravador.salvarArquivo(xmlTRetEnviNFe, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, chaveAcesso, "xml");
+            jsysNFe.setRetConsReciNFe(xmlTRetEnviNFe);
+            jsysNFe.setProcNFe(XmlNfeUtil.criaNfeProc(enviNFe, tRetEnviNFe.getProtNFe()));
+            if (Validar.verificaCsStat(tRetEnviNFe.getCStat())) {
+                this.CStat = tRetEnviNFe.getProtNFe().getInfProt().getCStat();
+                if (Validar.verificaCsStat(this.CStat)) {
+                    setMensagem(tRetEnviNFe.getProtNFe().getInfProt().getXMotivo());
+                    jsysNFe.setEmitida(true);
                 } else {
-                    setMensagem(retorno.getCStat() + " - " + retorno.getXMotivo());
+                    setMensagem(this.CStat + " - " + tRetEnviNFe.getProtNFe().getInfProt().getXMotivo());
                     jsysNFe.setEmitida(false);
                 }
             } else {
+                setMensagem(tRetEnviNFe.getCStat() + " - " + tRetEnviNFe.getXMotivo());
                 jsysNFe.setEmitida(false);
             }
             return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
@@ -1417,12 +1417,10 @@ public class GerandoNFeJAXB {
 
     private InfNFe.Cobr getCobr() {
         InfNFe.Cobr corb = new InfNFe.Cobr();
-
         return null;
     }
 
     private InfNFe.Pag getPag() {
-        //if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
         Map<Object, Object> filtro = new HashMap<>();
         filtro.put("idReceber", venda.getIdOrcamento());
         List<Object> O = Retorna.findList("JsysRebebimentoAgrupado.findByIdReceber", filtro);

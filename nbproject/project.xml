@@ -8,7 +8,7 @@
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>
-                <root id="test.Nova%20Pasta.dir" name="Pacotes de Testes"/>
+                <root id="test.srcTeste.dir" name="Pacotes de Código-fonte Teste"/>
             </test-roots>
         </data>
     </configuration>

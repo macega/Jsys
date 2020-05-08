@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="danfe" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="565" leftMargin="14" rightMargin="16" topMargin="14" bottomMargin="14" uuid="3f8a688d-1026-4dae-ae50-a696241c7045">
 	<property name="ireport.zoom" value="1.652892561983471"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="380"/>
 	<style name="campoPequeno" hAlign="Left" vAlign="Top" markup="styled" pattern="" fontName="SansSerif" fontSize="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Courier"/>
 	<style name="borda" mode="Transparent" forecolor="#000000" fill="Solid" radius="0" scaleImage="Clip" hAlign="Left" vAlign="Top" markup="none" pattern="" fontName="SansSerif" fontSize="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="true" pdfFontName="Courier">
 		<pen lineWidth="0.25"/>
@@ -61,7 +61,7 @@
 		<fieldDescription><![CDATA[../ide/natOp]]></fieldDescription>
 	</field>
 	<field name="FormaPagamento" class="java.lang.String">
-		<fieldDescription><![CDATA[../ide/indPag]]></fieldDescription>
+		<fieldDescription><![CDATA[../../Pag/DetPag/indPag]]></fieldDescription>
 	</field>
 	<field name="Serie" class="java.lang.String">
 		<fieldDescription><![CDATA[../ide/serie]]></fieldDescription>
@@ -1548,7 +1548,7 @@ $F{Trans_CNPJ}.substring(8,12) + "-" + $F{Trans_CNPJ}.substring(12,14) : $F{Tran
 					<textFieldExpression><![CDATA[$P{FAT_VALOR10}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="dados" mode="Opaque" x="2" y="93" width="557" height="21" uuid="d9b37a2a-ba51-409d-9519-7431e516e818">
+					<reportElement style="dados" mode="Opaque" x="4" y="93" width="555" height="21" uuid="d9b37a2a-ba51-409d-9519-7431e516e818">
 						<printWhenExpression><![CDATA[$P{FAT_NUMERO1} == null && $P{FAT_VENCIMENTO1} == null && $P{FAT_VALOR1} == null ? true : false]]></printWhenExpression>
 					</reportElement>
 					<textElement verticalAlignment="Middle" markup="styled">

@@ -1,6 +1,5 @@
 package br.sql.bean;
 
-import br.sql.util.Criptografia.Security;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

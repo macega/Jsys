@@ -14,7 +14,8 @@ SET NOCOUNT ON
 
 -- declaçao de varibles
 DECLARE @Srv SYSNAME
-	,@nomeBancoDados SYSNAME
+	,@nomeBancoDadosRemoto SYSNAME
+	,@nomebancoDadosLocal SYSNAME
 	,@Comando NVARCHAR(max)
 	,@OK AS INT = 0
 	,@camposInsert AS NVARCHAR(max)
@@ -23,6 +24,8 @@ DECLARE @Srv SYSNAME
 	,@camposLKeys AS NVARCHAR(max)
 	,@camposRKeys AS NVARCHAR(max)
 	,@camposDeleteKeys AS NVARCHAR(max)
+
+SELECT @nomebancoDadosLocal = db_name()
 
 -- procura por servidores vinculados 
 DECLARE cServer CURSOR
@@ -93,7 +96,7 @@ OPEN cServer
 
 FETCH NEXT
 FROM cServer
-INTO @Srv, @nomeBancoDados
+INTO @Srv, @nomeBancoDadosRemoto
 
 -- vai fazer um loop para cada link server configurado no servidor ou que foi selecina por parametro 
 WHILE @@FETCH_STATUS = 0
@@ -145,7 +148,7 @@ BEGIN
 					'IF (SELECT COUNT(*) FROM ['
 					,@Srv
 					,'].'
-					,@nomeBancoDados
+					,@nomeBancoDadosRemoto
 					,'.DBO.['
 					,@tabela
 					,'] AS L WITH (NOLOCK) WHERE '
@@ -156,7 +159,7 @@ BEGIN
 					,'UPDATE ['
 					,@Srv
 					,'].'
-					,@nomeBancoDados
+					,@nomeBancoDadosRemoto
 					,'.DBO.['
 					,@tabela
 					,'] '
@@ -166,11 +169,11 @@ BEGIN
 					,'FROM ['
 					,@Srv
 					,'].'
-					,@nomeBancoDados
+					,@nomeBancoDadosRemoto
 					,'.DBO.['
 					,@tabela
 					,'] AS R WITH (NOLOCK) CROSS JOIN '
-					,@nomeBancoDados
+					,@nomebancoDadosLocal
 					,'.DBO.['
 					,@tabela
 					,']'
@@ -189,7 +192,7 @@ BEGIN
 					,'INSERT INTO ['
 					,@Srv
 					,'].'
-					,@nomeBancoDados
+					,@nomeBancoDadosRemoto
 					,'.DBO.['
 					,@tabela
 					,'] ('
@@ -198,7 +201,7 @@ BEGIN
 					,'SELECT '
 					,@camposInsert
 					,' FROM '
-					,@nomeBancoDados
+					,@nomebancoDadosLocal
 					,'.DBO.['
 					,@tabela
 					,'] AS L WITH (NOLOCK) '
@@ -217,7 +220,7 @@ BEGIN
 					'DELETE FROM ['
 					,@Srv
 					,'].'
-					,@nomeBancoDados
+					,@nomeBancoDadosRemoto
 					,'.DBO.['
 					,@tabela
 					,'] WHERE '
@@ -239,7 +242,7 @@ BEGIN
 						N'EXEC ['
 						,@Srv
 						,'].'
-						,@nomeBancoDados
+						,@nomeBancoDadosRemoto
 						,'.DBO.'
 						,@ExecSP
 						)
@@ -287,7 +290,7 @@ BEGIN
 	--  vai para o proximo registro 
 	FETCH NEXT
 	FROM cServer
-	INTO @Srv, @nomeBancoDados
+	INTO @Srv, @nomeBancoDadosRemoto
 END
 
 -- fecha o loop

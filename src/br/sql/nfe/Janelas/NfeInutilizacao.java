@@ -1,5 +1,6 @@
 package br.sql.nfe.Janelas;
 
+import br.adp.util.Progress;
 import br.com.swconsultoria.certificado.exception.CertificadoException;
 import br.com.swconsultoria.nfe.Nfe;
 import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
@@ -19,11 +20,16 @@ import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
+import java.awt.Cursor;
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.JAXBException;
 
@@ -209,61 +215,84 @@ public class NfeInutilizacao extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (validar()) {
-            for (int i : inutilizacaojTable.getSelectedRows()) {
-                try {
-                    // Inicia As Configurações
-                    ConfiguracoesNfe configuracoesNfe = br.JavaApplicationJsys.iniciaConfigurações(par);
-                    int seriee = Integer.parseInt(inutilizacaojTable.getValueAt(i, 3).toString());
-                    int numeroInicial = Integer.parseInt(inutilizacaojTable.getValueAt(i, 0).toString());
-                    int numeroFinal = Integer.parseInt(inutilizacaojTable.getValueAt(i, 1).toString());
-                    DocumentoEnum documentoEnum = DocumentoEnum.getByModelo(String.valueOf(inutilizacaojTable.getValueAt(i, 2)));
-                    //Monta Inutilização
-                    TInutNFe tInutNFe = InutilizacaoUtil.montaInutilizacao(documentoEnum,
-                            ManagerString.RemoveFormatoCpfCnpj(par.getCnpj()),
-                            seriee,
-                            numeroInicial,
-                            numeroFinal,
-                            xJustificativajTextArea.getText().trim(),
-                            LocalDateTime.now(),
-                            configuracoesNfe);
-                    jsysNFeInut.setTpAmb(tInutNFe.getInfInut().getTpAmb());
-                    jsysNFeInut.setXServ(tInutNFe.getInfInut().getXServ());
-                    jsysNFeInut.setCUF(tInutNFe.getInfInut().getCUF());
-                    jsysNFeInut.setAno(tInutNFe.getInfInut().getAno());
-                    jsysNFeInut.setCnpj(tInutNFe.getInfInut().getCNPJ());
-                    jsysNFeInut.setMod(tInutNFe.getInfInut().getMod());
-                    jsysNFeInut.setSerie(tInutNFe.getInfInut().getSerie());
-                    jsysNFeInut.setNNFIni(tInutNFe.getInfInut().getNNFIni());
-                    jsysNFeInut.setNNFFin(tInutNFe.getInfInut().getNNFFin());
-                    jsysNFeInut.setXJust(tInutNFe.getInfInut().getXServ());
-                    jsysNFeInut.setIdInut(tInutNFe.getInfInut().getId());
-                    jsysNFeInut.setXmlInutNFe(XmlNfeUtil.objectToXml(tInutNFe));
-//                  Envia Inutilização
-                    TRetInutNFe tRetInutNFe = Nfe.inutilizacao(configuracoesNfe, tInutNFe, documentoEnum, true);
-                    GravaNoArquivo gravador = new GravaNoArquivo();
-                    gravador.salvarArquivo(jsysNFeInut.getXmlInutNFe(),
-                            br.JavaApplicationJsys.PASTA_XML_INUT_NFE,
-                            jsysNFeInut.getIdInut(),
-                            "xml");
-                    jsysNFeInut.setEmitida(tRetInutNFe.getInfInut().getCStat().equals(StatusEnum.INUTILIZADO.getCodigo()));
-                    jsysNFeInut.setXmlRetInutNFe(XmlNfeUtil.objectToXml(tRetInutNFe));
-                    String procInutNFe = InutilizacaoUtil.criaProcInutilizacao(configuracoesNfe, tInutNFe, tRetInutNFe);
-                    gravador.salvarArquivo(procInutNFe,
-                            br.JavaApplicationJsys.PASTA_XML_PROC_INUT_NFE,
-                            jsysNFeInut.getIdInut(),
-                            "xml");
-                    br.sql.acesso.ConnectionFactory.insert(jsysNFeInut);
-                    RetornoUtil.validaInutilizacao(tRetInutNFe);
-                } catch (FileNotFoundException | CertificadoException | JAXBException ex) {
-                    Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
-                } catch (NfeException ex) {
-                    Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
-                    JOptionPane.showMessageDialog(this, ex.getMessage());
-                    xJustificativajTextArea.requestFocus();
+        final Progress p = new Progress();
+        SwingWorker work = new SwingWorker() {
+            @Override
+            protected NfeException doInBackground() throws Exception {
+                if (validar()) {
+                    for (int i : inutilizacaojTable.getSelectedRows()) {
+                        try {
+                            // Inicia As Configurações
+                            ConfiguracoesNfe configuracoesNfe = br.JavaApplicationJsys.iniciaConfigurações(par);
+                            int seriee = Integer.parseInt(inutilizacaojTable.getValueAt(i, 3).toString());
+                            int numeroInicial = Integer.parseInt(inutilizacaojTable.getValueAt(i, 0).toString());
+                            int numeroFinal = Integer.parseInt(inutilizacaojTable.getValueAt(i, 1).toString());
+                            DocumentoEnum documentoEnum = DocumentoEnum.getByModelo(String.valueOf(inutilizacaojTable.getValueAt(i, 2)));
+                            //Monta Inutilização
+                            TInutNFe tInutNFe = InutilizacaoUtil.montaInutilizacao(documentoEnum,
+                                    ManagerString.RemoveFormatoCpfCnpj(par.getCnpj()),
+                                    seriee,
+                                    numeroInicial,
+                                    numeroFinal,
+                                    xJustificativajTextArea.getText().trim(),
+                                    LocalDateTime.now(),
+                                    configuracoesNfe);
+                            jsysNFeInut.setTpAmb(tInutNFe.getInfInut().getTpAmb());
+                            jsysNFeInut.setXServ(tInutNFe.getInfInut().getXServ());
+                            jsysNFeInut.setCUF(tInutNFe.getInfInut().getCUF());
+                            jsysNFeInut.setAno(tInutNFe.getInfInut().getAno());
+                            jsysNFeInut.setCnpj(tInutNFe.getInfInut().getCNPJ());
+                            jsysNFeInut.setMod(tInutNFe.getInfInut().getMod());
+                            jsysNFeInut.setSerie(tInutNFe.getInfInut().getSerie());
+                            jsysNFeInut.setNNFIni(tInutNFe.getInfInut().getNNFIni());
+                            jsysNFeInut.setNNFFin(tInutNFe.getInfInut().getNNFFin());
+                            jsysNFeInut.setXJust(tInutNFe.getInfInut().getXServ());
+                            jsysNFeInut.setIdInut(tInutNFe.getInfInut().getId());
+                            jsysNFeInut.setXmlInutNFe(XmlNfeUtil.objectToXml(tInutNFe));
+//                          Envia Inutilização
+                            TRetInutNFe tRetInutNFe = Nfe.inutilizacao(configuracoesNfe, tInutNFe, documentoEnum, true);
+                            GravaNoArquivo gravador = new GravaNoArquivo();
+                            gravador.salvarArquivo(jsysNFeInut.getXmlInutNFe(),
+                                    br.JavaApplicationJsys.PASTA_XML_INUT_NFE,
+                                    jsysNFeInut.getIdInut(),
+                                    "xml");
+                            jsysNFeInut.setEmitida(tRetInutNFe.getInfInut().getCStat().equals(StatusEnum.INUTILIZADO.getCodigo()));
+                            jsysNFeInut.setXmlRetInutNFe(XmlNfeUtil.objectToXml(tRetInutNFe));
+                            String procInutNFe = InutilizacaoUtil.criaProcInutilizacao(configuracoesNfe, tInutNFe, tRetInutNFe);
+                            gravador.salvarArquivo(procInutNFe,
+                                    br.JavaApplicationJsys.PASTA_XML_PROC_INUT_NFE,
+                                    jsysNFeInut.getIdInut(),
+                                    "xml");
+                            br.sql.acesso.ConnectionFactory.insert(jsysNFeInut);
+                            RetornoUtil.validaInutilizacao(tRetInutNFe);
+                        } catch (FileNotFoundException | CertificadoException | JAXBException ex) {
+                            Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
+                        } catch (NfeException ex) {
+                            Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
+                            xJustificativajTextArea.requestFocus();
+                            return ex;
+                        }
+                    }
                 }
+                return null;
             }
-        }
+
+            @Override
+            protected void done() {
+                try {
+                    super.done();
+                    NfeException nfeException = (NfeException) get();
+                    if (nfeException != null) {
+                        JOptionPane.showMessageDialog(null, nfeException.getMessage());
+                    }
+                } catch (InterruptedException | ExecutionException ex) {
+                    Log.registraErro(this, "jButton4ActionPerformed", ex);
+                }
+                p.setVisible(false);
+            }
+        };
+        work.execute();
+        p.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -320,28 +349,4 @@ public class NfeInutilizacao extends javax.swing.JDialog {
         }
         return true;
     }
-
-//    /**
-//     * Método que Converte o Objeto em String.
-//     *
-//     * @param tInutNFe
-//     * @return
-//     * @throws JAXBException
-//     */
-//    private static String strValueOf(TInutNFe tInutNFe) throws JAXBException {
-//        JAXBContext context = JAXBContext.newInstance(TInutNFe.class);
-//        Marshaller marshaller = context.createMarshaller();
-//        JAXBElement<TInutNFe> element = new br.com.swconsultoria.nfe.schema_4.inutNFe.ObjectFactory().createInutNFe(tInutNFe);
-//        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
-//        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-//
-//        StringWriter sw = new StringWriter();
-//        marshaller.marshal(element, sw);
-//
-//        String xml = sw.toString();
-//        xml = xml.replaceAll("xmlns:ns2=\"http://www.w3.org/2000/09/xmldsig#\"", "");
-//        xml = xml.replaceAll("<NFe>", "<NFe xmlns=\"http://www.portalfiscal.inf.br/nfe\">");
-//
-//        return xml;
-//    }
 }

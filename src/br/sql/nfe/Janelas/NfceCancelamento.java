@@ -1,16 +1,34 @@
 package br.sql.nfe.Janelas;
 
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.Nfe;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.Evento;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.dom.enuns.EventosEnum;
 import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TEnvEvento;
+import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TEvento;
+import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TRetEnvEvento;
+import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TRetEvento;
+import br.com.swconsultoria.nfe.util.CancelamentoUtil;
+import br.com.swconsultoria.nfe.util.RetornoUtil;
+import br.sql.acesso.ConnectionFactory;
+import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
+import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.log.Log;
-import br.sql.nfe.xml.GerandoNFeEventoJAXB;
+import br.sql.util.GravaNoArquivo;
+import br.sql.util.ManagerData;
 import br.sql.util.Retorna;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +45,10 @@ public class NfceCancelamento extends javax.swing.JDialog implements
         PropertyChangeListener {
 
     private JsysNFe nfe;
-    //private final JsysParametros par;
+    private JsysNFeEvento jsysNFeEvento;
+    private final SQLDatabaseConnection dados;
+    JsysParametros jsysParametros;
+    private Task task;
 
     /**
      * Creates new form NfceCancelamento
@@ -39,15 +60,15 @@ public class NfceCancelamento extends javax.swing.JDialog implements
     public NfceCancelamento(java.awt.Frame parent, boolean modal, JsysNFe nfe) {
         super(parent, modal);
         this.nfe = nfe;
-        //this.par = Retorna.JsysParametros();
         initComponents();
+        dados = new SQLDatabaseConnection();
         caregardados();
         StringBuilder status = new StringBuilder();
-        JsysParametros par = Retorna.JsysParametros();
+        jsysParametros = Retorna.JsysParametros();
         status.append("Servidor NFC-e: ");
-        status.append(ConstantesFiscal.statusSefaz(par.getcStat65()));
+        status.append(ConstantesFiscal.statusSefaz(jsysParametros.getcStat65()));
         status.append(" | Servidor NF-e: ");
-        status.append(ConstantesFiscal.statusSefaz(par.getcStat55()));
+        status.append(ConstantesFiscal.statusSefaz(jsysParametros.getcStat55()));
         jLabelStatus.setText(status.toString());
     }
 
@@ -227,7 +248,6 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 jTextFieldChaveAcesso.setText(nfe.getChaveAcesso());
             }
         } catch (NumberFormatException ignore) {
-            //salvaLog.registraErro(this.getClass().getName(), "jTextFieldVendaKeyReleased", e);
         }
     }//GEN-LAST:event_jTextFieldVendaKeyReleased
 
@@ -269,8 +289,6 @@ public class NfceCancelamento extends javax.swing.JDialog implements
         return true;
     }
 
-    private Task task;
-
     private class Task extends SwingWorker<Boolean, String> {
 
         /*
@@ -278,38 +296,125 @@ public class NfceCancelamento extends javax.swing.JDialog implements
          */
         @Override
         public Boolean doInBackground() {
-            //Initialize progress property.
+            Boolean erro = true;
             setProgress(0);
-            GerandoNFeEventoJAXB evento = new GerandoNFeEventoJAXB(nfe.getChaveAcesso(), jTextFieldMotivo.getText().trim());
-            if (evento.gerarEnviEvento()) {
-                try {
-                    setProgress(33);
-                    publish("Cancelamento Criado");
-                    //AssinarXMLsCertfificadoA1 assinador = new AssinarXMLsCertfificadoA1();
-                    //if (assinador.assinar(evento.getIdEvento(), "Evento")) {
-                    setProgress(66);
-                    //publish("Cancelamento Assinado");
-                    //EventoTransmitir transmisor = new EventoTransmitir();
-                    if (evento.enviar()) {
-                        setProgress(100);
-                        publish("Cancelamento Transmitido");
-                        publish(evento.getMensagem());
-                        return true;
-                    } else {
-                        publish(evento.getMensagem());
-                        publish("Erro ao Transmitir Evento Cancelamento");
-                    }
-//                } else {
-//                    publish("Erro ao Assinar o Evento Cancelamento");
-//                }
-                } catch (JAXBException ex) {
-                    Log.registraErro(NfceCancelamento.class, "Task.doInBackground", ex);
+            try {
+                jsysNFeEvento = new JsysNFeEvento();
+                GravaNoArquivo gravador = new GravaNoArquivo();
+                ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(jsysParametros);
+                br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe retEnviNFe;
+                retEnviNFe = br.com.swconsultoria.nfe.util.XmlNfeUtil.xmlToObject(
+                        nfe.getRetConsReciNFe(),
+                        br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe.class);
+                //Agora o evento pode aceitar uma lista de cancelaemntos para envio em Lote.
+                Evento cancela = new Evento();
+                //Informe a chave da Nota a ser Cancelada
+                cancela.setChave(nfe.getChaveAcesso());
+                //Informe o protocolo da Nota a ser Cancelada
+                cancela.setProtocolo(retEnviNFe.getProtNFe().getInfProt().getNProt());
+                //Informe o CNPJ do emitente
+                cancela.setCnpj(jsysParametros.getCnpj());
+                //Informe o Motivo do Cancelamento
+                cancela.setMotivo(jTextFieldMotivo.getText().trim());
+                //Informe a data do Cancelamento
+                cancela.setDataEvento(LocalDateTime.now());
+                //Monta o Evento de Cancelamento
+                TEnvEvento enviEvento = CancelamentoUtil.montaCancelamento(cancela, config);
+                TEvento tEvento = enviEvento.getEvento().get(0);
+                jsysNFeEvento.setCOrgao(tEvento.getInfEvento().getCOrgao());
+                jsysNFeEvento.setChNFe(tEvento.getInfEvento().getChNFe());
+                jsysNFeEvento.setTpAmb(config.getAmbiente().getCodigo());
+                jsysNFeEvento.setDhEvento(
+                        ManagerData.formataData(
+                                tEvento.getInfEvento().getDhEvento(),
+                                ManagerData.FORMATO_NFE
+                        ));
+                jsysNFeEvento.setTpEvento(EventosEnum.CANCELAMENTO.getCodigo());
+                jsysNFeEvento.setNSeqEvento(1);
+                jsysNFeEvento.setDescEvento("Cancelamento");
+                jsysNFeEvento.setNProt(tEvento.getInfEvento().getDetEvento().getNProt());
+                jsysNFeEvento.setXJust(tEvento.getInfEvento().getDetEvento().getXJust());
+                jsysNFeEvento.setEmitida(false);
+//                StringBuilder id = new StringBuilder();
+//                id.append("ID");
+//                id.append(jsysNFeEvento.getTpEvento());
+//                id.append(jsysNFeEvento.getChNFe());
+//                id.append(ManagerString.zeros(String.valueOf(jsysNFeEvento.getNSeqEvento()), 2));
+                jsysNFeEvento.setIdEvento(tEvento.getInfEvento().getId());
+                publish("Cancelamento Criado");
+                publish("Cancelamento Assinado");
+                setProgress(33);
+                
+                if (jsysNFeEvento.getIdEvento() != null) {
+                    String XmlEvento = br.com.swconsultoria.nfe.util.XmlNfeUtil.objectToXml(enviEvento);
+                    gravador.salvarArquivo(XmlEvento, br.JavaApplicationJsys.PASTA_XML_EVENTO, jsysNFeEvento.getIdEvento(), "xml");
+                    jsysNFeEvento.setEnvEventoCancNFe(XmlEvento);
+                    jsysNFeEvento = (JsysNFeEvento) ConnectionFactory.insert(jsysNFeEvento);
                 }
-            } else {
-                publish("Erro ao Criar Evento Cancelamento");
+                
+                //Envia o Evento de Cancelamento
+                publish("Envia o Evento de Cancelamento");
+                TRetEnvEvento tRetEnvEvento = Nfe.cancelarNfe(
+                        config,
+                        enviEvento,
+                        true,
+                        "55".equals(nfe.getMod()) ? DocumentoEnum.NFE : DocumentoEnum.NFCE);
+                //Valida o Retorno do Cancelamento
+                publish("Valida o Retorno do Cancelamento");
+                RetornoUtil.validaCancelamento(tRetEnvEvento);
+                setProgress(66);
+                //Cria ProcEvento de Cacnelamento
+                publish("Salvando Cancelamento");
+                String xmlProcEvento = CancelamentoUtil.criaProcEventoCancelamento(config, enviEvento, tRetEnvEvento.getRetEvento().get(0));
+                System.out.println("# ProcEvento : " + xmlProcEvento);
+                gravador.salvarArquivo(
+                        xmlProcEvento,
+                        br.JavaApplicationJsys.PASTA_XML_RET_EVENTO,
+                        jsysNFeEvento.getIdEvento(),
+                        "xml");
+                //Resultado
+                if ("128".equals(tRetEnvEvento.getCStat())) {
+                    for (TRetEvento tRetEvento : tRetEnvEvento.getRetEvento()) {
+                        if ("135".equals(tRetEvento.getInfEvento().getCStat())) {
+                            publish(tRetEvento.getInfEvento().getXMotivo());
+                            java.util.Map<Object, Object> filtro = new java.util.HashMap<>();
+                            filtro.put("chNFe", tRetEvento.getInfEvento().getChNFe());
+                            JsysNFeEvento evento = (JsysNFeEvento) Retorna.findOneResult("JsysNFeEvento.findByChNFe", filtro);
+                            if (evento != null) {
+                                StringBuilder sql = new StringBuilder();
+                                sql.append("UPDATE jsysNFeEvento SET emitida = 1, retEnvEventoCancNFe = '");
+                                sql.append(xmlProcEvento);
+                                sql.append("' WHERE chNFe = '").append(tRetEvento.getInfEvento().getChNFe()).append("'");
+                                StringBuilder sql2 = new StringBuilder();
+                                sql2.append("UPDATE jsysNFe SET cancelada = 1");
+                                sql2.append("WHERE chaveAcesso = 'NFe");
+                                sql2.append(tRetEvento.getInfEvento().getChNFe());
+                                sql2.append("'");
+                                if (dados.execSQLUpdate(sql) == 0) {
+                                    Log.registraErro(this.getClass().getName(), "Task.doInBackground", new Exception("erro ao tentar executar o Update na tabela jsysNFeEvento"));
+                                } else if (dados.execSQLUpdate(sql2) == 0) {
+                                    Log.registraErro(this.getClass().getName(), "Task.doInBackground", new Exception("erro ao tentar executar o Update na tabela jsysNFe"));
+                                } else {
+                                    erro = false;
+                                }
+                            }
+                        } else {
+                            publish("Chave: " + tRetEvento.getInfEvento().getChNFe());
+                            publish("Status: " + tRetEvento.getInfEvento().getCStat() + " - " + tRetEvento.getInfEvento().getXMotivo());
+                            publish("Protocolo: " + tRetEvento.getInfEvento().getNProt());
+                        }
+                    }
+                } else {
+                    publish(tRetEnvEvento.getCStat() + " - " + tRetEnvEvento.getXMotivo());
+                }
+                setProgress(100);
+            } catch (FileNotFoundException | CertificadoException | JAXBException | NfeException ex) {
+                setProgress(100);
+                publish("Erro ao Transmitir Evento Cancelamento");
+                publish(ex.getMessage());
+                Log.registraErro(NfceCancelamento.class, "Task.doInBackground", ex);
             }
-            setProgress(100);
-            return false;
+            return erro;
         }
 
         @Override

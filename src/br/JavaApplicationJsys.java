@@ -23,7 +23,6 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class JavaApplicationJsys {
 
-    //62.4.4006.15 local 
     public static final int MAJOR = 63; // versao do db
     public static final int MINOR = 4; // versao do app
     public static final int BUILD = 40012; // NotaFiscal java-nfe-4.00.12.jar

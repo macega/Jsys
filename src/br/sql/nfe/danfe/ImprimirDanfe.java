@@ -1,8 +1,8 @@
 package br.sql.nfe.danfe;
 
 import static br.JavaApplicationJsys.OPTIONS;
-import br.com.swconsultoria.nfe.exception.NfeException;
 import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNfeProc;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.bean.DanfeNFCe;
 import br.sql.bean.DanfeNFCeIten;
 import br.sql.bean.DanfeNFCePagamentos;
@@ -11,7 +11,6 @@ import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.LigacaoServicos;
 import br.sql.nfe.links.Servicos;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.ManagerString;
 import br.sql.util.ReportUtils;
 import br.sql.util.Retorna;
@@ -59,7 +58,7 @@ public class ImprimirDanfe {
             JsysNFe nfe = getJsysNFe(chaveAcesso);
             if (nfe != null) {
                 try {
-                    TNfeProc NFeProc = XmlUtil.xmlToObject(XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe()), TNfeProc.class);
+                    TNfeProc NFeProc = XmlNfeUtil.xmlToObject(nfe.getProcNFe(), TNfeProc.class);
                     //TNfeProc NFeProc = GerandoNFeProc.gerar(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                     String tpAmb = NFeProc.getNFe().getInfNFe().getIde().getTpAmb();
                     String tpImp = NFeProc.getNFe().getInfNFe().getIde().getTpImp();
@@ -180,7 +179,7 @@ public class ImprimirDanfe {
                             }
                         }
                     }
-                } catch (JAXBException | NfeException ex) {
+                } catch (JAXBException ex) {
                     Log.registraErro(ImprimirDanfe.class, "nfce", ex);
                 }
             }
@@ -198,7 +197,7 @@ public class ImprimirDanfe {
             if (nfe != null) {
                 try {
                     //xml.
-                    String xml = XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
+                    String xml = nfe.getProcNFe(); // XmlNfeUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                     Document doc = loadXMLFromString(xml);
                     //estrutura do xml.
                     String recordPath = "/nfeProc/NFe/infNFe/det";
@@ -209,7 +208,7 @@ public class ImprimirDanfe {
                     param.put("Logo", PAR.getLogo());
                     ReportUtils.openReport("Imprimindo NF-e", "/br/rel/fiscal/danfeR.jasper", param, xmlDataSource);
                     //ReportUtils.pirntReport("Imprimindo NF-e", inputStream, parametros, new JRBeanCollectionDataSource(dados), true);
-                } catch (JAXBException | JRException | NfeException e) {
+                } catch (JRException e) {
                     Log.registraErro("ImprimirFiscal", "nfe", e);
                 }
             }
@@ -232,7 +231,7 @@ public class ImprimirDanfe {
         if (nfe != null) {
             try {
                 //xml.
-                String xml = XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
+                String xml = nfe.getProcNFe(); //XmlNfeUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                 Document doc = loadXMLFromString(xml);
                 //estrutura do xml.
                 String recordPath = "/nfeProc/NFe/infNFe/det";
@@ -251,7 +250,7 @@ public class ImprimirDanfe {
                  * Exportando em pdf
                  */
                 pdf = JasperExportManager.exportReportToPdf(print);
-            } catch (JAXBException | JRException | NfeException e) {
+            } catch (JRException e) {
                 Log.registraErro("ImprimirDanfe", "nfePdf", e);
                 pdf = null;
             }

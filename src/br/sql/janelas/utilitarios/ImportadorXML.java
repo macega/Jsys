@@ -1,7 +1,7 @@
 package br.sql.janelas.utilitarios;
 
 //import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
-
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNfeProc;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
@@ -266,7 +266,8 @@ public class ImportadorXML extends javax.swing.JDialog {
         private void importNfeProc(String xml) {
             try {
                 //TNfeProc nfeProc = GerandoNFeProc.gerar(xml);
-                TNfeProc nfeProc = XmlUtil.xmlToObject(xml, TNfeProc.class);
+                TNfeProc nfeProc = br.com.swconsultoria.nfe.util.XmlNfeUtil.xmlToObject(xml, TNfeProc.class);
+                //TNfeProc nfeProc = XmlUtil.xmlToObject();
                 JsysNFe jsysNfe = new JsysNFe();
                 jsysNfe.setProcNFe(xml);
                 jsysNfe.setVenda(0);
@@ -304,7 +305,8 @@ public class ImportadorXML extends javax.swing.JDialog {
         }
 
         private void importProcEventoNFe(String xml) {
-            br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
+            //br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
+            br.com.swconsultoria.nfe.schema.eventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
             JsysNFeEvento evento = new JsysNFeEvento();
             evento.setIdEvento(procEventoNFe.getEvento().getInfEvento().getId());
             evento.setCOrgao(procEventoNFe.getEvento().getInfEvento().getCOrgao());

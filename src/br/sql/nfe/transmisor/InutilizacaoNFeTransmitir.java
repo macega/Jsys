@@ -1,6 +1,6 @@
 package br.sql.nfe.transmisor;
 
-import br.inf.portalfiscal.www.nfe_400.wsdl.NFeInutilizacao.NFeInutilizacao4Stub;
+import br.com.swconsultoria.nfe.wsdl.NFeInutilizacao.NFeInutilizacao4Stub;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFeInut;
 import br.sql.bean.JsysParametros;

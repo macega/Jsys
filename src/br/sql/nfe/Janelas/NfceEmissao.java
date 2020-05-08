@@ -1,6 +1,6 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.nfe.util.ConstantesUtil;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysOrcamento;
@@ -12,7 +12,7 @@ import br.sql.janelas.liberacoes.LiberacaoGeralJanelaJDialog;
 import br.sql.janelas.utilitarios.CertificadoA1Informacoes;
 import br.sql.janelas.utilitarios.ParametrosLocaisJanelas;
 import br.sql.log.Log;
-
+import br.sql.nfe.util.XmlUtil;
 import br.sql.util.ManagerData;
 import br.sql.util.ManagerDecimal;
 import br.sql.util.ManagerString;
@@ -496,7 +496,7 @@ public final class NfceEmissao extends javax.swing.JDialog implements
                                 setProgress(80);
                                 // vai enviar o XML para Sefaz
                                 publish("Iniciando Transmissão");
-                                if (xmlNfe.enviarNfe(ConstantesUtil.NFCE)) {
+                                if (xmlNfe.enviarNfe(DocumentoEnum.NFCE)) {
                                     publish(xmlNfe.getMensagem());
                                     setProgress(100);
                                     if (XmlUtil.verificaCsStat(xmlNfe.getCStat())) {

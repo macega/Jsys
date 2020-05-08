@@ -1,6 +1,7 @@
 package br.sql.nfe.xml;
 
-import br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento;
+//import br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento;
+import br.com.swconsultoria.nfe.schema.eventoCancNFe.TProcEvento;
 import br.sql.log.Log;
 import java.io.StringReader;
 import javax.xml.bind.JAXBContext;
@@ -17,7 +18,7 @@ public class GerandoProcEventoNFe {
     @SuppressWarnings("unchecked")
     public static TProcEvento gerar(String conteudoXml) {
         try {
-            JAXBContext context = JAXBContext.newInstance("br.inf.portalfiscal.nfe.schema.procEventoCancNFe");
+            JAXBContext context = JAXBContext.newInstance("br.com.swconsultoria.nfe.schema.eventoCancNFe");
             Unmarshaller unmarshaller = context.createUnmarshaller();
             JAXBElement<TProcEvento> element = (JAXBElement<TProcEvento>) unmarshaller.unmarshal(new StringReader(conteudoXml));
             return element.getValue();
