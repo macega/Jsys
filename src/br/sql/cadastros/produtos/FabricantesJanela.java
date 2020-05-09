@@ -16,12 +16,6 @@ public class FabricantesJanela extends JPanel {
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
     private final ProdutosEdit produtosEdit;
 
-//    JFrame frame = new JFrame();
-//        frame.setContentPane(new FabricantesJanela(null));
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
-//        frame.setTitle("Cadastro de Fabricantes");
-//        frame.setVisible(true);
     /**
      *
      * @param tThis
@@ -188,6 +182,9 @@ public class FabricantesJanela extends JPanel {
         }
         list.clear();
         list.addAll(data);
+        if (produtosEdit != null) {
+            produtosEdit.loadFabricantes();
+        }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -199,6 +196,7 @@ public class FabricantesJanela extends JPanel {
             br.sql.acesso.ConnectionFactory.delete(j);
         }
         list.removeAll(toRemove);
+        refreshButtonActionPerformed(null);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
@@ -218,9 +216,10 @@ public class FabricantesJanela extends JPanel {
                 j.setIdFabricante(DADOS.sequenciaTabela("jsysProdutosTFabricantes", "idFabricante"));
             }
             list.set(masterTable.convertRowIndexToModel(selected[idx]), j);
-            br.sql.acesso.ConnectionFactory.update(j);
-            if (produtosEdit != null) {
-                produtosEdit.loadFabricantes();
+            if (j.getIdFabricante().equals(null)) {
+                br.sql.acesso.ConnectionFactory.insert(j);
+            } else {
+                br.sql.acesso.ConnectionFactory.update(j);
             }
             refreshButtonActionPerformed(null);
         }

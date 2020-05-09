@@ -32,8 +32,8 @@ DECLARE cServer CURSOR
 FOR
 SELECT NAME
 	,jsysLojas.nomeBancoDados
-FROM SYS.SERVERS
-INNER JOIN jsysLojas ON jsysLojas.idloja = SYS.SERVERS.NAME
+FROM servers
+INNER JOIN jsysLojas ON jsysLojas.idloja = servers.NAME
 WHERE (is_linked = 1)
 	AND (
 		NAME IN (

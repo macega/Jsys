@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.sql.bean;
 
 import br.sql.util.ManagerString;
@@ -13,6 +7,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,16 +22,21 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "jsysProdutosTFamilias")
 @NamedQueries({
-    @NamedQuery(name = "JsysProdutosTFamilias.findAll", query = "SELECT j FROM JsysProdutosTFamilias j"),
-    @NamedQuery(name = "JsysProdutosTFamilias.findByIdFamilia", query = "SELECT j FROM JsysProdutosTFamilias j WHERE j.idFamilia = :idFamilia"),
-    @NamedQuery(name = "JsysProdutosTFamilias.findByNomeFamilia", query = "SELECT j FROM JsysProdutosTFamilias j WHERE j.nomeFamilia = :nomeFamilia")})
+    @NamedQuery(name = "JsysProdutosTFamilias.findAll", query = "SELECT j FROM JsysProdutosTFamilias j")
+    ,@NamedQuery(name = "JsysProdutosTFamilias.findByIdFamilia", query = "SELECT j FROM JsysProdutosTFamilias j WHERE j.idFamilia = :idFamilia")
+    ,@NamedQuery(name = "JsysProdutosTFamilias.findByNomeFamilia", query = "SELECT j FROM JsysProdutosTFamilias j WHERE j.nomeFamilia = :nomeFamilia")})
 public class JsysProdutosTFamilias implements Serializable {
+
     @Transient
     private final PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
-    @Id @Basic(optional = false)
+
+    @Id
+    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idFamilia")
     private Integer idFamilia;
+
     @Basic(optional = false)
     @Column(name = "nomeFamilia")
     private String nomeFamilia;
@@ -102,5 +103,5 @@ public class JsysProdutosTFamilias implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
+
 }

@@ -20,13 +20,6 @@ public class GruposJanela extends JPanel {
 
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
     private final ProdutosEdit produtosEdit;
-    
-//    JFrame frame = new JFrame();
-//            frame.setContentPane(new GruposJanela(tThis));
-//            frame.pack();
-//            frame.setLocationRelativeTo(null);
-//            frame.setTitle("Cadastro de Grupos");
-//            frame.setVisible(true);
 
     public GruposJanela(ProdutosEdit tThis) {
         initComponents();
@@ -189,6 +182,9 @@ public class GruposJanela extends JPanel {
         }
         list.clear();
         list.addAll(data);
+        if (produtosEdit != null) {
+            produtosEdit.loadGrupos();
+        }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -200,6 +196,7 @@ public class GruposJanela extends JPanel {
             br.sql.acesso.ConnectionFactory.delete(j);
         }
         list.removeAll(toRemove);
+        refreshButtonActionPerformed(null);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
@@ -215,15 +212,14 @@ public class GruposJanela extends JPanel {
         int[] selected = masterTable.getSelectedRows();
         for (int idx = 0; idx < selected.length; idx++) {
             JsysProdutosTGrupos j = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            list.set(masterTable.convertRowIndexToModel(selected[idx]), j);
             if (j.getIdGrupo() == null) {
                 j.setIdGrupo(DADOS.sequenciaTabela("JsysProdutosTGrupos", "idGrupo"));
+                br.sql.acesso.ConnectionFactory.insert(j);
+            } else {
+                br.sql.acesso.ConnectionFactory.update(j);
             }
-            list.set(masterTable.convertRowIndexToModel(selected[idx]), j);
-            br.sql.acesso.ConnectionFactory.update(j);
             refreshButtonActionPerformed(null);
-            if (produtosEdit != null) {
-                produtosEdit.loadGrupos();
-            }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

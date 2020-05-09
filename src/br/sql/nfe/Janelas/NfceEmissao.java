@@ -12,7 +12,7 @@ import br.sql.janelas.liberacoes.LiberacaoGeralJanelaJDialog;
 import br.sql.janelas.utilitarios.CertificadoA1Informacoes;
 import br.sql.janelas.utilitarios.ParametrosLocaisJanelas;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
+import br.sql.nfe.util.Verifica;
 import br.sql.util.ManagerData;
 import br.sql.util.ManagerDecimal;
 import br.sql.util.ManagerString;
@@ -482,7 +482,7 @@ public final class NfceEmissao extends javax.swing.JDialog implements
                                     if (DADOS.execSQLUpdate(sql) == 0) {
                                         Log.registraErro(this.getClass().getName(), "doInBackground0", new Exception("erro ao tentar executar o Update na tabela jsysNFe"));
                                     }
-                                    if (XmlUtil.verificaCsStat(xmlNfe.getCStat())) {
+                                    if (Verifica.csStat(xmlNfe.getCStat())) {
                                         ImprimirDanfe.nfce(xmlNfe.getChaveAcesso());
                                         return true;
                                     }
@@ -499,7 +499,7 @@ public final class NfceEmissao extends javax.swing.JDialog implements
                                 if (xmlNfe.enviarNfe(DocumentoEnum.NFCE)) {
                                     publish(xmlNfe.getMensagem());
                                     setProgress(100);
-                                    if (XmlUtil.verificaCsStat(xmlNfe.getCStat())) {
+                                    if (Verifica.csStat(xmlNfe.getCStat())) {
                                         ImprimirDanfe.nfce(xmlNfe.getChaveAcesso());
                                         return true;
                                     }

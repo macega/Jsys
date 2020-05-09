@@ -9,8 +9,8 @@ DECLARE @Srv SYSNAME
 
 DECLARE cServer CURSOR
 FOR
-SELECT sys.servers.name, jsysLojas.nomeBancoDados
-FROM SYS.SERVERS INNER JOIN jsysLojas ON jsysLojas.idloja = sys.servers.name 
+SELECT servers.name, jsysLojas.nomeBancoDados
+FROM SERVERS INNER JOIN jsysLojas ON jsysLojas.idloja = servers.name 
 WHERE is_linked = 1
 ORDER BY NAME
 
@@ -53,4 +53,3 @@ SET @query = substring(@query, 10, len(@query))
 EXEC SP_EXECUTESQL @query
 
 RETURN
-GO

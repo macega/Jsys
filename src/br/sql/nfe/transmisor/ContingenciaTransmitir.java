@@ -8,7 +8,7 @@ import br.com.swconsultoria.nfe.exception.NfeException;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
 import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
 import br.sql.bean.JsysNFe;
-import br.sql.nfe.util.XmlUtil;
+import br.sql.nfe.util.Verifica;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Retorna;
 import java.io.FileNotFoundException;
@@ -45,7 +45,7 @@ public class ContingenciaTransmitir {
                 gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, jsysNFe.getChaveAcesso(), "xml");
                 jsysNFe.setRetConsReciNFe(xml);
                 if ("104".equals(retorno.getCStat())) {
-                    if (XmlUtil.verificaCsStat(retorno.getProtNFe().getInfProt().getCStat())) {
+                    if (Verifica.csStat(retorno.getProtNFe().getInfProt().getCStat())) {
                         jsysNFe.setEmitida(true);
                     } else {
                         jsysNFe.setEmitida(false);

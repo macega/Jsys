@@ -312,7 +312,7 @@ public class ImportadorXML extends javax.swing.JDialog {
             evento.setCOrgao(procEventoNFe.getEvento().getInfEvento().getCOrgao());
             evento.setTpAmb(procEventoNFe.getEvento().getInfEvento().getTpAmb());
             evento.setChNFe(procEventoNFe.getEvento().getInfEvento().getChNFe());
-            evento.setDhEvento(ManagerData.formataData(procEventoNFe.getEvento().getInfEvento().getDhEvento(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            evento.setDhEvento(ManagerData.formataData(procEventoNFe.getEvento().getInfEvento().getDhEvento(), ManagerData.FORMATO_NFE));
             evento.setTpEvento(procEventoNFe.getEvento().getInfEvento().getTpEvento());
             evento.setNSeqEvento(Integer.parseInt(procEventoNFe.getEvento().getInfEvento().getNSeqEvento()));
             evento.setDescEvento(procEventoNFe.getEvento().getInfEvento().getDetEvento().getDescEvento() + "");

@@ -14,8 +14,8 @@ BEGIN
 	FOR
 	SELECT NAME
 		,nomeBancoDados
-	FROM SYS.SERVERS
-	INNER JOIN jsysLojas ON jsysLojas.idloja = SYS.SERVERS.NAME
+	FROM SERVERS
+	INNER JOIN jsysLojas ON jsysLojas.idloja = SERVERS.NAME
 	WHERE is_linked = 1
 	ORDER BY NAME
 

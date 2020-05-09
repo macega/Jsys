@@ -95,7 +95,6 @@ public class JavaApplicationJsys {
                 jsysParametros.getCaminhoDoCertificadoDoCliente(),
                 jsysParametros.getSenhaDoCertificadoDoCliente());
         ConfiguracoesNfe config = ConfiguracoesNfe.criarConfiguracoes(
-                
                 EstadosEnum.getByCodigoIbge(EstadosEnum.valueOf(jsysParametros.getUf()).getCodigoUF()),
                 AmbienteEnum.getByCodigo(ConstantesFiscal.AMBIENTE.TP_AMB),
                 certificado,

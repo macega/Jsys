@@ -413,12 +413,12 @@ public final class LoginTela extends javax.swing.JFrame {
             br.JavaApplicationJsys.base.setNome(bases[bancoDadosJC.getSelectedIndex()]);
             if (tipo == 2) {
                 usuarioTF.setText("SUPERVISOR");
-                senhaPF.setText("AE3ILM");
+                senhaPF.setText("jsys");
                 tipo = 0;
             }
             if (tipo == 3) {
                 usuarioTF.setText("SUPERVISOR");
-                senhaPF.setText("AE3ILM");
+                senhaPF.setText("jsys");
                 tipo = 1;
             }
             Security s = new Security();
