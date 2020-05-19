@@ -1,6 +1,7 @@
 package br.com.testes;
 
-import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.sql.util.Validar;
+import java.util.Optional;
 
 /**
  *
@@ -9,10 +10,19 @@ import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
 public class Main {
 
     public static void main(String[] args) {
+        
+        System.out.println("java inicio");
 
-        System.out.println(DocumentoEnum.NFCE);
-        System.out.println(DocumentoEnum.NFE);
-        //System.out.println(EstadosEnum.valueOf("RO").getCodigoUF());
+        Optional<String> linguagem = Optional.of("JAVA");
+        String respostaPreenchida = "Sim";
+        String respostaNula = null;
+
+        if (Validar.present(respostaNula).isPresent()) {
+            System.out.println(" entrou!!! ");
+        }
+        
+        System.out.println("java fim");
+        
     }
 
 }

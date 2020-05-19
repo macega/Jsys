@@ -1525,7 +1525,7 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
                 RegistroJsysClientes.setDataInclusao(ManagerData.getDate());
                 br.sql.acesso.ConnectionFactory.insert(RegistroJsysClientes);
             }
-            cadastroCartao(this.getCodigoCartao(), this.RegistroJsysClientes.getIdCliente()); 
+            cadastroCartao(this.getCodigoCartao(), this.RegistroJsysClientes.getIdCliente());
 //            cadastroCartao(cje.getCodigoCartao(), cje.RegistroJsysClientes.getIdCliente());
 //            consultaTF.setText(cje.RegistroJsysClientes.getIdCliente().toString());
             setVisible(false);
@@ -1915,8 +1915,13 @@ public final class ClientesJanelaEdit extends javax.swing.JDialog {
                     uJComboBoxLojaEmp.setSelectedItem(jL.getNomeLoja() + " - " + jL.getIdloja());
                 } else {
                     JsysLojas loja = Retorna.jsysLojas(RegistroJsysClientes.getIdLoja());
-                    uJComboBoxLoja.setSelectedItem(loja.getNomeLoja() + " - " + loja.getIdloja());
-                    uJComboBoxLojaEmp.setSelectedItem(loja.getNomeLoja() + " - " + loja.getIdloja());
+                    if (loja != null) {
+                        uJComboBoxLoja.setSelectedItem(loja.getNomeLoja() + " - " + loja.getIdloja());
+                        uJComboBoxLojaEmp.setSelectedItem(loja.getNomeLoja() + " - " + loja.getIdloja());
+                    } else {
+                        uJComboBoxLoja.setSelectedIndex(0);
+                        uJComboBoxLojaEmp.setSelectedIndex(0);
+                    }
                 }
             }
         } catch (Exception e) {

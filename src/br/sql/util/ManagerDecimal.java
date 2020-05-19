@@ -189,6 +189,7 @@ public class ManagerDecimal {
             valor = valor.replace("$", "");
             valor = valor.replace(",", ".");
         }
+
         if (!Validar.isNull(valor)
                 & !valor.isEmpty()
                 & !Objects.equals(valor, "-")

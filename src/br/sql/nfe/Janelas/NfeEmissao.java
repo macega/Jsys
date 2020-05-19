@@ -3,9 +3,6 @@ package br.sql.nfe.Janelas;
 import br.com.swconsultoria.certificado.exception.CertificadoException;
 import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
 import br.com.swconsultoria.nfe.exception.NfeException;
-import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
-import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TRetEnviNFe;
-import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysClientes;
 import br.sql.bean.JsysNFe;
@@ -65,8 +62,9 @@ import javax.xml.bind.JAXBException;
  *
  * @author Juliano Alves Medina
  */
-public class NfeEmissao extends javax.swing.JDialog implements
-        PropertyChangeListener {
+public class NfeEmissao
+        extends javax.swing.JDialog
+        implements PropertyChangeListener {
 
     private static final JsysParametros PAR = Retorna.JsysParametros();
     private GerandoNFeJAXB xmlNfe;
@@ -125,7 +123,8 @@ public class NfeEmissao extends javax.swing.JDialog implements
         jTableVol.setDefaultRenderer(Long.class, new ZebradoLocation());
         jTableVol.setDefaultRenderer(BigDecimal.class, new ZebradoLocation());
 
-        if (Validar.isNotNull(nVenda) & nVenda > 0) {
+        if (Validar.isNotNull(nVenda)
+                & nVenda > 0) {
             novaNfe();
             jTextFieldVenda.setText(nVenda.toString());
             consultaVenda();
@@ -1468,47 +1467,49 @@ public class NfeEmissao extends javax.swing.JDialog implements
 
     private void caregaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caregaVendaActionPerformed
         setRegistroAtual();
-        if (listItens.isEmpty()) {
-            loadItens(registroAtual.getVenda());
-        }
-        itens.forEach((iten) -> {
-            br.sql.acesso.ConnectionFactory.update(iten);
-        });
-        if (validarVenda()) {
-            if (registroAtual != null
-                    && !registroAtual.getEmitida()) {
-                Map<Object, Object> filtro = new HashMap<>();
-                filtro.clear();
-                filtro.put("nfeId", registroAtual.getNfeId());
-                JsysNFe jsysNfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByNfeId", filtro);
-                xmlNfe = new GerandoNFeJAXB(jsysNfe, "", jTextFieldnumeroNFe.getText().trim());
-                try {
-                    // vai gerar o XML
-                    if (xmlNfe.gerar()) {
-                        JOptionPane.showMessageDialog(this, "NF-e Criada com Sucesso", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                        taskOutput.append(String.format("NF-e Criada com Sucesso" + System.getProperty("line.separator")));
-                        setDisabled();
-                        //venda = xmlNfe.getVenda();
-                        registroAtual = xmlNfe.getJsysNfe();
-                        caregarDados();
-                        caregaVenda.setEnabled(false);
-                        transmitir.setEnabled(true);
-                    } else {
-                        Log.registraErro(this.getClass().getName(), "Erro ao Criar NF-e", new Exception("Erro ao Criar NF-e"));
-                        JOptionPane.showMessageDialog(this, "Erro ao Criar NF-e", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (registroAtual != null) {
+            if (listItens.isEmpty()) {
+                loadItens(registroAtual.getVenda());
+            }
+            itens.forEach((iten) -> {
+                br.sql.acesso.ConnectionFactory.update(iten);
+            });
+            if (validarVenda()) {
+                if (registroAtual != null
+                        && !registroAtual.getEmitida()) {
+                    Map<Object, Object> filtro = new HashMap<>();
+                    filtro.clear();
+                    filtro.put("nfeId", registroAtual.getNfeId());
+                    JsysNFe jsysNfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByNfeId", filtro);
+                    xmlNfe = new GerandoNFeJAXB(jsysNfe, "", jTextFieldnumeroNFe.getText().trim());
+                    try {
+                        // vai gerar o XML
+                        if (xmlNfe.gerar()) {
+                            JOptionPane.showMessageDialog(this, "NF-e Criada com Sucesso", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            taskOutput.append(String.format("NF-e Criada com Sucesso" + System.getProperty("line.separator")));
+                            setDisabled();
+                            //venda = xmlNfe.getVenda();
+                            registroAtual = xmlNfe.getJsysNfe();
+                            caregarDados();
+                            caregaVenda.setEnabled(false);
+                            transmitir.setEnabled(true);
+                        } else {
+                            Log.registraErro(this.getClass().getName(), "Erro ao Criar NF-e", new Exception("Erro ao Criar NF-e"));
+                            JOptionPane.showMessageDialog(this, "Erro ao Criar NF-e", "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (CertificadoException | HeadlessException | FileNotFoundException | NoSuchAlgorithmException | SQLException | JAXBException e) {
+                        Log.registraErro("NfeEmissao", "caregaVendaActionPerformed", e);
+                    } catch (NfeException ex) {
+                        taskOutput.setText(ex.getMessage());
+                        JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                        Log.registraErro(this.getClass(), "caregaVendaActionPerformed", ex);
                     }
-                } catch (CertificadoException | HeadlessException | FileNotFoundException | NoSuchAlgorithmException | SQLException | JAXBException e) {
-                    Log.registraErro("NfeEmissao", "caregaVendaActionPerformed", e);
-                } catch (NfeException ex) {
-                    taskOutput.setText(ex.getMessage());
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-                    Log.registraErro(this.getClass(), "caregaVendaActionPerformed", ex);
+                } else {
+                    setDisabled();
                 }
             } else {
-                setDisabled();
+                JOptionPane.showMessageDialog(this, "Verifique o Cadastro do Cliente", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Verifique o Cadastro do Cliente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_caregaVendaActionPerformed
 
@@ -2280,15 +2281,19 @@ public class NfeEmissao extends javax.swing.JDialog implements
             Map<Object, Object> filtro = new HashMap<>();
             filtro.put("idOrcamento", orcamento);
             itens = Retorna.findCollection("JsysOrcamentoItens.findByIdOrcamento", filtro);
-            for (JsysOrcamentoItens iten : itens) {
+            itens.stream().map((iten) -> {
                 if (Validar.isNullOrWhite(iten.getCfop())) {
                     iten.setCfop(iten.getJsysOrcamento().getIdCliente().getEstado().equals(PAR.getUf())
                             ? PAR.getCfop()
                             : PAR.getCfopInterestadual());
                     br.sql.acesso.ConnectionFactory.update(iten);
                 }
+//                if (Validar.isNullOrWhite(iten.getCfop())) {                   
+//                }
+                return iten;
+            }).forEachOrdered((iten) -> {
                 listItens.add(iten);
-            }
+            });
         }
     }
 
@@ -2363,7 +2368,6 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     setProgress(100);
                     publish("Erro ao Enviar E-mail");
                     Log.registraErro(this.getClass().getName(), "envioEmail", e);
-                    //e.printStackTrace();
                 }
             }
             return null;

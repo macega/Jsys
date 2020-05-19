@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.brazilutils.br.cpfcnpj.CpfCnpj;
@@ -19,6 +20,10 @@ import org.brazilutils.br.cpfcnpj.CpfCnpj;
  * @author Juliano Alves Medina
  */
 public class Validar {
+    
+    public static <T> Optional<T> present(T obj) {
+        return Optional.ofNullable(obj);
+    }
 
     public static boolean isNull(Object... args) {
         for (Object o : args) {

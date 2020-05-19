@@ -4,8 +4,6 @@ import br.adp.geral.Geral;
 import br.com.swconsultoria.certificado.Certificado;
 import br.com.swconsultoria.certificado.CertificadoService;
 import br.com.swconsultoria.certificado.exception.CertificadoException;
-
-
 import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
 import br.com.swconsultoria.nfe.dom.Proxy;
 import br.com.swconsultoria.nfe.dom.enuns.AmbienteEnum;

@@ -62,6 +62,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -1221,7 +1222,6 @@ public class GerandoNFeJAXB {
 
     public boolean gerar() throws JAXBException, SQLException, FileNotFoundException, CertificadoException, NfeException, NoSuchAlgorithmException {
         ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(par);
-        //try {
         if (jsysNFe.getMod() == ConstantesFiscal.NF_E & !Validar.cpfCnpj(venda.getIdCliente().getCnpjCpf())) {
             return false;
         }
@@ -1257,58 +1257,21 @@ public class GerandoNFeJAXB {
         // Monta e Assina o XML
         enviNFe = Nfe.montaNfe(config, enviNFe, true);
         if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
-            //QRCODE
-            String cDest = null;
-            if (enviNFe.getNFe().get(0).getInfNFe().getDest() != null) {
-                if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ())) {
-                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ();
-                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF())) {
-                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF();
-                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro())) {
-                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro();
-                }
-            }
-
-//                String qrCode = NFCeUtil.getCodeQRCode(
-//                        infNFe.getId().substring(3),
-//                        "2",
-//                        enviNFe.getNFe().get(0).getInfNFe().getIde().getTpAmb(),
-//                        //enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ() == null ? dest.getCPF() : dest.getCNPJ(),
-//                        cDest,
-//                        enviNFe.getNFe().get(0).getInfNFe().getIde().getDhEmi(),
-//                        enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVNF(),
-//                        enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVICMS(),
-//                        Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
-//                        par.getcIdToken(),
-//                        par.getCSC(),
-//                        WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-//                
-            String chave = infNFe.getId().substring(3);
-            String ambiente = config.getAmbiente().getCodigo();
-            String idToken = par.getcIdToken();
-            String CSC = par.getCSC();
-            String urlConsulta = WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE);
-
-            String qrCode = NFCeUtil.getCodeQRCode(
-                    chave,
-                    ambiente,
-                    idToken,
-                    CSC,
-                    urlConsulta);
-
-            //QRCODE OFFLine
-            //String qrCode = NFCeUtil.getCodeQRCodeContingencia(
-            //infNFe.getId().substring(3),
-            //config.getAmbiente(),
-            //ide.getDhEmi(),
-            //total.getICMSTot().getVNF(),
-            //Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
-            //idToken,
-            //csc,
-            //WebServiceUtil.getUrl(config,ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-            //System.out.println(qrCode);
+//            //QRCODE
+//            String cDest = null;
+//            if (enviNFe.getNFe().get(0).getInfNFe().getDest() != null) {
+//                if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ();
+//                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF();
+//                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro();
+//                }
+//            }
             TNFe.InfNFeSupl infNFeSupl = new TNFe.InfNFeSupl();
-            infNFeSupl.setQrCode(qrCode);
+            infNFeSupl.setQrCode(
+                    preencheQRCode(enviNFe, config, par.getcIdToken(), par.getCSC(), par.getContingencia())
+            );
             infNFeSupl.setUrlChave(
                     WebServiceUtil.getUrl(
                             config,
@@ -1323,11 +1286,6 @@ public class GerandoNFeJAXB {
         gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_ENVI_NFE, chaveAcesso, "xml");
         jsysNFe.setEnviNFe(xml);
         return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
-//        } catch (SQLException | JAXBException e) {
-//            
-//            Log.registraErro(getClass().getName(), "gerar", e);
-//        }
-        //return false;
     }
 
     /**
@@ -1435,5 +1393,46 @@ public class GerandoNFeJAXB {
 
     public String getCStat() {
         return CStat;
+    }
+
+    /**
+     * Preenche QRCode 
+     * 
+     * Monta QRCode
+     *
+     * @param enviNFe
+     * @param config
+     * @param idToken
+     * @param csc
+     * @return
+     * @throws NfeException
+     * @throws NoSuchAlgorithmException
+     */
+    private static String preencheQRCode(TEnviNFe enviNFe, ConfiguracoesNfe config, String idToken, String csc, boolean contingencia) throws NfeException, NoSuchAlgorithmException {
+
+        //System.out.println(csc);
+        //csc = csc.replaceAll("[^0-9^A-Z^a-z]", "");
+        //System.out.println(csc);
+        if (contingencia) {
+            // QRCODE EMISSAO OFFLINE
+            return NFCeUtil.getCodeQRCodeContingencia(
+                    enviNFe.getNFe().get(0).getInfNFe().getId().substring(3),
+                    config.getAmbiente().getCodigo(),
+                    enviNFe.getNFe().get(0).getInfNFe().getIde().getDhEmi(),
+                    enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVNF(),
+                    Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
+                    idToken,
+                    csc,
+                    WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE));
+        } else {
+            //QRCODE EMISAO ONLINE
+            return NFCeUtil.getCodeQRCode(
+                    enviNFe.getNFe().get(0).getInfNFe().getId().substring(3),
+                    config.getAmbiente().getCodigo(),
+                    idToken,
+                    csc,
+                    WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE));
+        }
+
     }
 }

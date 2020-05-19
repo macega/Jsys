@@ -1003,9 +1003,6 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             Log.registraErro(this.getClass().getName(), "jButton3ActionPerformed", e);
         }
-//        cancela();
-//        cancelaUltimosRecebimentos();
-//        setSelecaoTabela();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

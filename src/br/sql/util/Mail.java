@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -81,8 +82,12 @@ public class Mail {
      * @param files
      * @throws UnsupportedEncodingException
      * @throws MessagingException
+     * @throws javax.mail.AuthenticationFailedException
      */
-    public void senderMail(String titulo, String textHTML, List<String> files) throws UnsupportedEncodingException, MessagingException {
+    public void senderMail(String titulo, String textHTML, List<String> files)
+            throws UnsupportedEncodingException,
+            MessagingException,
+            AuthenticationFailedException {
         setMailJava();
         emailJava.setSubjectMail(titulo);
         emailJava.setBodyMail(textHTML);
@@ -108,7 +113,8 @@ public class Mail {
         Session session = Session.getDefaultInstance(props, auth);
 
         // Gera um log no console referente ao processo de envio
-        //session.setDebug(true);
+        session.setDebug(JavaApplicationJsys.LOG);
+
         //cria a mensagem setando o remetente e seus destinatários
         Message msg = new MimeMessage(session);
         //aqui seta o remetente
@@ -154,19 +160,7 @@ public class Mail {
                 // adiciona os anexos da mensagem
                 mps.addBodyPart(attachFilePart);
             }
-            //        for (int index = 0; index < emailJava.getFileMails().size(); index++) {
-//
-//            // Cria um novo objeto para cada arquivo, e anexa o arquivo
-//            MimeBodyPart attachFilePart = new MimeBodyPart();
-//            FileDataSource fds = new FileDataSource(
-//                    emailJava.getFileMails().get(index)
-//            );
-//            attachFilePart.setDataHandler(new DataHandler(fds));
-//            attachFilePart.setFileName(fds.getName());
-//
-//            //adiciona os anexos da mensagem
-//            mps.addBodyPart(attachFilePart, index);
-//        }
+
         }
 
         //adiciona o corpo texto da mensagem
@@ -178,50 +172,4 @@ public class Mail {
         // Envia a Mensagem
         Transport.send(msg);
     }
-
-//    public static boolean Email(Date dt, String html) {
-//        setMailJava();
-//        emailJava.setToMailsUsers(map);
-//        if (html == null) {
-//            return false;
-//        } else {
-//            final String username = JavaApplicationJsys.INI.getString("EMAIL", "USER");
-//            final String password = JavaApplicationJsys.INI.getString("EMAIL", "SENHA");
-//            Properties props = new Properties();
-//            props.put("mail.smtp.auth", "true");
-//            props.put("mail.smtp.starttls.enable", "true");
-//            props.put("mail.smtp.host", "smtp.gmail.com");
-//            props.put("mail.smtp.port", "587");
-//            Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-//                @Override
-//                protected PasswordAuthentication getPasswordAuthentication() {
-//                    return new PasswordAuthentication(username, password);
-//                }
-//            });
-//            try {
-//                Message message = new MimeMessage(session);
-//                Multipart mp = new MimeMultipart();
-//                message.setFrom(new InternetAddress(JavaApplicationJsys.INI.getString("EMAIL", "DESTINO")));
-//                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(JavaApplicationJsys.INI.getString("EMAIL", "DESTINO")));
-//                message.setSubject("Caixa dia: " + ManagerData.convertDate(dt, "dd/MM/yyyy"));
-//                /* anexar arquivos
-//                 * byte[] attachmentData = null;
-//                 * MimeBodyPart attachment = new MimeBodyPart();
-//                 * attachment.setFileName("manual.pdf");
-//                 * attachment.setContent(attachmentData, "application/pdf");
-//                 * mp.addBodyPart(attachment);*/
-//
-//                MimeBodyPart htmlPart = new MimeBodyPart();
-//                htmlPart.setContent(html, "text/html");
-//                mp.addBodyPart(htmlPart);
-//                //message.setText(mensagen);
-//                message.setContent(mp);
-//                Transport.send(message);
-//                return true;
-//            } catch (MessagingException e) {
-//                salvaLog.registraErro("SendMailTLS", "Email", e);
-//                return false;
-//            }
-//        }
-//    }
 }

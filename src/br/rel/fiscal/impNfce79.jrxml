@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inpNfece79" pageWidth="208" pageHeight="792" columnWidth="200" leftMargin="4" rightMargin="4" topMargin="4" bottomMargin="4" uuid="5221d3ee-a93b-4b64-b52e-c495aa510be0">
 	<property name="ireport.zoom" value="4.594972986357224"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="432"/>
+	<property name="ireport.y" value="1029"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["/br/rel/fiscal/"]]></defaultValueExpression>
 	</parameter>
@@ -186,9 +186,7 @@
 				<textFieldExpression><![CDATA[($F{menFiscal}.equals("") ? $F{infCpl} : 
 $F{menFiscal} + 
 System.getProperty("line.separator") + 
-$F{infCpl})
-
-]]></textFieldExpression>
+$F{infCpl})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" x="0" y="63" width="200" height="9" uuid="dffe522d-399e-4c84-9e0b-b13038ae5808"/>
