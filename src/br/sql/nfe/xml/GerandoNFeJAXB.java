@@ -218,14 +218,15 @@ public class GerandoNFeJAXB {
         /*
          Data e hora no formato UTC (Universal Coordinated Time): AAAA-MM-DDThh:mm:ssTZD
          */
-        ide.setDhEmi(ManagerData.convertDate(data, "yyyy-MM-dd'T'HH:mm:ssXXX")); //ManagerData.convertDate(n.getDataSaidaEntrada(), "yyyy-MM-dd'T'HH:mm:ssXXX")
+        ide.setDhEmi(ManagerData.convertDate(data, ManagerData.FORMATO_NFE)); //ManagerData.convertDate(n.getDataSaidaEntrada(), "yyyy-MM-dd'T'HH:mm:ssXXX")
         /*
          Data e hora no formato UTC (Universal Coordinated Time): AAAA-MM-DDThh:mm:ssTZD.
          Não informar este campo para a NFC-e.
          */
         if (jsysNFe.getMod() != ConstantesFiscal.NFC_E) {
-            ide.setDhSaiEnt(ManagerData.convertDate(jsysNFe.getDhSaiEnt(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            ide.setDhSaiEnt(ManagerData.convertDate(jsysNFe.getDhSaiEnt(), ManagerData.FORMATO_NFE));
         }
+        
         if (jsysNFe.getTpNF()) { // 0=Entrada; 1=Saída
             ide.setTpNF("1");
         } else {
@@ -292,7 +293,7 @@ public class GerandoNFeJAXB {
         ide.setProcEmi("0");
         ide.setVerProc(br.JavaApplicationJsys.VERSAO_STRING);
         if (!jsysNFe.getTpEmis().equals("1")) {
-            ide.setDhCont(ManagerData.convertDate(par.getDhCont(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            ide.setDhCont(ManagerData.convertDate(par.getDhCont(), ManagerData.FORMATO_NFE));
             ide.setXJust(ManagerString.removeAcentos(par.getxJust()));
         }
         for (JsysNFeReferencias ref : jsysNFe.getJsysNFeReferenciasCollection()) {

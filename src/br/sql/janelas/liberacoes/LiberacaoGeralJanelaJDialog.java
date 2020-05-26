@@ -19,9 +19,6 @@ import jsys.sql.Menu;
  */
 public final class LiberacaoGeralJanelaJDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form LiberacaoGeralJanelaJDialog
-     */
     private int tipo;
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
 
@@ -185,7 +182,8 @@ public final class LiberacaoGeralJanelaJDialog extends javax.swing.JDialog {
             protected void done() {
                 super.done();
                 if (!isConfirma()) {
-                    JOptionPane.showMessageDialog(null, "Usuário Sem Permição ou Senha Incoreta\n"
+                    JOptionPane.showMessageDialog(null, 
+                            "Usuário Sem Permição ou Senha Incoreta\n"
                             + "Prencher Motivo da Liberação");
                 }
                 p.dispose();
@@ -207,15 +205,6 @@ public final class LiberacaoGeralJanelaJDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_senhajPasswordFieldKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            LiberacaoGeralJanelaJDialog dialog = new LiberacaoGeralJanelaJDialog(new javax.swing.JFrame(), true);
-            dialog.setVisible(true);
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -269,9 +258,13 @@ public final class LiberacaoGeralJanelaJDialog extends javax.swing.JDialog {
 
     /**
      *
-     * @param valor 0 = "Liberação Desconto" 1 = "Reabertura" 2 = "Ajuste
-     * Desconto" 3 = "Cancelamento de Venda" 4 = "Reimpressao Cupom" 5 =
-     * "Cancelar Recebimento"
+     * @param valor 
+     * 0 = "Liberação Desconto" 
+     * 1 = "Reabertura" 
+     * 2 = "Ajuste Desconto" 
+     * 3 = "Cancelamento de Venda" 
+     * 4 = "Reimpressao Cupom" 
+     * 5 = "Cancelar Recebimento"
      */
     public void setTipo(int valor) {
         this.tipo = valor;
@@ -387,6 +380,7 @@ public final class LiberacaoGeralJanelaJDialog extends javax.swing.JDialog {
                             }
                         } catch (Exception e) {
                             Log.registraErro(this, "Confirma", e);
+                            setConfirma(false);
                         }
                     }
                     dispose();

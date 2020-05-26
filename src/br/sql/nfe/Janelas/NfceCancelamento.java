@@ -22,6 +22,7 @@ import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.log.Log;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerData;
+import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
 import java.awt.Cursor;
 import java.awt.Toolkit;
@@ -29,6 +30,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
         startButton = new javax.swing.JButton();
         jTextFieldMotivo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cancelar NF-e & NFC-e");
@@ -114,7 +117,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 914, Short.MAX_VALUE)
                     .addComponent(jLabelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -147,6 +150,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
         jLabel4.setText("Chave de Acesso");
         jLabel4.setToolTipText("");
 
+        taskOutput.setBackground(new java.awt.Color(204, 255, 255));
         taskOutput.setColumns(20);
         taskOutput.setRows(5);
         jScrollPane1.setViewportView(taskOutput);
@@ -165,6 +169,8 @@ public class NfceCancelamento extends javax.swing.JDialog implements
 
         jLabel5.setText("Motivo Cancelamento");
         jLabel5.setToolTipText("");
+
+        jLabel2.setText("Avisos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,7 +195,10 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(startButton)))
+                        .addComponent(startButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -208,8 +217,10 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldChaveAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(startButton)
                 .addContainerGap())
@@ -253,6 +264,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -309,17 +321,21 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 //Agora o evento pode aceitar uma lista de cancelaemntos para envio em Lote.
                 Evento cancela = new Evento();
                 //Informe a chave da Nota a ser Cancelada
-                cancela.setChave(nfe.getChaveAcesso());
+                cancela.setChave(ManagerString.RemoveFormato(nfe.getChaveAcesso()));
                 //Informe o protocolo da Nota a ser Cancelada
                 cancela.setProtocolo(retEnviNFe.getProtNFe().getInfProt().getNProt());
                 //Informe o CNPJ do emitente
-                cancela.setCnpj(jsysParametros.getCnpj());
+                cancela.setCnpj(ManagerString.RemoveFormatoCpfCnpj(jsysParametros.getCnpj()));
                 //Informe o Motivo do Cancelamento
                 cancela.setMotivo(jTextFieldMotivo.getText().trim());
                 //Informe a data do Cancelamento
+                //cancela.setDataEvento(LocalDateTime.now());
                 cancela.setDataEvento(LocalDateTime.now());
                 //Monta o Evento de Cancelamento
-                TEnvEvento enviEvento = CancelamentoUtil.montaCancelamento(cancela, config);
+                TEnvEvento enviEvento
+                        = CancelamentoUtil.montaCancelamento(cancela,
+                                config,
+                                ZoneId.of(ManagerData.TIME_ZONE_ID));
                 TEvento tEvento = enviEvento.getEvento().get(0);
                 jsysNFeEvento.setCOrgao(tEvento.getInfEvento().getCOrgao());
                 jsysNFeEvento.setChNFe(tEvento.getInfEvento().getChNFe());
@@ -328,7 +344,8 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                         ManagerData.formataData(
                                 tEvento.getInfEvento().getDhEvento(),
                                 ManagerData.FORMATO_NFE
-                        ));
+                        )
+                );
                 jsysNFeEvento.setTpEvento(EventosEnum.CANCELAMENTO.getCodigo());
                 jsysNFeEvento.setNSeqEvento(1);
                 jsysNFeEvento.setDescEvento("Cancelamento");
@@ -344,14 +361,12 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 publish("Cancelamento Criado");
                 publish("Cancelamento Assinado");
                 setProgress(33);
-                
                 if (jsysNFeEvento.getIdEvento() != null) {
                     String XmlEvento = br.com.swconsultoria.nfe.util.XmlNfeUtil.objectToXml(enviEvento);
                     gravador.salvarArquivo(XmlEvento, br.JavaApplicationJsys.PASTA_XML_EVENTO, jsysNFeEvento.getIdEvento(), "xml");
                     jsysNFeEvento.setEnvEventoCancNFe(XmlEvento);
                     jsysNFeEvento = (JsysNFeEvento) ConnectionFactory.insert(jsysNFeEvento);
                 }
-                
                 //Envia o Evento de Cancelamento
                 publish("Envia o Evento de Cancelamento");
                 TRetEnvEvento tRetEnvEvento = Nfe.cancelarNfe(
@@ -360,13 +375,12 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                         true,
                         "55".equals(nfe.getMod()) ? DocumentoEnum.NFE : DocumentoEnum.NFCE);
                 //Valida o Retorno do Cancelamento
-                publish("Valida o Retorno do Cancelamento");
-                RetornoUtil.validaCancelamento(tRetEnvEvento);
                 setProgress(66);
-                //Cria ProcEvento de Cacnelamento
                 publish("Salvando Cancelamento");
-                String xmlProcEvento = CancelamentoUtil.criaProcEventoCancelamento(config, enviEvento, tRetEnvEvento.getRetEvento().get(0));
-                System.out.println("# ProcEvento : " + xmlProcEvento);
+                String xmlProcEvento
+                        = CancelamentoUtil.criaProcEventoCancelamento(config,
+                                enviEvento,
+                                tRetEnvEvento.getRetEvento().get(0));
                 gravador.salvarArquivo(
                         xmlProcEvento,
                         br.JavaApplicationJsys.PASTA_XML_RET_EVENTO,
@@ -400,10 +414,14 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                             }
                         } else {
                             publish("Chave: " + tRetEvento.getInfEvento().getChNFe());
-                            publish("Status: " + tRetEvento.getInfEvento().getCStat() + " - " + tRetEvento.getInfEvento().getXMotivo());
-                            publish("Protocolo: " + tRetEvento.getInfEvento().getNProt());
+                            publish("Status: "
+                                    + tRetEvento.getInfEvento().getCStat()
+                                    + " - "
+                                    + tRetEvento.getInfEvento().getXMotivo());
                         }
                     }
+                    publish("Valida o Retorno do Cancelamento");
+                    RetornoUtil.validaCancelamento(tRetEnvEvento);
                 } else {
                     publish(tRetEnvEvento.getCStat() + " - " + tRetEnvEvento.getXMotivo());
                 }
@@ -413,13 +431,14 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 publish("Erro ao Transmitir Evento Cancelamento");
                 publish(ex.getMessage());
                 Log.registraErro(NfceCancelamento.class, "Task.doInBackground", ex);
+                return erro;
             }
             return erro;
         }
 
         @Override
         protected void process(List<String> chunks) {
-            super.process(chunks); //To change body of generated methods, choose Tools | Templates.
+            super.process(chunks);
             chunks.stream().forEach((s) -> {
                 taskOutput.append(String.format(s + System.getProperty("line.separator")));
             });
@@ -435,10 +454,10 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 startButton.setEnabled(true);
                 setCursor(null); //turn off the wait cursor
                 if (get()) {
+                    JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
+                } else {
                     JOptionPane.showMessageDialog(null, "Cancelamento efetuado com sucesso!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (InterruptedException | ExecutionException e) {
                 Log.registraErro(this.getClass().getName(), "Task", e);

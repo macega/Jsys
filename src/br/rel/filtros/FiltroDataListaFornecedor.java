@@ -16,12 +16,10 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
     /**
      * Creates new form FiltroDataListaFornecedor
      *
-     * @param parent
-     * @param modal
      * @param args
      */
-    public FiltroDataListaFornecedor(java.awt.Frame parent, boolean modal, String[] args) {
-        super(parent, modal);
+    public FiltroDataListaFornecedor(String[] args) {
+        super(new javax.swing.JFrame(), false);
         initComponents();
         setRelatorio(args);
         caregarDados();
@@ -50,6 +48,7 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Filtro Relatório");
+        setResizable(false);
 
         jLabel1.setText("Data Inicial");
         jLabel1.setToolTipText("");
@@ -92,22 +91,22 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 768, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(forncedorCB, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(forncedorCB, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, Short.MAX_VALUE)
                                 .addComponent(jButton3)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataInicialjDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dataInicialjDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(dataFinaljDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dataFinaljDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
@@ -131,7 +130,7 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
                         .addComponent(forncedorCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -159,20 +158,6 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         fornecedoresTA.setText(fornecedoresTA.getText() + "," + getFornecedor().getIdCliente());
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    /**
-     * @param args posicao 0 local do Relatorio; posicao 1 se a data mes atual
-     * ou dia atula "DIA" "MES" "ANO" posicao 2 para lista de fornecedor
-     * "201,10, 2" EX: args[0] = "/br/rel/financeiro/ContasAPagar.jasper";
-     * args[1] = "DIA"; args[2] = "201, 10, 2";
-     * br.rel.filtros.FiltroDataListaFornecedor.main(args);
-     */
-    public static void main(final String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            FiltroDataListaFornecedor dialog = new FiltroDataListaFornecedor(new javax.swing.JFrame(), false, args);
-            dialog.setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser dataFinaljDateChooser;
@@ -223,9 +208,8 @@ public final class FiltroDataListaFornecedor extends javax.swing.JDialog {
     }
 
     private void caregarDados() {
-        for (Object O : Retorna.findList("JsysClientes.findAllAtivos")) {
-            JsysClientes f = (JsysClientes) O;
+        Retorna.findList("JsysClientes.findAllAtivos").stream().map((O) -> (JsysClientes) O).forEachOrdered((f) -> {
             forncedorCB.addItem(f.getNomeCorentista() + " - " + f.getIdCliente(), f);
-        }
+        });
     }
 }

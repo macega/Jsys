@@ -85,6 +85,8 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
@@ -488,7 +490,7 @@ public final class Menu extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ImagenCentro, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(ImagenCentro, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -757,8 +759,7 @@ public final class Menu extends javax.swing.JFrame {
         });
         RelatoriosCaixa.add(relContasPagas);
 
-        relMovCaixa.setMnemonic('m');
-        relMovCaixa.setText("Mov Financeira");
+        relMovCaixa.setText("Movimento de Caixa");
         relMovCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 relMovCaixaActionPerformed(evt);
@@ -1199,8 +1200,7 @@ public final class Menu extends javax.swing.JFrame {
         });
         caixaMunu.add(relContasPagasMenu);
 
-        relMovFinaceiraMenu.setMnemonic('m');
-        relMovFinaceiraMenu.setText("Mov Financeira");
+        relMovFinaceiraMenu.setText("Movimento de Caixa");
         relMovFinaceiraMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 relMovFinaceiraMenuActionPerformed(evt);
@@ -1931,7 +1931,7 @@ public final class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        setSize(new java.awt.Dimension(962, 587));
+        setSize(new java.awt.Dimension(962, 667));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -2122,6 +2122,7 @@ public final class Menu extends javax.swing.JFrame {
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RecebimentoCaixa recebimentoCaixa = new RecebimentoCaixa();
         recebimentoCaixa.setVisible(true);
+        recebimentoCaixa.setFocusable(true);
         setCursor(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -2413,7 +2414,13 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem61ActionPerformed
 
     private void jMenuItem63ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem63ActionPerformed
-        br.rel.filtros.FiltroDataListaFornecedor.main(new String[]{"/br/rel/financeiro/ContasAPagar.jasper", "MES", ""});
+        FiltroDataListaFornecedor dataListaFornecedor
+                = new FiltroDataListaFornecedor(
+                        new String[]{
+                            "/br/rel/financeiro/ContasAPagar.jasper",
+                            "MES",
+                            ""});
+        dataListaFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItem63ActionPerformed
 
     private void jMenuItem64ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem64ActionPerformed
@@ -2869,7 +2876,13 @@ public final class Menu extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void abreContasPagas() {
-        FiltroDataListaFornecedor.main(new String[]{"/br/rel/caixa/ContasPagas.jasper", "MES", "0"});
+        FiltroDataListaFornecedor dataListaFornecedor
+                = new FiltroDataListaFornecedor(
+                        new String[]{
+                            "/br/rel/caixa/ContasPagas.jasper",
+                            "MES",
+                            "0"});
+        dataListaFornecedor.setVisible(true);
     }
 
     private void abreMovimCaixa() {
@@ -2917,6 +2930,7 @@ public final class Menu extends javax.swing.JFrame {
             SwingUtilities.updateComponentTreeUI(this);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             Log.registraErro(this.getClass().getName(), "setTela", e);
+            e.printStackTrace();
         }
     }
 

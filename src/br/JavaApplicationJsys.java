@@ -11,8 +11,12 @@ import br.com.swconsultoria.nfe.dom.enuns.EstadosEnum;
 import br.sql.acesso.LoginTela;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.ConstantesFiscal;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.Arrays;
+import java.util.Properties;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
@@ -24,7 +28,7 @@ public class JavaApplicationJsys {
     public static final int MAJOR = 63; // versao do db
     public static final int MINOR = 4; // versao do app
     public static final int BUILD = 40012; // NotaFiscal java-nfe-4.00.12.jar
-    public static final int REVISION = 0; // revisoes bugs
+    public static final int REVISION = 7; // revisoes bugs
     public static int[] VERSAO = new int[]{MAJOR, MINOR, BUILD, REVISION};
     public static String VERSAO_STRING = Arrays.toString(new int[]{MAJOR, MINOR, BUILD, REVISION}).replace("[", "").replace("]", "").replace(",", ".").replace(" ", "");
     public static Integer VERCAO_DB = MAJOR;
@@ -62,6 +66,10 @@ public class JavaApplicationJsys {
     public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static final Boolean LOG = true;
     public static final String PASTAS_SCHEMAS = "Schemas 4.00";
+    public static final String KEY_TIME_ZONE = "user.timezone";
+    public static final String VALUE_TIME_ZONE = "GMT-4:00";
+
+    public static final String TIME_ZONE_ID = "America/La_Paz";
     public static Base base = new Base();
 
     public static String getBaseDefault() {
@@ -106,6 +114,7 @@ public class JavaApplicationJsys {
     }
 
     public static void main(String[] args) {
+        System.setProperty(KEY_TIME_ZONE, VALUE_TIME_ZONE);
         boolean adapta = false;
         PropertyConfigurator.configure("log4j.properties");
         for (String s : args) {

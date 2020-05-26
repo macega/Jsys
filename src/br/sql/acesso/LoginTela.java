@@ -9,10 +9,13 @@ import br.sql.log.Log;
 import br.sql.util.Criptografia.Security;
 import br.sql.util.Validar;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -42,7 +45,6 @@ public final class LoginTela extends javax.swing.JFrame {
      *
      */
     public LoginTela() {
-        System.setProperty("user.timezone", "GMT-4:00");
         initException();
         monitoredVMs();
         criaMatrisINI();
@@ -55,6 +57,12 @@ public final class LoginTela extends javax.swing.JFrame {
                 Log.registraErro("LoginTela", "LoginTela", e);
             }
         }
+    }
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        this.setFocusable(b);
     }
 
     @SuppressWarnings("unchecked")
@@ -362,29 +370,6 @@ public final class LoginTela extends javax.swing.JFrame {
     private javax.swing.JTextField usuarioTF;
     // End of variables declaration//GEN-END:variables
 
-//    /**
-//     * @author Juliano Alves Medina
-//     *
-//     * @param args
-//     */
-//    public static void main(final String args[]) {
-//        boolean adapta = false;
-//        for (String s : args) {
-//            if ("adapta".equals(s)) {
-//                adapta = true;
-//                break;
-//            }
-//        }
-//        if (adapta) {
-//            br.adp.geral.Geral.main(args);
-//        } else {
-//            java.awt.EventQueue.invokeLater(() -> {
-//                LoginTela loginTela = new LoginTela();
-//                loginTela.setVisible(true);
-//                loginTela.autoLogin(args);
-//            });
-//        }
-//    }
     private void setFocus() {
         enabledItens(true);
         usuarioTF.requestFocus();

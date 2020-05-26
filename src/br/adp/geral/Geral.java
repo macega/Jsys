@@ -115,6 +115,14 @@ public class Geral extends javax.swing.JFrame {
         }
     }
 
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b); 
+        this.setFocusable(b);
+    }
+    
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

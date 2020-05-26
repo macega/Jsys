@@ -13,4 +13,4 @@ SELECT mod
 	,emitida
 	,cancelada
 FROM jsysNFe
-WHERE (emitida = 1) and (tpAmb = 1)
+WHERE (emitida = 1)

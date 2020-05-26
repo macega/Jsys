@@ -58,7 +58,8 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
 
     public RecebimentoCaixa() {
         initComponents();
-        masterTable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), 0);
+        masterTable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), 0);
         setValoresJconbobox();
         setSelecaoTabela();
         registrarAcoesDoTeclado(recebimento);
@@ -66,6 +67,12 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
         setCursor(null);
     }
 
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        this.setFocusable(b);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

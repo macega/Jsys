@@ -196,7 +196,7 @@ public class ManagerDecimal {
                 & Validar.isDouble(valor)) {
             return new BigDecimal(valor);
         }
-        return null;
+        return BigDecimal.ZERO;
     }
 
     public static String valorExtenso(Double valor) {
