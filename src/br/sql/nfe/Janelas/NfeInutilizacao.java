@@ -20,14 +20,11 @@ import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
-import java.awt.Cursor;
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
@@ -38,7 +35,7 @@ import javax.xml.bind.JAXBException;
  * @author julia
  */
 public class NfeInutilizacao extends javax.swing.JDialog {
-
+    
     private final String serie;
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
     private final JsysParametros par = Retorna.JsysParametros();
@@ -266,7 +263,7 @@ public class NfeInutilizacao extends javax.swing.JDialog {
                             jsysNFeInut.setXmlProcInutNFe(procInutNFe);
                             br.sql.acesso.ConnectionFactory.insert(jsysNFeInut);
                             RetornoUtil.validaInutilizacao(tRetInutNFe);
-                        } catch (FileNotFoundException | CertificadoException | JAXBException  ex) {
+                        } catch (FileNotFoundException | CertificadoException | JAXBException ex) {
                             Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
                         } catch (NfeException ex) {
                             Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
@@ -277,7 +274,7 @@ public class NfeInutilizacao extends javax.swing.JDialog {
                 }
                 return null;
             }
-
+            
             @Override
             protected void done() {
                 try {
@@ -343,7 +340,7 @@ public class NfeInutilizacao extends javax.swing.JDialog {
             Log.registraErro(this.getClass().getName(), "listaIntervaloNfe", e);
         }
     }
-
+    
     private boolean validar() {
         if (xJustificativajTextArea.getText().trim().length() < 15) {
             JOptionPane.showMessageDialog(this, "Informar a justificativa do pedido de inutilização com no mínimo 15 dígitos.");
