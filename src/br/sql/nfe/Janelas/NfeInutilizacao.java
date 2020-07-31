@@ -263,9 +263,10 @@ public class NfeInutilizacao extends javax.swing.JDialog {
                                     br.JavaApplicationJsys.PASTA_XML_PROC_INUT_NFE,
                                     jsysNFeInut.getIdInut(),
                                     "xml");
+                            jsysNFeInut.setXmlProcInutNFe(procInutNFe);
                             br.sql.acesso.ConnectionFactory.insert(jsysNFeInut);
                             RetornoUtil.validaInutilizacao(tRetInutNFe);
-                        } catch (FileNotFoundException | CertificadoException | JAXBException ex) {
+                        } catch (FileNotFoundException | CertificadoException | JAXBException  ex) {
                             Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
                         } catch (NfeException ex) {
                             Log.registraErro(this.getClass().getName(), "jButton4ActionPerformed", ex);
@@ -283,7 +284,9 @@ public class NfeInutilizacao extends javax.swing.JDialog {
                     super.done();
                     NfeException nfeException = (NfeException) get();
                     if (nfeException != null) {
-                        JOptionPane.showMessageDialog(null, nfeException.getMessage());
+                        JOptionPane.showMessageDialog(null, nfeException.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "102 - Inutilizacao de numero homologado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (InterruptedException | ExecutionException ex) {
                     Log.registraErro(this, "jButton4ActionPerformed", ex);

@@ -83,6 +83,8 @@ public class JsysNFeInut implements Serializable {
     private String xmlInutNFe;
     @Column(name = "xmlRetInutNFe")
     private String xmlRetInutNFe;
+    @Column(name = "xmlProcInutNFe")
+    private String xmlProcInutNFe;
 
     public JsysNFeInut() {
     }
@@ -226,6 +228,14 @@ public class JsysNFeInut implements Serializable {
     public void setXmlRetInutNFe(String xmlRetInutNFe) {
         this.xmlRetInutNFe = ManagerString.prepareXmlToSqlServer(xmlRetInutNFe);
     }
+
+    public String getXmlProcInutNFe() {
+        return xmlProcInutNFe;
+    }
+
+    public void setXmlProcInutNFe(String xmlProcInutNFe) {
+        this.xmlProcInutNFe = ManagerString.prepareXmlToSqlServer(xmlProcInutNFe);
+    } 
 
     @Override
     public int hashCode() {
