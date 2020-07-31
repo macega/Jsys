@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="danfe" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="565" leftMargin="14" rightMargin="16" topMargin="14" bottomMargin="14" uuid="3f8a688d-1026-4dae-ae50-a696241c7045">
 	<property name="ireport.zoom" value="1.652892561983471"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="380"/>
+	<property name="ireport.y" value="48"/>
 	<style name="campoPequeno" hAlign="Left" vAlign="Top" markup="styled" pattern="" fontName="SansSerif" fontSize="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Courier"/>
 	<style name="borda" mode="Transparent" forecolor="#000000" fill="Solid" radius="0" scaleImage="Clip" hAlign="Left" vAlign="Top" markup="none" pattern="" fontName="SansSerif" fontSize="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="true" pdfFontName="Courier">
 		<pen lineWidth="0.25"/>
@@ -61,7 +61,7 @@
 		<fieldDescription><![CDATA[../ide/natOp]]></fieldDescription>
 	</field>
 	<field name="FormaPagamento" class="java.lang.String">
-		<fieldDescription><![CDATA[../../Pag/DetPag/indPag]]></fieldDescription>
+		<fieldDescription><![CDATA[../pag/detPag/indPag]]></fieldDescription>
 	</field>
 	<field name="Serie" class="java.lang.String">
 		<fieldDescription><![CDATA[../ide/serie]]></fieldDescription>
@@ -137,6 +137,9 @@
 	</field>
 	<field name="Dest_CNPJ" class="java.lang.String">
 		<fieldDescription><![CDATA[../dest/CNPJ]]></fieldDescription>
+	</field>
+	<field name="Dest_CPF" class="java.lang.String">
+		<fieldDescription><![CDATA[../dest/CPF]]></fieldDescription>
 	</field>
 	<field name="Dest_Nome" class="java.lang.String">
 		<fieldDescription><![CDATA[../dest/xNome]]></fieldDescription>
@@ -1122,7 +1125,7 @@ $F{Dest_Telefone}.substring(2,6) + "-" + $F{Dest_Telefone}.substring(6,10)]]></t
 					<textFieldExpression><![CDATA[($F{Dest_Logradouro} == null ? " " : $F{Dest_Logradouro}) + ", " + ($F{Dest_Numero} == null ? " " : $F{Dest_Numero}) + " " + ($F{Dest_Complemento} == null ? " " : $F{Dest_Complemento})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="dados" x="2" y="16" width="386" height="16" uuid="3f919b1f-c98c-459d-858d-8b506845a4e8"/>
+					<reportElement style="dados" x="2" y="16" width="384" height="16" uuid="3f919b1f-c98c-459d-858d-8b506845a4e8"/>
 					<textElement>
 						<font fontName="Times New Roman" size="9" pdfFontName="Times-Bold"/>
 					</textElement>
@@ -1140,9 +1143,18 @@ $F{Dest_Telefone}.substring(2,6) + "-" + $F{Dest_Telefone}.substring(6,10)]]></t
 					<textElement>
 						<font fontName="Times New Roman" size="9" pdfFontName="Times-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Dest_CNPJ}.length() == 14 ? $F{Dest_CNPJ}.substring(0,2) + "." +
-$F{Dest_CNPJ}.substring(2,5) + "." + $F{Dest_CNPJ}.substring(5,8) + "/" +
-$F{Dest_CNPJ}.substring(8,12) + "-" + $F{Dest_CNPJ}.substring(12,14) : $F{Dest_CNPJ}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{Dest_CNPJ}.equals(null) ? $F{Dest_CNPJ} :
+    $F{Dest_CNPJ}.substring(0,2)+"."+$F{Dest_CNPJ}.substring(2,5)+"."+
+    $F{Dest_CNPJ}.substring(5,8)+"/"+$F{Dest_CNPJ}.substring(8,12)+"-"+$F{Dest_CNPJ}.substring(12,14))   ]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="dados" x="393" y="17" width="102" height="16" uuid="0eaf5dd8-3648-47c1-8521-330f87e01a0c"/>
+					<textElement>
+						<font fontName="Times New Roman" size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[($F{Dest_CPF}.equals(null) ? $F{Dest_CPF} :
+    $F{Dest_CPF}.substring(0,3)+"."+$F{Dest_CPF}.substring(3,6)+"."+
+    $F{Dest_CPF}.substring(6,9)+"-"+$F{Dest_CPF}.substring(9,11))]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00">
 					<reportElement style="dados" x="2" y="135" width="109" height="14" uuid="288414c1-c76e-4948-8d7b-c9d71f546c20"/>
@@ -1554,7 +1566,11 @@ $F{Trans_CNPJ}.substring(8,12) + "-" + $F{Trans_CNPJ}.substring(12,14) : $F{Tran
 					<textElement verticalAlignment="Middle" markup="styled">
 						<font fontName="Times New Roman" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Times-Bold"/>
 					</textElement>
-					<textFieldExpression><![CDATA[( $F{FormaPagamento}.equals("0") ? "PAGAMENTO À VISTA" : ( $F{FormaPagamento}.equals("1") ? "PAGAMENTO À PRAZO" : "Outras Formas de Pagamento, Verifique as Informações no Campo de Dados Adicionais " ) )]]></textFieldExpression>
+					<textFieldExpression><![CDATA[($F{FormaPagamento}.equals("0") ? "PAGAMENTO À VISTA" : 
+    ($F{FormaPagamento}.equals("1") ? "PAGAMENTO À PRAZO" : 
+        "Outras Formas de Pagamento, Verifique as Informações no Campo de Dados Adicionais " 
+    ) 
+)]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

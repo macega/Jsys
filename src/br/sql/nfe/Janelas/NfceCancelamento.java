@@ -13,6 +13,7 @@ import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TRetEnvEvento;
 import br.com.swconsultoria.nfe.schema.envEventoCancNFe.TRetEvento;
 import br.com.swconsultoria.nfe.util.CancelamentoUtil;
 import br.com.swconsultoria.nfe.util.RetornoUtil;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.acesso.ConnectionFactory;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
@@ -314,6 +315,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 jsysNFeEvento = new JsysNFeEvento();
                 GravaNoArquivo gravador = new GravaNoArquivo();
                 ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(jsysParametros);
+
                 br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe retEnviNFe;
                 retEnviNFe = br.com.swconsultoria.nfe.util.XmlNfeUtil.xmlToObject(
                         nfe.getRetConsReciNFe(),
@@ -331,6 +333,7 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 //Informe a data do Cancelamento
                 //cancela.setDataEvento(LocalDateTime.now());
                 cancela.setDataEvento(LocalDateTime.now());
+
                 //Monta o Evento de Cancelamento
                 TEnvEvento enviEvento
                         = CancelamentoUtil.montaCancelamento(cancela,
@@ -352,11 +355,6 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                 jsysNFeEvento.setNProt(tEvento.getInfEvento().getDetEvento().getNProt());
                 jsysNFeEvento.setXJust(tEvento.getInfEvento().getDetEvento().getXJust());
                 jsysNFeEvento.setEmitida(false);
-//                StringBuilder id = new StringBuilder();
-//                id.append("ID");
-//                id.append(jsysNFeEvento.getTpEvento());
-//                id.append(jsysNFeEvento.getChNFe());
-//                id.append(ManagerString.zeros(String.valueOf(jsysNFeEvento.getNSeqEvento()), 2));
                 jsysNFeEvento.setIdEvento(tEvento.getInfEvento().getId());
                 publish("Cancelamento Criado");
                 publish("Cancelamento Assinado");
@@ -367,20 +365,17 @@ public class NfceCancelamento extends javax.swing.JDialog implements
                     jsysNFeEvento.setEnvEventoCancNFe(XmlEvento);
                     jsysNFeEvento = (JsysNFeEvento) ConnectionFactory.insert(jsysNFeEvento);
                 }
-                //Envia o Evento de Cancelamento
+                // Envia o Evento de Cancelamento
                 publish("Envia o Evento de Cancelamento");
                 TRetEnvEvento tRetEnvEvento = Nfe.cancelarNfe(
                         config,
                         enviEvento,
                         true,
-                        "55".equals(nfe.getMod()) ? DocumentoEnum.NFE : DocumentoEnum.NFCE);
+                        DocumentoEnum.getByModelo(Integer.toString(nfe.getMod())));
                 //Valida o Retorno do Cancelamento
                 setProgress(66);
                 publish("Salvando Cancelamento");
-                String xmlProcEvento
-                        = CancelamentoUtil.criaProcEventoCancelamento(config,
-                                enviEvento,
-                                tRetEnvEvento.getRetEvento().get(0));
+                String xmlProcEvento = XmlNfeUtil.objectToXml(tRetEnvEvento);
                 gravador.salvarArquivo(
                         xmlProcEvento,
                         br.JavaApplicationJsys.PASTA_XML_RET_EVENTO,

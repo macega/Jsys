@@ -1038,16 +1038,16 @@ public class GerandoNFeJAXB {
         InfNFe.Pag.DetPag p = new InfNFe.Pag.DetPag();
         try {
             /**
+             * 
              * 0= Pagamento à Vista 1= Pagamento à Prazo
              */
             p.setIndPag(rec.getIndPag());
             /**
+             * 
              * 01=Dinheiro 02=Cheque 03=Cartão de Crédito 04=Cartão de Débito
              * 05=Crédito Loja 10=Vale Alimentação 11=Vale Refeição 12=Vale
              * Presente 13=Vale Combustível 15=Boleto Bancário 90= Sem pagamento
              * 99=Outros
-             *
-             *
              */
             p.setTPag(rec.getTipoPagamento().substring(0, 2));
             p.setVPag(ManagerDecimal.converterXmlNFe(rec.getTotalLiqudo()));

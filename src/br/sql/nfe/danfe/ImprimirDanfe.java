@@ -197,17 +197,18 @@ public class ImprimirDanfe {
             if (nfe != null) {
                 try {
                     //xml.
-                    String xml = nfe.getProcNFe(); // XmlNfeUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
+                    String xml = nfe.getProcNFe();
                     Document doc = loadXMLFromString(xml);
-                    //estrutura do xml.
-                    String recordPath = "/nfeProc/NFe/infNFe/det";
                     //Fonte de Dados.
-                    JRXmlDataSource xmlDataSource = new JRXmlDataSource(doc, recordPath);
+                    JRXmlDataSource xmlDataSource
+                            = new JRXmlDataSource(doc, "/nfeProc/NFe/infNFe/det");
                     // Parametros.
                     Map<String, Object> param = getFaturas(doc);
                     param.put("Logo", PAR.getLogo());
-                    ReportUtils.openReport("Imprimindo NF-e", "/br/rel/fiscal/danfeR.jasper", param, xmlDataSource);
-                    //ReportUtils.pirntReport("Imprimindo NF-e", inputStream, parametros, new JRBeanCollectionDataSource(dados), true);
+                    ReportUtils.openReport("Imprimindo NF-e",
+                            "/br/rel/fiscal/danfeR.jasper",
+                            param,
+                            xmlDataSource);
                 } catch (JRException e) {
                     Log.registraErro("ImprimirFiscal", "nfe", e);
                 }
@@ -216,13 +217,12 @@ public class ImprimirDanfe {
     }
 
     private static JsysNFe getJsysNFe(String chaveAcesso) {
-        JsysNFe nfe = null;
         if (!"".equals(chaveAcesso)) {
             Map<Object, Object> filtro = new HashMap<>();
             filtro.put("chaveAcesso", chaveAcesso);
-            nfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
+            return (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
         }
-        return nfe;
+        return null;
     }
 
     public static byte[] nfePdf(String chaveAcesso) {

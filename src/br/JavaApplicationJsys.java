@@ -11,12 +11,8 @@ import br.com.swconsultoria.nfe.dom.enuns.EstadosEnum;
 import br.sql.acesso.LoginTela;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.ConstantesFiscal;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.Arrays;
-import java.util.Properties;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
@@ -61,7 +57,7 @@ public class JavaApplicationJsys {
     public static final String JSSECACERTS = "certificados" + System.getProperty("file.separator") + "NFeCacerts";
     public static final int TIMEOUT_WS = 30;
     public static final int SSL_PORT = 443;
-    //public static final int DIA_INICIO_FOLHA = 26;
+    
     public static final String LINK_INSTALADOR = "https://drive.google.com/open?id=0B1_nXJkF5YiBTnVQVUR5UmNKRWs";
     public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static final Boolean LOG = true;
