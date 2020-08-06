@@ -148,9 +148,9 @@ public class ConnectionFactory implements Serializable {
             return o;
         } catch (RollbackException ex) {
             Log.registraErro("GerenteEntidade", "insertOrUpdate(" + o.getClass().toString() + ")", ex);
-            getEntityManagerNew().getTransaction().rollback();
+            //getEntityManagerNew().getTransaction().rollback();
             return null;
-        }
+        } 
     }
 
     /**

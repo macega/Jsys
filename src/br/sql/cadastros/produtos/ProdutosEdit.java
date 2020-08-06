@@ -607,8 +607,8 @@ public final class ProdutosEdit extends javax.swing.JDialog {
                     .addComponent(jTextFieldMargenLucro)
                     .addComponent(jTextFieldAgregado, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1038,7 +1038,7 @@ public final class ProdutosEdit extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jTextField23FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField23FocusGained
-         jTextField23.selectAll();
+        jTextField23.selectAll();
     }//GEN-LAST:event_jTextField23FocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1549,11 +1549,15 @@ class OrigemFiscal {
 
 class ProdutosPrecosLojasCellRenderer extends DefaultTableCellRenderer {
 
+    private br.sql.bean.JsysLojas jsysLojas = null;
+
     @Override
     public Component getTableCellRendererComponent(JTable table,
             Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        setText(Retorna.jsysLojas(value.toString()).getNomeLoja());
+        jsysLojas = Retorna.jsysLojas(value.toString());
+        String text = jsysLojas == null ? "Loja não Cadastrada" : jsysLojas.getNomeLoja();
+        setText(text);
         return this;
     }
 }

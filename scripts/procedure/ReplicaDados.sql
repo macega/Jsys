@@ -30,14 +30,14 @@ SELECT @nomebancoDadosLocal = db_name()
 -- procura por servidores vinculados 
 DECLARE cServer CURSOR
 FOR
-SELECT NAME
+SELECT SYS.SERVERS.NAME COLLATE Latin1_General_CI_AS AS NAME
 	,jsysLojas.nomeBancoDados
-FROM servers
-INNER JOIN jsysLojas ON jsysLojas.idloja = servers.NAME
+FROM SYS.SERVERS
+INNER JOIN jsysLojas ON jsysLojas.idloja = SYS.SERVERS.NAME COLLATE Latin1_General_CI_AS
 WHERE (is_linked = 1)
 	AND (
 		NAME IN (
-			SELECT itens
+			SELECT itens COLLATE Latin1_General_CI_AS AS itens
 			FROM DBO.SPLIT(@sd, ',')
 			)
 		OR '' = @sd
@@ -96,7 +96,8 @@ OPEN cServer
 
 FETCH NEXT
 FROM cServer
-INTO @Srv, @nomeBancoDadosRemoto
+INTO @Srv
+	,@nomeBancoDadosRemoto
 
 -- vai fazer um loop para cada link server configurado no servidor ou que foi selecina por parametro 
 WHILE @@FETCH_STATUS = 0
@@ -290,7 +291,8 @@ BEGIN
 	--  vai para o proximo registro 
 	FETCH NEXT
 	FROM cServer
-	INTO @Srv, @nomeBancoDadosRemoto
+	INTO @Srv
+		,@nomeBancoDadosRemoto
 END
 
 -- fecha o loop

@@ -4,6 +4,7 @@ import br.sql.bean.JsysLojas;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +15,16 @@ public class LojasJanela extends JPanel {
 
     public LojasJanela() {
         initComponents();
+    }
+
+    private void cancelar() {
+        br.sql.acesso.ConnectionFactory.cancelar();
+        java.util.Collection data = query.getResultList();
+        for (Object entity : data) {
+            br.sql.acesso.ConnectionFactory.getEntityManagerNew().refresh(entity);
+        }
+        list.clear();
+        list.addAll(data);
     }
 
     /**
@@ -289,13 +300,7 @@ public class LojasJanela extends JPanel {
 
     @SuppressWarnings("unchecked")
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        br.sql.acesso.ConnectionFactory.cancelar();
-        java.util.Collection data = query.getResultList();
-        for (Object entity : data) {
-            br.sql.acesso.ConnectionFactory.getEntityManagerNew().refresh(entity);
-        }
-        list.clear();
-        list.addAll(data);
+        cancelar();
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -319,10 +324,17 @@ public class LojasJanela extends JPanel {
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        Object ret = null;
         int[] selected = masterTable.getSelectedRows();
         for (int idx = 0; idx < selected.length; idx++) {
             JsysLojas j = list.get(masterTable.convertRowIndexToModel(selected[idx]));
-            br.sql.acesso.ConnectionFactory.insertOrUpdate(j);
+            ret = br.sql.acesso.ConnectionFactory.insertOrUpdate(j);
+        }
+        if (ret instanceof JsysLojas) {
+            JOptionPane.showMessageDialog(this, "Cadastro Realizado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Não foi Posivel Salvar o Registro", "Erro", JOptionPane.ERROR_MESSAGE);
+            cancelar();
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -337,7 +349,6 @@ public class LojasJanela extends JPanel {
             saveButtonActionPerformed(null);
         }
     }//GEN-LAST:event_nomeLojaFieldKeyPressed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CNPJField;

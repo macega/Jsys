@@ -4,11 +4,8 @@ AFTER UPDATE
 	,DELETE
 AS
 BEGIN
-	-- verifica se esta executando pela 2 ves e para 
-	IF (
-			SELECT TRIGGER_NESTLEVEL()
-			) > 1
-		RETURN
+	-- verifica se esta executando pela 2 vez e para 
+	IF  TRIGGER_NESTLEVEL() > 1 RETURN
 
 	-- declara as variables
 	DECLARE @table AS VARCHAR(50) = 'jsysClientes'

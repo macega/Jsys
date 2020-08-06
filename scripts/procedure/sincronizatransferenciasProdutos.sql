@@ -12,11 +12,11 @@ BEGIN
 
 	DECLARE cServer CURSOR
 	FOR
-	SELECT NAME
-		,nomeBancoDados
-	FROM SERVERS
-	INNER JOIN jsysLojas ON jsysLojas.idloja = SERVERS.NAME
-	WHERE is_linked = 1
+	SELECT SYS.SERVERS.NAME COLLATE Latin1_General_CI_AS AS NAME
+		,jsysLojas.nomeBancoDados
+	FROM SYS.SERVERS
+	INNER JOIN jsysLojas ON jsysLojas.idloja = SYS.SERVERS.NAME COLLATE Latin1_General_CI_AS
+	WHERE (is_linked = 1)
 	ORDER BY NAME
 
 	SET @OK = 0
@@ -61,8 +61,6 @@ BEGIN
 			SET @OK = @OK + 1
 		END CATCH
 
-		--PRINT @Comando1
-		--PRINT @Comando2
 		EXEC SP_EXECUTESQL @Comando1
 
 		EXEC SP_EXECUTESQL @Comando2
