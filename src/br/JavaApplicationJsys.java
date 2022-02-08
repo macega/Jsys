@@ -16,7 +16,8 @@ import java.util.Arrays;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
- *
+ * 08/02/2022
+ * @author Juliano Alves Medina
  */
 public class JavaApplicationJsys {
 
