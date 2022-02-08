@@ -15,7 +15,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
- * @author julia
+ * @author Juliano Alves Medina
  */
 public class JavaApplicationJsys {
 
