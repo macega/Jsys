@@ -1,38 +1,41 @@
 package br.sql.nfe.xml;
 
 import br.JavaApplicationJsys;
-import br.com.samuelweb.nfe.Nfe;
-import br.com.samuelweb.nfe.dom.ConfiguracoesNfe;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.com.samuelweb.nfe.util.ConstantesUtil;
-import br.com.samuelweb.nfe.util.NFCeUtil;
-import br.com.samuelweb.nfe.util.WebServiceUtil;
-import br.sql.nfe.util.XmlUtil;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.ObjectFactory;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnderEmi;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEndereco;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TIpi;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Dest;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.COFINS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.ICMS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.PIS;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Prod;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Emit;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Ide;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.InfAdic;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Total;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Total.ICMSTot;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Transporta;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Vol;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TRetEnviNFe;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TUf;
-import br.inf.portalfiscal.nfe.schema_4.enviNFe.TUfEmi;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.Nfe;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.dom.enuns.ServicosEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.util.NFCeUtil;
+import br.com.swconsultoria.nfe.util.WebServiceUtil;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.ObjectFactory;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnderEmi;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEndereco;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Dest;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.COFINS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.ICMS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Imposto.PIS;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Det.Prod;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Emit;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Ide;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.InfAdic;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Total;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Total.ICMSTot;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Transporta;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNFe.InfNFe.Transp.Vol;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+//import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TUf;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TUfEmi;
+//import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeLote;
@@ -54,9 +57,12 @@ import br.sql.util.ManagerDecimal;
 import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
 import br.sql.util.Validar;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +70,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBException;
 import org.brazilutils.br.cpfcnpj.CpfCnpj;
-import java.util.Base64;
 import javax.swing.JFrame;
 
 /**
@@ -213,14 +218,15 @@ public class GerandoNFeJAXB {
         /*
          Data e hora no formato UTC (Universal Coordinated Time): AAAA-MM-DDThh:mm:ssTZD
          */
-        ide.setDhEmi(ManagerData.convertDate(data, "yyyy-MM-dd'T'HH:mm:ssXXX")); //ManagerData.convertDate(n.getDataSaidaEntrada(), "yyyy-MM-dd'T'HH:mm:ssXXX")
+        ide.setDhEmi(ManagerData.convertDate(data, ManagerData.FORMATO_NFE)); //ManagerData.convertDate(n.getDataSaidaEntrada(), "yyyy-MM-dd'T'HH:mm:ssXXX")
         /*
          Data e hora no formato UTC (Universal Coordinated Time): AAAA-MM-DDThh:mm:ssTZD.
          Não informar este campo para a NFC-e.
          */
         if (jsysNFe.getMod() != ConstantesFiscal.NFC_E) {
-            ide.setDhSaiEnt(ManagerData.convertDate(jsysNFe.getDhSaiEnt(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            ide.setDhSaiEnt(ManagerData.convertDate(jsysNFe.getDhSaiEnt(), ManagerData.FORMATO_NFE));
         }
+        
         if (jsysNFe.getTpNF()) { // 0=Entrada; 1=Saída
             ide.setTpNF("1");
         } else {
@@ -287,7 +293,7 @@ public class GerandoNFeJAXB {
         ide.setProcEmi("0");
         ide.setVerProc(br.JavaApplicationJsys.VERSAO_STRING);
         if (!jsysNFe.getTpEmis().equals("1")) {
-            ide.setDhCont(ManagerData.convertDate(par.getDhCont(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            ide.setDhCont(ManagerData.convertDate(par.getDhCont(), ManagerData.FORMATO_NFE));
             ide.setXJust(ManagerString.removeAcentos(par.getxJust()));
         }
         for (JsysNFeReferencias ref : jsysNFe.getJsysNFeReferenciasCollection()) {
@@ -468,7 +474,9 @@ public class GerandoNFeJAXB {
              */
             if (venda.getIdCliente().getIeRg().equals("ISENTO")) {
                 // gabiarra para emitir nota para o estado no amazonas sem inscricao estadual
-                if (venda.getIdCliente().getEstado().equals("AM")) {
+                // Os Estados que não permitem que os destinatário tenham indicação 
+                // como Contribuinte Isento são: AM, BA, CE, GO, MG, MS, MT, PA, PE, RN, SE, SP.
+                if (Validar.estadosNaoContribuintes(venda.getIdCliente().getEstado())) {
                     dest.setIndIEDest("9");
                 } else {
                     dest.setIndIEDest("2");
@@ -515,7 +523,7 @@ public class GerandoNFeJAXB {
      * Serviços da NF-e M - Tributos incidentes no Produto ou Serviço V -
      * Informações adicionais
      */
-    private Det dadosDoProduto(JsysOrcamentoItens iten, Integer nItem) throws Exception {
+    private Det dadosDoProduto(JsysOrcamentoItens iten, Integer nItem) throws NfeException {
         Det det = new Det();
         det.setNItem(nItem.toString());
         // Dados do Produro
@@ -639,7 +647,7 @@ public class GerandoNFeJAXB {
     /**
      * Impostos da NF-e
      */
-    private Imposto getImposto(JsysOrcamentoItens iten) throws Exception {
+    private Imposto getImposto(JsysOrcamentoItens iten) throws NfeException {
         Imposto imposto = new Imposto();
         BigDecimal totalImposto = BigDecimal.ZERO;
         Map<Object, Object> filtro = new HashMap<>();
@@ -680,7 +688,7 @@ public class GerandoNFeJAXB {
         return imposto;
     }
 
-    public ICMS getSimples(JsysOrcamentoItens iten) throws Exception {
+    public ICMS getSimples(JsysOrcamentoItens iten) throws NfeException {
         ICMS icms = new ICMS();
         if (par.getIdTributacao() != null) {
             String cson = iten.getIdTributacao() == null
@@ -690,7 +698,7 @@ public class GerandoNFeJAXB {
 //                        vp.getProdProduto().getProdIcms().getProdIcmsCson() : 
 //                        vp.getComVendaProdutoIcmsCst();
             String origem = iten.getJsysProdutosT().getOrigemFiscal().substring(0, 1);// String.valueOf(vp.getProdProduto().getProdOrigem().getProdOrigemValor());
-            if (cson.equals("101")) {
+            switch (cson) {
 //            ICMS.ICMSSN101 icmssn101 = new ICMS.ICMSSN101();
 //            icmssn101.setOrig(origem);
 //            icmssn101.setCSOSN(cson);
@@ -711,12 +719,13 @@ public class GerandoNFeJAXB {
 //            // executa a soma dos impostos
 //            baseICMS += base;
 //            valorICMS += valor;
-            } else if (cson.equals("102")) {
-                ICMS.ICMSSN102 icmssn102 = new ICMS.ICMSSN102();
-                icmssn102.setOrig(origem);
-                icmssn102.setCSOSN(cson);
-
-                icms.setICMSSN102(icmssn102);
+                case "101":
+                    break;
+                case "102":
+                    ICMS.ICMSSN102 icmssn102 = new ICMS.ICMSSN102();
+                    icmssn102.setOrig(origem);
+                    icmssn102.setCSOSN(cson);
+                    icms.setICMSSN102(icmssn102);
 
 //        } else if (cson.equals("201")) {
 //            ICMS.ICMSSN201 icmssn201 = new ICMS.ICMSSN201();
@@ -738,23 +747,26 @@ public class GerandoNFeJAXB {
 //            icmssn202.setPICMSST("0.00");
 //            icmssn202.setVICMSST("0.00");
 //            icms.setICMSSN202(icmssn202);
-            } else if (cson.equals("500")) {
-                ICMS.ICMSSN500 icmssn500 = new ICMS.ICMSSN500();
-                icmssn500.setOrig(origem);
-                icmssn500.setCSOSN(cson);
-                icmssn500.setVBCSTRet("0.00");
-                icmssn500.setVICMSSTRet("0.00");
-                icms.setICMSSN500(icmssn500);
-            } else {
-                ICMS.ICMSSN900 icmssn900 = new ICMS.ICMSSN900();
-                icmssn900.setOrig(origem);
-                icmssn900.setCSOSN(cson);
-                icms.setICMSSN900(icmssn900);
+                    break;
+                case "500":
+                    ICMS.ICMSSN500 icmssn500 = new ICMS.ICMSSN500();
+                    icmssn500.setOrig(origem);
+                    icmssn500.setCSOSN(cson);
+                    icmssn500.setVBCSTRet("0.00");
+                    icmssn500.setVICMSSTRet("0.00");
+                    icms.setICMSSN500(icmssn500);
+                    break;
+                default:
+                    ICMS.ICMSSN900 icmssn900 = new ICMS.ICMSSN900();
+                    icmssn900.setOrig(origem);
+                    icmssn900.setCSOSN(cson);
+                    icms.setICMSSN900(icmssn900);
+                    break;
             }
         } else {
             JOptionPane.showMessageDialog(null, "situaçao tributária nao cadastrada", "ERRO", JOptionPane.ERROR_MESSAGE);
             new ParametrosJanelas().setVisible(true);
-            throw new Exception("situaçao tributária nao cadastrada");
+            throw new NfeException("situaçao tributária nao cadastrada");
         }
         return icms;
     }
@@ -1026,16 +1038,16 @@ public class GerandoNFeJAXB {
         InfNFe.Pag.DetPag p = new InfNFe.Pag.DetPag();
         try {
             /**
+             * 
              * 0= Pagamento à Vista 1= Pagamento à Prazo
              */
             p.setIndPag(rec.getIndPag());
             /**
+             * 
              * 01=Dinheiro 02=Cheque 03=Cartão de Crédito 04=Cartão de Débito
              * 05=Crédito Loja 10=Vale Alimentação 11=Vale Refeição 12=Vale
              * Presente 13=Vale Combustível 15=Boleto Bancário 90= Sem pagamento
              * 99=Outros
-             *
-             *
              */
             p.setTPag(rec.getTipoPagamento().substring(0, 2));
             p.setVPag(ManagerDecimal.converterXmlNFe(rec.getTotalLiqudo()));
@@ -1209,137 +1221,104 @@ public class GerandoNFeJAXB {
         return inf;
     }
 
-    public boolean gerar() throws JAXBException, Exception, SQLException {
+    public boolean gerar() throws JAXBException, SQLException, FileNotFoundException, CertificadoException, NfeException, NoSuchAlgorithmException {
         ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(par);
-        try {
-            if (jsysNFe.getMod() == ConstantesFiscal.NF_E & !Validar.cpfCnpj(venda.getIdCliente().getCnpjCpf())) {
-                return false;
-            }
-            infNFe.setId(chaveAcesso);
-            infNFe.setVersao(ConstantesFiscal.VERSAO.NFE);
-            infNFe.setIde(dadosDeIdentificacao());
-            infNFe.setEmit(dadosDoEmitente());
-            Dest destinatario = dadosDoDestinatario();
-            if (destinatario != null) {
-                infNFe.setDest(destinatario);
-            }
-            Integer nItem = 1;
-            for (JsysOrcamentoItens iten : venda.getJsysOrcamentoItensCollection()) {
-                infNFe.getDet().add(dadosDoProduto(iten, nItem));
-                nItem++;
-            }
-            infNFe.setTotal(totaisDaNFe());
-            infNFe.setTransp(dadosDoTransporte(this.jsysNFe.getModFrete()));
-            infNFe.setInfAdic(informacoesAdicionais());
-            infNFe.setPag(getPag());
-            //infNFe.setCobr(getCobr());
-
-            nFe.setInfNFe(infNFe);
-            // Monta EnviNfe
-            enviNFe = new TEnviNFe();
-            enviNFe.setVersao(ConstantesFiscal.VERSAO.NFE);
-            JsysNFeLote lote = new JsysNFeLote();
-            lote.setIdLote(String.valueOf(DADOS.sequenciaTabela("jsysNFeLote", "idLote")));
-            br.sql.acesso.ConnectionFactory.insert(lote);
-            enviNFe.setIdLote(lote.getIdLote());
-            enviNFe.setIndSinc("1");
-            enviNFe.getNFe().add(nFe);
-            // Monta e Assina o XML
-            enviNFe = Nfe.montaNfe(enviNFe, true);
-            if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
-                //QRCODE
-                String cDest = null;
-                if (enviNFe.getNFe().get(0).getInfNFe().getDest() != null) {
-                    if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ())) {
-                        cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ();
-                    } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF())) {
-                        cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF();
-                    } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro())) {
-                        cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro();
-                    }
-                }
-
-//                String qrCode = NFCeUtil.getCodeQRCode(
-//                        infNFe.getId().substring(3),
-//                        "2",
-//                        enviNFe.getNFe().get(0).getInfNFe().getIde().getTpAmb(),
-//                        //enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ() == null ? dest.getCPF() : dest.getCNPJ(),
-//                        cDest,
-//                        enviNFe.getNFe().get(0).getInfNFe().getIde().getDhEmi(),
-//                        enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVNF(),
-//                        enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVICMS(),
-//                        Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
-//                        par.getcIdToken(),
-//                        par.getCSC(),
-//                        WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-//                
-                String qrCode = NFCeUtil.getCodeQRCode(
-                        infNFe.getId().substring(3),
-                        config.getAmbiente(),
-                        par.getcIdToken(),
-                        par.getCSC(),
-                        WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-
-                //QRCODE OFFLine
-                //String qrCode = NFCeUtil.getCodeQRCodeContingencia(
-                //infNFe.getId().substring(3),
-                //config.getAmbiente(),
-                //ide.getDhEmi(),
-                //total.getICMSTot().getVNF(),
-                //Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
-                //idToken,
-                //csc,
-                //WebServiceUtil.getUrl(config,ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_QRCODE));
-                System.out.println(qrCode);
-
-                TNFe.InfNFeSupl infNFeSupl = new TNFe.InfNFeSupl();
-                infNFeSupl.setQrCode(qrCode);
-                infNFeSupl.setUrlChave(WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.URL_CONSULTANFCE));
-                enviNFe.getNFe().get(0).setInfNFeSupl(infNFeSupl);
-            }
-            String xml = XmlUtil.objectToXml(enviNFe);
-            GravaNoArquivo gravador = new GravaNoArquivo();
-            gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_ENVI_NFE, chaveAcesso, "xml");
-            jsysNFe.setEnviNFe(xml);
-            return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
-        } catch (SQLException | JAXBException e) {
-            Log.registraErro(getClass().getName(), "gerar", e);
+        if (jsysNFe.getMod() == ConstantesFiscal.NF_E & !Validar.cpfCnpj(venda.getIdCliente().getCnpjCpf())) {
+            return false;
         }
-        return false;
+        infNFe.setId(chaveAcesso);
+        infNFe.setVersao(ConstantesFiscal.VERSAO.NFE);
+        infNFe.setIde(dadosDeIdentificacao());
+        infNFe.setEmit(dadosDoEmitente());
+        Dest destinatario = dadosDoDestinatario();
+        if (destinatario != null) {
+            infNFe.setDest(destinatario);
+        }
+        Integer nItem = 1;
+        for (JsysOrcamentoItens iten : venda.getJsysOrcamentoItensCollection()) {
+            infNFe.getDet().add(dadosDoProduto(iten, nItem));
+            nItem++;
+        }
+        infNFe.setTotal(totaisDaNFe());
+        infNFe.setTransp(dadosDoTransporte(this.jsysNFe.getModFrete()));
+        infNFe.setInfAdic(informacoesAdicionais());
+        infNFe.setPag(getPag());
+        //infNFe.setCobr(getCobr());
+
+        nFe.setInfNFe(infNFe);
+        // Monta EnviNfe
+        enviNFe = new TEnviNFe();
+        enviNFe.setVersao(ConstantesFiscal.VERSAO.NFE);
+        JsysNFeLote lote = new JsysNFeLote();
+        lote.setIdLote(String.valueOf(DADOS.sequenciaTabela("jsysNFeLote", "idLote")));
+        br.sql.acesso.ConnectionFactory.insert(lote);
+        enviNFe.setIdLote(lote.getIdLote());
+        enviNFe.setIndSinc("1");
+        enviNFe.getNFe().add(nFe);
+        // Monta e Assina o XML
+        enviNFe = Nfe.montaNfe(config, enviNFe, true);
+        if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
+//            //QRCODE
+//            String cDest = null;
+//            if (enviNFe.getNFe().get(0).getInfNFe().getDest() != null) {
+//                if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCNPJ();
+//                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getCPF();
+//                } else if (Validar.isNotNullOrWhite(enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro())) {
+//                    cDest = enviNFe.getNFe().get(0).getInfNFe().getDest().getIdEstrangeiro();
+//                }
+//            }
+            TNFe.InfNFeSupl infNFeSupl = new TNFe.InfNFeSupl();
+            infNFeSupl.setQrCode(
+                    preencheQRCode(enviNFe, config, par.getcIdToken(), par.getCSC(), par.getContingencia())
+            );
+            infNFeSupl.setUrlChave(
+                    WebServiceUtil.getUrl(
+                            config,
+                            DocumentoEnum.NFCE,
+                            ServicosEnum.URL_CONSULTANFCE
+                    )
+            );
+            enviNFe.getNFe().get(0).setInfNFeSupl(infNFeSupl);
+        }
+        String xml = XmlNfeUtil.objectToXml(enviNFe);
+        GravaNoArquivo gravador = new GravaNoArquivo();
+        gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_ENVI_NFE, chaveAcesso, "xml");
+        jsysNFe.setEnviNFe(xml);
+        return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
     }
 
     /**
      * Envia a Nfe para a Sefaz
      *
-     * @param tipo ConstantesUtil.NFCE
+     * @param tipoDocumento se e uma NF-e ou NFC-e
      * @return
      */
-    public boolean enviarNfe(String tipo) {
+    public boolean enviarNfe(DocumentoEnum tipoDocumento) {
         try {
-            TRetEnviNFe retorno = Nfe.enviarNfe(enviNFe, tipo);
-            String xml = XmlUtil.objectToXml(retorno);
+            ConfiguracoesNfe config = br.JavaApplicationJsys.iniciaConfigurações(par);
+            TRetEnviNFe tRetEnviNFe = Nfe.enviarNfe(config, enviNFe, tipoDocumento);
+            String xmlTRetEnviNFe = XmlNfeUtil.objectToXml(tRetEnviNFe);
             GravaNoArquivo gravador = new GravaNoArquivo();
-            gravador.salvarArquivo(xml, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, chaveAcesso, "xml");
-            jsysNFe.setRetConsReciNFe(xml);
-            if (jsysNFe != null) {
-                if (XmlUtil.verificaCsStat(retorno.getCStat())) {
-                    this.CStat = retorno.getProtNFe().getInfProt().getCStat();
-                    if (XmlUtil.verificaCsStat(this.CStat)) {
-                        setMensagem(retorno.getProtNFe().getInfProt().getXMotivo());
-                        jsysNFe.setEmitida(true);
-                    } else {
-                        setMensagem(this.CStat + " - " + retorno.getProtNFe().getInfProt().getXMotivo());
-                        jsysNFe.setEmitida(false);
-                    }
+            gravador.salvarArquivo(xmlTRetEnviNFe, br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, chaveAcesso, "xml");
+            jsysNFe.setRetConsReciNFe(xmlTRetEnviNFe);
+            jsysNFe.setProcNFe(XmlNfeUtil.criaNfeProc(enviNFe, tRetEnviNFe.getProtNFe()));
+            if (Validar.verificaCsStat(tRetEnviNFe.getCStat())) {
+                this.CStat = tRetEnviNFe.getProtNFe().getInfProt().getCStat();
+                if (Validar.verificaCsStat(this.CStat)) {
+                    setMensagem(tRetEnviNFe.getProtNFe().getInfProt().getXMotivo());
+                    jsysNFe.setEmitida(true);
                 } else {
-                    setMensagem(retorno.getCStat() + " - " + retorno.getXMotivo());
+                    setMensagem(this.CStat + " - " + tRetEnviNFe.getProtNFe().getInfProt().getXMotivo());
                     jsysNFe.setEmitida(false);
                 }
             } else {
+                setMensagem(tRetEnviNFe.getCStat() + " - " + tRetEnviNFe.getXMotivo());
                 jsysNFe.setEmitida(false);
             }
             return br.sql.acesso.ConnectionFactory.update(jsysNFe) instanceof JsysNFe;
-        } catch (JAXBException | NfeException ex) {
+        } catch (JAXBException | FileNotFoundException | CertificadoException | NfeException ex) {
             Log.registraErro(GerandoNFeJAXB.class.getName(), "enviarNfe", ex);
         }
         return false;
@@ -1350,7 +1329,7 @@ public class GerandoNFeJAXB {
         return valor.multiply(fator).setScale(JavaApplicationJsys.CASA_DECIMAL_VALOR_DEFALT, RoundingMode.DOWN);
     }
 
-    private TIpi getIPI(JsysOrcamentoItens iten) {
+//    private TIpi getIPI(JsysOrcamentoItens iten) {
 //        IPI ipi = new IPI();
 //        String cst = vp.getComVendaProdutoIpiCst().equals("") ? vp.getProdProduto().getProdIpi().getProdIpiCstSaida() : vp.getComVendaProdutoIpiCst();
 //
@@ -1385,9 +1364,8 @@ public class GerandoNFeJAXB {
 //        ipi.setIPITrib(trib);
 //        ipi.setCEnq(vp.getProdProduto().getProdIpi().getProdIpiEnq());
 //        return ipi;
-        return null;
-    }
-
+//        return null;
+//    }
     private String getValorNfe(double valor) {
         return ManagerDecimal.formataNumero(valor, 1, 2, false).replace(",", ".");
     }
@@ -1398,12 +1376,10 @@ public class GerandoNFeJAXB {
 
     private InfNFe.Cobr getCobr() {
         InfNFe.Cobr corb = new InfNFe.Cobr();
-
         return null;
     }
 
     private InfNFe.Pag getPag() {
-        //if (jsysNFe.getMod() == ConstantesFiscal.NFC_E) {
         Map<Object, Object> filtro = new HashMap<>();
         filtro.put("idReceber", venda.getIdOrcamento());
         List<Object> O = Retorna.findList("JsysRebebimentoAgrupado.findByIdReceber", filtro);
@@ -1418,5 +1394,46 @@ public class GerandoNFeJAXB {
 
     public String getCStat() {
         return CStat;
+    }
+
+    /**
+     * Preenche QRCode 
+     * 
+     * Monta QRCode
+     *
+     * @param enviNFe
+     * @param config
+     * @param idToken
+     * @param csc
+     * @return
+     * @throws NfeException
+     * @throws NoSuchAlgorithmException
+     */
+    private static String preencheQRCode(TEnviNFe enviNFe, ConfiguracoesNfe config, String idToken, String csc, boolean contingencia) throws NfeException, NoSuchAlgorithmException {
+
+        //System.out.println(csc);
+        //csc = csc.replaceAll("[^0-9^A-Z^a-z]", "");
+        //System.out.println(csc);
+        if (contingencia) {
+            // QRCODE EMISSAO OFFLINE
+            return NFCeUtil.getCodeQRCodeContingencia(
+                    enviNFe.getNFe().get(0).getInfNFe().getId().substring(3),
+                    config.getAmbiente().getCodigo(),
+                    enviNFe.getNFe().get(0).getInfNFe().getIde().getDhEmi(),
+                    enviNFe.getNFe().get(0).getInfNFe().getTotal().getICMSTot().getVNF(),
+                    Base64.getEncoder().encodeToString(enviNFe.getNFe().get(0).getSignature().getSignedInfo().getReference().getDigestValue()),
+                    idToken,
+                    csc,
+                    WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE));
+        } else {
+            //QRCODE EMISAO ONLINE
+            return NFCeUtil.getCodeQRCode(
+                    enviNFe.getNFe().get(0).getInfNFe().getId().substring(3),
+                    config.getAmbiente().getCodigo(),
+                    idToken,
+                    csc,
+                    WebServiceUtil.getUrl(config, DocumentoEnum.NFCE, ServicosEnum.URL_QRCODE));
+        }
+
     }
 }

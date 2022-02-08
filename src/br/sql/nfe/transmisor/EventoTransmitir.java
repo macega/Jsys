@@ -1,6 +1,6 @@
 package br.sql.nfe.transmisor;
 
-import br.inf.portalfiscal.www.nfe_400.wsdl.NFeRecepcaoEvento.NFeRecepcaoEvento4Stub;
+import br.com.swconsultoria.nfe.wsdl.NFeRecepcaoEvento.NFeRecepcaoEvento4Stub;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
@@ -95,10 +95,10 @@ public class EventoTransmitir implements transmitirInterface {
             GravaNoArquivo gravador = new GravaNoArquivo();
             gravador.salvarArquivo(result.getExtraElement().toString(), br.JavaApplicationJsys.PASTA_XML_RET_EVENTO, chaveAcesso, "xml");
 
-            br.inf.portalfiscal.nfe.schema.retEnvEventoCancNFe.TRetEnvEvento retEnvEvento = GerandoRetXML.getTRetEnvEvento(result.getExtraElement().toString());
-
+            br.com.swconsultoria.nfe.schema.retEnvEventoCancNFe.TRetEnvEvento retEnvEvento = GerandoRetXML.getTRetEnvEvento(result.getExtraElement().toString());
+            
             if ("128".equals(retEnvEvento.getCStat())) {
-                for (br.inf.portalfiscal.nfe.schema.retEnvEventoCancNFe.TRetEvento r : retEnvEvento.getRetEvento()) {
+                for (br.com.swconsultoria.nfe.schema.retEnvEventoCancNFe.TRetEvento r : retEnvEvento.getRetEvento()) {
                     if ("135".equals(r.getInfEvento().getCStat())) {
                         setMensagem(r.getInfEvento().getXMotivo());
                         java.util.Map<Object, Object> filtro = new java.util.HashMap<>();

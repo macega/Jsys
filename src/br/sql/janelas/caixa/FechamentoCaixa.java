@@ -523,19 +523,28 @@ public class FechamentoCaixa extends javax.swing.JFrame {
     private void confirmarJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarJBActionPerformed
         // pega o valor das direnças
         ArrayList<fechamento> f = new ArrayList<>();
-        f.add(new fechamento("DINH", ManagerDecimal.StringToBigDecimal(dinheroTF.getText()), ManagerDecimal.StringToBigDecimal(dinheroDifTF.getText()), ManagerDecimal.StringToBigDecimal(dinheroSaldoTF.getText())));
-        f.add(new fechamento("CRED", ManagerDecimal.StringToBigDecimal(creditoTF.getText()), ManagerDecimal.StringToBigDecimal(creditoDifTF.getText()), ManagerDecimal.StringToBigDecimal(creditoSaldoTF.getText())));
-        f.add(new fechamento("DEBI", ManagerDecimal.StringToBigDecimal(debitoTF.getText()), ManagerDecimal.StringToBigDecimal(debitoDifTF.getText()), ManagerDecimal.StringToBigDecimal(debitoSaldoTF.getText())));
-        for (fechamento obj : f) {
-            // registra na tabela os valores digitados no formulario
-            registraCaixa(obj);
-            // Vefifica se ouve diferença de caixa e lamça os valores.
+        f.add(new fechamento("DINH",
+                ManagerDecimal.StringToBigDecimal(dinheroTF.getText()),
+                ManagerDecimal.StringToBigDecimal(dinheroDifTF.getText()),
+                ManagerDecimal.StringToBigDecimal(dinheroSaldoTF.getText())));
+        f.add(new fechamento("CRED",
+                ManagerDecimal.StringToBigDecimal(creditoTF.getText()),
+                ManagerDecimal.StringToBigDecimal(creditoDifTF.getText()),
+                ManagerDecimal.StringToBigDecimal(creditoSaldoTF.getText())));
+        f.add(new fechamento("DEBI",
+                ManagerDecimal.StringToBigDecimal(debitoTF.getText()),
+                ManagerDecimal.StringToBigDecimal(debitoDifTF.getText()),
+                ManagerDecimal.StringToBigDecimal(debitoSaldoTF.getText())));
+        f.stream().map((obj) -> {
+            registraCaixa(obj); // registra na tabela os valores digitados no formulario
+            return obj;
+        }).forEachOrdered((obj) -> {
             if (obj.getValorDifereca().doubleValue() > 0) { // se sobrou dinhero e registra no banco de dados
                 registraSobraFalta(obj, Retorna.JsysParametros().getIdGeralSobraCaixa(), Menu.getIdBanco(), par.getIdBancoAjuste());
             } else if (obj.getValorDifereca().doubleValue() < 0) { // se faltou ele retistra no banco de dados 
                 registraSobraFalta(obj, Retorna.JsysParametros().getIdGeralFaltaCaixa(), par.getIdBancoAjuste(), Menu.getIdBanco());
             }
-        }
+        });
 
         // pregunta o que fazer e fecha a o formulario
         if (JOptionPane.showOptionDialog(null,
@@ -694,6 +703,7 @@ public class FechamentoCaixa extends javax.swing.JFrame {
     }
 
     private class fechamento {
+
         private String titulo;
         private BigDecimal valorConferido;
         private BigDecimal valorDifereca;

@@ -1,15 +1,16 @@
-CREATE PROCEDURE VendasLojasGeral (
+CREATE PROCEDURE [dbo].[VendasLojasGeral] (
 	@dataInicial DATETIME
 	,@dataFinal DATETIME
 	)
 AS
 DECLARE @Srv SYSNAME
 	,@query NVARCHAR(MAX)
+	,@nomeBancoDadosRemoto SYSNAME
 
 DECLARE cServer CURSOR
 FOR
-SELECT NAME
-FROM SYS.SERVERS
+SELECT servers.name, jsysLojas.nomeBancoDados
+FROM SERVERS INNER JOIN jsysLojas ON jsysLojas.idloja = servers.name 
 WHERE is_linked = 1
 ORDER BY NAME
 
@@ -19,7 +20,7 @@ OPEN cServer
 
 FETCH NEXT
 FROM cServer
-INTO @Srv
+INTO @Srv, @nomeBancoDadosRemoto
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
@@ -27,8 +28,8 @@ BEGIN
 		EXEC sp_testlinkedserver @Srv
 
 		SET @query = @query + N'UNION ALL SELECT ROW_NUMBER() OVER(ORDER BY idTitulo) as posicao, sum(totalVendas) AS totalVendas, sum(totalBruto) AS totalBruto, sum(totalLiqudo) AS totalLiqudo, sum(totalDesconto) AS totalDesconto, idTitulo, AVG(mediaDesconto) AS mediaDesconto, fantasia, TB.totalGeral ' + 
-		'FROM [' + @Srv + '].DADOS.DBO.jsysVendasLojas  WITH (NOLOCK)' + 
-		'cross join (SELECT sum(totalLiqudo) AS totalGeral FROM [' + @Srv + '].DADOS.DBO.jsysVendasLojas  WITH (NOLOCK) WHERE (data between ''' + convert(VARCHAR, @dataInicial, 120) + ''' AND ''' + convert(VARCHAR, @dataFinal, 120) + ''')) as TB ' + 
+		'FROM [' + @Srv + '].['+@nomeBancoDadosRemoto+'].DBO.jsysVendasLojas  WITH (NOLOCK)' + 
+		'cross join (SELECT sum(totalLiqudo) AS totalGeral FROM [' + @Srv + '].['+@nomeBancoDadosRemoto+'].DBO.jsysVendasLojas  WITH (NOLOCK) WHERE (data between ''' + convert(VARCHAR, @dataInicial, 120) + ''' AND ''' + convert(VARCHAR, @dataFinal, 120) + ''')) as TB ' + 
 		'WHERE (data between ''' + convert(VARCHAR, @dataInicial, 120) + ''' AND ''' + convert(VARCHAR, @dataFinal, 120) + ''') ' + 
 		'GROUP BY idTitulo, fantasia, TB.totalGeral '
 	END TRY
@@ -39,7 +40,7 @@ BEGIN
 
 	FETCH NEXT
 	FROM cServer
-	INTO @Srv
+	INTO @Srv, @nomeBancoDadosRemoto
 END
 
 CLOSE cServer

@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rankVendas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c066889-0de2-45c4-b9c5-ac88d4e5b8d3">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="data" class="java.util.Date"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[( $P{dataInicial} == null ? $P{data} : $P{dataInicial} )]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[($P{dataFinal} == null ? $P{data} : $P{dataFinal})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idVendedor" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new java.lang.Integer("0")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[DECLARE @dataInicial AS DATETIME
+	,@dataInicialGeral AS DATETIME
+	,@dataFinal AS DATETIME
+	,@dataFinalMes AS DATETIME
+	,@idVendedor AS INT
+	,@valorTop1 AS DECIMAL(29, 2)
+	,@RankVendedorGeral AS INT
+
+SET @dataInicial = $P{dataInicial}
+SET @dataFinal = $P{dataFinal}
+SET @idVendedor = $P{idVendedor}
+
+SELECT @dataInicialGeral = dbo.setTimeNull(CASE 
+			WHEN dataInicioFolhaPagamento = 0
+				THEN cast(@dataInicial - DAY(@dataInicial) + 1 AS DATETIME)
+			ELSE DATEADD(MONTH, CASE 
+						WHEN (SUBSTRING(CONVERT(VARCHAR, @dataInicial, 120), 9, 2) >= dataInicioFolhaPagamento)
+							THEN 00
+						ELSE (00 - 1)
+						END, CAST(SUBSTRING(CONVERT(VARCHAR, @dataInicial, 120), 1, 7) + '-' + dataInicioFolhaPagamento + ' 00:00:00.000' AS DATETIME))
+			END)
+	,@dataFinalMes = dbo.setTimeNull(CASE 
+			WHEN dataFimFolhaPagamento = 0
+				THEN cast(dateadd(MONTH, 1, @dataFinal) - day(@dataFinal) AS DATETIME)
+			ELSE DATEADD(MONTH, CASE 
+						WHEN (SUBSTRING(CONVERT(VARCHAR, @dataInicial, 120), 9, 2) >= dataInicioFolhaPagamento)
+							THEN 01
+						ELSE 00
+						END, CAST(SUBSTRING(CONVERT(VARCHAR, @dataInicial, 120), 1, 7) + '-' + dataFimFolhaPagamento + ' 00:00:00.000' AS DATETIME))
+			END)
+FROM jsysParametros
+
+SELECT @valorTop1 = max(topVendas.tot)
+FROM (
+	SELECT SUM(jsysOrcamento.valorLiquido) AS tot
+	FROM jsysOrcamento
+	WHERE (
+			jsysOrcamento.Data BETWEEN @dataInicial
+				AND @dataFinal
+			)
+		AND (jsysOrcamento.vendido = 1)
+		AND (jsysOrcamento.cancelado = 0)
+	GROUP BY jsysOrcamento.idFuncionario
+	) AS topVendas
+
+SELECT @RankVendedorGeral = CASE 
+		WHEN jsysClientes.idCliente = @idVendedor
+			THEN ROW_NUMBER() OVER (
+					ORDER BY SUM(jsysOrcamento.valorLiquido) DESC
+					)
+		ELSE @RankVendedorGeral
+		END
+FROM jsysOrcamento
+INNER JOIN jsysClientes ON jsysClientes.idCliente = CAST(jsysOrcamento.idFuncionario AS VARCHAR)
+WHERE (
+		jsysOrcamento.Data BETWEEN @dataInicialGeral
+			AND @dataFinal
+		)
+	AND (jsysOrcamento.vendido = 1)
+	AND (jsysOrcamento.cancelado = 0)
+GROUP BY jsysClientes.idCliente
+
+SELECT jsysOrcamento.idFuncionario AS codVendedor
+	,jsysClientes.nomeCorentista AS vendedor
+	,informacaoVendas.diasTrabalhados
+	,informacaoVendas.quantidadeVendasGeral
+	,informacaoVendas.mediaVendasDiaria
+	,CASE 
+		WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+			OR (@idVendedor = 0)
+			THEN count(jsysOrcamento.idOrcamento)
+		ELSE 0
+		END AS quantidadeVendas
+	,CASE 
+		WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+			OR (@idVendedor = 0)
+			THEN informacaoVendas.percentualVendasGeral
+		ELSE 0
+		END AS percentualVendasGeral
+	,SUM(jsysOrcamento.valorLiquido) - @valorTop1 AS saldo
+	,ROW_NUMBER() OVER (
+		ORDER BY SUM(jsysOrcamento.valorLiquido) - @valorTop1 DESC
+		) AS rankDiario
+	,CASE 
+		WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+			OR (@idVendedor = 0)
+			THEN SUM(jsysOrcamento.valorLiquido)
+		ELSE 0
+		END AS valorDiario
+	,CASE 
+		WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+			THEN @RankVendedorGeral
+		WHEN (@idVendedor = 0)
+			THEN rankGeral.rankMes
+		ELSE 0
+		END AS rankGeral
+	,informacaoVendas.valorVendido AS valorGeral
+	,ROUND(informacaoVendas.valorComissao, 2) AS valorComissao
+	,CASE 
+		WHEN jsysOrcamento.idFuncionario = @idVendedor
+			OR (@idVendedor = 0)
+			THEN round((jsysMetas.vendedor - (informacaoVendas.valorVendido - SUM(jsysOrcamento.valorLiquido))) / CASE 
+						WHEN dbo.getDiasUteis(@dataFinal, @dataFinalMes) = 0
+							THEN 1
+						ELSE dbo.getDiasUteis(@dataFinal, @dataFinalMes)
+						END, 2, 1)
+		ELSE 0
+		END AS meta
+FROM jsysOrcamento
+CROSS JOIN jsysMetas
+INNER JOIN jsysClientes ON (jsysClientes.idCliente = jsysOrcamento.idFuncionario)
+LEFT OUTER JOIN (
+	SELECT jsysOrcamento.idFuncionario AS codVendedor
+		,CASE 
+			WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+				OR (@idVendedor = 0)
+				THEN SUM(jsysOrcamento.valorLiquido)
+			ELSE 0
+			END AS valorVendido
+		,CASE 
+			WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+				OR (@idVendedor = 0)
+				THEN (SUM(jsysOrcamento.valorLiquido) * jsysClientes.comissaoVista) / 100
+			ELSE 0
+			END AS valorComissao
+		,CASE 
+			WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+				OR (@idVendedor = 0)
+				THEN count(jsysOrcamento.idorcamento)
+			ELSE 0
+			END AS quantidadeVendasGeral
+		,CASE 
+			WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+				OR (@idVendedor = 0)
+				THEN round(cast(count(jsysOrcamento.idorcamento) AS DECIMAL) / ponto.diasTrabalhados, 2)
+			ELSE 0
+			END AS mediaVendasDiaria
+		,CASE 
+			WHEN (jsysOrcamento.idFuncionario = @idVendedor)
+				OR (@idVendedor = 0)
+				THEN ponto.diasTrabalhados
+			ELSE 0
+			END AS diasTrabalhados
+		,cast(round((SUM(jsysOrcamento.valorLiquido) * 100) / somaVendas.totalGeral, 2) AS DECIMAL(16, 2)) AS percentualVendasGeral
+	FROM jsysOrcamento
+	INNER JOIN jsysClientes ON jsysClientes.idCliente = jsysOrcamento.idFuncionario
+	CROSS JOIN (
+		SELECT sum(jsysVendasComissao.totalVendido) AS totalGeral
+		FROM jsysVendasComissao
+		WHERE DATA BETWEEN @dataInicialGeral
+				AND @dataFinal
+		) AS somaVendas
+	INNER JOIN (
+		SELECT jsysFuncionarios.idFuncionario
+			,isnull(td.diasTrabalhados, 1) AS diasTrabalhados
+		FROM jsysFuncionarios
+		LEFT JOIN (
+			SELECT idFuncionario
+				,count(idFuncionario) AS diasTrabalhados
+			FROM funcionariosPonto
+			WHERE (substring(convert(VARCHAR, entrada, 108), 1, 2) > 0)
+				AND (
+					dbo.setTimeNull(entrada) BETWEEN @dataInicialGeral
+						AND @dataFinal
+					)
+			GROUP BY idFuncionario
+			) AS td ON td.idFuncionario = jsysFuncionarios.idFuncionario
+		) AS ponto ON ponto.idFuncionario = jsysOrcamento.idFuncionario
+	WHERE (
+			jsysOrcamento.data BETWEEN @dataInicialGeral
+				AND @dataFinal
+			)
+		AND (jsysOrcamento.vendido = 1)
+		AND (jsysOrcamento.cancelado = 0)
+	GROUP BY jsysOrcamento.idFuncionario
+		,jsysClientes.comissaoVista
+		,somaVendas.totalGeral
+		,ponto.diasTrabalhados
+	) AS informacaoVendas ON informacaoVendas.codVendedor = jsysClientes.idCliente
+INNER JOIN (
+	SELECT ROW_NUMBER() OVER (
+			ORDER BY SUM(jsysOrcamento.valorLiquido) DESC
+			) AS rankMes
+		,jsysOrcamento.idFuncionario
+	FROM jsysOrcamento
+	WHERE (
+			jsysOrcamento.Data BETWEEN @dataInicialGeral
+				AND @dataFinal
+			)
+		AND (jsysOrcamento.vendido = 1)
+		AND (jsysOrcamento.cancelado = 0)
+	GROUP BY jsysOrcamento.idFuncionario
+	) AS rankGeral ON rankGeral.idFuncionario = jsysClientes.idCliente
+WHERE (
+		jsysOrcamento.data BETWEEN @dataInicial
+			AND @dataFinal
+		)
+	AND (jsysOrcamento.vendido = 1)
+	AND (jsysOrcamento.cancelado = 0)
+	AND (
+		jsysMetas.mes BETWEEN @dataInicialGeral
+			AND @dataFinalMes
+		)
+	AND (jsysClientes.admissao IS NOT NULL)
+	AND (jsysClientes.colaborador = 1)
+	AND (jsysClientes.inativo = 0)
+GROUP BY jsysOrcamento.idFuncionario
+	,jsysClientes.nomeCorentista
+	,informacaoVendas.valorVendido
+	,informacaoVendas.valorComissao
+	,informacaoVendas.quantidadeVendasGeral
+	,informacaoVendas.percentualVendasGeral
+	,informacaoVendas.diasTrabalhados
+	,informacaoVendas.mediaVendasDiaria
+	,jsysMetas.vendedor
+	,rankGeral.rankMes
+ORDER BY 8 DESC
+]]>
+	</queryString>
+	<field name="codVendedor" class="java.lang.Integer"/>
+	<field name="vendedor" class="java.lang.String"/>
+	<field name="diasTrabalhados" class="java.lang.Integer"/>
+	<field name="quantidadeVendasGeral" class="java.lang.Integer"/>
+	<field name="mediaVendasDiaria" class="java.math.BigDecimal"/>
+	<field name="quantidadeVendas" class="java.lang.Integer"/>
+	<field name="percentualVendasGeral" class="java.math.BigDecimal"/>
+	<field name="saldo" class="java.math.BigDecimal"/>
+	<field name="rankDiario" class="java.lang.Long"/>
+	<field name="valorDiario" class="java.math.BigDecimal"/>
+	<field name="rankGeral" class="java.lang.Long"/>
+	<field name="valorGeral" class="java.math.BigDecimal"/>
+	<field name="valorComissao" class="java.math.BigDecimal"/>
+	<field name="meta" class="java.math.BigDecimal"/>
+	<title>
+		<band height="23">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="802" height="20" forecolor="#000000" uuid="34f5c3e8-55e0-422d-9f21-d4110807bfe9"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Tahoma" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rank de Vendas de " 
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="801" height="1" uuid="253d669b-40ae-4d63-940c-4792ff4a4dd0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31">
+			<line>
+				<reportElement x="0" y="26" width="801" height="1" forecolor="#666666" uuid="bc93ec6b-8885-441f-9051-5649a368782b"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="27" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="be003fa6-6988-4b61-87b9-71f564802675"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rank]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="0" width="182" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="4357bd0d-c6aa-43a0-afe9-e2047e409e30"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Colaborador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="68" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="553" y="0" width="38" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="7683ef1a-a95a-44b3-8da1-fec5b7878661"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rank Geral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="676" y="0" width="55" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="89492205-4286-4231-8f8b-ebf7782c8807"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comissão Geral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="416" y="0" width="60" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="376" y="0" width="36" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="285" y="0" width="42" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="244" y="0" width="37" height="26" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Media Vendas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="216" y="0" width="25" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="331" y="0" width="42" height="26" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#E6E6E6" uuid="a0580848-491e-4bae-af50-02a54319b22e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VendasGeral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="596" y="0" width="76" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="252df353-fe20-4263-9636-6971852019da"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="736" y="0" width="66" height="26" forecolor="#000000" backcolor="#E6E6E6" uuid="89492205-4286-4231-8f8b-ebf7782c8807"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Meta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="12" width="801" height="1" uuid="d4abf520-ef45-4db7-852a-10723ce7ada8"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="27" height="11" uuid="ade7524c-eded-4d0e-bf1a-0636d72183b9"/>
+				<textElement>
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rankDiario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="416" y="0" width="60" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="30" y="0" width="182" height="11" uuid="c6874658-0567-44fa-aa9f-7e02a3ce3f38"/>
+				<textElement>
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendedor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="480" y="0" width="68" height="11" uuid="13f3aa57-d608-42ea-8aa9-2500cf649b15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorDiario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="553" y="1" width="38" height="11" uuid="038f83a0-c409-4a9e-bbaa-36f6cdcf2b5f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rankGeral}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="676" y="0" width="55" height="11" uuid="dd8706bb-3ac3-4980-81ce-c969541caed6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorComissao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00">
+				<reportElement x="376" y="0" width="24" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentualVendasGeral}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0;-#,##0">
+				<reportElement x="285" y="0" width="41" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidadeVendas}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="244" y="0" width="37" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mediaVendasDiaria}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement x="331" y="0" width="42" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidadeVendasGeral}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0;-#,##0" isBlankWhenNull="true">
+				<reportElement x="216" y="0" width="25" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diasTrabalhados}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="596" y="0" width="76" height="11" uuid="3e518e5c-b72e-4905-9183-2bdb85e1ace0"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorGeral}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="410" y="0" width="0" height="11" uuid="75624e67-6335-4665-bc10-1eae00c951a0"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="736" y="0" width="66" height="11" uuid="dd8706bb-3ac3-4980-81ce-c969541caed6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{meta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="762" height="13" backcolor="#E6E6E6" uuid="95e1a49d-2c3b-44e7-9419-79d3e17a9013"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Paginas "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="762" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="38c8cb12-1fc1-48f3-948b-e56cf18d8002"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="416" height="13" uuid="93ef7411-63b9-491f-915d-9373fe55fab9"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,9 +1,8 @@
 package br.sql.nfe.danfe;
 
 import static br.JavaApplicationJsys.OPTIONS;
-import br.com.samuelweb.nfe.exception.NfeException;
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNFe;
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+import br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNfeProc;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.bean.DanfeNFCe;
 import br.sql.bean.DanfeNFCeIten;
 import br.sql.bean.DanfeNFCePagamentos;
@@ -12,7 +11,6 @@ import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.LigacaoServicos;
 import br.sql.nfe.links.Servicos;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.ManagerString;
 import br.sql.util.ReportUtils;
 import br.sql.util.Retorna;
@@ -60,7 +58,7 @@ public class ImprimirDanfe {
             JsysNFe nfe = getJsysNFe(chaveAcesso);
             if (nfe != null) {
                 try {
-                    TNfeProc NFeProc = XmlUtil.xmlToObject(XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe()), TNfeProc.class);
+                    TNfeProc NFeProc = XmlNfeUtil.xmlToObject(nfe.getProcNFe(), TNfeProc.class);
                     //TNfeProc NFeProc = GerandoNFeProc.gerar(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                     String tpAmb = NFeProc.getNFe().getInfNFe().getIde().getTpAmb();
                     String tpImp = NFeProc.getNFe().getInfNFe().getIde().getTpImp();
@@ -97,7 +95,7 @@ public class ImprimirDanfe {
                             danf.setDivInfoFixas1("DANFE NFC-e - Documento Auxiliar da Nota Fiscal de Consumidor Eletrõnica");
                             danf.setDivInfoFixas2("Não permite aproveitamento de crédito de ICMS");
                             List<DanfeNFCeIten> listProd = new ArrayList<>();
-                            for (TNFe.InfNFe.Det det : NFeProc.getNFe().getInfNFe().getDet()) {
+                            for (br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe.InfNFe.Det det : NFeProc.getNFe().getInfNFe().getDet()) {
                                 DanfeNFCeIten prod = new DanfeNFCeIten();
                                 prod.setIdProduto(Integer.valueOf(det.getProd().getCProd()));
                                 prod.setDescricao(det.getProd().getXProd());
@@ -112,7 +110,7 @@ public class ImprimirDanfe {
                             danf.setQtdeItens(new BigDecimal(NFeProc.getNFe().getInfNFe().getDet().size()));
                             danf.setvTotalNfce(new BigDecimal(NFeProc.getNFe().getInfNFe().getTotal().getICMSTot().getVNF()));
                             List<DanfeNFCePagamentos> pags = new ArrayList<>();
-                            for (TNFe.InfNFe.Pag.DetPag p : NFeProc.getNFe().getInfNFe().getPag().getDetPag()) {
+                            for (br.com.swconsultoria.nfe.schema_4.retEnviNFe.TNFe.InfNFe.Pag.DetPag p : NFeProc.getNFe().getInfNFe().getPag().getDetPag()) {
                                 DanfeNFCePagamentos pag = new DanfeNFCePagamentos();
                                 pag.setFormaPagamento(p.getTPag());
                                 pag.setvTotalPago(p.getVPag());
@@ -181,7 +179,7 @@ public class ImprimirDanfe {
                             }
                         }
                     }
-                } catch (JAXBException | NfeException ex) {
+                } catch (JAXBException ex) {
                     Log.registraErro(ImprimirDanfe.class, "nfce", ex);
                 }
             }
@@ -199,18 +197,19 @@ public class ImprimirDanfe {
             if (nfe != null) {
                 try {
                     //xml.
-                    String xml = XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
+                    String xml = nfe.getProcNFe();
                     Document doc = loadXMLFromString(xml);
-                    //estrutura do xml.
-                    String recordPath = "/nfeProc/NFe/infNFe/det";
                     //Fonte de Dados.
-                    JRXmlDataSource xmlDataSource = new JRXmlDataSource(doc, recordPath);
+                    JRXmlDataSource xmlDataSource
+                            = new JRXmlDataSource(doc, "/nfeProc/NFe/infNFe/det");
                     // Parametros.
                     Map<String, Object> param = getFaturas(doc);
                     param.put("Logo", PAR.getLogo());
-                    ReportUtils.openReport("Imprimindo NF-e", "/br/rel/fiscal/danfeR.jasper", param, xmlDataSource);
-                    //ReportUtils.pirntReport("Imprimindo NF-e", inputStream, parametros, new JRBeanCollectionDataSource(dados), true);
-                } catch (JAXBException | NfeException | JRException e) {
+                    ReportUtils.openReport("Imprimindo NF-e",
+                            "/br/rel/fiscal/danfeR.jasper",
+                            param,
+                            xmlDataSource);
+                } catch (JRException e) {
                     Log.registraErro("ImprimirFiscal", "nfe", e);
                 }
             }
@@ -218,13 +217,12 @@ public class ImprimirDanfe {
     }
 
     private static JsysNFe getJsysNFe(String chaveAcesso) {
-        JsysNFe nfe = null;
         if (!"".equals(chaveAcesso)) {
             Map<Object, Object> filtro = new HashMap<>();
             filtro.put("chaveAcesso", chaveAcesso);
-            nfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
+            return (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
         }
-        return nfe;
+        return null;
     }
 
     public static byte[] nfePdf(String chaveAcesso) {
@@ -233,8 +231,7 @@ public class ImprimirDanfe {
         if (nfe != null) {
             try {
                 //xml.
-
-                String xml = XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
+                String xml = nfe.getProcNFe(); //XmlNfeUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe());
                 Document doc = loadXMLFromString(xml);
                 //estrutura do xml.
                 String recordPath = "/nfeProc/NFe/infNFe/det";
@@ -253,7 +250,7 @@ public class ImprimirDanfe {
                  * Exportando em pdf
                  */
                 pdf = JasperExportManager.exportReportToPdf(print);
-            } catch (NfeException | JAXBException | JRException e) {
+            } catch (JRException e) {
                 Log.registraErro("ImprimirDanfe", "nfePdf", e);
                 pdf = null;
             }

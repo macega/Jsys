@@ -1,14 +1,15 @@
 package br.sql.janelas.utilitarios;
 
-import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+//import br.inf.portalfiscal.nfe.schema_4.procNFe.TNfeProc;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TNfeProc;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.nfe.xml.GerandoProcEventoNFe;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.FileEx;
 import br.sql.util.ManagerData;
+import br.sql.util.ManagerString;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -190,7 +191,7 @@ public class ImportadorXML extends javax.swing.JDialog {
                             new StringBuilder().append(diretorio).append("/").append(file).toString());
                     if (FileEx.getExtension(fileXml).equals(FileEx.xml)) {
                         String xml = fileXml.stringRead();
-                        xml = xml.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+                        xml = ManagerString.prepareXmlToSqlServer(xml);
                         if (xml.length() > 0) {
                             switch (getTipoXML(xml)) {
                                 case "nfeProc":
@@ -265,7 +266,8 @@ public class ImportadorXML extends javax.swing.JDialog {
         private void importNfeProc(String xml) {
             try {
                 //TNfeProc nfeProc = GerandoNFeProc.gerar(xml);
-                TNfeProc nfeProc = XmlUtil.xmlToObject(xml, TNfeProc.class);
+                TNfeProc nfeProc = br.com.swconsultoria.nfe.util.XmlNfeUtil.xmlToObject(xml, TNfeProc.class);
+                //TNfeProc nfeProc = XmlUtil.xmlToObject();
                 JsysNFe jsysNfe = new JsysNFe();
                 jsysNfe.setProcNFe(xml);
                 jsysNfe.setVenda(0);
@@ -303,13 +305,14 @@ public class ImportadorXML extends javax.swing.JDialog {
         }
 
         private void importProcEventoNFe(String xml) {
-            br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
+            //br.inf.portalfiscal.nfe.schema.procEventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
+            br.com.swconsultoria.nfe.schema.eventoCancNFe.TProcEvento procEventoNFe = GerandoProcEventoNFe.gerar(xml);
             JsysNFeEvento evento = new JsysNFeEvento();
             evento.setIdEvento(procEventoNFe.getEvento().getInfEvento().getId());
             evento.setCOrgao(procEventoNFe.getEvento().getInfEvento().getCOrgao());
             evento.setTpAmb(procEventoNFe.getEvento().getInfEvento().getTpAmb());
             evento.setChNFe(procEventoNFe.getEvento().getInfEvento().getChNFe());
-            evento.setDhEvento(ManagerData.formataData(procEventoNFe.getEvento().getInfEvento().getDhEvento(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
+            evento.setDhEvento(ManagerData.formataData(procEventoNFe.getEvento().getInfEvento().getDhEvento(), ManagerData.FORMATO_NFE));
             evento.setTpEvento(procEventoNFe.getEvento().getInfEvento().getTpEvento());
             evento.setNSeqEvento(Integer.parseInt(procEventoNFe.getEvento().getInfEvento().getNSeqEvento()));
             evento.setDescEvento(procEventoNFe.getEvento().getInfEvento().getDetEvento().getDescEvento() + "");

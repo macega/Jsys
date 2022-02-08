@@ -1098,6 +1098,11 @@ public class Update {
             script.add(new String[]{"ALTER TABLE jsysParametros ADD dataFimFolhaPagamento varchar(2) NULL", "jsysParametros"});
             script.add(new String[]{"ALTER TABLE jsysParametros SET (LOCK_ESCALATION = TABLE)", "jsysParametros"});
         }
+        if (vercaoAtulizacao == 63) {
+            script.add(new String[]{"ALTER TABLE jsysNFeInut ADD xmlProcInutNFe xml NULL", "jsysNFeInut"});
+            script.add(new String[]{"ALTER TABLE jsysNFeInut SET (LOCK_ESCALATION = TABLE)", "jsysNFeInut"});
+        }
+
 //        if (vercaoAtulizacao == 0) {
 //            script.add(new String[]{"", ""});
 //        }

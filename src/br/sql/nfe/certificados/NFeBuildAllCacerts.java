@@ -252,11 +252,11 @@ public class NFeBuildAllCacerts {
     }
 
     private static void info(String log) {
-        System.out.println("INFO: " + log);
+        //System.out.println("INFO: " + log);
     }
 
     private static void error(String log) {
-        System.out.println("ERROR: " + log);
+        //System.out.println("ERROR: " + log);
     }
 
 }

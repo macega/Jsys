@@ -693,7 +693,7 @@ public class JsysNFe implements Serializable {
     }
 
     public void setEnviNFe(String enviNFe) {
-        this.enviNFe = enviNFe.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+        this.enviNFe = ManagerString.prepareXmlToSqlServer(enviNFe);
     }
 
     public String getRetConsReciNFe() {
@@ -701,7 +701,7 @@ public class JsysNFe implements Serializable {
     }
 
     public void setRetConsReciNFe(String retConsReciNFe) {
-        this.retConsReciNFe = retConsReciNFe.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+        this.retConsReciNFe = ManagerString.prepareXmlToSqlServer(retConsReciNFe);
     }
 
     public String getChaveAcesso() {
@@ -718,7 +718,7 @@ public class JsysNFe implements Serializable {
     }
 
     public void setProcNFe(String procNFe) {
-        this.procNFe = procNFe;
+        this.procNFe = ManagerString.prepareXmlToSqlServer(procNFe);
     }
 
     public Integer getIdTrasportadora() {

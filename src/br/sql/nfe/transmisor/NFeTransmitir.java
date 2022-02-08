@@ -1,10 +1,16 @@
 package br.sql.nfe.transmisor;
 
-import br.com.samuelweb.nfe.dom.ConfiguracoesNfe;
-import br.com.samuelweb.nfe.util.ConstantesUtil;
-import br.com.samuelweb.nfe.util.ObjetoUtil;
-import br.com.samuelweb.nfe.util.WebServiceUtil;
-import br.inf.portalfiscal.www.nfe_400.wsdl.NFeAutorizacao.NFeAutorizacao4Stub;
+//import br.com.samuelweb.nfe.dom.ConfiguracoesNfe;
+//import br.com.samuelweb.nfe.util.ConstantesUtil;
+//import br.com.samuelweb.nfe.util.ObjetoUtil;
+//import br.com.samuelweb.nfe.util.WebServiceUtil;
+//import br.inf.portalfiscal.www.nfe_400.wsdl.NFeAutorizacao.NFeAutorizacao4Stub;
+import br.com.swconsultoria.nfe.dom.ConfiguracoesNfe;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.dom.enuns.ServicosEnum;
+import br.com.swconsultoria.nfe.util.ObjetoUtil;
+import br.com.swconsultoria.nfe.util.WebServiceUtil;
+import br.com.swconsultoria.nfe.wsdl.NFeAutorizacao.NFeAutorizacao4Stub;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysParametros;
@@ -107,7 +113,7 @@ public class NFeTransmitir implements transmitirInterface {
                     omElement.addAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe", null);
                 }
             }
-            
+
 //            if (nfce) {
 //                GerandoNFeTNFe cast = new GerandoNFeTNFe();
 //                TEnviNFe nfe = cast.CastTEnviNFe(XML);
@@ -179,7 +185,6 @@ public class NFeTransmitir implements transmitirInterface {
 //                GravaNoArquivo gravador = new GravaNoArquivo();
 //                gravador.salvarArquivo(ome.toString(), br.JavaApplicationJsys.PASTA_XML_ENVI_NFE, chaveAcesso, "xml");
 //            }
-
 //            NFeAutorizacao4Stub.NfeDadosMsg dadosMsg = new NFeAutorizacao4Stub.NfeDadosMsg();
 //            dadosMsg.setExtraElement(ome);
 //            //NFeAutorizacao4Stub.NfeCabecMsg nfeCabecMsg = new NFeAutorizacao4Stub.NfeCabecMsg();
@@ -202,10 +207,13 @@ public class NFeTransmitir implements transmitirInterface {
             dadosMsg.setExtraElement(ome);
 
             NFeAutorizacao4Stub stub = new NFeAutorizacao4Stub(
-                    nfce ? WebServiceUtil.getUrl(config, ConstantesUtil.NFCE, ConstantesUtil.SERVICOS.ENVIO)
-                            : WebServiceUtil.getUrl(config, ConstantesUtil.NFE, ConstantesUtil.SERVICOS.ENVIO));
+                    WebServiceUtil.getUrl(
+                            config,
+                            nfce ? DocumentoEnum.NFCE : DocumentoEnum.NFE,
+                            ServicosEnum.ENVIO));
             // Timeout
-            if (!ObjetoUtil.isEmpty(config.getTimeout())) {
+            if (ObjetoUtil.verifica(config.getTimeout()).isPresent()) {
+                //if (!ObjetoUtil.verifica(config.getTimeout())) {
                 stub._getServiceClient().getOptions().setProperty(HTTPConstants.SO_TIMEOUT, config.getTimeout());
                 stub._getServiceClient().getOptions().setProperty(HTTPConstants.CONNECTION_TIMEOUT,
                         config.getTimeout());
@@ -213,14 +221,15 @@ public class NFeTransmitir implements transmitirInterface {
             NFeAutorizacao4Stub.NfeResultMsg result = stub.nfeAutorizacaoLote(dadosMsg);
 
             //return XmlUtil.xmlToObject(result.getExtraElement().toString(), TRetEnviNFe.class);
-            ////////////////////////////////
-            GravaNoArquivo gravador = new GravaNoArquivo();
-            gravador.salvarArquivo(result.getExtraElement().toString(), 
-                    br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE, 
-                    chaveAcesso, 
-                    "xml");
 
-            br.inf.portalfiscal.nfe.schema_4.retEnviNFe.TRetEnviNFe retEnviNFe = GerandoRetXML.getTRetEnviNFe(result.getExtraElement().toString());
+            GravaNoArquivo gravador = new GravaNoArquivo();
+            gravador.salvarArquivo(result.getExtraElement().toString(),
+                    br.JavaApplicationJsys.PASTA_XML_RET_CONS_RECI_NFE,
+                    chaveAcesso,
+                    "xml");
+            br.com.swconsultoria.nfe.schema_4.retEnviNFe.TRetEnviNFe retEnviNFe;
+            retEnviNFe = GerandoRetXML.getTRetEnviNFe(
+                    result.getExtraElement().toString());
             java.util.Map<Object, Object> filtro = new java.util.HashMap<>();
             filtro.put("chaveAcesso", chaveAcesso);
             JsysNFe nfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);

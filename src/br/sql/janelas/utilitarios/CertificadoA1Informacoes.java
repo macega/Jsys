@@ -255,7 +255,7 @@ public class CertificadoA1Informacoes extends javax.swing.JDialog {
             keystore.load(new FileInputStream(par.getCaminhoDoCertificadoDoCliente()), par.getSenhaDoCertificadoDoCliente().toCharArray());
 
             Enumeration<String> eAliases = keystore.aliases();
-
+            
             while (eAliases.hasMoreElements()) {
                 String alias = (String) eAliases.nextElement();
                 Certificate certificado = (Certificate) keystore.getCertificate(alias);

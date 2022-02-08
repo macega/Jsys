@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,17 +28,18 @@ public class ManagerData {
     public static final String TIME_ZONE_ID = "America/La_Paz";
     public static final int INICIO = 0;
     public static final int FIM = 1;
+
     public static final String FORMATO_NFE = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
     /**
      * novo gregorian calendar, onde temos a data atual
+     *
      * @return
      */
     public static GregorianCalendar getGregorianCalendar() {
         GregorianCalendar gc = (GregorianCalendar) GregorianCalendar.getInstance();
         gc.setTime(new Date(System.currentTimeMillis()));
         gc.setTimeZone(TimeZone.getTimeZone(TIME_ZONE_ID));
-        //System.out.println(gc.getTimeZone());
         return gc;
     }
 
@@ -46,6 +49,14 @@ public class ManagerData {
      */
     public static Date getDate() {
         return getGregorianCalendar().getTime();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static LocalDateTime now() {
+        return LocalDateTime.now(ZoneId.of(TIME_ZONE_ID));
     }
 
     /**
@@ -99,9 +110,8 @@ public class ManagerData {
 
     /**
      *
-     * @param periodo 
-     * 0 retorna a data com a hora 00:00.00.000
-     * 1 retorna a hora 23:59.59.000
+     * @param periodo 0 retorna a data com a hora 00:00.00.000 1 retorna a hora
+     * 23:59.59.000
      * @return
      */
     public static Date getDataAtualTypeDate(int periodo) {
@@ -682,7 +692,7 @@ public class ManagerData {
      */
     public static Date setHoraInicioDia(Date date) {
         GregorianCalendar gc = getGregorianCalendar();
-        
+
         gc.setTime(date);
         gc.set(GregorianCalendar.HOUR_OF_DAY, 0);
         //gc.set(GregorianCalendar.HOUR, 0);

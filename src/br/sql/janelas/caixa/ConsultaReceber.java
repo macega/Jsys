@@ -809,13 +809,6 @@ public class ConsultaReceber extends JPanel {
         return (JsysTitulos) uJComboBoxTitulos.getSelectedObject();
     }
 
-//    @SuppressWarnings("unchecked")
-//    private void setValoresJcombobox() {
-//        jComboBoxTitulos.removeAllItems();
-//        for (JsysTitulos t : listTitulos) {
-//            jComboBoxTitulos.addItem(t.getIdTitulo());
-//        }
-//    }
     private class setFiltro extends SwingWorker<Void, Object> {
 
         final Progress p = new Progress(false);

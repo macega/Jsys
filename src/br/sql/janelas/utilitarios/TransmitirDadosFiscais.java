@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.sql.janelas.utilitarios;
 
-import br.com.samuelweb.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TEnviNFe;
+import br.com.swconsultoria.nfe.schema_4.enviNFe.TRetEnviNFe;
+import br.com.swconsultoria.nfe.util.XmlNfeUtil;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeEvento;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.xml.GerandoProcEventoNFe;
 import br.sql.log.Log;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Mail;
 import br.sql.util.ManagerData;
@@ -265,8 +262,24 @@ public class TransmitirDadosFiscais extends javax.swing.JDialog implements Prope
                         List<Object> O = Retorna.findList("JsysNFe.findXml", filtro);
                         for (Object o : O) {
                             JsysNFe nfe = (JsysNFe) o;
-                            if (Validar.isNotNullOrWhite(nfe.getEnviNFe(), nfe.getRetConsReciNFe())) {
-                                gravador.salvarArquivo(XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe()), // GerandoNFeProc.gerarString(nfe.getEnviNFe(), nfe.getRetConsReciNFe())
+                            if (Validar.isNotNullOrWhite(nfe.getProcNFe())) {
+                                gravador.salvarArquivo(nfe.getProcNFe(),
+                                        subPasta.toString() + File.separator + "serie_" + nfe.getSerie(),
+                                        nfe.getChaveAcesso(),
+                                        "xml");
+                                if ("55".equals(m)) {
+                                    gravador.salvarArquivo(
+                                            br.sql.nfe.danfe.ImprimirDanfe.nfePdf(nfe.getChaveAcesso()),
+                                            subPasta.toString() + File.separator + "serie_" + nfe.getSerie(),
+                                            nfe.getChaveAcesso(),
+                                            "pdf");
+                                }
+                            } else if (Validar.isNotNullOrWhite(nfe.getEnviNFe(), nfe.getRetConsReciNFe())) {
+                                gravador.salvarArquivo(
+                                        XmlNfeUtil.criaNfeProc(
+                                                XmlNfeUtil.xmlToObject(nfe.getEnviNFe(), TEnviNFe.class),
+                                                (XmlNfeUtil.xmlToObject(nfe.getRetConsReciNFe(), TRetEnviNFe.class)).getProtNFe()
+                                        ),
                                         subPasta.toString() + File.separator + "serie_" + nfe.getSerie(),
                                         nfe.getChaveAcesso(),
                                         "xml");
@@ -338,7 +351,7 @@ public class TransmitirDadosFiscais extends javax.swing.JDialog implements Prope
                 setProgress(100);
                 publish("E-mail Enviado.");
                 return true;
-            } catch (NfeException | JAXBException | UnsupportedEncodingException | MessagingException ex) {
+            } catch (JAXBException | UnsupportedEncodingException | MessagingException | NfeException ex) {
                 setProgress(100);
                 publish("Erro não foi possível enviar o E-mail.");
                 publish(ex.getMessage());

@@ -217,14 +217,14 @@ public class Retorna {
             javax.persistence.Query q = br.sql.acesso.ConnectionFactory.getEntityManagerNew().createNamedQuery("JsysLojas.findByIdloja");
             q.setParameter("idloja", valor);
             List<br.sql.bean.JsysLojas> data = q.getResultList();
-            for (Object entity : data) {
+            data.forEach((entity) -> {
                 br.sql.acesso.ConnectionFactory.getEntityManagerNew().refresh(entity);
-            }
-            return data.get(0);
+            });
+            return data.isEmpty() ? null : data.get(0);
         } catch (Exception e) {
             Log.registraErro("Retorna", "jsysLojas", e);
+            return null;
         }
-        return null;
     }
 
     @SuppressWarnings("unchecked")

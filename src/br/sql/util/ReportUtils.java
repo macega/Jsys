@@ -35,6 +35,8 @@ import net.sf.jasperreports.swing.JRViewer;
  * @author Juliano Alves Medina
  */
 public final class ReportUtils implements PropertyChangeListener {
+    
+    static final Progress p = new Progress("Preparando relatorio", Progress.MODAL, Progress.INDETERMINATE);
 
     /**
      * Abre um relatório.
@@ -207,42 +209,6 @@ public final class ReportUtils implements PropertyChangeListener {
             }
         }
     }
-//    /**
-//     * imprime um relatório usando um datasource genérico.
-//     *
-//     * @param localRelatorio
-//     * @param parametros Parâmetros utilizados pelo relatório.
-//     * @param conexao Conexão utilizada para a execução da query.
-//     * @param solicitaImpr solicitar impressora para enviar o relatorio
-//     * @throws JRException Caso ocorra algum problema na execução do relatório
-//     */
-//    @SuppressWarnings("unchecked")
-//    public static void pirntReport(
-//            final String localRelatorio,
-//            final Map parametros,
-//            final Connection conexao,
-//            final Boolean solicitaImpr) throws JRException {
-//        TaskReportPrint taskReportPrint = new TaskReportPrint(localRelatorio, parametros, conexao, solicitaImpr);
-//        taskReportPrint.execute();
-//        p.setVisible(true);
-//    }
-//        /**
-//     * imprime um relatório usando um datasource genérico.
-//     *
-//     * @param localRelatorio
-//     * @param parametros Parâmetros utilizados pelo relatório.
-//     * @param solicitaImpr solicitar impressora para enviar o relatorio
-//     * @throws JRException Caso ocorra algum problema na execução do relatório
-//     */
-//    @SuppressWarnings("unchecked")
-//    public static void pirntReport(
-//            final String localRelatorio,
-//            final Map parametros,
-//            final Boolean solicitaImpr) throws JRException {
-//        TaskReportPrint taskReportPrint = new TaskReportPrint(localRelatorio, parametros, solicitaImpr);
-//        taskReportPrint.execute();
-//        p.setVisible(true);
-//    }
 
     /**
      *
@@ -259,13 +225,13 @@ public final class ReportUtils implements PropertyChangeListener {
         try {
             JasperPrint print = JasperFillManager.fillReport(inputStream, parametros, conexao);
             pdf = JasperExportManager.exportReportToPdf(print);
-        } catch (Exception e) {
+        } catch (JRException e) {
             Log.registraErro("ImprimirDanfe", "nfePdf", e);
         }
         return pdf;
     }
 
-    private static final Progress p = new Progress("Preparando Relatorio", true, true);
+    
 
     @SuppressWarnings("unchecked")
     private static JasperPrint getJPrint(InputStream inputStream, Map parametros, Connection conexao) throws JRException {
@@ -337,7 +303,7 @@ public final class ReportUtils implements PropertyChangeListener {
         @SuppressWarnings("unchecked")
         protected Void doInBackground() {
             try {
-                publish("Abrindo o banco de dados");
+                publish("Carregando dados, aguarde por favor");
                 JasperPrint JPrint;
                 InputStream inputStream = getClass().getResourceAsStream(localRelatorio);
                 if (conexao != null) {
@@ -433,7 +399,7 @@ public final class ReportUtils implements PropertyChangeListener {
         @Override
         protected Void doInBackground() {
             try {
-                publish("Abrindo o banco de dados");
+                publish("Carregando dados, aguarde por favor");
                 if (conexao != null) {
                     JPrint = getJPrint(getClass().getResourceAsStream(localRelatorio), parametros, conexao);
                 } else if (dataSource != null) {

@@ -141,7 +141,7 @@ public class Cacert {
 //            //eSOCIAL Produção
 //            listaWebServices.add("webservices.esocial.gov.br");
 
-            System.out.println(CACERTS_PATH + SEPARATOR + CACERTS_NAME);
+            //System.out.println(CACERTS_PATH + SEPARATOR + CACERTS_NAME);
             File cafile = new File(CACERTS_PATH + SEPARATOR + CACERTS_NAME);
             OutputStream out = new FileOutputStream(cafile);
             ks.store(out, passphrase);
@@ -227,10 +227,10 @@ public class Cacert {
     }
 
     private static void info(String log) {
-        System.out.println("INFO: " + log);
+        //System.out.println("INFO: " + log);
     }
 
     private static void error(String log) {
-        System.out.println("ERROR: " + log);
+        //System.out.println("ERROR: " + log);
     }
 }

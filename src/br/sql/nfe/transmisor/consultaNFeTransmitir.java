@@ -1,8 +1,11 @@
 package br.sql.nfe.transmisor;
 
-import br.inf.portalfiscal.nfe.schema_4.consSitNFe.ObjectFactory;
-import br.inf.portalfiscal.nfe.schema_4.consSitNFe.TConsSitNFe;
-import br.inf.portalfiscal.www.nfe_400.wsdl.NFeConsultaProtocolo.NFeConsultaProtocolo4Stub;
+//import br.inf.portalfiscal.nfe.schema_4.consSitNFe.ObjectFactory;
+import br.com.swconsultoria.nfe.schema_4.consSitNFe.ObjectFactory;
+//import br.inf.portalfiscal.nfe.schema_4.consSitNFe.TConsSitNFe;
+import br.com.swconsultoria.nfe.schema_4.consSitNFe.TConsSitNFe;
+//import br.inf.portalfiscal.www.nfe_400.wsdl.NFeConsultaProtocolo.NFeConsultaProtocolo4Stub;
+import br.com.swconsultoria.nfe.wsdl.NFeConsultaProtocolo.NFeConsultaProtocolo4Stub;
 import br.sql.bean.JsysParametros;
 import br.sql.nfe.links.LigacaoServicos;
 import br.sql.nfe.links.Servicos;
@@ -94,14 +97,12 @@ public class consultaNFeTransmitir implements transmitirInterface {
              * Código do Estado.
              */
             //nfeCabecMsg.setCUF(codigoDoEstado);
-
             /**
              * Versao do XML
              */
             //nfeCabecMsg.setVersaoDados("3.10");
             //NFeConsultaProtocolo4Stub.NfeCabecMsgE nfeCabecMsgE = new NFeConsultaProtocolo4Stub.NfeCabecMsgE();
             //nfeCabecMsgE.setNfeCabecMsg(nfeCabecMsg);
-            
             NFeConsultaProtocolo4Stub stub = new NFeConsultaProtocolo4Stub(url.toString());
             NFeConsultaProtocolo4Stub.NfeResultMsg result = stub.nfeConsultaNF(dadosMsg);
 

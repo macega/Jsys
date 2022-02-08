@@ -13,6 +13,7 @@ SET NOCOUNT ON
 		,ExecSP
 		,servidorDestino
 		,camposChave
+		,obs
 		)
 	SELECT tabela
 		,id
@@ -22,4 +23,5 @@ SET NOCOUNT ON
 		,ExecSP
 		,servidorDestino
 		,camposChave
+		,''
 	FROM @TRT

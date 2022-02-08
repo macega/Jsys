@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.sql.bean;
 
+import br.sql.util.ManagerString;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -87,6 +83,8 @@ public class JsysNFeInut implements Serializable {
     private String xmlInutNFe;
     @Column(name = "xmlRetInutNFe")
     private String xmlRetInutNFe;
+    @Column(name = "xmlProcInutNFe")
+    private String xmlProcInutNFe;
 
     public JsysNFeInut() {
     }
@@ -220,7 +218,7 @@ public class JsysNFeInut implements Serializable {
     }
 
     public void setXmlInutNFe(String xmlInutNFe) {
-        this.xmlInutNFe = xmlInutNFe;
+        this.xmlInutNFe = ManagerString.prepareXmlToSqlServer(xmlInutNFe);
     }
 
     public String getXmlRetInutNFe() {
@@ -228,8 +226,16 @@ public class JsysNFeInut implements Serializable {
     }
 
     public void setXmlRetInutNFe(String xmlRetInutNFe) {
-        this.xmlRetInutNFe = xmlRetInutNFe;
+        this.xmlRetInutNFe = ManagerString.prepareXmlToSqlServer(xmlRetInutNFe);
     }
+
+    public String getXmlProcInutNFe() {
+        return xmlProcInutNFe;
+    }
+
+    public void setXmlProcInutNFe(String xmlProcInutNFe) {
+        this.xmlProcInutNFe = ManagerString.prepareXmlToSqlServer(xmlProcInutNFe);
+    } 
 
     @Override
     public int hashCode() {

@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.sql.nfe.Janelas;
 
-import br.inf.portalfiscal.nfe.schema_4.retConsStatServ.TRetConsStatServ;
+//import br.inf.portalfiscal.nfe.schema_4.retConsStatServ.TRetConsStatServ;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
+import br.com.swconsultoria.nfe.schema_4.retConsStatServ.TRetConsStatServ;
+import br.sql.log.Log;
 import br.sql.nfe.util.StatusServicoTeste;
 import br.sql.util.ManagerData;
 import java.awt.Cursor;
+import java.io.FileNotFoundException;
 import java.util.Date;
 
 /**
@@ -58,6 +58,7 @@ public class NfeStatus extends javax.swing.JDialog {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Status Servico Sefaz");
@@ -82,14 +83,14 @@ public class NfeStatus extends javax.swing.JDialog {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Cancelar");
+        jButton1.setText("Fechar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Consultar");
+        jButton2.setText("Consultar NF-e");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -184,7 +185,7 @@ public class NfeStatus extends javax.swing.JDialog {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel17)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,6 +225,13 @@ public class NfeStatus extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jButton3.setText("Consultar NFC-e");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,7 +241,9 @@ public class NfeStatus extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 248, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1))
@@ -249,7 +259,8 @@ public class NfeStatus extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -262,14 +273,29 @@ public class NfeStatus extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        TRetConsStatServ retorno = StatusServicoTeste.verificaStatusServico();
-        mostraRetorno(retorno);
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            mostraRetorno(StatusServicoTeste.verificaStatusServico(DocumentoEnum.NFE));
+            setCursor(null);
+        } catch (NfeException | FileNotFoundException ex) {
+            Log.registraErro(NfeStatus.class, "jButton2ActionPerformed", ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            mostraRetorno(StatusServicoTeste.verificaStatusServico(DocumentoEnum.NFCE));
+            setCursor(null);
+        } catch (NfeException | FileNotFoundException ex) {
+            Log.registraErro(NfeStatus.class, "jButton3ActionPerformed", ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -312,6 +338,5 @@ public class NfeStatus extends javax.swing.JDialog {
             jLabel16.setText("Não houve retorno da Sefaz");
             jLabel17.setText("Não houve retorno da Sefaz");
         }
-        setCursor(null);
     }
 }

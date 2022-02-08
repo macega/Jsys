@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.sql.bean;
 
 import br.sql.util.ManagerString;
@@ -11,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,18 +21,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "jsysProdutosTGrupos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "JsysProdutosTGrupos.findAll", query = "SELECT j FROM JsysProdutosTGrupos j"),
-    @NamedQuery(name = "JsysProdutosTGrupos.findByIdGrupo", query = "SELECT j FROM JsysProdutosTGrupos j WHERE j.idGrupo = :idGrupo"),
-    @NamedQuery(name = "JsysProdutosTGrupos.findByNomeGrupo", query = "SELECT j FROM JsysProdutosTGrupos j WHERE j.nomeGrupo = :nomeGrupo")})
+    @NamedQuery(name = "JsysProdutosTGrupos.findAll", query = "SELECT j FROM JsysProdutosTGrupos j")
+    ,@NamedQuery(name = "JsysProdutosTGrupos.findByIdGrupo", query = "SELECT j FROM JsysProdutosTGrupos j WHERE j.idGrupo = :idGrupo")
+    ,@NamedQuery(name = "JsysProdutosTGrupos.findByNomeGrupo", query = "SELECT j FROM JsysProdutosTGrupos j WHERE j.nomeGrupo = :nomeGrupo")})
 public class JsysProdutosTGrupos implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @Basic(optional = false)
     @Column(name = "idGrupo")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idGrupo;
-    
+
     @Basic(optional = false)
     @Column(name = "nomeGrupo")
     private String nomeGrupo;
@@ -93,5 +90,5 @@ public class JsysProdutosTGrupos implements Serializable {
     public String toString() {
         return "br.sql.bean.JsysProdutosTGrupos[ idGrupo=" + idGrupo + " ]";
     }
-    
+
 }

@@ -52,6 +52,7 @@ public class ReciboAvulso extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Recibo avulso");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -93,7 +94,7 @@ public class ReciboAvulso extends javax.swing.JDialog {
         jLabel6.setText("Emitente");
         jLabel6.setToolTipText("");
 
-        jTextFieldCnpjCpf.setDocument(new CpfCnpjDocument());
+        jTextFieldCnpjCpf.setDocument(new br.sql.plainDocument.CpfCnpjDocument());
         jTextFieldCnpjCpf.setToolTipText("");
 
         jLabel7.setText("CPF/CNPJ");
@@ -148,11 +149,11 @@ public class ReciboAvulso extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldEmitente, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                        .addComponent(jTextFieldEmitente, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCnpjCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldCnpjCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)

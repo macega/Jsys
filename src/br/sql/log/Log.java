@@ -139,7 +139,11 @@ public final class Log {
         escreverLog(log.toString());
         Toolkit.getDefaultToolkit().beep();
         print(e);
-        JOptionPane.showMessageDialog(null, mensUsuario.equals("") ? "Erro Inesperado no Programa" : mensUsuario, "ERRO", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(
+                null,
+                mensUsuario.equals("") ? "Erro Inesperado no Programa" : mensUsuario,
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     private static void escreverLog(String err) {

@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCorrentista" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6288252d-8802-440e-8ef9-005ceeb7708b">
+	<property name="ireport.zoom" value="1.9487171000000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="343"/>
+	<parameter name="idFuncionario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT jsysClientes.idCliente
+	,jsysClientes.nomeCorentista
+	,jsysClientes.fantasia
+	,jsysClientes.tipo
+	,jsysClientes.sexo
+	,jsysClientes.endereco
+	,jsysClientes.complemento
+	,jsysClientes.bairro
+	,jsysClientes.cidade
+	,jsysClientes.codMunicipio
+	,jsysClientes.estado
+	,jsysClientes.cep
+	,jsysClientes.numero
+	,jsysClientes.pais
+	,jsysClientes.codPais
+	,jsysClientes.fone
+	,jsysClientes.celular
+	,jsysClientes.fax
+	,jsysClientes.email
+	,jsysClientes.natural
+	,jsysClientes.cnpjCpf
+	,jsysClientes.ieRg
+	,isnull(jsysClientes.ieRgData, '') as ieRgData
+	,jsysClientes.ctps
+	,isnull(jsysClientes.ctpsSerie, '') as ctpsSerie
+	,isnull(jsysClientes.ctpsdata, '') as ctpsdata
+	,isnull(jsysClientes.reservista, '') as reservista
+	,isnull(jsysClientes.reservistaCategoria, '') as reservistaCategoria
+	,isnull(jsysClientes.cnh, '') as cnh
+	,isnull(jsysClientes.cnhTipo, '') as cnhTipo
+	,isnull(jsysClientes.nacionalidade, '') as nacionalidade
+	,isnull(jsysClientes.pis, '') as pis
+	,isnull(jsysClientes.pisdata, '') as pisdata
+	,isnull(jsysClientes.estadoCivil, '') as estadoCivil
+	,jsysClientes.conjuge
+	,jsysClientes.filhos
+	,isnull(jsysClientes.nomesDatas, '') as nomesDatas
+	,jsysClientes.suframa
+	,isnull(jsysClientes.dataNacimento, '') as dataNacimento
+	,isnull(jsysClientes.pai, '') pai
+	,isnull(jsysClientes.mae, '') mae
+	,isnull(jsysClientes.cargo, '') cargo
+	,jsysClientes.salario
+	,isnull(jsysClientes.foneconjugue, '') foneconjugue
+	,isnull(jsysClientes.contato, '') contato
+	,isnull(jsysClientes.dataInclusao, '') dataInclusao
+	,isnull(jsysClientes.usuarioInclusao, '') usuarioInclusao
+	,isnull(jsysClientes.dataalteracao, '') dataalteracao
+	,isnull(jsysClientes.usuarioalteracao, '') usuarioalteracao
+	,isnull(jsysClientes.obs, '') obs
+	,isnull(jsysClientes.inativo, '') inativo
+	,jsysClientes.comissaoVista
+	,jsysClientes.comissaoPrazo
+	,isnull(jsysClientes.admissao, '') admissao
+	,isnull(jsysClientes.demissao, '') demissao
+	,isnull(jsysClientes.cliente, '') cliente
+	,isnull(jsysClientes.fornecedor, '') fornecedor
+	,isnull(jsysClientes.colaborador, '') colaborador
+	,jsysClientes.malaDireta
+	,jsysClientes.vip
+	,isnull(jsysClientes.idLoja, '') idLoja
+	,isnull(jsysClientes.tituloEleitor, '') tituloEleitor
+	,isnull(jsysClientes.zona, '') zona
+	,isnull(jsysClientes.secao, '') secao
+	,isnull(jsysClientes.escolaridade, '') escolaridade
+	,isnull(jsysClientes.cutis, '') cutis
+	,isnull(jsysClientes.cargaHoraria, '') cargaHoraria
+	,isnull(jsysClientes.reposoSemanal, '') reposoSemanal
+	,isnull(jsysClientes.horasExtras, '') horasExtras
+	,jsysClientes.recebimentoValeTrasnporte
+	,jsysClientes.descontosOutros
+	,isnull(jsysClientes.exameAdmissional, '') exameAdmissional
+	,jsysParametros.razaoSocial AS parRazaoSocial
+	,jsysParametros.cnpj AS parCnpj
+	,jsysParametros.endereco AS parEndereco
+	,jsysParametros.bairro AS parBairro
+	,jsysParametros.numero AS parNumero
+	,jsysParametros.fone AS parFone
+	,jsysParametros.email AS parEmail
+FROM jsysClientes
+CROSS JOIN jsysParametros
+WHERE (jsysClientes.idCliente = $P{idFuncionario})]]>
+	</queryString>
+	<field name="idCliente" class="java.lang.Integer"/>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.Boolean"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="cidade" class="java.lang.String"/>
+	<field name="codMunicipio" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="codPais" class="java.lang.String"/>
+	<field name="fone" class="java.lang.String"/>
+	<field name="celular" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="natural" class="java.lang.String"/>
+	<field name="cnpjCpf" class="java.lang.String"/>
+	<field name="ieRg" class="java.lang.String"/>
+	<field name="ieRgData" class="java.sql.Timestamp"/>
+	<field name="ctps" class="java.lang.String"/>
+	<field name="ctpsSerie" class="java.lang.String"/>
+	<field name="ctpsdata" class="java.sql.Timestamp"/>
+	<field name="reservista" class="java.lang.String"/>
+	<field name="reservistaCategoria" class="java.lang.String"/>
+	<field name="cnh" class="java.lang.String"/>
+	<field name="cnhTipo" class="java.lang.String"/>
+	<field name="nacionalidade" class="java.lang.String"/>
+	<field name="pis" class="java.lang.String"/>
+	<field name="pisdata" class="java.sql.Timestamp"/>
+	<field name="estadoCivil" class="java.lang.String"/>
+	<field name="conjuge" class="java.lang.String"/>
+	<field name="filhos" class="java.lang.Boolean"/>
+	<field name="nomesDatas" class="java.lang.String"/>
+	<field name="suframa" class="java.lang.String"/>
+	<field name="dataNacimento" class="java.sql.Timestamp"/>
+	<field name="pai" class="java.lang.String"/>
+	<field name="mae" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="salario" class="java.math.BigDecimal"/>
+	<field name="foneconjugue" class="java.lang.String"/>
+	<field name="contato" class="java.lang.String"/>
+	<field name="dataInclusao" class="java.sql.Timestamp"/>
+	<field name="usuarioInclusao" class="java.lang.String"/>
+	<field name="dataalteracao" class="java.sql.Timestamp"/>
+	<field name="usuarioalteracao" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="inativo" class="java.lang.Boolean"/>
+	<field name="comissaoVista" class="java.math.BigDecimal"/>
+	<field name="comissaoPrazo" class="java.math.BigDecimal"/>
+	<field name="admissao" class="java.sql.Timestamp"/>
+	<field name="demissao" class="java.sql.Timestamp"/>
+	<field name="cliente" class="java.lang.Boolean"/>
+	<field name="fornecedor" class="java.lang.Boolean"/>
+	<field name="colaborador" class="java.lang.Boolean"/>
+	<field name="malaDireta" class="java.lang.Boolean"/>
+	<field name="vip" class="java.lang.Boolean"/>
+	<field name="idLoja" class="java.lang.String"/>
+	<field name="tituloEleitor" class="java.lang.String"/>
+	<field name="zona" class="java.lang.String"/>
+	<field name="secao" class="java.lang.String"/>
+	<field name="escolaridade" class="java.lang.String"/>
+	<field name="cutis" class="java.lang.String"/>
+	<field name="cargaHoraria" class="java.sql.Timestamp"/>
+	<field name="reposoSemanal" class="java.lang.String"/>
+	<field name="horasExtras" class="java.lang.Boolean"/>
+	<field name="recebimentoValeTrasnporte" class="java.lang.Boolean"/>
+	<field name="descontosOutros" class="java.lang.Boolean"/>
+	<field name="exameAdmissional" class="java.sql.Timestamp"/>
+	<field name="parRazaoSocial" class="java.lang.String"/>
+	<field name="parCnpj" class="java.lang.String"/>
+	<field name="parEndereco" class="java.lang.String"/>
+	<field name="parBairro" class="java.lang.String"/>
+	<field name="parNumero" class="java.lang.String"/>
+	<field name="parFone" class="java.lang.String"/>
+	<field name="parEmail" class="java.lang.String"/>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3a887977-2701-4934-ba7c-30efe77c7625" x="0" y="0" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{parRazaoSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="93ea69f4-1f97-4f62-a674-74c4ac5e0017" x="0" y="15" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CNPJ: "+$F{parCnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="68b39f88-62a4-4ba8-9e2c-dd13d45fa7a6" x="0" y="30" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Endereço: " + $F{parEndereco} + " Nº: " + $F{parNumero} + " Bairro: " + $F{parBairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a541e22b-7db3-49af-a601-500f038fbe3a" x="0" y="45" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fone: " + $F{parFone} + " Email: " + $F{parEmail}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="89301b66-21a6-4a78-8e37-f8dd5e79592f" x="0" y="60" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.05" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="550" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d5a4492e-58aa-4f7f-a13d-c7c12c6bb932" x="0" y="28" width="555" height="13"/>
+				<textElement>
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nome do Colaborador: " + $F{nomeCorentista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="563250c6-8992-489a-a8af-0957e3a3d77f" x="0" y="41" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["CTPS: "+$F{ctps}+" Série: "+$F{ctpsSerie}+" Data de Expedição: "+new SimpleDateFormat("dd/MM/yyyy").format($F{ctpsdata})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22fc1369-60de-426f-aff6-7512ecb6c960" x="0" y="54" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["RG: "+$F{ieRg}+" Data de Expedição:"+new SimpleDateFormat("dd/MM/yyyy").format($F{ieRgData})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f4a3e6a2-9e3b-488b-bd1a-5883eef395c8" x="0" y="67" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["CPF: "+$F{cnpjCpf}+" Titulo de Eleitor: "+$F{tituloEleitor}+ " Zona: " + $F{zona} + " Seção: "+$F{secao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2e7eac35-655c-4157-b004-d6b98067d926" x="0" y="80" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Certificado de Reservista: "+$F{reservista}+" Categoria: "+$F{reservistaCategoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1cb38feb-82d1-4388-8ead-48c309178e6a" x="0" y="93" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["PIS/PASEP: "+$F{pis}+" Data de Expedição: "+new SimpleDateFormat("dd/MM/yyyy").format($F{pisdata})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d44076d8-2358-40a6-a461-a138b4ad2313" x="0" y="106" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Carteira de Habilitação: "+$F{cnh} + " Tipo: " + $F{cnhTipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e942c444-87f6-4009-9691-563e8fe43d58" x="0" y="119" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Nome da Mãe: "+$F{mae}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="edaa948d-f1d9-431e-80c7-445ce1b5ea09" x="0" y="132" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Nome do Pai: "+$F{pai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3b35a9a8-9354-480f-9b03-be4395e5400b" x="0" y="145" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["CEP: "+$F{cep}+" Logradouro: "+$F{endereco}+" Numero: "+$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9ff78c0b-b8a4-41c4-8be7-9958396c8ea8" x="0" y="158" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Bairro: "+$F{bairro}+" Cidade: "+$F{cidade}+" UF: "+$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="427afbad-1bcb-4926-b1c1-d1d2c8b85a01" x="0" y="171" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Fone: "+$F{fone}+" Celular: "+ $F{celular}+ " Nacionalidade: "+$F{nacionalidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5e935fc8-56f9-4ec8-8082-4c3ae671a845" x="0" y="184" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Naturalidade: "+$F{natural}+ " Data Nacimento: "+new SimpleDateFormat("dd/MM/yyyy").format($F{dataNacimento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="30ebde62-cbb4-4736-84c4-376eae90d24f" x="0" y="197" width="555" height="13"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Grau de Instrução: "+$F{escolaridade}+ 
+" Sexo:" + $F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e1b6e6e9-450d-4fe2-a390-0d0f55ffdca3" x="0" y="210" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Cútis: "+$F{cutis}+
+" Estado Civil: "+$F{estadoCivil}+
+" Nome do Cônjuge: "+$F{conjuge}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c732f765-a247-42ca-b7fb-3fe1d999b811" x="0" y="223" width="555" height="52"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{filhos} ? "Filhos: Sim(X) Não( ) Nome/Data de Nacimento: "+$F{nomesDatas} : "Filhos: Sim( ) Não(X)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eb054345-8b4f-4059-9241-737f619a8184" x="0" y="275" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Data de Admissão: "+new SimpleDateFormat("dd/MM/yyyy").format($F{admissao}) + 
+" Função: "+ $F{cargo} +
+" Salario: " + new java.text.DecimalFormat("R$ #,##0.00").format($F{salario})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="997ef506-c5b6-48dc-8071-1329b2356a3a" x="0" y="288" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Hora de trabalho: "+ new SimpleDateFormat("HH:mm").format( $F{cargaHoraria} ) +
+" Repouso Semanal: " + $F{reposoSemanal} +
+" Concessão de Horas Extras: "+( $F{horasExtras} ? "Sim(x) Não( )" : "Sim( ) Não(X)" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="443c1874-eccd-4fb4-8061-dddc7cd91fc5" x="0" y="301" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Recebimento de Vale Transporte: "+( $F{recebimentoValeTrasnporte} ? "Sim(X) Não( )" : "Sim( ) Não(X)" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="42c71de0-56b6-4105-bf82-6d78ccb9ad3c" x="0" y="314" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Descontos de Vale avulsos e convênios no Contra-Cheque e Rescisão de Contrato: "+( $F{descontosOutros} ? "Sim(X) Não( )" : "Sim( ) Não(X)" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8ee53d96-0049-4858-a3d6-992a42e2d370" x="0" y="452" width="555" height="89"/>
+				<textElement/>
+				<text><![CDATA[PROVIDENCIAR AS SEGUINTES CÓPIAS:
+•	RG, CPF, TITULO DE ELEITOR:
+•	CERT. DE RESERVISTA (MASC) e CARTEIRA DE TRABALHO
+•	CONPROVANTE DE RESIDENCIA (se possível conta de telefone)
+•	CERTIDÃO DE NASC. E CARTÃO DE VACINA (se possuir filhos menor de 07 anos)
+•	CERT. DE NASC. E MATRICULA ESCOLAR
+•	UMA FOTO  3 x 4
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="775238f8-cb42-486f-89d4-9fce87f2223c" x="0" y="327" width="555" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Data Exame Adimensional: " + new SimpleDateFormat("dd/MM/yyyy").format( $F{exameAdmissional} )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e451f2fb-9515-4c9d-be94-6f551055e261" x="0" y="10" width="266" height="16"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dados Pessoais]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="10a762db-56da-42fd-83d0-343b3a64d270" x="0" y="410" width="200" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="be53bcdb-72e3-490a-bec3-4b3ac792c530" x="266" y="410" width="289" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="93229ae5-7a80-4a44-aaf5-4cb901ecff9d" x="266" y="411" width="289" height="14"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[ASSINATURA DO COLABORADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e786d044-34dc-4268-8aec-e27bbedcc26e" x="0" y="412" width="200" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[DATA E LOCAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f18c359-e38f-4f86-bc52-3bbe49bb86e4" x="0" y="364" width="555" height="13"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Assumo inteira responsabilidade pelas informações aqui prestadas.]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

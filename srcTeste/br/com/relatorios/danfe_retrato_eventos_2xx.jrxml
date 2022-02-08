@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="danfe_retrato_eventos_2xx" pageWidth="539" pageHeight="842" columnWidth="539" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0240935f-27fb-4c42-aee1-12257a122914">
+	<property name="ireport.zoom" value="3.1384283767210093"/>
+	<property name="ireport.x" value="28"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataseteventos" uuid="cf3ee288-f789-43e2-9304-235b4998ae3c">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="descricao" class="java.lang.String">
+			<fieldDescription><![CDATA[descricao]]></fieldDescription>
+		</field>
+		<field name="dhEvento" class="java.lang.String">
+			<fieldDescription><![CDATA[dhEvento]]></fieldDescription>
+		</field>
+		<field name="tipoEvento" class="java.lang.String">
+			<fieldDescription><![CDATA[tipoEvento]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<field name="dhEvento" class="java.lang.String">
+		<fieldDescription><![CDATA[dhEvento]]></fieldDescription>
+	</field>
+	<field name="tipoEvento" class="java.lang.String">
+		<fieldDescription><![CDATA[tipoEvento]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="23">
+			<staticText>
+				<reportElement uuid="afa60df3-0836-4295-adc2-a898f3008b3a" positionType="Float" mode="Transparent" x="1" y="6" width="138" height="17"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eventos da NF-e]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17">
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" x="0" y="2" width="100" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" x="100" y="2" width="325" height="15"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" x="425" y="2" width="114" height="15"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="afa60df3-0836-4295-adc2-a898f3008b3a" positionType="Float" mode="Transparent" x="3" y="4" width="96" height="11"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Evento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="afa60df3-0836-4295-adc2-a898f3008b3a" positionType="Float" mode="Transparent" x="101" y="4" width="129" height="11"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição Informada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="afa60df3-0836-4295-adc2-a898f3008b3a" positionType="Float" mode="Transparent" x="426" y="4" width="113" height="11"/>
+				<textElement textAlignment="Left">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data/Hora Evento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="100" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" stretchType="RelativeToTallestObject" mode="Opaque" x="100" y="0" width="325" height="10"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="890ba102-f250-4fe2-834e-9bed13e68650" stretchType="RelativeToTallestObject" mode="Opaque" x="425" y="0" width="114" height="10"/>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="1586df50-ecc1-4ddf-9ab3-0b30a329d93f" positionType="Float" mode="Transparent" x="3" y="0" width="98" height="10" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoEvento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="1586df50-ecc1-4ddf-9ab3-0b30a329d93f" positionType="Float" mode="Transparent" x="101" y="0" width="324" height="10" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="1586df50-ecc1-4ddf-9ab3-0b30a329d93f" positionType="Float" mode="Transparent" x="426" y="0" width="113" height="10" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dhEvento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

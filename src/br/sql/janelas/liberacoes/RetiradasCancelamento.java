@@ -199,14 +199,20 @@ public class RetiradasCancelamento extends javax.swing.JDialog {
             retirada.setDataAlteracao(ManagerData.getDate());
             retirada.setUsuarioAlteracao(Menu.getNomeUsuario());
             ConnectionFactory.update(retirada);
-            if (retirada instanceof JsysTranferenciaEntreContas
+            if (ConnectionFactory.update(retirada) != null
                     & retirada != null) {
                 JOptionPane.showMessageDialog(this, "Cancelamento efetuado com sucesso.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Erro ao cancelar retirada", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Acesso não Autorizado." + System.lineSeparator() + "Retirada não Encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Acesso não Autorizado."
+                    + System.lineSeparator()
+                    + "Retirada não Encontrada.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

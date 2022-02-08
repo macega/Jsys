@@ -5,21 +5,35 @@ WITH intervaloIDs (
 	,[nNF]
 	,[mod]
 	,[serie]
+	,[tpAmb]
 	)
 AS (
 	SELECT TOP 100 PERCENT ROW_NUMBER() OVER (
-			ORDER BY cast(nNF AS INT)
+			ORDER BY CONCAT (
+					[tpAmb]
+					,[mod]
+					,right(CONCAT (
+							'000'
+							,[serie]
+							), 3)
+					,right(CONCAT (
+							'000000000'
+							,nNF
+							), 9)
+					)
 			) AS [rowNum]
 		,cast(nNF AS INT) AS [nNF]
 		,[mod]
 		,[serie]
-	FROM jsysNFe where emitida = 1
-	ORDER BY [nNF]
+		,[tpAmb]
+	FROM jsysNFe
+	WHERE emitida = 1
 	)
 SELECT cast(a.nNF AS INT) + 1 AS [inicio]
 	,cast(b.nNF AS INT) - 1 AS [fim]
-	,b.[mod]
-	,b.serie
+	,a.[mod]
+	,a.serie
+	,a.tpAmb
 FROM intervaloIDs a
 INNER JOIN intervaloIDs b ON (a.RowNum = b.RowNum - 1)
 WHERE (cast(a.nNF AS INT) - (cast(b.nNF AS INT) - 1) < 0)
@@ -34,12 +48,14 @@ WHERE (cast(a.nNF AS INT) - (cast(b.nNF AS INT) - 1) < 0)
 				), 9)
 		,b.[mod]
 		,right('000000000' + b.serie, 3)
+		,b.tpAmb
 		) NOT IN (
 		SELECT CONCAT (
 				right('000000000' + [nNFIni], 9)
 				,right('000000000' + [nNFFin], 9)
 				,[mod]
 				,right('000000000' + serie, 3)
+				,tpAmb
 				)
 		FROM jsysNFeInut
 		WHERE emitida = 1

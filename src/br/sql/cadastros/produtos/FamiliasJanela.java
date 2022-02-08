@@ -12,17 +12,10 @@ import javax.swing.JPanel;
  * @author Juliano Alves Medina
  */
 public class FamiliasJanela extends JPanel {
-    
+
     private static final SQLDatabaseConnection DADOS = new SQLDatabaseConnection();
     private final ProdutosEdit produtosEdit;
 
-//    JFrame frame = new JFrame();
-//                frame.setContentPane(new FamiliasJanela(tThis));
-//                frame.pack();
-//                frame.setLocationRelativeTo(null);
-//                frame.setTitle("Cadastro de Famílias");
-//                frame.setVisible(true);
-    
     public FamiliasJanela(ProdutosEdit tThis) {
         initComponents();
         this.produtosEdit = tThis;
@@ -185,6 +178,9 @@ public class FamiliasJanela extends JPanel {
         }
         list.clear();
         list.addAll(data);
+        if (produtosEdit != null) {
+            produtosEdit.loadFamilias();
+        }
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -196,6 +192,7 @@ public class FamiliasJanela extends JPanel {
             br.sql.acesso.ConnectionFactory.delete(j);
         }
         list.removeAll(toRemove);
+        refreshButtonActionPerformed(null);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
@@ -212,15 +209,14 @@ public class FamiliasJanela extends JPanel {
         int[] selected = masterTable.getSelectedRows();
         for (int idx = 0; idx < selected.length; idx++) {
             JsysProdutosTFamilias f = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            list.set(masterTable.convertRowIndexToModel(selected[idx]), f);
             if (f.getIdFamilia() == null) {
                 f.setIdFamilia(DADOS.sequenciaTabela("jsysProdutosTFamilias", "idFamilia"));
+                br.sql.acesso.ConnectionFactory.insert(f);
+            } else {
+                br.sql.acesso.ConnectionFactory.update(f);
             }
-            list.set(masterTable.convertRowIndexToModel(selected[idx]), f);
-            br.sql.acesso.ConnectionFactory.update(f);
             refreshButtonActionPerformed(null);
-            if (produtosEdit != null) {
-                produtosEdit.loadFamilias();
-            }
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 

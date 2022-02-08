@@ -437,7 +437,7 @@ public final class ProdutosEdit extends javax.swing.JDialog {
                         .addGroup(jPanelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(uJComboBoxFabricantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelGeralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -607,8 +607,8 @@ public final class ProdutosEdit extends javax.swing.JDialog {
                     .addComponent(jTextFieldMargenLucro)
                     .addComponent(jTextFieldAgregado, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -644,7 +644,7 @@ public final class ProdutosEdit extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel19)
                             .addComponent(jTextFieldAgregado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tabela de Preços", null, jPanel2, "");
@@ -817,6 +817,12 @@ public final class ProdutosEdit extends javax.swing.JDialog {
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${registroAtual.peso}"), jTextField23, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        jTextField23.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField23FocusGained(evt);
+            }
+        });
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel29.setText("Localiza:");
@@ -1030,6 +1036,10 @@ public final class ProdutosEdit extends javax.swing.JDialog {
         frame.setTitle("Cadastro de Fabricantes");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTextField23FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField23FocusGained
+        jTextField23.selectAll();
+    }//GEN-LAST:event_jTextField23FocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addCodigoBarras;
@@ -1539,11 +1549,15 @@ class OrigemFiscal {
 
 class ProdutosPrecosLojasCellRenderer extends DefaultTableCellRenderer {
 
+    private br.sql.bean.JsysLojas jsysLojas = null;
+
     @Override
     public Component getTableCellRendererComponent(JTable table,
             Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        setText(Retorna.jsysLojas(value.toString()).getNomeLoja());
+        jsysLojas = Retorna.jsysLojas(value.toString());
+        String text = jsysLojas == null ? "Loja não Cadastrada" : jsysLojas.getNomeLoja();
+        setText(text);
         return this;
     }
 }

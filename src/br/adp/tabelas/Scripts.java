@@ -2,6 +2,7 @@ package br.adp.tabelas;
 
 import br.adp.geral.Geral;
 import br.adp.util.ExecutaQuery;
+import br.sql.log.Log;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ public class Scripts {
                     try {
                         ExecutaQuery.executeSqlScriptList(br.adp.script.Update.update(i), base, aThis);
                     } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        Log.registraErro(this, "Rodar", ex); 
                     }
                     ExecutaQuery.executeSqlScript("update jsysParametros set vercaoDB = " + i, base);
                 }

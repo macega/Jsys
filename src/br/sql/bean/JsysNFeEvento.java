@@ -5,6 +5,7 @@
  */
 package br.sql.bean;
 
+import br.sql.util.ManagerString;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -215,7 +216,7 @@ public class JsysNFeEvento implements Serializable {
     }
 
     public void setEnvEventoCancNFe(String envEventoCancNFe) {
-        this.envEventoCancNFe = envEventoCancNFe.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+        this.envEventoCancNFe = ManagerString.prepareXmlToSqlServer(envEventoCancNFe);
     }
 
     public String getRetEnvEventoCancNFe() {

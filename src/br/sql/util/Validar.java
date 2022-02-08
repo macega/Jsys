@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.brazilutils.br.cpfcnpj.CpfCnpj;
@@ -19,6 +20,10 @@ import org.brazilutils.br.cpfcnpj.CpfCnpj;
  * @author Juliano Alves Medina
  */
 public class Validar {
+    
+    public static <T> Optional<T> present(T obj) {
+        return Optional.ofNullable(obj);
+    }
 
     public static boolean isNull(Object... args) {
         for (Object o : args) {
@@ -138,7 +143,6 @@ public class Validar {
 //    public static boolean isNumerico(String campo) {
 //        return campo.matches("[0-9]{" + campo.length() + "}");
 //    }
-    
     public static boolean isNumber(String campo) {
         for (int i = 0; i < campo.length(); i++) {
             if (!Character.isDigit(campo.charAt(i))) {
@@ -181,7 +185,7 @@ public class Validar {
         filtro.put("idOrcamento", valor);
         return !br.sql.util.Retorna.findList("JsysOrcamento.findByFechado", filtro).isEmpty();
     }
-    
+
     /**
      *
      * @param valor
@@ -201,7 +205,7 @@ public class Validar {
      * @return verdadeiro se o valor for um CPF ou CNPJ valido
      */
     public static boolean cpfCnpj(String valor) {
-        valor = ManagerString.RemoveFormato(valor); 
+        valor = ManagerString.RemoveFormato(valor);
         if ("11111111111".equals(valor)
                 | "22222222222".equals(valor)
                 | "33333333333".equals(valor)
@@ -330,7 +334,67 @@ public class Validar {
                 return Boolean.TRUE;
             }
         }
-
         return Boolean.FALSE;
+    }
+
+    public static boolean verificaCsStat(String csStat) {
+        return "100".equals(csStat) //  Autorizado o uso da NF-e
+                || "101".equals(csStat) //  Cancelamento de NF-e homologado
+                || "102".equals(csStat) //  Inutilização de número homologado
+                || "103".equals(csStat) //  Lote recebido com sucesso
+                || "104".equals(csStat) //  Lote processado
+                || "105".equals(csStat) //  Lote em processamento
+                || "106".equals(csStat) //  Lote não localizado
+                || "107".equals(csStat) //  Serviço em Operação
+                || "108".equals(csStat) //  Serviço Paralisado Momentaneamente (curto prazo)
+                || "109".equals(csStat) //  Serviço Paralisado sem Previsão
+                || "110".equals(csStat) //  Uso Denegado
+                || "111".equals(csStat) //  Consulta cadastro com uma ocorrência
+                || "112".equals(csStat) //  Consulta cadastro com mais de uma ocorrência
+                || "124".equals(csStat) //  EPEC Autorizado
+                || "128".equals(csStat) //  Lote de Evento Processado
+                || "135".equals(csStat) //  Evento registrado e vinculado a NF-e
+                || "136".equals(csStat) //  Evento registrado, mas não vinculado a NF-e
+                || "137".equals(csStat) //  Nenhum documento localizado para o Destinatário
+                || "138".equals(csStat) //  Documento localizado para o Destinatário
+                || "139".equals(csStat) //  Pedido de Download processado
+                || "140".equals(csStat) //  Download disponibilizado
+                || "142".equals(csStat) //  Ambiente de Contingência EPEC bloqueado para o Emitente
+                || "150".equals(csStat) //  Autorizado o uso da NF-e, autorização fora de prazo
+                || "151".equals(csStat) //  Cancelamento de NF-e homologado fora de prazo
+                || "301".equals(csStat) //  Uso Denegado: Irregularidade fiscal do emitente
+                || "302".equals(csStat) //  Rejeição: Irregularidade fiscal do destinatário
+                || "303".equals(csStat);//  Uso Denegado: Destinatário não habilitado a operar na UF
+    }
+
+    /**
+     * 1=Contribuinte ICMS (informar a IE do destinatário); 2=Contribuinte
+     * isento de Inscrição no cadastro de Contribuintes do ICMS; 9=Não
+     * Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de
+     * Contribuintes do ICMS. Nota 1: No caso de NFC-e informar indIEDest=9 e
+     * não informar a tag IE do destinatário; Nota 2: No caso de operação com o
+     * Exterior informar indIEDest=9 e não informar a tag IE do destinatário;
+     * Nota 3: No caso de Contribuinte Isento de Inscrição (indIEDest=2), não
+     * informar a tag IE do destinatário.
+     *
+     * // Os Estados que não permitem que os destinatário tenham indicação como
+     * Contribuinte Isento são: AM, BA, CE, GO, MG, MS, MT, PA, PE, RN, SE, SP.
+     *
+     * @param estado recebe o estado que vai
+     * @return retorna verdadeiro se o estado nao aceita contribuinte ISENTO
+     */
+    public static boolean estadosNaoContribuintes(String estado) {
+        return "AM".equals(estado)
+                || "BA".equals(estado)
+                || "CE".equals(estado)
+                || "GO".equals(estado)
+                || "MG".equals(estado)
+                || "MS".equals(estado)
+                || "MT".equals(estado)
+                || "PA".equals(estado)
+                || "PE".equals(estado)
+                || "RN".equals(estado)
+                || "SE".equals(estado)
+                || "SP".equals(estado);
     }
 }

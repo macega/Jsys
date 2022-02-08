@@ -1,7 +1,10 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.nfe.util.ConstantesUtil;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.dom.enuns.DocumentoEnum;
+import br.com.swconsultoria.nfe.exception.NfeException;
 import br.sql.acesso.SQLDatabaseConnection;
+import br.sql.bean.JsysClientes;
 import br.sql.bean.JsysNFe;
 import br.sql.bean.JsysNFeReferencias;
 import br.sql.bean.JsysNFeTransportadoras;
@@ -9,12 +12,12 @@ import br.sql.bean.JsysNFeVolumes;
 import br.sql.bean.JsysOrcamento;
 import br.sql.bean.JsysOrcamentoItens;
 import br.sql.bean.JsysParametros;
+import br.sql.cadastros.ClientesJanelaEdit;
 import br.sql.nfe.danfe.ImprimirDanfe;
 import br.sql.nfe.links.ConstantesFiscal;
 import br.sql.nfe.xml.GerandoNFeJAXB;
 import br.sql.log.Log;
 import br.sql.defaultTableCellRenderer.ZebradoLocation;
-import br.sql.nfe.util.XmlUtil;
 import br.sql.util.GravaNoArquivo;
 import br.sql.util.Mail;
 import br.sql.util.ManagerData;
@@ -24,14 +27,17 @@ import br.sql.util.ManagerString;
 import br.sql.util.Retorna;
 import br.sql.util.Validar;
 import java.awt.Cursor;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -50,15 +56,17 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.JAXBException;
 
 /**
  *
  * @author Juliano Alves Medina
  */
-public class NfeEmissao extends javax.swing.JDialog implements
-        PropertyChangeListener {
+public class NfeEmissao
+        extends javax.swing.JDialog
+        implements PropertyChangeListener {
 
-    private static final JsysParametros par = Retorna.JsysParametros();
+    private static final JsysParametros PAR = Retorna.JsysParametros();
     private GerandoNFeJAXB xmlNfe;
     private JsysOrcamento venda;
     private java.util.Collection<JsysOrcamentoItens> itens;
@@ -87,7 +95,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
         setDisabled();
         setValoresIniciais();
         caregaVenda.setEnabled(false);
-        assinar.setEnabled(false);
+        //editarCliente.setEnabled(false);
         validar.setEnabled(false);
         transmitir.setEnabled(false);
 
@@ -115,7 +123,8 @@ public class NfeEmissao extends javax.swing.JDialog implements
         jTableVol.setDefaultRenderer(Long.class, new ZebradoLocation());
         jTableVol.setDefaultRenderer(BigDecimal.class, new ZebradoLocation());
 
-        if (Validar.isNotNull(nVenda) & nVenda > 0) {
+        if (Validar.isNotNull(nVenda)
+                & nVenda > 0) {
             novaNfe();
             jTextFieldVenda.setText(nVenda.toString());
             consultaVenda();
@@ -212,7 +221,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
         jTextFieldVenda = new javax.swing.JTextField();
         jTextFieldDetalhesVenda = new javax.swing.JTextField();
         caregaVenda = new javax.swing.JButton();
-        assinar = new javax.swing.JButton();
+        editarCliente = new javax.swing.JButton();
         validar = new javax.swing.JButton();
         transmitir = new javax.swing.JButton();
         imprimir = new javax.swing.JButton();
@@ -437,7 +446,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             jPanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -821,10 +830,10 @@ public class NfeEmissao extends javax.swing.JDialog implements
             }
         });
 
-        assinar.setText("Assinar");
-        assinar.addActionListener(new java.awt.event.ActionListener() {
+        editarCliente.setText("Editar Cliente");
+        editarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assinarActionPerformed(evt);
+                editarClienteActionPerformed(evt);
             }
         });
 
@@ -865,9 +874,17 @@ public class NfeEmissao extends javax.swing.JDialog implements
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextFieldVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(caregaVenda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDetalhesVenda))
+                        .addComponent(validar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(transmitir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(imprimir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(email)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jProgressBarEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -888,19 +905,11 @@ public class NfeEmissao extends javax.swing.JDialog implements
                             .addComponent(jLabel2))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(caregaVenda)
+                        .addComponent(jTextFieldVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(assinar)
+                        .addComponent(editarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(validar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(transmitir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(imprimir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(email)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jProgressBarEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jTextFieldDetalhesVenda)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -928,11 +937,11 @@ public class NfeEmissao extends javax.swing.JDialog implements
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDetalhesVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldDetalhesVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editarCliente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(caregaVenda)
-                            .addComponent(assinar)
                             .addComponent(validar)
                             .addComponent(transmitir)
                             .addComponent(imprimir)
@@ -1017,7 +1026,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             jPanelItensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelItensLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1204,7 +1213,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             .addGroup(jPanelVolumesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         jTabbedPaneNota.addTab("Volumes", null, jPanelVolumes, "");
@@ -1290,7 +1299,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             jPanelRef1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRef1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRef1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonIncluirRef1)
@@ -1342,7 +1351,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             jPanelRef2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRef2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRef2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
@@ -1394,7 +1403,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             jPanelRef3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRef3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelRef3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
@@ -1458,56 +1467,76 @@ public class NfeEmissao extends javax.swing.JDialog implements
 
     private void caregaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_caregaVendaActionPerformed
         setRegistroAtual();
-        if (listItens.isEmpty()) {
-            loadItens(registroAtual.getVenda());
-        }
-        itens.forEach((iten) -> {
-            br.sql.acesso.ConnectionFactory.update(iten);
-        });
-        if (validarVenda()) {
-            if (registroAtual != null
-                    && !registroAtual.getEmitida()) {
-                Map<Object, Object> filtro = new HashMap<>();
-                filtro.clear();
-                filtro.put("nfeId", registroAtual.getNfeId());
-                JsysNFe jsysNfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByNfeId", filtro);
-                xmlNfe = new GerandoNFeJAXB(jsysNfe, "", jTextFieldnumeroNFe.getText().trim());
-                try {
-                    // vai gerar o XML
-                    if (xmlNfe.gerar()) {
-                        JOptionPane.showMessageDialog(this, "NF-e Criada com Sucesso", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                        taskOutput.append(String.format("NF-e Criada com Sucesso" + System.getProperty("line.separator")));
-                        setDisabled();
-                        //venda = xmlNfe.getVenda();
-                        registroAtual = xmlNfe.getJsysNfe();
-                        caregarDados();
-                        caregaVenda.setEnabled(false);
-                        transmitir.setEnabled(true);
-                    } else {
-                        Log.registraErro(this.getClass().getName(), "Erro ao Criar NF-e", new Exception("Erro ao Criar NF-e"));
-                        JOptionPane.showMessageDialog(this, "Erro ao Criar NF-e", "Erro", JOptionPane.ERROR_MESSAGE);
+        if (registroAtual != null) {
+            if (listItens.isEmpty()) {
+                loadItens(registroAtual.getVenda());
+            }
+            itens.forEach((iten) -> {
+                br.sql.acesso.ConnectionFactory.update(iten);
+            });
+            if (validarVenda()) {
+                if (registroAtual != null
+                        && !registroAtual.getEmitida()) {
+                    Map<Object, Object> filtro = new HashMap<>();
+                    filtro.clear();
+                    filtro.put("nfeId", registroAtual.getNfeId());
+                    JsysNFe jsysNfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByNfeId", filtro);
+                    xmlNfe = new GerandoNFeJAXB(jsysNfe, "", jTextFieldnumeroNFe.getText().trim());
+                    try {
+                        // vai gerar o XML
+                        if (xmlNfe.gerar()) {
+                            JOptionPane.showMessageDialog(this, "NF-e Criada com Sucesso", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            taskOutput.append(String.format("NF-e Criada com Sucesso" + System.getProperty("line.separator")));
+                            setDisabled();
+                            //venda = xmlNfe.getVenda();
+                            registroAtual = xmlNfe.getJsysNfe();
+                            caregarDados();
+                            caregaVenda.setEnabled(false);
+                            transmitir.setEnabled(true);
+                        } else {
+                            Log.registraErro(this.getClass().getName(), "Erro ao Criar NF-e", new Exception("Erro ao Criar NF-e"));
+                            JOptionPane.showMessageDialog(this, "Erro ao Criar NF-e", "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (CertificadoException | HeadlessException | FileNotFoundException | NoSuchAlgorithmException | SQLException | JAXBException e) {
+                        Log.registraErro("NfeEmissao", "caregaVendaActionPerformed", e);
+                    } catch (NfeException ex) {
+                        taskOutput.setText(ex.getMessage());
+                        JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                        Log.registraErro(this.getClass(), "caregaVendaActionPerformed", ex);
                     }
-                } catch (Exception e) {
-                    Log.registraErro("NfeEmissao", "caregaVendaActionPerformed", e);
+                } else {
+                    setDisabled();
                 }
             } else {
-                setDisabled();
+                JOptionPane.showMessageDialog(this, "Verifique o Cadastro do Cliente", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Verifique o Cadastro do Cliente", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_caregaVendaActionPerformed
 
-    private void assinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assinarActionPerformed
-//        AssinarXMLsCertfificadoA1 assinador = new AssinarXMLsCertfificadoA1();
-//        if (assinador.assinar(xmlNfe.getChaveAcesso(), "Lote")) {
-//            aviso("NF-e Assinada com Sucesso");
-//            assinar.setEnabled(false);
-//            validar.setEnabled(true);
-//        } else {
-//            erro("Erro ao Assinar NF-e");
-//        }
-    }//GEN-LAST:event_assinarActionPerformed
+    private void editarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarClienteActionPerformed
+
+        if (venda != null) {
+
+            Map<Object, Object> filtro = new HashMap<>();
+            filtro.put("idCliente", venda.getIdCliente().getIdCliente());
+            JsysClientes C = (JsysClientes) Retorna.findOneResult("JsysClientes.findByIdCliente", filtro);
+            ClientesJanelaEdit cje = new ClientesJanelaEdit(null, true, C, false);
+            cje.setVisible(true);
+            if (cje.isConfirmaClientes()) {
+                //consultaTF.setText(cje.RegistroJsysClientes.getNomeCorentista());
+                //actionConsulta();
+                cje.dispose();
+            } else {
+                //actionConsulta();
+                cje.dispose();
+            }
+        } else {
+            jTextFieldDetalhesVenda.setText("Venda não encontrada");
+            caregaVenda.setEnabled(false);
+        }
+
+
+    }//GEN-LAST:event_editarClienteActionPerformed
 
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
 //        ValidacaoNFeXML validador = new ValidacaoNFeXML();
@@ -1537,7 +1566,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
             setDisabled();
             //setValoresIniciais();
             caregaVenda.setEnabled(false);
-            assinar.setEnabled(false);
+            //editarCliente.setEnabled(false);
             validar.setEnabled(false);
             transmitir.setEnabled(false);
             imprimir.setEnabled(false);
@@ -1701,10 +1730,10 @@ public class NfeEmissao extends javax.swing.JDialog implements
     }//GEN-LAST:event_jButtonDeleteRef1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assinar;
     private javax.swing.JButton caregaVenda;
     private com.toedter.calendar.JDateChooser dataFinalDateChooser;
     private com.toedter.calendar.JDateChooser dataInicialDateChooser;
+    private javax.swing.JButton editarCliente;
     private javax.swing.JButton email;
     private javax.swing.JButton imprimir;
     private javax.swing.JButton jButton1;
@@ -1921,14 +1950,14 @@ public class NfeEmissao extends javax.swing.JDialog implements
         jTextFieldValorIcms.setText("");
         jTextFieldValorIcmsSt.setText("");
         jTextFieldModelo.setText("55");
-        jTextFieldSerie.setText(par.getnNFeserie());
+        jTextFieldSerie.setText(PAR.getnNFeserie());
         jTextFieldnumeroNFe.setText("0");
         jTextFieldData.setText(ManagerData.convertDate(ManagerData.getDate(), "yyyy-MM-dd'T'HH:mm:ssXXX"));
         jTextFieldCodigoNumerico.setText("");
         jTextFieldDV.setText("");
         jTextFieldNaturazaOperacao.setText("Venda");
         uJComboBoxModFrete.setSelectedIndex(3);
-        jTextFieldinfCpl.setText(par.getInfCpl());
+        jTextFieldinfCpl.setText(PAR.getInfCpl());
     }
 
     private JsysNFe getJsysNFe() {
@@ -1960,7 +1989,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
         if (registroAtual != null
                 //&& registroAtual.getNfeId() == null
                 && venda != null) {
-            if (par.getUf().equals(venda.getIdCliente().getEstado())) {
+            if (PAR.getUf().equals(venda.getIdCliente().getEstado())) {
                 uJComboBoxIdDest.setSelectedIndex(0);
             } else if (venda.getIdCliente().getEstado().equals("EX")) {
                 uJComboBoxIdDest.setSelectedIndex(2);
@@ -1978,12 +2007,12 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     uJComboBoxModFrete.getSelectedObject())) {
                 registroAtual.setVenda(venda.getIdOrcamento());
                 registroAtual.setMod(ConstantesFiscal.NF_E);
-                registroAtual.setSerie(par.getnNFeserie());
+                registroAtual.setSerie(PAR.getnNFeserie());
                 registroAtual.setTpNF(jRadioButton2.isSelected());
                 //registroAtual.setCDV("0");
                 //registroAtual.setCNF(jTextFieldCodigoNumerico.getText());
-                registroAtual.setCMunFG(String.valueOf(par.getCodMunicipio()));
-                registroAtual.setCUF(String.valueOf(par.getCodMunicipio()).substring(0, 2));
+                registroAtual.setCMunFG(String.valueOf(PAR.getCodMunicipio()));
+                registroAtual.setCUF(String.valueOf(PAR.getCodMunicipio()).substring(0, 2));
                 //registroAtual.setDhEmi(null);
                 //registroAtual.setDhSaiEnt(null);
                 registroAtual.setEmitida(false);
@@ -2024,7 +2053,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
         uJComboBoxIndFinal.setEnabled(false);
         jTextFieldVenda.setEnabled(false);
         caregaVenda.setEnabled(false);
-        assinar.setEnabled(false);
+        //editarCliente.setEnabled(false);
         validar.setEnabled(false);
         transmitir.setEnabled(false);
         imprimir.setEnabled(false);
@@ -2252,15 +2281,19 @@ public class NfeEmissao extends javax.swing.JDialog implements
             Map<Object, Object> filtro = new HashMap<>();
             filtro.put("idOrcamento", orcamento);
             itens = Retorna.findCollection("JsysOrcamentoItens.findByIdOrcamento", filtro);
-            for (JsysOrcamentoItens iten : itens) {
+            itens.stream().map((iten) -> {
                 if (Validar.isNullOrWhite(iten.getCfop())) {
-                    iten.setCfop(iten.getJsysOrcamento().getIdCliente().getEstado().equals(par.getUf())
-                            ? par.getCfop()
-                            : par.getCfopInterestadual());
+                    iten.setCfop(iten.getJsysOrcamento().getIdCliente().getEstado().equals(PAR.getUf())
+                            ? PAR.getCfop()
+                            : PAR.getCfopInterestadual());
                     br.sql.acesso.ConnectionFactory.update(iten);
                 }
+//                if (Validar.isNullOrWhite(iten.getCfop())) {                   
+//                }
+                return iten;
+            }).forEachOrdered((iten) -> {
                 listItens.add(iten);
-            }
+            });
         }
     }
 
@@ -2287,17 +2320,17 @@ public class NfeEmissao extends javax.swing.JDialog implements
             if (Validar.isNotNullOrWhite(venda.getIdCliente().getEmail())) {
                 try {
                     StringBuilder html = new StringBuilder();
-                    html.append("<html><head><title>NF-e ").append(par.getFantasia()).append("</title></head><body>");
+                    html.append("<html><head><title>NF-e ").append(PAR.getFantasia()).append("</title></head><body>");
                     html.append("<div>Segue em anexo o arquivo XML e PDF da NF-e.</div>");
                     html.append("<br><br><br><div>___________________________________________</div>");
                     html.append("<div><H2><b><u>")
-                            .append(par.getFantasia())
+                            .append(PAR.getFantasia())
                             .append("</u></b></H2></div>");
                     html.append("<div>Endereço: ")
-                            .append(par.getEndereco())
+                            .append(PAR.getEndereco())
                             .append("</div>");
                     html.append("<div>Fone: ")
-                            .append(par.getFone())
+                            .append(PAR.getFone())
                             .append("</div></body></html>");
                     setProgress(25);
                     publish("Montanto E-mail");
@@ -2307,7 +2340,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
                     filtro.put("chaveAcesso", registroAtual.getChaveAcesso());
                     JsysNFe nfe = (JsysNFe) Retorna.findOneResult("JsysNFe.findByChaveAcesso", filtro);
                     if (nfe != null) {
-                        files.add(gravador.salvarArquivo(XmlUtil.criaNfeProc(nfe.getEnviNFe(), nfe.getRetConsReciNFe()),
+                        files.add(gravador.salvarArquivo(nfe.getProcNFe(),
                                 br.JavaApplicationJsys.PASTA_XML_PROC_NFE,
                                 nfe.getChaveAcesso(),
                                 "xml"));
@@ -2323,7 +2356,7 @@ public class NfeEmissao extends javax.swing.JDialog implements
                         publish("Enviando E-mail");
                         Mail correio = new Mail();
                         correio.setDestinatario(venda.getIdCliente().getNomeCorentista().toUpperCase(), venda.getIdCliente().getEmail().toLowerCase());
-                        correio.senderMail("NF-e - " + par.getFantasia(), html.toString(), localFiles);
+                        correio.senderMail("NF-e - " + PAR.getFantasia(), html.toString(), localFiles);
                         setProgress(100);
                         publish("E-mail Enviado");
                     } else {
@@ -2385,7 +2418,8 @@ public class NfeEmissao extends javax.swing.JDialog implements
             publish(xmlNfe.getMensagem());
             setProgress(50);
             //String tpAmb = Constantes.INI.getString("FISCAL", "TP_AMB").substring(0, 1);
-            if (xmlNfe.enviarNfe(ConstantesUtil.NFE)) {
+
+            if (xmlNfe.enviarNfe(DocumentoEnum.NFE)) {
                 setProgress(60);
                 transmitir.setEnabled(false);
                 imprimir.setEnabled(true);

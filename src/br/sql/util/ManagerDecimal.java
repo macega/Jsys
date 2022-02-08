@@ -189,13 +189,14 @@ public class ManagerDecimal {
             valor = valor.replace("$", "");
             valor = valor.replace(",", ".");
         }
+
         if (!Validar.isNull(valor)
                 & !valor.isEmpty()
                 & !Objects.equals(valor, "-")
                 & Validar.isDouble(valor)) {
             return new BigDecimal(valor);
         }
-        return null;
+        return BigDecimal.ZERO;
     }
 
     public static String valorExtenso(Double valor) {

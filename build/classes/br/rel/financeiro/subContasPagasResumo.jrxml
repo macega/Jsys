@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subContasPagasResumo" pageWidth="595" pageHeight="842" columnWidth="591" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="8a1e94e4-105b-4461-98c5-f4df6c0f0b2e">
+	<property name="ireport.zoom" value="1.7715610000000044"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[DECLARE @Srv SYSNAME
+	,@Comando NVARCHAR(MAX)
+	,@dataInicial AS VARCHAR(40)
+	,@dataFinal AS VARCHAR(40)
+
+DECLARE cServer CURSOR
+FOR
+SELECT NAME
+FROM SYS.SERVERS
+WHERE is_linked = 1
+ORDER BY NAME
+
+SET @Comando = N''
+SET @dataInicial = $P{dataInicial}
+SET @dataFinal = $P{dataFinal}
+
+OPEN cServer
+
+FETCH NEXT
+FROM cServer
+INTO @Srv
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	BEGIN TRY
+		EXEC sp_testlinkedserver @Srv
+
+		SET @Comando = CONCAT (
+				@Comando
+				,'UNION ALL '
+				,'SELECT idTituloBaixa, sum(valorPago) as totalPago, nomeLoja '
+				,'FROM  ['
+				,@Srv
+				,'].DADOS.DBO.jsysContasPagas '
+				,'WHERE  (dataPagamento between '''
+				,@dataInicial
+				,''' and '''
+				,@dataFinal
+				,''') '
+				,'GROUP BY idTituloBaixa, nomeLoja '
+				)
+	END TRY
+
+	BEGIN CATCH
+		SET @Comando = CONCAT (
+				@Comando
+				,N'UNION ALL '
+				,'SELECT ''OFF'' idTituloBaixa, 0 as totalPago, '''
+				,@Srv
+				,''' AS nomeLoja '
+				)
+	END CATCH
+
+	FETCH NEXT
+	FROM cServer
+	INTO @Srv
+END
+
+CLOSE cServer
+
+DEALLOCATE cServer
+
+SET @Comando = CONCAT (
+		@Comando
+		,N'UNION ALL '
+		,'SELECT idTituloBaixa, sum(valorPago) as totalPago, nomeLoja '
+		,'FROM  jsysContasPagas '
+		,'WHERE  (dataPagamento between '''
+		,@dataInicial
+		,''' and '''
+		,@dataFinal
+		,''') '
+		,'GROUP BY idTituloBaixa, nomeLoja '
+		)
+SET @Comando = substring(@Comando, 10, len(@Comando))
+SET @Comando = CONCAT (
+		'SELECT tb.idTituloBaixa, sum(tb.totalPago) as totalPago, tb.nomeLoja FROM ('
+		,@Comando
+		,') AS tb GROUP BY tb.idTituloBaixa, tb.nomeLoja ORDER BY tb.nomeLoja '
+		)
+
+EXEC SP_EXECUTESQL @Comando
+]]>
+	</queryString>
+	<field name="idTituloBaixa" class="java.lang.String"/>
+	<field name="totalPago" class="java.math.BigDecimal"/>
+	<field name="nomeLoja" class="java.lang.String"/>
+	<variable name="totalPago_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalPago}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="4" y="0" width="327" height="1" uuid="6d49d764-1bf7-4233-ac8a-186c5581988f"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="105" y="3" width="56" height="15" uuid="40701191-e357-4986-b21b-c4608a088bcd"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="161" y="3" width="166" height="15" uuid="5015579c-0c1f-4f0e-af89-96328d56fc68"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Valor Pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="9" y="3" width="75" height="15" uuid="e39a058c-3c3e-485f-89dd-15f7df9ef65e"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Loja]]></text>
+			</staticText>
+			<line>
+				<reportElement x="331" y="0" width="1" height="21" uuid="f74281b7-8d30-4eb2-b681-02861a1a623b"/>
+			</line>
+			<line>
+				<reportElement x="3" y="0" width="1" height="21" uuid="0d121b59-c9ee-4c57-b39f-fa6122f203f6"/>
+			</line>
+			<line>
+				<reportElement x="4" y="20" width="327" height="1" uuid="006df7a0-65c1-4afc-873a-ce66a6c1a748"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="105" y="1" width="56" height="15" uuid="fb9d60d6-2207-451f-80a9-1cdfbd4cbceb"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idTituloBaixa}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement style="Detail" x="161" y="1" width="166" height="15" uuid="b9183d6e-a397-40ed-915f-bc24d174c512"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalPago}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="9" y="1" width="75" height="15" uuid="76f56b6b-3da8-4549-9a42-ca02ac72b2a1"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeLoja}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="3" y="0" width="1" height="16" uuid="ea0d5a81-b7af-4980-8e93-c463f8e2a63d"/>
+			</line>
+			<line>
+				<reportElement x="331" y="0" width="1" height="16" uuid="6bb181cc-bb91-4cfe-a93b-cee5d0ce4c9a"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="19" splitType="Stretch">
+			<line>
+				<reportElement x="3" y="0" width="329" height="1" uuid="88894f27-db48-44e7-abd8-71704f30ab73"/>
+			</line>
+			<staticText>
+				<reportElement x="79" y="2" width="82" height="16" uuid="fd15eaa2-8863-43ca-85e3-a84ae6c3e51a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Pago:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="161" y="2" width="166" height="16" uuid="f85a7fc1-eb45-41dc-a1a5-573ac982054d"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPago_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

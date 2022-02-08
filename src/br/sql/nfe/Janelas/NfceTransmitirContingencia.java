@@ -1,20 +1,19 @@
 package br.sql.nfe.Janelas;
 
-import br.com.samuelweb.certificado.exception.CertificadoException;
-import br.com.samuelweb.nfe.exception.NfeException;
+import br.com.swconsultoria.certificado.exception.CertificadoException;
+import br.com.swconsultoria.nfe.exception.NfeException;
 import br.sql.acesso.SQLDatabaseConnection;
 import br.sql.nfe.transmisor.ContingenciaTransmitir;
 import br.sql.log.Log;
 import br.sql.defaultTableCellRenderer.Zebrado;
 import br.sql.util.ManagerSQL;
+import java.io.FileNotFoundException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -207,7 +206,7 @@ public class NfceTransmitirContingencia extends javax.swing.JDialog {
             }
             ContingenciaTransmitir contingenciaTransmitir = new ContingenciaTransmitir(chavesAcesso);
             contingenciaTransmitir.enviar();
-        } catch (CertificadoException | NfeException e) {
+        } catch (CertificadoException | NfeException | FileNotFoundException e) {
             Log.registraErro(this.getClass().getName(), "jButton2ActionPerformed", e);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

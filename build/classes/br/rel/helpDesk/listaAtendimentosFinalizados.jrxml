@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listaAtendimentoFinalizados" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f34cf3e-29de-4234-9a98-cb33c224a104">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[DECLARE @Srv SYSNAME
+	,@Comando NVARCHAR(MAX)
+	,@dataInicial AS DATETIME
+	,@dataFinal AS DATETIME
+
+SET @dataInicial = $P{dataInicial}
+SET @dataFinal = $P{dataFinal}
+
+DECLARE cServer CURSOR
+FOR
+SELECT NAME
+FROM SYS.SERVERS
+WHERE is_linked = 1
+ORDER BY NAME
+
+SET @Comando = N''
+
+OPEN cServer
+
+FETCH NEXT
+FROM cServer
+INTO @Srv
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	BEGIN TRY
+		EXEC sp_testlinkedserver @Srv
+
+		SET @Comando += CONCAT (
+				N'UNION ALL SELECT id, data as datahora '
+				,',dbo.zeraHoras(data) as data '
+				,',helpDesk.idLoja '
+				,',jsysLojas.nomeLoja'
+				,',usuario '
+				,',cast(obs as varchar(max)) AS obs '
+				,',tipo '
+				,',fechado '
+				,',atendente '
+				,',cast(obsFechamento as varchar(max)) AS obsFechamento '
+				,',dataFechamento '
+				,',jsysParametros.fantasia '
+				,'FROM ['
+				,@Srv
+				,'].DADOS.DBO.helpDesk left join jsysLojas on  jsysLojas.idloja = helpDesk.idLoja cross join jsysParametros '
+				,'WHERE fechado = 1 and dbo.zerahoras(dataFechamento) between '''
+				,cast(@dataInicial AS VARCHAR)
+				,''' and '''
+				,cast(@dataFinal AS VARCHAR)
+				,''' '
+				)
+	END TRY
+
+	BEGIN CATCH
+		SET @Comando += CONCAT (
+				N'UNION ALL SELECT 0, GETDATE() AS datahora '
+				,',GETDATE() AS data '
+				,','''
+				,@Srv
+				,''' AS idLoja '
+				,',''ERRO OFF-LINE'' AS nomeLoja '
+				,',''ERRO OFF-LINE'' AS usuario '
+				,',''ERRO OFF-LINE'' AS obs '
+				,',''ERRO OFF-LINE'' AS tipo '
+				,',0 AS fechado '
+				,',''ERRO OFF-LINE'' AS atendente '
+				,',''ERRO OFF-LINE'' AS obsFechamento '
+				,',GETDATE() AS dataFechamento '
+				,',''ERRO OFF-LINE'' AS fantasia '
+				)
+	END CATCH
+
+	FETCH NEXT
+	FROM cServer
+	INTO @Srv
+END
+
+CLOSE cServer
+
+DEALLOCATE cServer
+
+SET @Comando += CONCAT (
+		N'UNION ALL SELECT id, data as datahora '
+		,',dbo.zeraHoras(data) as data '
+		,',helpDesk.idLoja '
+		,',jsysLojas.nomeLoja'
+		,',usuario '
+		,',cast(obs as varchar(max)) AS obs'
+		,',tipo '
+		,',fechado '
+		,',atendente '
+		,',cast(obsFechamento as varchar(max)) AS obsFechamento'
+		,',dataFechamento '
+		,',jsysParametros.fantasia '
+		,'FROM helpDesk left join jsysLojas on  jsysLojas.idloja = helpDesk.idLoja cross join jsysParametros '
+		,'WHERE fechado = 1 and dbo.zerahoras(dataFechamento) between '''
+		,cast(@dataInicial AS VARCHAR)
+		,''' and '''
+		,cast(@dataFinal AS VARCHAR)
+		,''' '
+		,'GROUP BY id, data, helpDesk.idLoja, jsysLojas.nomeLoja, usuario, cast(obs as varchar(max)), tipo, fechado, atendente, cast(obsFechamento as varchar(max)), dataFechamento, jsysParametros.fantasia '
+		,'ORDER BY tipo, idLoja, data, datahora '
+		)
+SET @Comando = substring(@Comando, 10, len(@Comando))
+
+EXEC SP_EXECUTESQL @Comando]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="datahora" class="java.sql.Timestamp"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="idLoja" class="java.lang.String"/>
+	<field name="nomeLoja" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="fechado" class="java.lang.Boolean"/>
+	<field name="atendente" class="java.lang.String"/>
+	<field name="obsFechamento" class="java.lang.String"/>
+	<field name="dataFechamento" class="java.sql.Timestamp"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<group name="tipo">
+		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement style="Detail" x="40" y="2" width="308" height="15" uuid="8badaabb-ea2a-4a87-a55a-edbf5593e6fb"/>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="6" y="2" width="29" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="447df480-a93c-4c40-81be-0693440203d2"/>
+				</rectangle>
+				<line>
+					<reportElement x="0" y="18" width="555" height="1" uuid="ead58e5e-eae7-4ff3-889c-b746fd1a651c"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement style="Title" x="0" y="0" width="555" height="17" forecolor="#000000" uuid="c04d7d13-865f-4887-92af-b244eea7d1c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="0" y="17" width="555" height="15" forecolor="#000000" uuid="85ba4a96-eb07-4904-80cc-69621711e403"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lista de Atendimentos Realizados de " 
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="33" width="555" height="1" uuid="704d10dd-3ab2-48c7-81b2-fb9de8181c31"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="12" y="0" width="121" height="12" uuid="7a523213-38b7-4585-89fd-223bd29f8e81"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Loja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="148" y="0" width="200" height="12" uuid="b6eac7a2-9a72-4f99-8e29-8464245f143c"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Atendente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="121" height="12" uuid="71ea722b-0fe8-4d12-a634-c50c3b5d3cfe"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idLoja} + " - " +$F{nomeLoja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="148" y="0" width="200" height="12" uuid="d99d92e9-73ff-46e2-835a-19676303aa93"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atendente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" positionType="Float" x="0" y="28" width="555" height="12" uuid="4fa7069e-4b82-4b96-bf7b-8b936eee29a0"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Data Resolvido: " +
+new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format($F{dataFechamento}) + 
+": " +
+$F{obsFechamento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="13" width="555" height="14" uuid="49e42a6e-a5d2-4e43-b912-8a426a869e72"/>
+				<textFieldExpression><![CDATA["Data do chamado: " +
+new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format($F{data}) +
+": " +
+$F{obs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="41" width="555" height="1" uuid="01ff49aa-0d56-41ba-8090-c41c3878d21c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="310" y="0" width="203" height="12" uuid="1f66b013-fcd0-4a23-b75e-80ddf8b83f8e"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="12" uuid="d0c578c2-02e8-4616-bb46-5037a8e94726"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="12" uuid="be81f133-870e-4e68-8d2b-da052e36a5d4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

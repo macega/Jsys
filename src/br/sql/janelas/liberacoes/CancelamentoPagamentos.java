@@ -266,12 +266,19 @@ public class CancelamentoPagamentos extends javax.swing.JDialog {
                 pagamento.setObsCancelamento(L.getMotivo());
                 pagamento.setQuitado(false);
                 pagamento.setIdTitulo("");
-                if (ConnectionFactory.update(pagamento) == null) {
-                    JOptionPane.showMessageDialog(this, "Erro ao cancelar pagamento", "Erro", JOptionPane.ERROR_MESSAGE);
-                } else {
+                if (ConnectionFactory.update(pagamento) != null) {
                     JOptionPane.showMessageDialog(this, "Pagamento Cancelado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Erro ao cancelar pagamento", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
-                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Acesso não Autorizado."
+                        + System.lineSeparator()
+                        + "Retirada não Encontrada.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

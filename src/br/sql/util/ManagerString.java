@@ -286,4 +286,8 @@ public class ManagerString {
         CharSequence cs = new StringBuilder(str == null ? "" : str);
         return Normalizer.normalize(cs, Normalizer.Form.NFKD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
     }
+    
+    public static String prepareXmlToSqlServer(String s) {
+        return s.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
+    }
 }
