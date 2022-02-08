@@ -16,6 +16,7 @@ import java.util.Arrays;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
+ * 
  * 08/02/2022
  * @author Juliano Alves Medina
  */
@@ -24,7 +25,7 @@ public class JavaApplicationJsys {
     public static final int MAJOR = 63; // versao do db
     public static final int MINOR = 4; // versao do app
     public static final int BUILD = 40012; // NotaFiscal java-nfe-4.00.12.jar
-    public static final int REVISION = 7; // revisoes bugs
+    public static final int REVISION = 8; // revisoes bugs
     public static int[] VERSAO = new int[]{MAJOR, MINOR, BUILD, REVISION};
     public static String VERSAO_STRING = Arrays.toString(new int[]{MAJOR, MINOR, BUILD, REVISION}).replace("[", "").replace("]", "").replace(",", ".").replace(" ", "");
     public static Integer VERCAO_DB = MAJOR;
