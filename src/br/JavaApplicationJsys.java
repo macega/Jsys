@@ -16,8 +16,13 @@ import java.util.Arrays;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
+<<<<<<< Updated upstream
  * 08/02/2022
  * @author Juliano Alves Medina
+=======
+ * Teste de Comit
+ * @author juliano Alves Medina
+>>>>>>> Stashed changes
  */
 public class JavaApplicationJsys {
 

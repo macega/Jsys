@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pedido" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="44f32f80-1fd5-4427-b05c-a8c5d822b1b4">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="loja" class="java.lang.String"/>
+	<parameter name="idPedido" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[DECLARE @LOJA AS VARCHAR(30), @strSQL varchar(5000), @id varchar(30)
+SET @LOJA = $P{loja}
+SET @id = $P{idPedido}
+SET @strSQL= 
+'SELECT PedidoCompras.idPedido
+	  ,PedidoCompras.dataPedido
+	  ,PedidoCompras.usuario
+	  ,PedidoComprasItens.idPedidoComprasItens
+	  ,PedidoComprasItens.idProduto
+	  ,PedidoComprasItens.descricao
+	  ,PedidoComprasItens.Quantidade
+	  ,jsysProdutosT.marca
+	  ,jsysProdutosT.estoqueGeral
+	  ,jsysProdutosT.prodLocaliza
+	  ,DEP.estoqueGeral AS estoqueGeralDep
+	  ,jsysParametros.fantasia
+FROM ['+@LOJA+'] .DADOS.DBO.PedidoCompras WITH (NOLOCK) 
+     INNER JOIN ['+@LOJA+'].DADOS.DBO.PedidoComprasItens WITH (NOLOCK) ON PedidoCompras.idPedido = PedidoComprasItens.idPedido 
+	 INNER JOIN ['+@LOJA+'].DADOS.DBO.jsysProdutosT WITH (NOLOCK) ON PedidoComprasItens.idProduto = jsysProdutosT.idProduto
+	 INNER JOIN DADOS.DBO.jsysProdutosT AS DEP WITH (NOLOCK) ON PedidoComprasItens.idProduto = DEP.idProduto
+	 CROSS JOIN ['+@LOJA+'].DADOS.DBO.jsysParametros WITH (NOLOCK)
+WHERE PedidoCompras.idPedido = ' + @id + ' ' +
+'ORDER BY 10 '
+EXEC('['+@LOJA+'].DADOS.DBO.recontaEstoque ')
+EXEC(@strSQL)]]>
+	</queryString>
+	<field name="idPedido" class="java.lang.Integer"/>
+	<field name="dataPedido" class="java.sql.Timestamp"/>
+	<field name="usuario" class="java.lang.String"/>
+	<field name="idPedidoComprasItens" class="java.lang.Integer"/>
+	<field name="idProduto" class="java.lang.Integer"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="Quantidade" class="java.math.BigDecimal"/>
+	<field name="marca" class="java.lang.String"/>
+	<field name="estoqueGeral" class="java.math.BigDecimal"/>
+	<field name="prodLocaliza" class="java.lang.String"/>
+	<field name="estoqueGeralDep" class="java.math.BigDecimal"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="idProduto_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{idProduto}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="50">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="d421ae7e-5474-4905-aa52-dc0ccffc175c" x="80" y="32" width="67" height="13"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ff08119b-b7cb-4554-b6bb-a21f318bc7cb" x="151" y="32" width="167" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5512c0ba-4d6b-4aa1-b57d-8ba183d850af" x="318" y="0" width="237" height="20" forecolor="#999999"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PEDIDO DE COMPRA]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9b5ee2d0-0bbf-4066-8d9f-d8dee583f373" x="0" y="0" width="306" height="20"/>
+				<textElement>
+					<font fontName="Tahoma" size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a64ce853-8ba1-4de6-bbfe-8e1a543ca4d0" x="151" y="22" width="167" height="10"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d385e106-e05a-4640-ae8a-3a99d55840f8" x="80" y="22" width="67" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="dee0ba42-e5ff-4794-8b45-1f472d04f54e" x="0" y="45" width="318" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6a0a7b47-6e35-44e4-ad6d-567144031f2b" x="0" y="22" width="67" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Nº do Pedido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f3c9bd76-bd80-4caf-85df-f627a0aeef7e" x="0" y="32" width="67" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idPedido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="db8fa78c-3403-44cf-ab4a-639fc1e98ae8" x="0" y="0" width="43" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c947f1a6-2975-45db-8a29-55652aa4db83" x="151" y="0" width="69" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="75cecdb5-fe43-403d-a502-f80975e27c77" x="222" y="0" width="260" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Descricao]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="34222089-4d5e-4021-98c5-747cb82e2f5a" x="482" y="0" width="73" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Localização]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="30d83231-a739-47b5-a84a-0b907e2eaa82" x="43" y="0" width="23" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[EVD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="106acc1d-c568-491e-b5b5-60797dbcba9b" x="66" y="0" width="40" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Loja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a1e4c7a-1f82-4d03-974e-1278a254e19f" x="109" y="0" width="38" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Dep]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="3e1ec8aa-9e36-4c50-9da3-535034eaac68" x="0" y="13" width="555" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="32d63b9f-ad28-4cec-b4b0-4d1813a8fe41" x="151" y="0" width="69" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b84263af-ebc1-4e80-999e-16bb505f259c" x="222" y="0" width="260" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3faefa28-d44c-430a-8e4a-89932250d7e6" x="482" y="0" width="73" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prodLocaliza}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement uuid="4c12af3e-914e-4d68-ae37-8d97e411351c" x="66" y="0" width="40" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoqueGeral}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement uuid="e3544fc3-207a-4503-9ceb-80961e4b286f" x="109" y="0" width="38" height="13"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoqueGeralDep}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="48f31732-0058-4979-8179-ba5dd9575de3" x="0" y="0" width="43" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idProduto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e8c1ccd1-8f72-4bb4-826d-1c04f6ce9d59" x="0" y="13" width="555" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="101b81c8-3c01-4fb0-9b66-4800b345cbf5" x="42" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement uuid="a307f7ee-f20f-42a2-bb8c-d8db15d7dc79" x="66" y="0" width="1" height="14"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0118dc76-c1eb-4507-ae5a-3facccfb6652" x="43" y="0" width="104" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{idProduto_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="42a91ba8-f494-4031-99e3-fc8777ccb540" x="0" y="0" width="43" height="13"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Qt Itens:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

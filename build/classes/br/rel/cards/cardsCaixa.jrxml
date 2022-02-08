@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cardsCaixa" language="groovy" columnCount="2" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="295" leftMargin="5" rightMargin="0" topMargin="6" bottomMargin="0" uuid="c00263c6-96e3-4210-927f-14c493cd6c1e">
+	<property name="ireport.zoom" value="1.2100000000000009"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select top 1000 ROW_NUMBER() OVER(ORDER BY idproduto DESC) + 1000 AS Row, logo from jsysProdutosT cross join jsysParametros]]>
+	</queryString>
+	<field name="Row" class="java.lang.Long"/>
+	<field name="logo" class="java.lang.String"/>
+	<detail>
+		<band height="163" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="7" y="6" width="279" height="152" uuid="861ae2f8-5c9c-4a6d-8156-1ebe41d45433"/>
+			</rectangle>
+			<image scaleImage="RetainShape" hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="59" y="15" width="175" height="95" uuid="8033a9af-7250-4f59-b961-55d538cb43b4"/>
+				<imageExpression><![CDATA[$F{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="15" y="15" width="44" height="134" uuid="82fdf86d-ac8e-4dfb-96b7-b8a4c9270730"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Right">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Row}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="103" y="123" width="131" height="25" uuid="d10e31bd-9ded-4c6f-9144-66733e840fee"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="1" barHeight="10">
+					<jr:codeExpression><![CDATA[$F{Row}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="234" y="14" width="44" height="134" uuid="0ec634a1-7921-45fd-8529-d47ebdac7e5e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="Left">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Row}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
