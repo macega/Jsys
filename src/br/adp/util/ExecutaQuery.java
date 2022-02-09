@@ -51,7 +51,7 @@ public class ExecutaQuery {
     public static void executeSqlScriptList(List<String[]> list, String base, Geral aThis) throws SQLException {
         for (String[] sql : list) {
             executa(sql[0], base);
-            aThis.setLog("script executado: " + sql[1], "script");
+            aThis.setLog("Script Executado: " + sql[1], "script");
             //aThis.jTextAreaLog.append("script executado: " + sql[1] + System.lineSeparator());
         }
     }

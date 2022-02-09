@@ -17,12 +17,13 @@ public class LojasJanela extends JPanel {
         initComponents();
     }
 
+    @SuppressWarnings("unchecked")
     private void cancelar() {
         br.sql.acesso.ConnectionFactory.cancelar();
         java.util.Collection data = query.getResultList();
-        for (Object entity : data) {
+        data.forEach((entity) -> {
             br.sql.acesso.ConnectionFactory.getEntityManagerNew().refresh(entity);
-        }
+        });
         list.clear();
         list.addAll(data);
     }
