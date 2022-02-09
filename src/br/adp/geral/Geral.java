@@ -64,6 +64,8 @@ public class Geral extends javax.swing.JFrame {
     private String arquivoImportador;
     private final List<Importador> imp;
     private final ImportadorTableModel importadorTableModel;
+    private Integer countErros = 0;
+    private Integer countScripts = 0;
 
     /**
      * Creates new form Geral
@@ -117,11 +119,9 @@ public class Geral extends javax.swing.JFrame {
 
     @Override
     public void setVisible(boolean b) {
-        super.setVisible(b); 
+        super.setVisible(b);
         this.setFocusable(b);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,6 +144,10 @@ public class Geral extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaLog = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        jLabelCountErros = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelCountScripts = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -217,20 +221,47 @@ public class Geral extends javax.swing.JFrame {
         jTextAreaLog.setRows(5);
         jScrollPane1.setViewportView(jTextAreaLog);
 
+        jLabel8.setText("Contador de Erros:");
+
+        jLabelCountErros.setText("0");
+
+        jLabel9.setText("Contador de Scripts");
+
+        jLabelCountScripts.setText("0");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelCountErros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelCountScripts, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabelCountScripts))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabelCountErros))
                 .addContainerGap())
         );
 
@@ -602,8 +633,7 @@ public class Geral extends javax.swing.JFrame {
                 jTextAreaLog.setText("");
                 drop();
                 create();
-                setLog("Finalizado");
-
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -625,7 +655,7 @@ public class Geral extends javax.swing.JFrame {
             protected Object doInBackground() throws Exception {
                 jTextAreaLog.setText("");
                 atualizarTabelas();
-                setLog("Finalizado");
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -646,7 +676,7 @@ public class Geral extends javax.swing.JFrame {
             protected Object doInBackground() throws Exception {
                 jTextAreaLog.setText("");
                 importarTabelaIBPT();
-                setLog("Finalizado");
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -671,12 +701,11 @@ public class Geral extends javax.swing.JFrame {
                     ExecutaQuery.executeSqlScriptList(br.adp.script.Create.create(), base, Geral.this);
                     //drop();
                     //create();
-                    setLog("Finalizado");
-
+                    setLog("Finalizado", "");
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    setLog(ex);
+                    Log.registraErro(this.getClass().getName(), "Metodo", ex);
                     return null;
-                    //Logger.getLogger(Geral.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return null;
             }
@@ -699,7 +728,7 @@ public class Geral extends javax.swing.JFrame {
             protected Object doInBackground() throws Exception {
                 jTextAreaLog.setText("");
                 importarTabelaCidades();
-                setLog("Finalizado");
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -721,7 +750,7 @@ public class Geral extends javax.swing.JFrame {
             protected Object doInBackground() throws Exception {
                 jTextAreaLog.setText("");
                 ExecutaQuery.executeSqlScriptList(br.adp.script.Insert.insert(), base, Geral.this);
-                setLog("Finalizado");
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -743,7 +772,7 @@ public class Geral extends javax.swing.JFrame {
             protected Object doInBackground() throws Exception {
                 jTextAreaLog.setText("");
                 importarTabelaContas();
-                setLog("Finalizado");
+                setLog("Finalizado", "");
                 return null;
             }
 
@@ -776,12 +805,9 @@ public class Geral extends javax.swing.JFrame {
                                 .append(")");
                         try {
                             ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
-                            setLog(vDados[1]);
+                            setLog(vDados[1], "script");
                         } catch (SQLException e) {
-                            setLog("------------------------------");
-                            setLog(" !!! erro no Script " + sql);
-                            setLog(e);
-                            setLog("------------------------------");
+                            setLog(" !!! erro no Script " + sql + " " + e.getMessage(), "erro");
                         }
                     }
 
@@ -808,19 +834,14 @@ public class Geral extends javax.swing.JFrame {
                                 .append(")");
                         try {
                             ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
-                            setLog(vDados2[3]);
+                            setLog(vDados2[3], "script");
                         } catch (SQLException e) {
-                            setLog("------------------------------");
-                            setLog(" !!! erro no Script " + sql);
-                            setLog(e);
-                            setLog("------------------------------");
+                            setLog(" !!! erro no Script " + sql + " " + e.getMessage(), "erro");
                         }
                     }
 
                 } catch (IOException | SQLException e) {
-                    setLog("------------------------------");
                     setLog(e);
-                    setLog("------------------------------");
                 }
             }
 
@@ -937,7 +958,7 @@ public class Geral extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Finalizado", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            setLog(e);
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -950,7 +971,7 @@ public class Geral extends javax.swing.JFrame {
             CaregarTabela();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            setLog(e);
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
@@ -979,6 +1000,10 @@ public class Geral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelCountErros;
+    private javax.swing.JLabel jLabelCountScripts;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1000,19 +1025,17 @@ public class Geral extends javax.swing.JFrame {
     private void create() throws HeadlessException {
         for (File pai : scriptsCreate) {
             String StingPai = pai.toString().substring(8);
-            setLog("Criando " + StingPai);
+            setLog("Criando " + StingPai, "script");
             for (String filho : pai.list()) {
                 FileEx script = new FileEx(pai + "/" + filho);
                 try {
                     if (script.stringread().length() > 0) {
                         ExecutaQuery.executeSqlScript(script.stringread(), bases[bancoDadosJC.getSelectedIndex()]);
-                        setLog(" - Criado " + filho.substring(0, filho.length() - 4));
+                        setLog(" - Criado " + filho.substring(0, filho.length() - 4), "script");
                     }
                 } catch (FileNotFoundException | SQLException e) {
-                    setLog("------------------------------");
-                    setLog(" !!! erro ao tentar Criar a " + StingPai + " " + filho);
+                    setLog(" !!! erro ao tentar Criar a " + StingPai + " " + e.getMessage(), "erro");
                     setLog(e);
-                    setLog("------------------------------");
                 }
             }
         }
@@ -1027,9 +1050,7 @@ public class Geral extends javax.swing.JFrame {
                 bases = ini.getString("LISTA BASE", "LISTA").split(",");
             }
         } catch (Exception e) {
-            setLog("------------------------------");
             setLog(e);
-            setLog("------------------------------");
         }
     }
 
@@ -1037,7 +1058,7 @@ public class Geral extends javax.swing.JFrame {
         for (File script : this.scriptsDelete) {
             String[] filhos = script.list();
             String pai = script.toString().substring(8);
-            setLog("Apagando " + pai);
+            setLog("Apagando " + pai, "script");
             for (String filho : filhos) {
                 filho = filho.substring(0, filho.length() - 4);
                 StringBuilder sql = new StringBuilder();
@@ -1052,31 +1073,62 @@ public class Geral extends javax.swing.JFrame {
                 }
                 try {
                     ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
-                    setLog(" - " + filho + " Apagando ");
+                    setLog(" - " + filho + " Apagando ", "script");
                 } catch (SQLException e) {
-                    setLog("------------------------------");
-                    setLog(" !!! erro ao apagar " + filho);
-                    setLog(e);
-                    setLog("------------------------------");
+                    setLog(" !!! erro ao apagar " + filho +e.getMessage(), "erro");
                 }
             }
         }
     }
 
+    /**
+     * 
+     * @param e 
+     */
     public void setLog(SQLException e) {
-        escreveLog(e.getLocalizedMessage());
+        escreveLog(e.getLocalizedMessage(), "erro");
     }
 
+    /**
+     * 
+     * @param e 
+     */
     public void setLog(Exception e) {
-        escreveLog(e.getLocalizedMessage());
+        escreveLog(e.getLocalizedMessage(), "erro");
     }
 
-    public void setLog(String e) {
-        escreveLog(e);
+    /**
+     *
+     * @param mensagen String com a mensagem a ser registrada no log do usuario
+     * @param tipo; "erro" : "script" ou ""
+     */
+    public void setLog(String mensagen, String tipo) {
+        escreveLog(mensagen, tipo);
     }
 
-    private void escreveLog(String valor) {
-        this.jTextAreaLog.append(valor + System.lineSeparator());
+    /**
+     *
+     * @param mensagen String com a mensagem a ser registrada no log do usuario
+     * @param tipo; "erro" : "script" ou ""
+     */
+    private void escreveLog(String mensagen, String tipo) {
+        switch (tipo) {
+            case "erro":
+                countErros += 1;
+                this.jLabelCountErros.setText(countErros.toString());
+                this.jTextAreaLog.append("--------------------------------------------" + System.lineSeparator());
+                this.jTextAreaLog.append("-- " + mensagen + " --" + System.lineSeparator());
+                this.jTextAreaLog.append("--------------------------------------------" + System.lineSeparator());
+                break;
+            case "script":
+                countScripts += 1;
+                this.jLabelCountScripts.setText(countScripts.toString());
+                this.jTextAreaLog.append(mensagen + System.lineSeparator());
+                break;
+            default:
+                this.jTextAreaLog.append(mensagen + System.lineSeparator());
+                break;
+        }
     }
 
     private void atualizarTabelas() {
@@ -1111,20 +1163,14 @@ public class Geral extends javax.swing.JFrame {
                         .append(", '").append(vDados[12]).append("'")
                         .append(")");
                 try {
-                    System.out.println(sql);
                     ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
-                    setLog(vDados[3]);
+                    setLog(vDados[3], "script");
                 } catch (SQLException e) {
-                    setLog("------------------------------");
-                    setLog(" !!! erro no Script " + sql);
-                    setLog(e);
-                    setLog("------------------------------");
+                    setLog(" !!! erro no Script " + sql + e.getMessage(), "erro");
                 }
             }
         } catch (IOException | SQLException e) {
-            setLog("------------------------------");
             setLog(e);
-            setLog("------------------------------");
         }
     }
 
@@ -1174,18 +1220,13 @@ public class Geral extends javax.swing.JFrame {
                         .append(")");
                 try {
                     ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
-                    setLog(vDados[3]);
+                    setLog(vDados[3], "script");
                 } catch (SQLException e) {
-                    setLog("------------------------------");
-                    setLog(" !!! erro no Script " + sql);
                     setLog(e);
-                    setLog("------------------------------");
                 }
             }
         } catch (IOException | SQLException e) {
-            setLog("------------------------------");
             setLog(e);
-            setLog("------------------------------");
         }
     }
 

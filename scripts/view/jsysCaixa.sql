@@ -362,70 +362,70 @@ FROM (
 	
 	UNION ALL
 	
-	-- Contas Pagas
-	SELECT quita_PAGAR.[Código título] AS idtitulo
-		,PAGAR.DOCUMENTO AS venda
-		,PAGAR.Data_emissão AS emissao
-		,PAGAR.Data_vencimento AS vencimento
-		,CASE 
-			WHEN quita_pagar.valor_restante > 0
-				THEN convert(VARCHAR, quita_PAGAR.Data_pagto, 3) + '-P'
-			ELSE convert(VARCHAR, quita_PAGAR.Data_pagto, 3) + '-Q'
-			END AS pagamento
-		,jsysSubConta.descricao AS Cliente
-		,CONCAT (
-			PAGAR.DOCUMENTO
-			,pagar.ORDEM_SEQ
-			,'-0'
-			) AS fatura
-		,PAGAR.valor_titulo * - 1 AS valor
-		,quita_pagar.valor_restante * - 1 AS restante
-		,0 AS desconto
-		,(quita_PAGAR.[VALOR_PAGO] * - 1) AS vlPago
-		,0 AS idVendedor
-		,PAGAR.CODIGO_DO_FORNECEDOR AS idCliente
-		,'5' AS tipo
-		,quita_PAGAR.Data_pagto AS Data
-		,PAGAR.DOCUMENTO AS id
-		,CASE 
-			WHEN restante > 0
-				THEN convert(BIT, 0)
-			ELSE convert(BIT, 1)
-			END AS quitado
-		,DATEDIFF(day, isnull(PAGAR.Data_pagamento, getDate()), PAGAR.Data_vencimento) * - 1 AS ATZ
-		,PAGAR.[VALOR_TITULO] AS vlbruto
-		,0.0 AS Descontopercet
-		,CASE 
-			WHEN PAGAR.USUARIO_ALTERACAO = ''
-				THEN PAGAR.USUARIO_INCLUSAO
-			ELSE PAGAR.USUARIO_ALTERACAO
-			END AS usuarioInclusao
-		,quita_PAGAR.Cod_banco AS idBanco
-		,CASE 
-			WHEN quita_pagar.hora_pagto IS NULL
-				THEN pagar.hora_inclusao
-			ELSE quita_pagar.hora_pagto
-			END AS hora
-		,CONCAT (
-			pagar.Nome_fornecedor
-			,'; '
-			,jsysSubConta.descricao
-			,'; ' + pagar.observ
-			) AS historico
-		,pagar.cod_contabil AS idContabil
-		,'Pagar' AS tabela
-		,'' AS bancoOrigem
-		,'' AS bancoDestino
-		,'1' AS retirado
-		,'' AS descRetirado
-		,'' AS dataRetirado
-		,0 AS ficha
-	FROM quita_PAGAR WITH (NOLOCK)
-	INNER JOIN pagar WITH (NOLOCK) ON pagar.documento = quita_pagar.documento
-	INNER JOIN jsysSubConta WITH (NOLOCK) ON Pagar.Cod_contabil = jsysSubConta.idGeral
-	WHERE (PAGAR.DATA_CANCELAR IS NULL)
+	---- Contas Pagas
+	--SELECT quita_PAGAR.[Código título] AS idtitulo
+	--	,PAGAR.DOCUMENTO AS venda
+	--	,PAGAR.Data_emissão AS emissao
+	--	,PAGAR.Data_vencimento AS vencimento
+	--	,CASE 
+	--		WHEN quita_pagar.valor_restante > 0
+	--			THEN convert(VARCHAR, quita_PAGAR.Data_pagto, 3) + '-P'
+	--		ELSE convert(VARCHAR, quita_PAGAR.Data_pagto, 3) + '-Q'
+	--		END AS pagamento
+	--	,jsysSubConta.descricao AS Cliente
+	--	,CONCAT (
+	--		PAGAR.DOCUMENTO
+	--		,pagar.ORDEM_SEQ
+	--		,'-0'
+	--		) AS fatura
+	--	,PAGAR.valor_titulo * - 1 AS valor
+	--	,quita_pagar.valor_restante * - 1 AS restante
+	--	,0 AS desconto
+	--	,(quita_PAGAR.[VALOR_PAGO] * - 1) AS vlPago
+	--	,0 AS idVendedor
+	--	,PAGAR.CODIGO_DO_FORNECEDOR AS idCliente
+	--	,'5' AS tipo
+	--	,quita_PAGAR.Data_pagto AS Data
+	--	,PAGAR.DOCUMENTO AS id
+	--	,CASE 
+	--		WHEN restante > 0
+	--			THEN convert(BIT, 0)
+	--		ELSE convert(BIT, 1)
+	--		END AS quitado
+	--	,DATEDIFF(day, isnull(PAGAR.Data_pagamento, getDate()), PAGAR.Data_vencimento) * - 1 AS ATZ
+	--	,PAGAR.[VALOR_TITULO] AS vlbruto
+	--	,0.0 AS Descontopercet
+	--	,CASE 
+	--		WHEN PAGAR.USUARIO_ALTERACAO = ''
+	--			THEN PAGAR.USUARIO_INCLUSAO
+	--		ELSE PAGAR.USUARIO_ALTERACAO
+	--		END AS usuarioInclusao
+	--	,quita_PAGAR.Cod_banco AS idBanco
+	--	,CASE 
+	--		WHEN quita_pagar.hora_pagto IS NULL
+	--			THEN pagar.hora_inclusao
+	--		ELSE quita_pagar.hora_pagto
+	--		END AS hora
+	--	,CONCAT (
+	--		pagar.Nome_fornecedor
+	--		,'; '
+	--		,jsysSubConta.descricao
+	--		,'; ' + pagar.observ
+	--		) AS historico
+	--	,pagar.cod_contabil AS idContabil
+	--	,'Pagar' AS tabela
+	--	,'' AS bancoOrigem
+	--	,'' AS bancoDestino
+	--	,'1' AS retirado
+	--	,'' AS descRetirado
+	--	,'' AS dataRetirado
+	--	,0 AS ficha
+	--FROM quita_PAGAR WITH (NOLOCK)
+	--INNER JOIN pagar WITH (NOLOCK) ON pagar.documento = quita_pagar.documento
+	--INNER JOIN jsysSubConta WITH (NOLOCK) ON Pagar.Cod_contabil = jsysSubConta.idGeral
+	--WHERE (PAGAR.DATA_CANCELAR IS NULL)
 	
-	UNION ALL
+	--UNION ALL
 	
 	-- Contas Pagas 2
 	SELECT Pagamentos.idTituloBaixa AS Titulo

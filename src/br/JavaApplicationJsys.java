@@ -16,8 +16,9 @@ import java.util.Arrays;
 import org.apache.log4j.PropertyConfigurator;
 
 /**
- * 
+ *
  * 08/02/2022
+ *
  * @author Juliano Alves Medina
  */
 public class JavaApplicationJsys {
@@ -58,16 +59,23 @@ public class JavaApplicationJsys {
     public static final String JSSECACERTS = "certificados" + System.getProperty("file.separator") + "NFeCacerts";
     public static final int TIMEOUT_WS = 30;
     public static final int SSL_PORT = 443;
-    
+
     public static final String LINK_INSTALADOR = "https://drive.google.com/open?id=0B1_nXJkF5YiBTnVQVUR5UmNKRWs";
     public static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     public static final Boolean LOG = true;
     public static final String PASTAS_SCHEMAS = "Schemas 4.00";
     public static final String KEY_TIME_ZONE = "user.timezone";
     public static final String VALUE_TIME_ZONE = "GMT-4:00";
+    public static final String DEFAULT_LANGUAGE_BANCO_DE_DADOS = "us_english";
 
     public static final String TIME_ZONE_ID = "America/La_Paz";
     public static Base base = new Base();
+
+    public static String getUsuarioBancoDados() {
+        return INI.getString(
+                "BASE " + br.JavaApplicationJsys.base.getNome(),
+                "USUARIOSQLSERVER");
+    }
 
     public static String getBaseDefault() {
         String bases[] = INI.getString("LISTA BASE", "LISTA").split(",");

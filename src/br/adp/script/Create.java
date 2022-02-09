@@ -1,5 +1,6 @@
 package br.adp.script;
 
+import br.JavaApplicationJsys;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Create {
      */
     public static List<String[]> create() {
         List<String[]> script = new ArrayList<>();
-        script.add(new String[]{"ALTER LOGIN [jsys] WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=[us_english], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF", "Idioma Padrao"});
+        script.add(new String[]{"ALTER LOGIN ["+JavaApplicationJsys.getUsuarioBancoDados()+"] WITH DEFAULT_DATABASE=[master], DEFAULT_LANGUAGE=["+JavaApplicationJsys.DEFAULT_LANGUAGE_BANCO_DE_DADOS+"], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF", "Idioma Padrao"});
         script.add(new String[]{"CREATE DEFAULT defaultFalse AS 0", "defaultFalse"});
         script.add(new String[]{"CREATE DEFAULT defaultTrue AS 1", "defaultTrue"});
         script.add(new String[]{"CREATE DEFAULT defNada AS ''", "defNada"});
