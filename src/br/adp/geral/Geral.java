@@ -1111,6 +1111,7 @@ public class Geral extends javax.swing.JFrame {
                         .append(", '").append(vDados[12]).append("'")
                         .append(")");
                 try {
+                    System.out.println(sql);
                     ExecutaQuery.executeSqlScript(sql, bases[bancoDadosJC.getSelectedIndex()]);
                     setLog(vDados[3]);
                 } catch (SQLException e) {
