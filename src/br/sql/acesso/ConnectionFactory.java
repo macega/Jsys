@@ -14,7 +14,7 @@ import javax.persistence.RollbackException;
 
 /**
  *
- * @author julia
+ * @author Juliano Alves Medina
  */
 public class ConnectionFactory implements Serializable {
 
