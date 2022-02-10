@@ -24,6 +24,7 @@ import java.awt.ComponentOrientation;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -72,7 +75,7 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
         super.setVisible(b);
         this.setFocusable(b);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -889,8 +892,18 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
                     cancelaUltimosRecebimentos();
                     setSelecaoTabela();
                 }
-                p.dispose();
+                //p.dispose();
             }
+
+            @Override
+            protected void finalize() throws Throwable {
+                super.finalize(); //To change body of generated methods, choose Tools | Templates.
+
+                System.out.println("testes ");
+                p.dispose();
+
+            }
+
         };
         worker.execute();
         p.setVisible(true);
@@ -1234,22 +1247,18 @@ public final class RecebimentoCaixa extends javax.swing.JFrame {
     }
 
     private void emitirDocumentoFiscal() {
-        try {
-            setRegistroSelecionado();
-            // verifica se tem algum registro selecionado na Lista de recebimentos
-            if (jTableUltimosReceb.getSelectedRow() != -1) {
-                nfce(Integer.valueOf(jTableUltimosReceb.getValueAt(jTableUltimosReceb.getSelectedRow(), 1).toString()));
-            } else if (!titulosABaixar.isEmpty()) {
-                titulosABaixar.stream().forEach((t) -> {
-                    nfce(t.getIdReceber());
-                });
-            } else if (titulosABaixar.isEmpty() & registroSelecionado != null) {
-                nfce(registroSelecionado.getIdReceber());
-            } else {
-                nfce(0);
-            }
-        } catch (NumberFormatException e) {
-            Log.registraErro(this.getClass().getName(), "emitirCupom", e);
+        setRegistroSelecionado();
+        // verifica se tem algum registro selecionado na Lista de recebimentos
+        if (jTableUltimosReceb.getSelectedRow() != -1) {
+            nfce(Integer.valueOf(jTableUltimosReceb.getValueAt(jTableUltimosReceb.getSelectedRow(), 1).toString()));
+        } else if (!titulosABaixar.isEmpty()) {
+            titulosABaixar.stream().forEach((t) -> {
+                nfce(t.getIdReceber());
+            });
+        } else if (titulosABaixar.isEmpty() & registroSelecionado != null) {
+            nfce(registroSelecionado.getIdReceber());
+        } else {
+            nfce(0);
         }
     }
 

@@ -88,11 +88,11 @@ public class SQLDatabaseConnection {
      * @param sql
      * @return
      */
-    public ResultSet executesqlScriptRS(StringBuilder sql) { 
+    public ResultSet executesqlScriptRS(StringBuilder sql) {
         return executaRS(sql.toString());
     }
 
-    private void executa(String sql) { 
+    private void executa(String sql) {
         try {
             Statement stm = connection.createStatement();
             stm.execute(sql);
@@ -105,7 +105,7 @@ public class SQLDatabaseConnection {
      *
      * @param sql passar uma String com um Script sql
      */
-    public void executeSqlScript(String sql) { 
+    public void executeSqlScript(String sql) {
         executa(sql);
     }
 
@@ -113,12 +113,15 @@ public class SQLDatabaseConnection {
      *
      * @param sql passar uma StringBuilder com um Script sql
      */
-    public void executeSqlScript(StringBuilder sql) { 
+    public void executeSqlScript(StringBuilder sql) {
         executa(sql.toString());
     }
 
     /**
-     * @return retrona um int
+     * @return retrona um int retorna 1 do banco de dados se a procedure foi
+     * executado coretamente, se retornar -1 ouve um erro os dados nao foram
+     * presistidos no banco de dados
+     * 
      * @param procedure enviar a query da procedure ex: "procedure(?, ?, ?)"
      */
     public int execProcudureRetInt(String procedure) {

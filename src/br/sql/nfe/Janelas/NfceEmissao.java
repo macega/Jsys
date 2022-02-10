@@ -57,9 +57,10 @@ public final class NfceEmissao extends javax.swing.JDialog implements
      */
     public NfceEmissao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        par = Retorna.JsysParametros();
         Date data = ManagerData.getDate();
         Date dataValidadeCertificado = CertificadoA1Informacoes.getCertificado().getNotAfter();
-        par = Retorna.JsysParametros();
+        //par = Retorna.JsysParametros();
         double dias = ManagerData.dateDiffDay(data, dataValidadeCertificado);
         mensagenCaixa.append("Certificado valido por ");
         mensagenCaixa.append(ManagerDecimal.converter(dias, "#,##0"));

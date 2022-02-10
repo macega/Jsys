@@ -28,6 +28,16 @@ public class CertificadoA1Informacoes extends javax.swing.JDialog {
 
     private static final JsysParametros par = Retorna.JsysParametros();
 
+    /**
+     * para iniciar a classe seguir o exemplo
+     *
+     * java.awt.EventQueue.invokeLater(() -> { CertificadoA1Informacoes dialog =
+     * new CertificadoA1Informacoes(new javax.swing.JFrame(), true);
+     * dialog.setVisible(true); });
+     *
+     * @param f
+     * @param modal
+     */
     public CertificadoA1Informacoes(java.awt.Frame f, boolean modal) {
         super(f, modal);
         initComponents();
@@ -219,15 +229,15 @@ public class CertificadoA1Informacoes extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            CertificadoA1Informacoes dialog = new CertificadoA1Informacoes(new javax.swing.JFrame(), true);
-            dialog.setVisible(true);
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(() -> {
+//            CertificadoA1Informacoes dialog = new CertificadoA1Informacoes(new javax.swing.JFrame(), true);
+//            dialog.setVisible(true);
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -255,7 +265,7 @@ public class CertificadoA1Informacoes extends javax.swing.JDialog {
             keystore.load(new FileInputStream(par.getCaminhoDoCertificadoDoCliente()), par.getSenhaDoCertificadoDoCliente().toCharArray());
 
             Enumeration<String> eAliases = keystore.aliases();
-            
+
             while (eAliases.hasMoreElements()) {
                 String alias = (String) eAliases.nextElement();
                 Certificate certificado = (Certificate) keystore.getCertificate(alias);
@@ -268,15 +278,17 @@ public class CertificadoA1Informacoes extends javax.swing.JDialog {
     }
 
     private void caregarCertificado() {
-        jTextFieldVersao.setText(String.valueOf(getCertificado().getVersion()));
-        jTextFieldAsunto.setText(getCertificado().getSubjectDN().getName());
-        jTextFieldValidoAte.setText(ManagerData.convertDate(getCertificado().getNotAfter(), "dd/MM/yyyy HH:mm:ss"));
-        jTextFieldvalidoApartir.setText(ManagerData.convertDate(getCertificado().getNotBefore(), "dd/MM/yyyy HH:mm:ss"));
-        jTextFieldDias.setText(ManagerDecimal.converter(ManagerData.dateDiffDay(ManagerData.getDate(), getCertificado().getNotAfter()), "#,##0"));
-        for (String str : getCertificado().getSubjectDN().getName().split(",")) {
-            String[] s = str.trim().split("=");
-            if ("CN".equals(s[0])) {
-                jTextFieldnome.setText(s[1]);
+        if (getCertificado() != null) {
+            jTextFieldVersao.setText(String.valueOf(getCertificado().getVersion()));
+            jTextFieldAsunto.setText(getCertificado().getSubjectDN().getName());
+            jTextFieldValidoAte.setText(ManagerData.convertDate(getCertificado().getNotAfter(), "dd/MM/yyyy HH:mm:ss"));
+            jTextFieldvalidoApartir.setText(ManagerData.convertDate(getCertificado().getNotBefore(), "dd/MM/yyyy HH:mm:ss"));
+            jTextFieldDias.setText(ManagerDecimal.converter(ManagerData.dateDiffDay(ManagerData.getDate(), getCertificado().getNotAfter()), "#,##0"));
+            for (String str : getCertificado().getSubjectDN().getName().split(",")) {
+                String[] s = str.trim().split("=");
+                if ("CN".equals(s[0])) {
+                    jTextFieldnome.setText(s[1]);
+                }
             }
         }
     }

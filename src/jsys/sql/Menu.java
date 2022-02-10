@@ -2443,7 +2443,10 @@ public final class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem67ActionPerformed
 
     private void jMenuItem69ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem69ActionPerformed
-        CertificadoA1Informacoes.main(null);
+        java.awt.EventQueue.invokeLater(() -> {
+            CertificadoA1Informacoes dialog = new CertificadoA1Informacoes(new javax.swing.JFrame(), true);
+            dialog.setVisible(true);
+        });
     }//GEN-LAST:event_jMenuItem69ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
