@@ -28,6 +28,7 @@ public final class Log {
 //    public static void registraErro(Class<?> t, String metodo, Throwable e) {
 //        registraErro(t.getName(), metodo, e.getMessage());
 //    }
+    
     /**
      * Ex; br.sql.log.Log.registraErro(this.getClass().getName(), "Metodo", e);
      *
