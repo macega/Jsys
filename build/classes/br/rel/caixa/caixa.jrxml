@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Caixa" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="720ea8fd-2a26-478c-99ba-4e0801a6362f">
+	<property name="ireport.zoom" value="2.853116706110004"/>
+	<property name="ireport.x" value="792"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/br/rel/caixa/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[DECLARE @dataInicial AS DATETIME
+	,@dataFinal AS DATETIME
+
+SET @dataInicial = $P{dataInicial}
+SET @dataFinal = $P{dataFinal}
+
+SELECT fantasia
+	,isnull(tb.idTitulo, '') as idTitulo
+	,isnull(tb.valor, 0) as valor
+	,isnull(tb.[percent], '0 %') as [percent]
+FROM jsysParametros
+LEFT OUTER JOIN (
+	SELECT jsysCaixa.idTitulo
+		,sum(jsysCaixa.VlPago) AS valor
+		,CONCAT (
+			cast(round((isnull(sum(jsysCaixa.VlPago), 0) * 100) / (isnull(vendas.totalVendas, 0) + 1), 1, 2) AS DECIMAL(10, 2))
+			,' %'
+			) AS [percent]
+	FROM jsysCaixa
+	INNER JOIN jsysNFe ON jsysNFe.venda = jsysCaixa.venda
+	CROSS JOIN (
+		SELECT sum(jsysOrcamento.valorLiquido) AS totalVendas
+		FROM jsysOrcamento WITH (NOLOCK)
+		WHERE vendido = 1
+			AND cancelado = 0
+			AND cast(floor(cast(data AS FLOAT)) AS DATETIME) BETWEEN @dataInicial
+				AND @dataFinal
+		) AS vendas
+	WHERE jsysCaixa.Tipo IN (
+			1
+			,2
+			,3
+			)
+		AND jsysNFe.emitida = 1
+		AND jsysNFe.cancelada = 0
+		AND cast(floor(cast(jsysCaixa.data AS FLOAT)) AS DATETIME) BETWEEN @dataInicial
+			AND @dataFinal
+	GROUP BY jsysCaixa.idTitulo
+		,vendas.totalVendas
+	) AS tb ON 1 = 1]]>
+	</queryString>
+	<field name="fantasia" class="java.lang.String"/>
+	<field name="idTitulo" class="java.lang.String"/>
+	<field name="valor" class="java.math.BigDecimal"/>
+	<field name="percent" class="java.lang.String"/>
+	<title>
+		<band height="32">
+			<textField>
+				<reportElement style="Title" x="0" y="0" width="555" height="15" uuid="e2bbd5a0-bb1e-4eb1-99a0-66e23b315f7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="SubTitle" x="0" y="15" width="555" height="13" uuid="a843e61d-e5c1-4667-ac0a-2ffbf34abfba"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Caixa de " 
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="28" width="555" height="1" uuid="830f8b29-45a4-4e4b-9d96-e8aa3e677af6"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18">
+			<subreport>
+				<reportElement x="345" y="0" width="210" height="15" uuid="6e8b0dc8-2b80-4628-bdd0-7529342ccd76"/>
+				<subreportParameter name="dataFinal">
+					<subreportParameterExpression><![CDATA[$P{dataFinal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dataInicial">
+					<subreportParameterExpression><![CDATA[$P{dataInicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[getClass().getResource($P{SUBREPORT_DIR} + "caixaTotalGeralSub.jasper")]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="300" height="15" uuid="c4221849-98ec-4b98-9a39-77971afac9dc"/>
+				<subreportParameter name="dataFinal">
+					<subreportParameterExpression><![CDATA[$P{dataFinal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dataInicial">
+					<subreportParameterExpression><![CDATA[$P{dataInicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[getClass().getResource($P{SUBREPORT_DIR} + "caixaResumoDeCaixaSub.jasper")]]></subreportExpression>
+			</subreport>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<rectangle>
+				<reportElement x="345" y="0" width="210" height="10" uuid="aa736d87-f31a-4b7d-b33d-64ab732b47e5"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="345" y="0" width="68" height="10" uuid="a8563ea0-d08b-4af0-a313-7a28e12f2505"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idTitulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="455" y="0" width="100" height="10" uuid="3c7f4984-c413-41bb-93fd-39557414b314"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="0" width="42" height="10" uuid="748196b2-5d75-4c44-9605-9d244cfe013d"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percent}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="12" uuid="be809e7c-af19-4d87-adfd-0a10d3717917"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="12" uuid="5b25abae-acc9-4158-a9f1-76a6991c2d28"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="12" uuid="8def86b3-db89-4e5a-aa5f-c02b8283c31d"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="34" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="15" uuid="37f91873-8f99-46d7-84e0-b42321fae4df"/>
+				<subreportParameter name="dataFinal">
+					<subreportParameterExpression><![CDATA[$P{dataFinal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dataInicial">
+					<subreportParameterExpression><![CDATA[$P{dataInicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[getClass().getResource($P{SUBREPORT_DIR} + "caixaDespesasSub.jasper")]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="15" width="555" height="15" uuid="9e1f228a-581d-4715-8c8b-8d9aa93d8c4d"/>
+				<subreportParameter name="dataFinal">
+					<subreportParameterExpression><![CDATA[$P{dataFinal}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dataInicial">
+					<subreportParameterExpression><![CDATA[$P{dataInicial}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[getClass().getResource($P{SUBREPORT_DIR} + "caixaLiberacaoSub.jasper")]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

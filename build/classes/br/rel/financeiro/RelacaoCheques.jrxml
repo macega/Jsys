@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cheques Pre-datado" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a4b0723-147a-4412-8679-a6672eb65f70">
+	<property name="ireport.zoom" value="1.6105100000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date"/>
+	<parameter name="dataFinal" class="java.util.Date"/>
+	<parameter name="emitidos" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="quitados" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idFornecedor" class="java.lang.String"/>
+	<parameter name="devolvidos" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cancelado" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[DECLARE @idFornecedor AS VARCHAR(max) = $P{idFornecedor}
+	,@devolvido AS BIT = $P{devolvidos}
+	,@cancelado AS BIT = $P{cancelado}
+	,@quitado AS BIT = $P{quitados}
+	,@emitido AS BIT = $P{emitidos}
+
+SELECT jsysCheques.idcheque
+	,dataEmissao
+	,dataVencimento
+	,jsysCheques.idCliente
+	,CASE 
+		WHEN semCadastrado = 1
+			THEN jsysCheques.nomeCorentista
+		ELSE jsysClientes.nomeCorentista
+		END AS nomeCorentista
+	,jsysCheques.idBanco
+	,numeroCheque
+	,outrosNumeros
+	,valorCheque
+	,quitado
+	,concat(jsysBancos.nomeBanco, jsysCheques.obs) as obs
+	,jsysparametros.fantasia
+FROM jsysCheques
+INNER JOIN jsysclientes ON jsysClientes.idCliente = jsysCheques.idCliente
+inner join jsysBancos on jsysBancos.idBanco = jsysCheques.idBanco
+CROSS JOIN jsysparametros
+WHERE dataVencimento between $P{dataInicial} and $P{dataFinal}
+	AND (
+		emitidos = @emitido
+		OR 1 = @devolvido
+		OR 1 = @cancelado
+		)
+	AND (
+		quitado = @quitado
+		OR 1 = @devolvido
+		OR 1 = @cancelado
+		)
+	AND (
+		cancelado = @cancelado
+		OR 1 = @devolvido
+		)
+	AND (
+		devolvido = @devolvido
+		OR 1 = @cancelado
+		)
+	AND (replace(',' + @idFornecedor + ',', ' ', '') LIKE '%,' + CAST(jsysCheques.idCliente AS VARCHAR) + ',%'
+          OR '' = @idFornecedor)
+ORDER BY dataVencimento]]>
+	</queryString>
+	<field name="idcheque" class="java.lang.Integer"/>
+	<field name="dataEmissao" class="java.sql.Timestamp"/>
+	<field name="dataVencimento" class="java.sql.Timestamp"/>
+	<field name="idCliente" class="java.lang.Integer"/>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="idBanco" class="java.lang.Integer"/>
+	<field name="numeroCheque" class="java.lang.String"/>
+	<field name="outrosNumeros" class="java.lang.String"/>
+	<field name="valorCheque" class="java.math.BigDecimal"/>
+	<field name="quitado" class="java.lang.Boolean"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="valorCheque_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valorCheque}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement style="Title" x="0" y="0" width="555" height="13" forecolor="#000000" uuid="6f469799-62b3-4506-9188-46aad999381b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="0" y="13" width="555" height="13" forecolor="#000000" uuid="db1fbf36-51ea-4418-86c9-37a9c61f1aaa"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cheques Pré-datado " + new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á " + new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="27" width="555" height="1" uuid="f66c821a-6e7e-4103-a42b-2eb0d9032654"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="11" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="555" height="1" uuid="aad50c67-2fca-4363-afba-49f2c9f3d0fe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="34" height="10" uuid="6b56cf38-8daf-4657-8963-0a1f7b0c50ff"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="37" y="0" width="56" height="10" uuid="58085acd-8852-4b53-a6ee-eac9aa598f35"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Pré-datado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="96" y="0" width="144" height="10" uuid="faffcb9f-fa3d-4bf7-9567-a6d96b688ecf"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Corentista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="246" y="0" width="50" height="10" uuid="25de6b24-9f20-4973-ad1e-20531e7dc366"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Cheque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="464" y="0" width="91" height="10" uuid="c9e67ddc-b2e9-435f-80ac-32b05096f08f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="301" y="0" width="160" height="10" uuid="7e35cb63-b1c6-4184-b6a2-c79297ab67c8"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Obs]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="555" height="1" uuid="5259c897-c55a-4bbb-9ed7-726211951d7f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="34" height="10" uuid="2e0bf7f3-ac05-4eec-bd3f-9c39ec2b8a76"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idcheque}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="37" y="0" width="56" height="10" uuid="0b7054be-5078-447f-8b98-127376055b62"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="96" y="0" width="144" height="10" uuid="2077fbb4-65bf-4cda-b9e1-c52b96a7bbd6"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idCliente}+ " - "+$F{nomeCorentista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="246" y="0" width="50" height="10" uuid="d83e15bf-4ef9-42d7-9939-ab0c48d37156"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroCheque}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement style="Detail" x="464" y="0" width="91" height="10" uuid="eaa2ba9b-5bee-4682-a802-e0e74c769dfd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorCheque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="301" y="0" width="160" height="10" uuid="e371a79b-87c9-4e37-b16a-66dc97e9c507"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="396" y="0" width="117" height="13" uuid="d9542d67-0523-4dba-951c-341c8c5b6358"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="13" uuid="c881340b-2edf-4e15-8995-afa8954f6193"/>
+				<textElement>
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="13" uuid="02ae8497-59c0-4992-a559-e4ce73b1eb26"/>
+				<textElement>
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="16" splitType="Stretch">
+			<textField pattern="">
+				<reportElement x="344" y="2" width="211" height="13" uuid="6b088784-15ee-4f0e-b9b2-e7198fbdc274"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total Geral: " + new java.text.DecimalFormat("#,##0.00").format($V{valorCheque_1})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="344" y="0" width="211" height="1" uuid="f4bfc4fa-5c43-4ed6-bb10-cc88fd0e4701"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

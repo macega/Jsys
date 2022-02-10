@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="impNfce79_subreport_itens" language="groovy" pageWidth="208" pageHeight="792" columnWidth="200" leftMargin="4" rightMargin="4" topMargin="0" bottomMargin="0" uuid="c2cb0278-304c-4fbf-8f71-b441fcfe5e34">
+	<property name="ireport.zoom" value="4.594972986357224"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="idProduto" class="java.lang.Integer"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="qtde" class="java.math.BigDecimal"/>
+	<field name="un" class="java.lang.String"/>
+	<field name="vUnit" class="java.math.BigDecimal"/>
+	<field name="vTotal" class="java.math.BigDecimal"/>
+	<field name="vTributos" class="java.math.BigDecimal"/>
+	<columnHeader>
+		<band height="9">
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="155" y="0" width="45" height="9"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[vTot]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="21" y="0" width="69" height="9"/>
+				<textElement markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="90" y="0" width="19" height="9"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Und]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="0" y="0" width="21" height="9"/>
+				<textElement markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Cod]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="130" y="0" width="25" height="9"/>
+				<textElement textAlignment="Right" markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[vUnd]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="f1ac4a50-07ef-454d-b902-a9b273fd8437" x="0" y="8" width="200" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="311dc5a9-68f6-452c-9b17-4f3ec533ae67" x="109" y="0" width="21" height="9"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Qt]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9" splitType="Stretch">
+			<textField>
+				<reportElement uuid="25425678-5f95-4b32-a1a4-3136165a5de2" x="0" y="0" width="90" height="9"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idProduto} + 
+" " +$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement uuid="513ccf60-04cd-4870-8b8e-e44442d7c3fe" x="109" y="0" width="21" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33325301-9d36-415e-aaed-168b123b89fa" x="90" y="0" width="19" height="9"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{un}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement uuid="6f460560-4fb1-4f77-b3cc-3865c4231b56" x="130" y="0" width="25" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vUnit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement uuid="5ea027b3-d452-4f46-b567-31fa7ff70e4a" x="155" y="0" width="45" height="9"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etiquetas3Colunas" columnCount="3" pageWidth="298" pageHeight="165" columnWidth="99" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="daa945c8-93c3-4364-bedf-190cda1c2a56">
+	<property name="ireport.zoom" value="3.3868435803226733"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT produtosEtiquetas.[codigo]
+       ,produtosEtiquetas.[descricao]
+       ,produtosEtiquetas.[quantidade]
+       ,Produtos.Referencia AS referencia 
+       ,Produtos."Preço venda" AS precoVenda 
+       ,Produtos.N_marca AS marca 
+from produtosEtiquetas 
+   inner join produtos on cast(produtos.[Cód prod] as int) = produtosEtiquetas.[codigo]]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Short"/>
+	<field name="descricao" class="java.lang.String"/>
+	<field name="referencia" class="java.lang.String"/>
+	<field name="precoVenda" class="java.math.BigDecimal"/>
+	<field name="marca" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.Integer" calculation="StandardDeviation">
+		<variableExpression><![CDATA[$F{quantidade}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<detail>
+		<band height="165" splitType="Stretch">
+			<componentElement>
+				<reportElement x="23" y="67" width="76" height="36" uuid="c924882d-b621-48a6-9eff-2cf5ad6596bd"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="true" checksumRequired="false" barWidth="2" barHeight="50">
+					<jr:codeExpression><![CDATA[$F{codigo}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="8" y="14" width="12" height="144" uuid="6a799707-1f3b-4089-ac9b-c30cecfeb08e"/>
+				<textElement rotation="Right" markup="none">
+					<font fontName="Tahoma" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="22" y="136" width="77" height="22" uuid="85010a14-7e6f-49ef-9051-6252ac0336e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Tahoma" size="17" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precoVenda}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="7" y="11" width="14" height="1" uuid="ed1c815d-1c26-44a6-a274-3dde86320a3f"/>
+			</line>
+			<line>
+				<reportElement x="21" y="135" width="78" height="1" uuid="4f57dad8-1c28-4c49-a2c7-c55109db2f7e"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="7" y="158" width="92" height="1" uuid="d68124cb-93d4-44fc-9794-086fe75ad72f"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="20" y="11" width="1" height="147" uuid="af4bfd84-ceda-4ddb-9d7a-0f1dc6d923e0"/>
+			</line>
+			<line>
+				<reportElement x="7" y="11" width="1" height="147" uuid="af4bfd84-ceda-4ddb-9d7a-0f1dc6d923e0"/>
+			</line>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="23" y="10" width="75" height="54" uuid="9c233893-b37d-410a-a7c0-95d2e02672e8"/>
+				<imageExpression><![CDATA["Logo.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="22" y="124" width="25" height="8" uuid="e42077fb-ea80-4d02-b539-50cc26fb453d"/>
+				<textElement>
+					<font fontName="Tahoma" size="6"/>
+				</textElement>
+				<text><![CDATA[Preço:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="21" y="106" width="78" height="1" uuid="356a2e6d-b8eb-4f37-a7dc-b5dcee46250e"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="21" y="118" width="78" height="1" uuid="356a2e6d-b8eb-4f37-a7dc-b5dcee46250e"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="22" y="108" width="77" height="10" uuid="ca0d241f-7467-4a57-a8ca-6e725701cd69"/>
+				<textElement>
+					<font fontName="Tahoma" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InventarioEstoqueData" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d0f19830-7ddf-494c-9aa1-bc8ed47d128a">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="data" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[DECLARE @Data as datetime
+SET @Data = $P{data}
+
+SELECT jsysProdutosT.idProduto
+      ,nomeProduto
+	  ,dbo.produtosEstoqueData(jsysProdutosT.idProduto, @Data) as estoqueGeral
+	  ,precoCompra
+	  ,(dbo.produtosEstoqueData(jsysProdutosT.idProduto, @Data) * precoCompra) AS totalCompra
+	  ,jsysProdutosTPrecos.precoVenda
+	  ,(dbo.produtosEstoqueData(jsysProdutosT.idProduto, @Data) * jsysProdutosTPrecos.precoVenda) AS totalVenda
+	  ,jsysParametros.fantasia
+	  ,jsysParametros.cnpj+' - '+jsysParametros.inscricao AS cnpjIe
+FROM jsysProdutosT
+cross join jsysLojas
+inner join jsysProdutosTPrecos on jsysProdutosTPrecos.idProduto = jsysProdutosT.idProduto 
+                              and jsysProdutosTPrecos.idloja = jsysLojas.idloja
+cross join jsysParametros
+where (dbo.produtosEstoqueData(jsysProdutosT.idProduto, @Data) > 0) and (jsysLojas.ativo = 1) and (jsysProdutosT.inativo = 0)]]>
+	</queryString>
+	<field name="idProduto" class="java.lang.Integer"/>
+	<field name="nomeProduto" class="java.lang.String"/>
+	<field name="estoqueGeral" class="java.math.BigDecimal"/>
+	<field name="precoCompra" class="java.math.BigDecimal"/>
+	<field name="totalCompra" class="java.math.BigDecimal"/>
+	<field name="precoVenda" class="java.math.BigDecimal"/>
+	<field name="totalVenda" class="java.math.BigDecimal"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<field name="cnpjIe" class="java.lang.String"/>
+	<variable name="totalCompra_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalCompra}]]></variableExpression>
+	</variable>
+	<variable name="totalVenda_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalVenda}]]></variableExpression>
+	</variable>
+	<variable name="totalItens" class="java.math.BigDecimal" calculation="Count">
+		<variableExpression><![CDATA[$F{idProduto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="17" uuid="4355fb88-3501-412c-a01a-1953097d58a5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="17" width="555" height="13" uuid="3b458081-dfaf-43bc-b7fc-17071428ec93"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cnpjIe}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="43" width="555" height="1" uuid="080daf81-2824-4491-a498-3fd8c9f8bd9c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="13" uuid="086de08b-8ca3-4070-8f56-b0b575296dbb"/>
+				<textElement textAlignment="Center" markup="none">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["INVENTÁRIO (Estoque) Data: "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{data})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="11" width="555" height="1" uuid="81957fba-e999-44bf-a421-6f514f3223ca"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="50" height="10" uuid="6dd971f7-b56d-4102-9480-6e0cf146678b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="56" y="0" width="185" height="10" uuid="fc762dde-fdc0-4387-bfe8-16f6a4d08ae1"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Descrição do Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="246" y="0" width="49" height="10" uuid="f17802d4-4092-4340-8039-cdfb1360412b"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="300" y="0" width="60" height="10" uuid="0306ccd6-5408-45b6-bd30-59e194233bd6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Valor Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="365" y="0" width="60" height="10" uuid="aa9a86f2-1efc-4669-85fc-b006512ec1b6"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Total Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="430" y="0" width="60" height="10" uuid="2bab3cc4-054d-4dc4-aaa4-0292d84c7579"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Valor Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="495" y="0" width="60" height="10" uuid="1f264d5b-30a2-4ef5-9b87-edef6657eb6e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Venda]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="555" height="1" uuid="81ab8ed5-1b34-44f4-9fe7-3c94496e227c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="50" height="10" uuid="413149a9-5a4b-4387-bf83-ac7bad7a1b4a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idProduto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.0;-#,##0.0">
+				<reportElement style="Detail" x="246" y="0" width="49" height="10" uuid="0b236c25-5bb9-4641-983b-6ad3296360b2"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estoqueGeral}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="300" y="0" width="60" height="10" uuid="09390b29-6a1c-4015-8377-56238b4d3e36"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precoCompra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="365" y="0" width="60" height="10" uuid="1f0fa1f7-d5d8-477e-83fd-6d5427b7ca20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalCompra}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="495" y="0" width="60" height="10" uuid="695471f9-bc22-4644-b6dc-1b3737f12ab3"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalVenda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="430" y="0" width="60" height="10" uuid="9a029141-86aa-4803-a443-0ab14746d3a9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precoVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="56" y="0" width="185" height="10" uuid="748fca22-c6fa-4456-a0a7-6f1008fd4299"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="284" y="0" width="229" height="13" uuid="c2af7acf-390e-4a04-bb40-1cbd7e72da07"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="13" uuid="ef36d9a7-f420-46d7-8162-130e044785c7"/>
+				<textElement>
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Column header" x="0" y="0" width="284" height="13" uuid="4bc0b78f-abc5-428f-b08c-75dffef414d4"/>
+				<textElement>
+					<font fontName="Tahoma" size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="321" y="1" width="104" height="13" uuid="81ce4e2a-1c16-46cb-9a13-41769b9c0f9b"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalCompra_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;#,##0.00-">
+				<reportElement x="433" y="1" width="122" height="13" uuid="9899cc80-5b22-4b5d-86df-e07c500af29c"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalVenda_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="224" y="1" width="97" height="13" uuid="fd56bd6a-bace-4e95-bdad-e701f6636d2b"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Geral:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="224" y="0" width="331" height="1" uuid="99d55914-22ab-4bcb-b204-6baa64dc75fd"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="40" height="13" uuid="6023fd3c-f6cf-439a-959b-1ebacda6b3ab"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Qt Itens:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="1" width="89" height="13" uuid="3fdfbf9b-e9d3-4964-bb5d-be53f7bc0a14"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalItens}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

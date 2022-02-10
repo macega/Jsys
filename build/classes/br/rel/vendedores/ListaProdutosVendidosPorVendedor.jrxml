@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListaProdutosVendidosPorVendedor" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="06bc13ff-3e05-487f-b11e-37341d339820">
+	<property name="ireport.zoom" value="1.771561000000002"/>
+	<property name="ireport.x" value="25"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="dataInicial" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataFinal" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select jsysOrcamentoItens.idProduto, 
+jsysProdutosT.nomeProduto, 
+jsysOrcamentoItens.quantidade,  
+jsysOrcamentoItens.precoVenda,
+(jsysOrcamentoItens.totalProduto - jsysOrcamentoItens.desconto)  as totalVenda,
+jsysOrcamento.idOrcamento, 
+jsysOrcamento.data, 
+jsysOrcamento.idFuncionario, 
+jsysClientes.nomeCorentista, 
+jsysParametros.fantasia
+from jsysOrcamento 
+inner join jsysOrcamentoItens on jsysOrcamentoItens.idOrcamento = jsysOrcamento.idOrcamento
+inner join jsysProdutosT on jsysProdutosT.idProduto = jsysOrcamentoItens.idProduto
+inner join jsysClientes on jsysOrcamento.idFuncionario = jsysClientes.idCliente
+cross join jsysParametros
+where (jsysOrcamento.vendido = 1) 
+	and (jsysOrcamento.cancelado = 0)
+	and (jsysOrcamentoItens.quantidade >= 0)
+	and (jsysOrcamento.data between $P{dataInicial} and $P{dataFinal})
+order by jsysOrcamento.idFuncionario, jsysOrcamentoItens.idProduto, jsysOrcamento.data]]>
+	</queryString>
+	<field name="idProduto" class="java.lang.Integer"/>
+	<field name="nomeProduto" class="java.lang.String"/>
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="precoVenda" class="java.math.BigDecimal"/>
+	<field name="totalVenda" class="java.math.BigDecimal"/>
+	<field name="idOrcamento" class="java.lang.Integer"/>
+	<field name="data" class="java.sql.Timestamp"/>
+	<field name="idFuncionario" class="java.lang.Integer"/>
+	<field name="nomeCorentista" class="java.lang.String"/>
+	<field name="fantasia" class="java.lang.String"/>
+	<variable name="totalVenda_1" class="java.math.BigDecimal" resetType="Group" resetGroup="idFuncionario" calculation="Sum">
+		<variableExpression><![CDATA[$F{totalVenda}]]></variableExpression>
+	</variable>
+	<group name="idFuncionario">
+		<groupExpression><![CDATA[$F{idFuncionario}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField>
+					<reportElement style="SubTitle" x="41" y="0" width="50" height="15" forecolor="#333333" uuid="ced7df0d-4d23-4381-8f17-7c3aebea8de8"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{idFuncionario}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="0" width="36" height="15" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="fcce6bf3-811c-4a11-888c-49513169dbc2"/>
+				</rectangle>
+				<textField>
+					<reportElement style="Detail" x="91" y="0" width="464" height="15" uuid="43e6123e-e26e-4a2f-9a98-e31432c633ff"/>
+					<textFieldExpression><![CDATA[$F{nomeCorentista}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="15">
+				<line>
+					<reportElement x="391" y="0" width="163" height="1" uuid="fbf010a8-f254-4436-b21e-8c7d89a71570"/>
+					<graphicElement>
+						<pen lineWidth="0.5" lineStyle="Dashed"/>
+					</graphicElement>
+				</line>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="474" y="1" width="80" height="13" uuid="8f101384-64f3-47df-94da-c48979a6274f"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{totalVenda_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="391" y="1" width="80" height="13" uuid="a9e7b9ad-d0b3-4df5-9d9c-318455b6ef62"/>
+					<textElement textAlignment="Right" markup="none"/>
+					<text><![CDATA[Total Vendido:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="384" height="14" forecolor="#CC0033" uuid="49c09bf8-9354-43c1-98fa-3dde5cda4b6a"/>
+					<text><![CDATA[Não Corresponde ao Total de Vendas Devido as Trocas, Não entram nesta Lista]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="555" height="17" uuid="eb008b61-fbf4-4521-8989-5f9158996030"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fantasia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SubTitle" x="0" y="17" width="555" height="13" forecolor="#666666" uuid="ddbc6722-f900-419f-81f9-6e53e7e2d545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lista de Produtos Vendidos (Por Vendedor) de "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataInicial})
++ " á "
++ new SimpleDateFormat("dd/MM/yyyy").format($P{dataFinal})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="30" width="555" height="1" uuid="01054fe5-8b7a-40bc-a348-dfe2666b4988"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="555" height="1" uuid="64625034-b23b-40f4-af23-ad47842d43d1"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineStyle="Dashed" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="0" width="36" height="10" uuid="d09fda2e-4608-4462-8f46-f52fb9c5e303"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="41" y="0" width="203" height="10" uuid="e7c01dbf-19b2-4aff-bb48-037c58fec41f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Descrição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="250" y="0" width="40" height="10" uuid="7d4e02a8-99f7-4249-afa5-21d018c2c0e1"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Qt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="391" y="0" width="80" height="10" uuid="e5838208-6c10-4fc0-a122-698df00533b7"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="295" y="0" width="43" height="10" uuid="2dcaea47-a14a-44ba-b061-ddbdc5a2d214"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Venda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="342" y="0" width="42" height="10" uuid="5caa4dff-fa25-4b41-b1ce-b13103cbf321"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="474" y="0" width="81" height="10" uuid="16551c0a-a2f8-47d9-b007-7a4659e2bae3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Venda]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="36" height="10" uuid="834594e3-ed4d-4c0c-8f85-a19b08677f66"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="41" y="0" width="203" height="10" uuid="b9b9a3da-5a09-4616-a832-461bbf52949f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeProduto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0;-#,##0">
+				<reportElement style="Detail" x="250" y="0" width="40" height="10" uuid="ce2716ea-19fb-4632-a40b-838aac40b7c4"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="391" y="0" width="80" height="10" uuid="9305884e-f617-4e46-ae74-b06f0e6b59bf"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precoVenda}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement style="Detail" x="474" y="0" width="80" height="10" uuid="efbd2fd5-e834-4e01-bae9-99789bb862e8"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="295" y="0" width="43" height="10" uuid="5b2e0f54-2e12-4ac0-acc7-cd999b7e7400"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idOrcamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="Detail" x="342" y="0" width="42" height="10" uuid="ef3d2526-a268-4e79-8349-ddee5b761123"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="78309bad-fb42-4d28-82aa-1ab04d71fcf4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="311" y="0" width="202" height="12" uuid="e0a44597-04b3-4f7b-be02-a76099a694bb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="42" height="12" uuid="4e015144-bec7-4e78-a451-53a316726a2c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="12" uuid="84dc01a3-1852-45fd-98f1-fbe0701f780e"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
