@@ -34,7 +34,8 @@ public class JsysProdutosTFabricantes implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "idFabricante")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idFabricante;
     
     @Basic(optional = false)

@@ -33,7 +33,8 @@ public class JsysProdutosTFamilias implements Serializable {
 
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idFamilia")
     private Integer idFamilia;
 
