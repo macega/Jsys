@@ -836,6 +836,8 @@ public class Geral extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         JFileChooser file = new JFileChooser();
+        
+        JFileChooser fileChooser = new NativeJFileChooser();
         file.setFileSelectionMode(JFileChooser.FILES_ONLY);
         file.setSelectedFile(new File(origenFileTF.getText()));
         file.setFileFilter(new FileNameExtensionFilter(null, jComboBox2.getSelectedItem().toString()));
