@@ -29,7 +29,7 @@
  * Created on 10 de Setembro de 2006, 13:57
  *
  * @author Giovanni <gio@drayah.net>
- * Copyright � 2006 G.M. Martina
+ * Copyright 2006 G.M. Martina
  *
  * Class that enables printing to ESC/P and ESC/P2 dot matrix printers (e.g. Epson LQ-570, Epson LX-300) by writing directly to a stream using standard I/O
  * Like this we have direct control over the printer and bypass Java2D printing which is considerably slower printing in graphics to a dotmatrix

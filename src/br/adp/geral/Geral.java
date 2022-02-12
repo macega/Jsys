@@ -1231,9 +1231,9 @@ public class Geral extends javax.swing.JFrame {
             for (StringBuilder linha : linhas) {
                 x.write(linha.toString());
             }
-            JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso", "Conclu�do", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Arquivo gravado com sucesso", "Concluído", JOptionPane.INFORMATION_MESSAGE);
         } catch (HeadlessException | IOException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Aten��o", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Atenção", JOptionPane.WARNING_MESSAGE);
         }
     }
 

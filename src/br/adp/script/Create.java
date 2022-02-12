@@ -175,7 +175,7 @@ public class Create {
             + "	[Cod_grupo] [varchar](3) NOT NULL, "
             + "	[Descricao] [varchar](25) NOT NULL, "
             + "	[quick~rs] [timestamp] NULL, "
-            + " CONSTRAINT [C�digo grupo] PRIMARY KEY CLUSTERED  "
+            + " CONSTRAINT [Código grupo] PRIMARY KEY CLUSTERED  "
             + "( "
             + "	[Cod_grupo] ASC "
             + ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY] "
@@ -1048,58 +1048,6 @@ public class Create {
             + "	[idPagamentos] ASC "
             + ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY] "
             + ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]", "Pagamentos"});
-//        script.add(new String[]{"CREATE TABLE [dbo].[Pagar]( "
-//            + "	[Documento] [varchar](6) NOT NULL, "
-//            + "	[Ordem_seq] [varchar](2) NOT NULL, "
-//            + "	[Cod_empresa] [varchar](3) NOT NULL, "
-//            + "	[C�digo t�tulo] [varchar](4) NOT NULL, "
-//            + "	[Codigo_do_fornecedor] [varchar](6) NOT NULL, "
-//            + "	[Nome_fornecedor] [varchar](60) NOT NULL, "
-//            + "	[Nao_cadastrado] [bit] NOT NULL, "
-//            + "	[Outros_numeros] [varchar](15) NOT NULL, "
-//            + "	[Data_emiss�o] [datetime] NULL, "
-//            + "	[Data_vencimento] [datetime] NULL, "
-//            + "	[Valor_titulo] [decimal](10, 2) NOT NULL, "
-//            + "	[Cod_banco] [int] NOT NULL, "
-//            + "	[Observ] [varchar](200) NOT NULL, "
-//            + "	[Situa��o] [varchar](200) NOT NULL, "
-//            + "	[Data_pagamento] [datetime] NULL, "
-//            + "	[Valor_pagar] [decimal](10, 2) NOT NULL, "
-//            + "	[Cod_contabil] [varchar](5) NOT NULL, "
-//            + "	[Multa] [decimal](8, 2) NOT NULL, "
-//            + "	[Juros] [decimal](8, 2) NOT NULL, "
-//            + "	[Corre��o] [decimal](9, 2) NOT NULL, "
-//            + "	[Despesas] [decimal](8, 2) NOT NULL, "
-//            + "	[Descontos] [decimal](13, 2) NOT NULL, "
-//            + "	[data_ultimo_pgto] [datetime] NULL, "
-//            + "	[Valor pago] [decimal](10, 2) NOT NULL, "
-//            + "	[restante] [decimal](10, 2) NOT NULL, "
-//            + "	[Doc_ordem] [varchar](9) NOT NULL, "
-//            + "	[Data_cancelar] [datetime] NULL, "
-//            + "	[Obs_cancelamento] [text] NOT NULL, "
-//            + "	[Vl_estorno] [decimal](10, 2) NOT NULL, "
-//            + "	[Data_inclusao] [datetime] NULL, "
-//            + "	[Hora_inclusao] [datetime] NULL, "
-//            + "	[Usuario_inclusao] [varchar](25) NOT NULL, "
-//            + "	[Data_alteracao] [datetime] NULL, "
-//            + "	[Hora_alteracao] [datetime] NULL, "
-//            + "	[Usuario_alteracao] [varchar](25) NOT NULL, "
-//            + "	[Cod custo] [varchar](3) NOT NULL, "
-//            + "	[flag] [bit] NOT NULL, "
-//            + "	[ordem_pagar] [varchar](6) NOT NULL, "
-//            + "	[Numero Compensa��o] [varchar](15) NOT NULL, "
-//            + "	[C�digo t�tulo_baixa] [varchar](4) NOT NULL, "
-//            + "	[Seq_Ult_pagto] [smallint] NOT NULL, "
-//            + "	[Quitado] [bit] NOT NULL, "
-//            + "	[Nada] [varchar](1) NOT NULL, "
-//            + "	[Informacoes_fiscais] [text] NOT NULL, "
-//            + "	[quick~rs] [timestamp] NULL, "
-//            + " CONSTRAINT [Doc_seq] PRIMARY KEY CLUSTERED  "
-//            + "( "
-//            + "	[Documento] ASC, "
-//            + "	[Ordem_seq] ASC "
-//            + ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY] "
-//            + ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]", "Pagar"});
         script.add(new String[]{"CREATE TABLE [dbo].[PedidoCompras]( "
             + "	[idPedido] [int] IDENTITY(1,1) NOT NULL, "
             + "	[dataPedido] [datetime] NOT NULL, "
@@ -1150,38 +1098,6 @@ public class Create {
             + "	[codigo] ASC "
             + ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY] "
             + ") ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]", "produtosEtiquetas"});
-//        script.add(new String[]{"CREATE TABLE [dbo].[Quita_pagar]( "
-//            + "	[Documento] [varchar](6) NOT NULL, "
-//            + "	[Ordem_seq] [varchar](2) NOT NULL, "
-//            + "	[Cod_banco] [int] NOT NULL, "
-//            + "	[C�digo t�tulo] [varchar](4) NOT NULL, "
-//            + "	[N_Doc_Cheque] [varchar](10) NOT NULL, "
-//            + "	[Data_pagto] [datetime] NULL, "
-//            + "	[Valor] [decimal](13, 2) NOT NULL, "
-//            + "	[Valor_Acrescimo] [decimal](10, 2) NOT NULL, "
-//            + "	[Valor_desconto] [decimal](10, 2) NOT NULL, "
-//            + "	[Valor_Pago] [decimal](10, 2) NOT NULL, "
-//            + "	[Quitar] [bit] NOT NULL, "
-//            + "	[Valor_restante] [decimal](10, 2) NOT NULL, "
-//            + "	[Sq] [smallint] NOT NULL, "
-//            + "	[Hora_pagto] [datetime] NULL, "
-//            + "	[Data_inclusao] [datetime] NULL, "
-//            + "	[Hora_inclusao] [datetime] NULL, "
-//            + "	[Usuario_inclusao] [varchar](25) NOT NULL, "
-//            + "	[Data_alteracao] [datetime] NULL, "
-//            + "	[Hora_alteracao] [datetime] NULL, "
-//            + "	[Usuario_alteracao] [varchar](25) NOT NULL, "
-//            + "	[Cod_movi_caixa] [varchar](7) NOT NULL, "
-//            + "	[Ch_codigo] [varchar](6) NOT NULL, "
-//            + "	[Cod baixa pagar] [varchar](7) NOT NULL, "
-//            + "	[quick~rs] [timestamp] NULL, "
-//            + " CONSTRAINT [Pagar Documento_seq] PRIMARY KEY CLUSTERED  "
-//            + "( "
-//            + "	[Documento] ASC, "
-//            + "	[Ordem_seq] ASC, "
-//            + "	[Sq] ASC "
-//            + ")WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 90) ON [PRIMARY] "
-//            + ") ON [PRIMARY]", "Quita_pagar"});
         script.add(new String[]{"CREATE TABLE [dbo].[Replicacao]( "
             + "	[idReplicacao] [int] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL, "
             + "	[tabela] [varchar](255) NOT NULL, "
@@ -1395,175 +1311,6 @@ public class Create {
         script.add(new String[]{"ALTER TABLE [dbo].[Usuarios]  WITH CHECK ADD  CONSTRAINT [FK_Usuarios_idCliente] FOREIGN KEY([idCliente]) "
             + "REFERENCES [dbo].[jsysClientes] ([idCliente])", "Usuarios"});
         script.add(new String[]{"ALTER TABLE [dbo].[Usuarios] CHECK CONSTRAINT [FK_Usuarios_idCliente]", "Usuarios"});
-
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysParametros.vercaoSystema'", "jsysParametros.vercaoSystema"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysParametros.deposito'", "jsysParametros.deposito"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysParametros.bloquearRankVendedor'", "jsysParametros.bloquearRankVendedor"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.feriado'", "funcionariosPonto.feriado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.atestado'", "funcionariosPonto.atestado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.ferias'", "funcionariosPonto.ferias"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.outros'", "funcionariosPonto.outros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.licencaMaternidade'", "funcionariosPonto.licencaMaternidade"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.avisoPrevio'", "funcionariosPonto.avisoPrevio"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.verificar'", "funcionariosPonto.verificar"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.lactante'", "funcionariosPonto.lactante"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.compensacao'", "funcionariosPonto.compensacao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'funcionariosPonto.meiaFalta'", "funcionariosPonto.meiaFalta"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysDevolucaoDeposito.cancelado'", "jsysDevolucaoDeposito.cancelado"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysClientes.cliente'", "jsysClientes.cliente"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysClientes.fornecedor'", "jsysClientes.fornecedor"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysClientes.colaborador'", "jsysClientes.colaborador"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysClientes.filial'", "jsysClientes.filial"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Usuarios.usuario'", "Usuarios.usuario"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Usuarios.password'", "Usuarios.password"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.nomeContato'", "agendaTelefonica.nomeContato"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.foneFixo'", "agendaTelefonica.foneFixo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.foneCelular'", "agendaTelefonica.foneCelular"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.obs'", "agendaTelefonica.obs"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.grupo'", "agendaTelefonica.grupo"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Centro_custo.[Nome centro]'", "Centro_custo.[Nome centro]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Centro_custo.[Cod centro]'", "Centro_custo.[Cod centro]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Centro_custo.[Codigo Grupo Centro]'", "Centro_custo.[Codigo Grupo Centro]"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Centro_custo_Grupo.[Codigo Grupo Centro]'", "Centro_custo_Grupo.[Codigo Grupo Centro]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Centro_custo_Grupo.[Nome Grupo Centro]'", "Centro_custo_Grupo.[Nome Grupo Centro]"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysBancos.nomeBanco'", "jsysBancos.nomeBanco"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysBancos.numeroBanco'", "jsysBancos.numeroBanco"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysBancos.numeroBancoDv'", "jsysBancos.numeroBancoDv"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysBancos.numeroConta'", "jsysBancos.numeroConta"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysCheques.nomeCorentista'", "jsysCheques.nomeCorentista"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysCheques.numeroCheque'", "jsysCheques.numeroCheque"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysCheques.outrosNumeros'", "jsysCheques.outrosNumeros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysCheques.numeroCompensacao'", "jsysCheques.numeroCompensacao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysCheques.obs'", "jsysCheques.obs"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysCheques.valorCheque'", "jsysCheques.valorCheque"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysCheques.valorPago'", "jsysCheques.valorPago"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysContas.idConta'", "jsysContas.idConta"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysContas.descricao'", "jsysContas.descricao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysContas.idGrupo'", "jsysContas.idGrupo"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysProdutosTKardex.Contexto'", "jsysProdutosTKardex.Contexto"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysProdutosTKardex.idCorentista'", "jsysProdutosTKardex.idCorentista"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosTKardex.Entrou'", "jsysProdutosTKardex.Entrou"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosTKardex.Saiu'", "jsysProdutosTKardex.Saiu"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysTitulos.idTitulo'", "jsysTitulos.idTitulo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysTitulos.tipoFatura'", "jsysTitulos.tipoFatura"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'jsysTitulos.idcupom'", "jsysTitulos.idcupom"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysTitulos.ativo'", "jsysTitulos.ativo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultTrue', 'jsysTitulos.baixaReceber'", "jsysTitulos.baixaReceber"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.tabelaOrigem'", "Liberacao.tabelaOrigem"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.idOrigem'", "Liberacao.idOrigem"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.motivo'", "Liberacao.motivo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.usuario'", "Liberacao.usuario"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.usuarioLogado'", "Liberacao.usuarioLogado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Liberacao.tipo'", "Liberacao.tipo"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.outrosNumeros'", "Pagamentos.outrosNumeros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.docOrdem'", "Pagamentos.docOrdem"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.codEmpresa'", "Pagamentos.codEmpresa"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.idTitulo'", "Pagamentos.idTitulo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.idFornecedor'", "Pagamentos.idFornecedor"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.nomeFornecedor'", "Pagamentos.nomeFornecedor"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.semCadastrado'", "Pagamentos.semCadastrado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.valorTitulo'", "Pagamentos.valorTitulo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.valorPago'", "Pagamentos.valorPago"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.restante'", "Pagamentos.restante"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.valorEstorno'", "Pagamentos.valorEstorno"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.idBanco'", "Pagamentos.idBanco"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.obs'", "Pagamentos.obs"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.idContabil'", "Pagamentos.idContabil"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.multa'", "Pagamentos.multa"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.juros'", "Pagamentos.juros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.correcao'", "Pagamentos.correcao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.despesas'", "Pagamentos.despesas"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.descontos'", "agamentos.descontos"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.obsCancelamento'", "Pagamentos.obsCancelamento"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.usuarioInclusao'", "Pagamentos.usuarioInclusao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.usuarioAlteracao'", "Pagamentos.usuarioAlteracao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.numeroCompensacao'", "Pagamentos.numeroCompensacao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.idTituloBaixa'", "Pagamentos.idTituloBaixa"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.quitado'", "Pagamentos.quitado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.informacoesFiscais'", "Pagamentos.informacoesFiscais"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Documento'", "Pagar.Documento"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Ordem_seq'", "Pagar.Ordem_seq"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_empresa'", "Pagar.Cod_empresa"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Codigo_do_fornecedor'", "Pagar.Codigo_do_fornecedor"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[C�digo t�tulo]'", "Pagar.[C�digo t�tulo]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Nome_fornecedor'", "Pagar.Nome_fornecedor"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Nao_cadastrado'", "Pagar.Nao_cadastrado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Outros_numeros'", "Outros_numeros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Valor_titulo'", "Pagar.Valor_titulo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_banco'", "Pagar.Cod_banco"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Observ'", "Pagar.Observ"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Situa��o'", "Pagar.Situa��o"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Valor_pagar'", "Pagar.Valor_pagar"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_contabil'", "Pagar.Cod_contabil"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Multa'", "Pagar.Multa"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Juros'", "Pagar.Juros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Corre��o'", "Pagar.Corre��o"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Despesas'", "Pagar.Despesas"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Descontos'", "Pagar.Descontos"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.[Valor pago]'", "Pagar.[Valor pago]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.restante'", "Pagar.restante"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Doc_ordem'", "Pagar.Doc_ordem"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Obs_cancelamento'", "Pagar.Obs_cancelamento"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Vl_estorno'", "Pagar.Vl_estorno"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Usuario_inclusao'", "Pagar.Usuario_inclusao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Usuario_alteracao'", "Pagar.Usuario_alteracao"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[Cod custo]'", "Pagar.[Cod custo]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.flag'", "Pagar.flag"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.ordem_pagar'", "Pagar.ordem_pagar"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[Numero Compensa��o]'", "Pagar.[Numero Compensa��o]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[C�digo t�tulo_baixa]'", "Pagar.[C�digo t�tulo_baixa]"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Seq_Ult_pagto'", "Pagar.Seq_Ult_pagto"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Quitado'", "Pagar.Quitado"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Nada'", "Pagar.Nada"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Informacoes_fiscais'", "Pagar.Informacoes_fiscais"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'PedidoComprasItens.descricao'", "PedidoComprasItens.descricao"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Cod_plano'", "Plano_pagto.Cod_plano"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Desc_plano'", "Plano_pagto.Desc_plano"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Doc_entrada'", "Plano_pagto.Doc_entrada"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Forma_pagto'", "Plano_pagto.Forma_pagto"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Doc_restante'", "Plano_pagto.Doc_restante"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.q_parcela'", "Plano_pagto.q_parcela"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.tem_entrada'", "Plano_pagto.tem_entrada"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.intervalo'", "Plano_pagto.intervalo"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.controle_juros'", "Plano_pagto.controle_juros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.par_mensal_juros'", "Plano_pagto.par_mensal_juros"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.Plano_desconto'", "Plano_pagto.Plano_desconto"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.plano_desconto_inicial'", "Plano_pagto.plano_desconto_inicial"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.camposRemovidos'", "Replicacao.camposRemovidos"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.ExecSP'", "Replicacao.ExecSP"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.obs'", "Replicacao.obs"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultFalse', 'jsysLojas.deposito'", "jsysLojas.deposito"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defaultTrue', 'CadECF.ativo'", "CadECF.ativo"});
-//
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.estoqueGeral'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.NCM'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.modBC'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.modBCST'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.pisCST'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.cofinsCST'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.ipiCST'", ""});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'jsysProdutosT.tipoItem'", ""});
- 
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.nomeContato'", "nomeContato"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.foneCelular'", "foneCelular"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'agendaTelefonica.foneFixo'", "bindefault"});
@@ -1679,41 +1426,6 @@ public class Create {
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.idTituloBaixa'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagamentos.quitado'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagamentos.informacoesFiscais'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Documento'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Ordem_seq'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_empresa'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[C�digo t�tulo]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Codigo_do_fornecedor'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Nao_cadastrado'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Nome_fornecedor'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Outros_numeros'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Valor_titulo'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_banco'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Observ'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Situa��o'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Valor_pagar'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Cod_contabil'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Multa'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Juros'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Corre��o'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Despesas'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Descontos'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.[Valor pago]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.restante'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Doc_ordem'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Obs_cancelamento'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Vl_estorno'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Usuario_inclusao'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Usuario_alteracao'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[Cod custo]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.flag'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.ordem_pagar'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[Numero Compensa��o]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.[C�digo t�tulo_baixa]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Seq_Ult_pagto'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Pagar.Quitado'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Nada'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Pagar.Informacoes_fiscais'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Cod_plano'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Desc_plano'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Plano_pagto.Doc_entrada'", "bindefault"});
@@ -1726,23 +1438,6 @@ public class Create {
         script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.par_mensal_juros'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.Plano_desconto'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Plano_pagto.plano_desconto_inicial'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Documento'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Ordem_seq'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.[C�digo t�tulo]'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Cod_banco'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.N_Doc_Cheque'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Valor'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Valor_Acrescimo'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Valor_desconto'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Valor_Pago'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Quitar'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Valor_restante'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defZero', 'Quita_pagar.Sq'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Usuario_inclusao'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Usuario_alteracao'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Cod_movi_caixa'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.Ch_codigo'", "bindefault"});
-//        script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Quita_pagar.[Cod baixa pagar]'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.camposRemovidos'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.ExecSP'", "bindefault"});
         script.add(new String[]{"EXECUTE sp_bindefault 'defNada', 'Replicacao.obs'", "bindefault"});

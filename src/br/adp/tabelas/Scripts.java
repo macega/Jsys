@@ -31,9 +31,10 @@ public class Scripts {
                 }
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Erro na execu�ao do Script;"
-                    + System.lineSeparator() + "Parametro n�o encontrado;"
+            Log.registraErro(this, "rodar", ex);
+            //ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro na execução do Script;"
+                    + System.lineSeparator() + "Parametro não encontrado;"
                     + System.lineSeparator() + ex.getMessage());
         }
     }

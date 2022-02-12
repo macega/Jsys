@@ -255,15 +255,15 @@ public class Insert {
             + "	AND JSYSCLIENTES.nomeCorentista = 'Supervisor'", "INSERT INTO Usuarios"});
 
         script.add(new String[]{"INSERT INTO jsysTitulos ([idTitulo],[tipoFatura],[idcupom],[ativo],[tipoPagamento],[card],[cnpjCredenciadora],[tipoBandeira],[tipoIntegracao],[baixaReceber]) "
-            + "     VALUES ('PROM','PROMISSORIA','05',1,'05 Cr�dito Loja',0,'','',NULL,1)", "INSERT INTO jsysTitulos"});
+            + "     VALUES ('PROM','PROMISSORIA','05',1,'05 Crédito Loja',0,'','',NULL,1)", "INSERT INTO jsysTitulos"});
         script.add(new String[]{"INSERT INTO jsysTitulos ([idTitulo],[tipoFatura],[idcupom],[ativo],[tipoPagamento],[card],[cnpjCredenciadora],[tipoBandeira],[tipoIntegracao],[baixaReceber]) "
             + "     VALUES ('PREM','PREMIO','99',1	,'99 Outros',0,'','',NULL,0)", "INSERT INTO jsysTitulos"});
         script.add(new String[]{"INSERT INTO jsysTitulos ([idTitulo],[tipoFatura],[idcupom],[ativo],[tipoPagamento],[card],[cnpjCredenciadora],[tipoBandeira],[tipoIntegracao],[baixaReceber]) "
-            + "     VALUES ('DINH','DINHERO','01',1,'01 Dinheiro',0,'','',NULL,1)", "INSERT INTO jsysTitulos"});
+            + "     VALUES ('DINH','DINHEIRO','01',1,'01 Dinheiro',0,'','',NULL,1)", "INSERT INTO jsysTitulos"});
         script.add(new String[]{"INSERT INTO jsysTitulos ([idTitulo],[tipoFatura],[idcupom],[ativo],[tipoPagamento],[card],[cnpjCredenciadora],[tipoBandeira],[tipoIntegracao],[baixaReceber]) "
-            + "     VALUES ('DEBI','CARTAO DE DEBITO','04',1,'04 Cart�o de D�bito',1,'','99 Outros','2 - POS Pagamento n�o integrado com o sistema de automa��o da empresa',1)", "INSERT INTO jsysTitulos"});
+            + "     VALUES ('DEBI','CARTAO DE DEBITO','04',1,'04 Cartão de Débito',1,'','99 Outros','2 - POS Pagamento não integrado com o sistema de automaticoo da empresa',1)", "INSERT INTO jsysTitulos"});
         script.add(new String[]{"INSERT INTO jsysTitulos ([idTitulo],[tipoFatura],[idcupom],[ativo],[tipoPagamento],[card],[cnpjCredenciadora],[tipoBandeira],[tipoIntegracao],[baixaReceber]) "
-            + "     VALUES ('CRED','CARTAO DE CREDITO','03',1,'03 Cart�o de Cr�dito',1,'','99 Outros','2 - POS Pagamento n�o integrado com o sistema de automa��o da empresa',0)", "INSERT INTO jsysTitulos"});
+            + "     VALUES ('CRED','CARTAO DE CREDITO','03',1,'03 Cartão de Crédito',1,'','99 Outros','2 - POS Pagamento não integrado com o sistema de automatico da empresa',0)", "INSERT INTO jsysTitulos"});
 
         script.add(new String[]{"INSERT INTO jsysParametros "
             + "                         (fantasia, razaoSocial, cnpj, inscricao, suframa, endereco, numero, complemento, bairro, cidade, codMunicipio, uf, cep, pais, codPais, fone, fax, email, mensagem, juros, selecionarEstoque, idForncedor, "

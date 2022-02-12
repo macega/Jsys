@@ -9,10 +9,10 @@ import java.util.Map;
  */
 public class MailJava {
 
-    //indica se o formato de texto ser� texto ou html
+    //indica se o formato de texto será texto ou html
     public static final String TYPE_TEXT_PLAIN = "text/plain";
     public static final String TYPE_TEXT_HTML = "text/html";
-    //indica qual ser� o servidor de email(gmail, hotmail...)
+    //indica qual será o servidor de email(gmail, hotmail...)
     private String smtpHostMail;
     //indica a porta de acesso ao servidor
     private String smtpPortMail;
@@ -28,13 +28,13 @@ public class MailJava {
     private String passMail;
     //assunto do email
     private String subjectMail;
-    //corpo do email, onde estar� o texto da mensagem
+    //corpo do email, onde estará o texto da mensagem
     private String bodyMail;
-    //lista com email e nome dos destinat�rios
+    //lista com email e nome dos destinatários
     private Map<String, String> toMailsUsers;
     //lista contendo os arquivos anexos
     private List<String> fileMails;
-    //charset, no caso de html � necess�rio
+    //charset, no caso de html a necessario
     private String charsetMail;
     //tipo do formato da mensagem, texto ou html
     private String typeTextMail;
